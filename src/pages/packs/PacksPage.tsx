@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 import MainLayout from '../../layouts/MainLayout';
+import { useAsyncAction } from '../../hooks/useAsyncAction';
+import { fetchGetPacks } from '../../store/slices/packSlice';
+import { selectPacks } from '../../store/selectors/packsSelectors';
 // import { ITrack } from '../../types/track';
 // import TrackItem from '../../components/TrackItem';
 // import PacksList from '../../components/PacksList/PacksList';
 // import { useActions } from '../../hooks/useAction';
-// import { wrapper } from '../../store/index';
 
 // import { Player } from '../../components/Player/Player';
 // import { setPack } from '../../store/slices/packSlice';
@@ -17,8 +18,12 @@ import MainLayout from '../../layouts/MainLayout';
 
 export const PacksPage = () => {
 	const history = useHistory();
-	// const packs = useSelector(selectPacks);
-	
+	const packs = useSelector(selectPacks);
+    const createTrack = useAsyncAction<any, any>(fetchGetPacks);
+	useEffect(() => {
+        createTrack({});
+    }, []);
+
 	return (
 		<div>
 			<MainLayout>

@@ -28,6 +28,18 @@ export const fetchCreatePack = createAsyncThunk(
 	},
 );
 
+export const fetchGetPacks = createAsyncThunk(
+	'packs/getPackstatus', 
+	async () => {
+		try {
+			const packs = await packsApi.getPacks();
+			console.log(packs);
+		} catch (error) {
+			console.log(error);
+		}
+	},
+);
+
 export const packSlice = createSlice({
 	name: 'packs',
 	initialState,
