@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { MouseEvent, MouseEventHandler } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useActions } from '../../hooks/useAction';
-import { Pack } from '../../types/packs';
+
+import { Pack } from '../../store/types/packs';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { useSelector } from 'react-redux';
-import { selectAudio } from '../../store/selectors/playerSelectors';
 
 type PackListProps = {
 	pack: Pack;
@@ -21,12 +20,12 @@ export const PackItem: React.FC<PackListProps> = ({ pack }) => {
 		(state) => state.player,
 	);
 	
-	const play = (e) => {
+	const play = (e: any) => {
 		e.stopPropagation();
-	
+    
 		if (pause) {
 			setActiveTrack(pack);
-			setAudioSrc('http://localhost:5000/' + active.audio);
+			setAudioSrc('http://localhost:5000/' + active?.audio);
 			setAudioPlay();
 			playTrack();
 		} else {

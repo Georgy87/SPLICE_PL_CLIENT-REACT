@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { PlayerSliceState } from '../types/player';
 import { RootState } from '../types';
-import { ITrack } from '../../types/packs';
+import { Pack } from '../types/packs';
 
 const initialState: PlayerSliceState = {
     currentTime: 0,
@@ -32,7 +32,7 @@ export const playerSlice = createSlice({
         setCurrentTime: (state, action: PayloadAction<number>) => {
             state.currentTime = action.payload;
         },
-        setActiveTrack: (state, action: PayloadAction<ITrack>) => {
+        setActiveTrack: (state, action: PayloadAction<Pack>) => {
             state.active = action.payload;
             state.currentTime = 0;
             state.duration = 0;

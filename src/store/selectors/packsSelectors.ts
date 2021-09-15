@@ -1,3 +1,3 @@
-import { RootState } from "../types";
+import { RootState } from '../types';
 
 export const selectPacks = (state: RootState) => state.packs.packs;

@@ -29,11 +29,12 @@ export const fetchCreatePack = createAsyncThunk(
 );
 
 export const fetchGetPacks = createAsyncThunk(
-	'packs/getPackstatus', 
+	'packs/getPackStatus', 
 	async () => {
 		try {
 			const packs = await packsApi.getPacks();
 			console.log(packs);
+			return packs;
 		} catch (error) {
 			console.log(error);
 		}
@@ -43,13 +44,14 @@ export const fetchGetPacks = createAsyncThunk(
 export const packSlice = createSlice({
 	name: 'packs',
 	initialState,
-	reducers: {
-		setPack: (state, action: PayloadAction<Pack[]>) => {
+	reducers: {},
+	extraReducers: (builder) => 
+		builder
+			.addCase(fetchGetPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
+				console.log(action.payload)
 			state.packs = action.payload;
-		} 
-	},
+		},
+	)
 });
-
-export const { setPack } = packSlice.actions;
 
 export const packsReducer = packSlice.reducer;

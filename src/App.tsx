@@ -1,20 +1,19 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 
-import MainLayout from './layouts/MainLayout';
-import { PacksPage } from './pages/packs/PacksPage';
+import { MainLayout } from './layouts/MainLayout';
+import { PacksPage } from './pages/Packs/PacksPage';
+import { MainPage } from './pages/MainPage/MainPage';
+import { Navbar } from './components/Navbar/Navbar';
 
-import './App.css';
-
-function App() {
+export const App: React.FC = () => {
 	return (
-		<div className="App">
-			<MainLayout />
+		<>
+			<Navbar />
 			<Switch>
-				<Route path='/packs' component={PacksPage}/>
+				<Route path='/' component={MainPage} exact />
+				<Route path='/packs' component={PacksPage} />
 			</Switch>
-		</div>
+		</>
 	);
-}
-
-export default App;
+};
