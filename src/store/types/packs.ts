@@ -6,6 +6,7 @@ export type Pack = {
     listens: number;
     picture: string;
     audio: string;
+    pause: boolean;
 }
 
 export type PacksSliceState = {

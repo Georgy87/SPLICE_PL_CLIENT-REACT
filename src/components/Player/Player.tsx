@@ -1,13 +1,13 @@
 import React, { AudioHTMLAttributes, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-// import TrackProgress from '../TrackProgress/TrackProgress';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useAction';
 import { selectAudio } from '../../store/selectors/playerSelectors';
+import TrackProgress from '../TrackProgress/TrackProgress';
 
 import styles from './Player.module.scss';
 
-export const Player = () => {
+export const Player: React.FC = () => {
 	const audio = useSelector(selectAudio);
 
 	const {
@@ -35,9 +35,9 @@ export const Player = () => {
 		}
 	}, [active]);
 
-	const setAudioVal = () => {
+	const setAudioVal = async () => {
 		if (active) {
-			setAudioSrc('http://localhost:5000/' + active.audio);
+			await setAudioSrc('http://localhost:5000/' + active.audio);
 			audio.volume = volume / 100;
 			audio.onloadedmetadata = () => {
 				setDuration(Math.ceil(audio.duration));
@@ -83,13 +83,13 @@ export const Player = () => {
 					{active?.artist}
 				</div>
 			</div>
-			{/* <TrackProgress
+			<TrackProgress
 				left={currentTime}
 				right={duration}
 				onChange={changeCurrentTime}
 			/>
 			<button style={{ marginLeft: 'auto' }}>Vol</button>
-			<TrackProgress left={volume} right={100} onChange={changeVolume} /> */}
+			<TrackProgress left={volume} right={100} onChange={changeVolume} />
 		</div>
 	);
 };

@@ -19,7 +19,6 @@ export const PacksPage = () => {
 	const history = useHistory();
 	const packs = useSelector(selectPacks);
 	const dispatch = useDispatch();
-
 	// const createTrack = useAsyncAction<any, any>(fetchGetPacks);
 	useEffect(() => {
 		dispatch(fetchGetPacks());

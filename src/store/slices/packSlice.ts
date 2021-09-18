@@ -8,19 +8,19 @@ const initialState: PacksSliceState = {
 };
 
 export const fetchCreatePack = createAsyncThunk(
-	'packs/createTrackStatus', 
+	'packs/createTrackStatus',
 	async (payload: any) => {
 		try {
 			const { picture, audio } = payload;
 			const { trackName, authorName, packInfo } = payload.info;
-			
+
 			const formData = new FormData();
 			formData.append('trackName', trackName);
 			formData.append('authorName', authorName);
 			formData.append('packInfo', packInfo);
 			formData.append('picture', picture);
 			formData.append('audio', audio);
-			
+
 			packsApi.createPack(formData);
 		} catch (error) {
 			console.log(error);
@@ -29,11 +29,10 @@ export const fetchCreatePack = createAsyncThunk(
 );
 
 export const fetchGetPacks = createAsyncThunk(
-	'packs/getPackStatus', 
+	'packs/getPackStatus',
 	async () => {
 		try {
 			const packs = await packsApi.getPacks();
-			console.log(packs);
 			return packs;
 		} catch (error) {
 			console.log(error);
@@ -44,14 +43,36 @@ export const fetchGetPacks = createAsyncThunk(
 export const packSlice = createSlice({
 	name: 'packs',
 	initialState,
-	reducers: {},
-	extraReducers: (builder) => 
-		builder
-			.addCase(fetchGetPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
-				console.log(action.payload)
-			state.packs = action.payload;
+	reducers: {
+		playPack: (state, action: PayloadAction<string | undefined>) => {
+			console.log(action.payload);
+			state.packs = state.packs.map((pack) => {
+				pack.pause = true;
+				if (pack._id === action.payload) {
+					pack.pause = false;
+				} 
+				return pack;
+			});
 		},
-	)
+		pausePack: (state, action: PayloadAction<string | undefined>) => {
+			state.packs = state.packs.map((pack) => {
+				if (pack._id === action.payload) {
+					console.log(pack);
+					pack.pause = true;
+				}
+				return pack;
+			});
+		},
+	},
+	extraReducers: (builder) =>
+		builder.addCase(
+			fetchGetPacks.fulfilled.type,
+			(state, action: PayloadAction<Pack[]>) => {
+				state.packs = action.payload;
+			},
+		),
 });
+
+export const { playPack, pausePack } = packSlice.actions;
 
 export const packsReducer = packSlice.reducer;
