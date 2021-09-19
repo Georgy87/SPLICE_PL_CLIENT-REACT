@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { MainLayout } from '../../layouts/MainLayout';
 import { useAsyncAction } from '../../hooks/useAsyncAction';
 import { fetchGetPacks } from '../../store/slices/packSlice';
 import { selectPacks } from '../../store/selectors/packsSelectors';

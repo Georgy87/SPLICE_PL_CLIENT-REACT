@@ -10,6 +10,7 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { selectPacks } from '../../store/selectors/packsSelectors';
 import { selectAudio } from '../../store/selectors/playerSelectors';
 import { pausePack, playPack } from '../../store/slices/packSlice';
+import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 
 import styles from './PackItem.module.scss';
 
@@ -36,10 +37,7 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id }) => {
 		setActiveTrack,
 		setAudioPlay,
 		setAudioPause,
-		setAudio,
 		setAudioSrc,
-		setDuration,
-		setCurrentTime,
 	} = useActions();
 
 	const play = async (id: string) => {
@@ -59,11 +57,19 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id }) => {
 
 	return (
 		<div className={styles.packCard}>
-			<div
-				onClick={() => play(pack._id)}
-				className={styles.playPauseCircle}
+			<IconLayout
+				onClicked={() => play(pack._id)}
+				blockStyle={styles.playPauseCircle}
+				iconOneOrTwo={pack.pause}
+				iconOne='play'
+				iconTwo='pause'
+				iconStyle={{
+					color: '#fff',
+					fontSize: '60px',
+					cursor: 'pointer',
+				}}
 			>
-				{pack.pause ? (
+				{/* {pack.pause ? (
 					<PlayCircleFilled
 						style={{
 							color: '#fff',
@@ -79,8 +85,8 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id }) => {
 							cursor: 'pointer',
 						}}
 					/>
-				)}
-			</div>
+				)} */}
+			</IconLayout>
 			<img src={`http://localhost:5000/${pack.picture}`} />
 
 			<div>
