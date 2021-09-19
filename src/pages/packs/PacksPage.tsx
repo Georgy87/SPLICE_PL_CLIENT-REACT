@@ -25,25 +25,17 @@ export const PacksPage = () => {
 	}, []);
 
 	return (
-		<div>
+		<div style={{ marginLeft: '200px' }}>
 			<div>
-				<div style={{ marginLeft: '200px' }}>
-					<div>
-						<div>
-							<h1>Список треков</h1>
-							<button
-								onClick={() =>
-									history.push('/packs/create')
-								}
-							>
-								Загрузить
-							</button>
-						</div>
-					</div>
-					<PacksList packs={packs} />
-					<Player />
+				<div>
+					<h1>Список треков</h1>
+					<button onClick={() => history.push('/packs/create')}>
+						Загрузить
+					</button>
 				</div>
 			</div>
+			<PacksList packs={packs} />
+			<Player />
 		</div>
 	);
 };

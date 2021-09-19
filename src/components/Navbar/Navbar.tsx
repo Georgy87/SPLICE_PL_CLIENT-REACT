@@ -23,7 +23,7 @@ export const Navbar = () => {
 
 	return (
 		<>
-			<div className={`${styles.sidebar} ${styles.close}`}>
+			<div className={`${styles.sidebar}`}>
 				<div className={styles.logoDetails}>
 					<CustomerServiceOutlined />
 					<span className={styles.logoName}>SPLICE</span>

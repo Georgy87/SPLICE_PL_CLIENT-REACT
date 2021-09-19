@@ -1,5 +1,7 @@
 import React, { AudioHTMLAttributes, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { PauseCircleTwoTone, PlayCircleTwoTone } from '@ant-design/icons';
+
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useAction';
 import { selectAudio } from '../../store/selectors/playerSelectors';
@@ -75,8 +77,13 @@ export const Player: React.FC = () => {
 	return (
 		<div className={styles.player}>
 			<button onClick={play}>
-				{pause ? <button>Play</button> : <button>Pause</button>}
+				{pause ? (
+					<PlayCircleTwoTone />
+				) : (
+					<PauseCircleTwoTone />
+				)}
 			</button>
+
 			<div>
 				<div>{active?.name}</div>
 				<div style={{ fontSize: 12, color: 'gray' }}>
