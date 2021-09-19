@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { PlayCircleFilled } from '@material-ui/icons';
-import { PauseCircleFilled } from '@material-ui/icons';
 
 import { useActions } from '../../hooks/useAction';
 import { Pack } from '../../store/types/packs';
@@ -10,7 +8,7 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { selectPacks } from '../../store/selectors/packsSelectors';
 import { selectAudio } from '../../store/selectors/playerSelectors';
 import { pausePack, playPack } from '../../store/slices/packSlice';
-import { IconLayout } from '../../layouts/IconLayout/IconLayout';
+import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 
 import styles from './PackItem.module.scss';
 
@@ -57,7 +55,7 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id }) => {
 
 	return (
 		<div className={styles.packCard}>
-			<IconLayout
+			<IconChangeLayout
 				onClicked={() => play(pack._id)}
 				blockStyle={styles.playPauseCircle}
 				iconOneOrTwo={pack.pause}
@@ -69,24 +67,7 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id }) => {
 					cursor: 'pointer',
 				}}
 			>
-				{/* {pack.pause ? (
-					<PlayCircleFilled
-						style={{
-							color: '#fff',
-							fontSize: '60px',
-							cursor: 'pointer',
-						}}
-					/>
-				) : (
-					<PauseCircleFilled
-						style={{
-							color: '#fff',
-							fontSize: '60px',
-							cursor: 'pointer',
-						}}
-					/>
-				)} */}
-			</IconLayout>
+			</IconChangeLayout>
 			<img src={`http://localhost:5000/${pack.picture}`} />
 
 			<div>
