@@ -1,9 +1,10 @@
+import Slider from '@material-ui/core/Slider';
 import React from 'react';
 
 interface TrackProgressProps {
-	left: number;
-	right: number;
-	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	left?: number;
+	right?: number;
+	onChange: any;
 }
 
 const TrackProgress: React.FC<TrackProgressProps> = ({
@@ -12,17 +13,17 @@ const TrackProgress: React.FC<TrackProgressProps> = ({
 	onChange,
 }) => {
 	return (
-		<div style={{ display: 'flex' }}>
-			<input
-				type='range'
-				min={0}
-				max={right}
-				value={left}
+		<div style={{ display: 'flex', width: '100%' }}>
+			<Slider
+				// min={0}
+				// max={right}
+				value={right}
+				style={{ width: '100%' }}
 				onChange={onChange}
 			/>
-			<div>
+			{/* <div>
 				{left} / {right}
-			</div>
+			</div> */}
 		</div>
 	);
 };

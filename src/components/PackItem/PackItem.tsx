@@ -66,6 +66,7 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id }) => {
 					fontSize: '60px',
 					cursor: 'pointer',
 				}}
+				typeBtn='pack'
 			>
 			</IconChangeLayout>
 			<img src={`http://localhost:5000/${pack.picture}`} />

@@ -1,6 +1,9 @@
 import React from 'react';
 import { PlayCircleFilled } from '@material-ui/icons';
 import { PauseCircleFilled } from '@material-ui/icons';
+import { PlayArrow } from '@material-ui/icons';
+import { Pause } from '@material-ui/icons';
+import { ButtonLayout } from '../ButtonLayout/ButtonLayout';
 
 type PropsType = {
 	blockStyle: string;
@@ -13,6 +16,7 @@ type PropsType = {
 		fontSize: string;
 		cursor: string;
 	};
+	typeBtn: string;
 };
 
 export const IconChangeLayout: React.FC<PropsType> = ({
@@ -22,6 +26,7 @@ export const IconChangeLayout: React.FC<PropsType> = ({
 	iconOneOrTwo,
 	iconOne,
 	iconTwo,
+	typeBtn,
 }) => {
 	let IconOne = null;
 	let IconTwo = null;
@@ -30,17 +35,27 @@ export const IconChangeLayout: React.FC<PropsType> = ({
 		case 'play':
 			IconOne = <PlayCircleFilled style={iconStyle} />;
 			break;
+		case 'play-footer':
+			IconOne = <PlayArrow />;
+			break;
 	}
 
 	switch (iconTwo) {
 		case 'pause':
 			IconTwo = <PauseCircleFilled style={iconStyle} />;
 			break;
+		case 'pause-footer':
+			IconTwo = <Pause />;
+			break;
 	}
 
 	return (
 		<div onClick={onClicked} className={blockStyle}>
-			{iconOneOrTwo ? <>{IconOne}</> : <>{IconTwo}</>}
+			{iconOneOrTwo ? (
+				<ButtonLayout>{IconOne}</ButtonLayout>
+			) : (
+				<ButtonLayout>{IconTwo}</ButtonLayout>
+			)}
 		</div>
 	);
 };

@@ -1,119 +1,120 @@
 .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 18%;
-    background: #1d1b3b;
-    z-index: 100;
-    transition: all 0.5s ease;
-    &.close {} 
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 20%;
+	background: #1d1b3b;
+	z-index: 100;
+	transition: all 0.5s ease;
+	&.close {
+	}
 }
 
 .logoDetails {
-    height: 60px;
-    width: 100%;
-    display: flex;
-    align-items: center;
+	height: 60px;
+	width: 100%;
+	display: flex;
+	align-items: center;
 
-    svg {
-        font-size: 30px;
-        color: #fff;
-        height: 50px;
-        min-width: 78px;
-        text-align: center;
-        line-height: 50px;
-    }
+	svg {
+		font-size: 30px;
+		color: #fff;
+		height: 50px;
+		min-width: 78px;
+		text-align: center;
+		line-height: 50px;
+	}
 }
 
 .logoName {
-    font-size: 22px;
-    color: #fff;
-    font-weight: 600;
-    transition: 0.3s ease;
-    transition-delay: 0.1s;
+	font-size: 22px;
+	color: #fff;
+	font-weight: 600;
+	transition: 0.3s ease;
+	transition-delay: 0.1s;
 }
 
 .navLinks {
-    height: 100%;
-    padding: 30px 0 150px 0;
-    overflow: auto;
+	height: 100%;
+	padding: 30px 0 150px 0;
+	overflow: auto;
 
-    svg {
-        height: 20px;
-        min-width: 78px;
-        text-align: center;
-        line-height: 50px;
-        color: #fff;
-        font-size: 20px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
+	svg {
+		height: 20px;
+		min-width: 78px;
+		text-align: center;
+		line-height: 50px;
+		color: #fff;
+		font-size: 20px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
 
-    li {
-        position: relative;
-        list-style: none;
-        padding: 10px;
-        transition: all 0.4s ease;
+	li {
+		position: relative;
+		list-style: none;
+		padding: 10px;
+		transition: all 0.4s ease;
 
-        &:hover {
-            background: #1d1b31;
-        }
+		&:hover {
+			background: #1d1b31;
+		}
 
-        a {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-    }
+		a {
+			display: flex;
+			align-items: center;
+			text-decoration: none;
+		}
+	}
 }
 
 .sidebar .navLinks::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 
 .iocnLink {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 
-    svg {
-        height: 15px;
-    }
+	svg {
+		height: 15px;
+	}
 }
 
 .linkName {
-    font-size: 18px;
-    font-weight: 400;
-    color: #fff;
-    transition: all 0.4s ease;
+	font-size: 18px;
+	font-weight: 400;
+	color: #fff;
+	transition: all 0.4s ease;
 }
 
 .sidebar .navLinks li .subMenu {
-    padding: 6px 6px 14px 80px;
-    margin-top: -10px;
-    background: #1d1b31;
-    display: none;
+	padding: 6px 6px 14px 80px;
+	margin-top: -10px;
+	background: #1d1b31;
+	display: none;
 }
 
 .sidebar .navLinks li:hover .subMenu {
-    // padding: 6px 6px 14px 80px;
-    // margin-top: -10px;
-    // background: #1d1b31;
-    display: block;
+	// padding: 6px 6px 14px 80px;
+	// margin-top: -10px;
+	// background: #1d1b31;
+	display: block;
 }
 
 .sidebar .navLinks li .subMenu a {
-    color: #fff;
-    font-size: 15px;
-    padding: 5px 0;
-    white-space: nowrap;
-    opacity: 0.6;
-    transition: all 0.3s ease;
+	color: #fff;
+	font-size: 15px;
+	padding: 5px 0;
+	white-space: nowrap;
+	opacity: 0.6;
+	transition: all 0.3s ease;
 }
 
 .sidebar .navLinks li .subMenu a:hover {
-    opacity: 1;
+	opacity: 1;
 }
 
 // .sidebar~.homeSection {
@@ -121,95 +122,95 @@
 // }
 
 .sidebar.close {
-    width: 78px;
+	width: 78px;
 }
 
 .sidebar.close .logoDetails .logoName {
-    transition-delay: 0s;
-    opacity: 0;
-    pointer-events: none;
+	transition-delay: 0s;
+	opacity: 0;
+	pointer-events: none;
 }
 
 .sidebar.close .navLinks li .subMenu {
-    position: absolute;
-    left: 100%;
-    top: -10px;
-    margin-top: 0;
-    padding: 10px 20px;
-    border-radius: 0 6px 6px 0;
-    opacity: 0;
-    display: block;
-    pointer-events: none;
-    transition: 0s;
+	position: absolute;
+	left: 100%;
+	top: -10px;
+	margin-top: 0;
+	padding: 10px 20px;
+	border-radius: 0 6px 6px 0;
+	opacity: 0;
+	display: block;
+	pointer-events: none;
+	transition: 0s;
 }
 
 .sidebar.close .navLinks li:hover .subMenu {
-    top: 0;
-    opacity: 1;
-    pointer-events: auto;
-    transition: all 0.4s ease;
+	top: 0;
+	opacity: 1;
+	pointer-events: auto;
+	transition: all 0.4s ease;
 }
 
 .sidebar.close .navLinks li .iocnLink {
-    display: block
+	display: block;
 }
 
 .sidebar.close .navLinks {
-    overflow: visible;
+	overflow: visible;
 }
 
 .sidebar .navLinks::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 
 // Home section
 
 .homeSection {
-    position: absolute;
-    // height: 20vh;
-    left: 260px;
-    width: calc(100% - 260px);
-    transition: all 0.5s ease;
+	position: absolute;
+	// height: 20vh;
+	left: 290px;
+	width: calc(100% - 290px);
+	transition: all 0.5s ease;
 }
 
-.sidebar.close~.homeSection {
-    left: 78px;
-    width: calc(100% - 78px);
+.sidebar.close ~ .homeSection {
+	left: 78px;
+	width: calc(100% - 78px);
 }
 
 .homeSection .homeContent {
-    height: 60px;
-    display: flex;
-    align-items: center;
+	height: 60px;
+	display: flex;
+	align-items: center;
 
-    svg {
-        margin-left: 10px;
-        margin-right: 10px;
-        font-size: 22px;
-        color: red;
-    }
+	svg {
+		margin-left: 10px;
+		margin-right: 10px;
+		font-size: 22px;
+		color: #fff;
+	}
 }
 
 .homeSection .homeContent .bxMenu,
 .homeSection .homeContent .text {
-    color: #11101d;
-    font-size: 35px;
+	color: #11101d;
+	font-size: 35px;
 }
 
 .homeSection .homeContent .bxMenu {
-    margin: 0 15px;
-    cursor: pointer;
+	margin: 0 15px;
+	cursor: pointer;
 }
 
 .homeSection .homeContent .text {
-    font-size: 26px;
-    font-weight: 500;
+	font-size: 26px;
+	font-weight: 500;
 }
 
 .homeSection .homeContent .mainText {
-    margin-top: 400px;
-    margin-left: 100px;
-    width: 580px;
-    font-size: 60px;
-    color: #fff;
+	margin-top: 600px;
+	margin-left: 100px;
+	width: 680px;
+	font-size: 60px;
+	color: #fff;
 }

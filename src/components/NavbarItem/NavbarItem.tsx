@@ -1,10 +1,8 @@
 import React from 'react';
 import {
-	BankOutlined,
-	LoginOutlined,
 	DownOutlined,
-	NotificationTwoTone,
 } from '@ant-design/icons';
+
 import { useHistory } from 'react-router-dom';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 

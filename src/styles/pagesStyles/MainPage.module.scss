@@ -3,6 +3,10 @@
     justify-content: center;
     width: 100%;
     img {
-        width: 100%;
+        display: flex;
+        position: fixed;
+        height: 690px;
+        z-index: -1;
+        width: calc(100% + 150px);
     }
 }

@@ -6,7 +6,7 @@ export const MainPage: React.FC = () => {
 	return (
 		<div className={styles.container}>
 			<img
-				src='https://samesound.ru/wp-content/uploads/2016/10/SONAR-2016-hero.jpg'
+				src='https://darbaculture.com/wp-content/uploads/2018/03/asap-rocky.jpg'
 				alt='main-image'
 			/>
 		</div>

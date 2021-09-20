@@ -1,13 +1,14 @@
-import React, { AudioHTMLAttributes, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { PauseCircleTwoTone, PlayCircleTwoTone } from '@ant-design/icons';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useAction';
 import { selectAudio } from '../../store/selectors/playerSelectors';
 import TrackProgress from '../TrackProgress/TrackProgress';
+import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 
 import styles from './Player.module.scss';
+import { formatTime } from '../../utils/formatTime';
 
 export const Player: React.FC = () => {
 	const audio = useSelector(selectAudio);
@@ -65,9 +66,12 @@ export const Player: React.FC = () => {
 		setVolume(Number(e.target.value));
 	};
 
-	const changeCurrentTime = (e: React.ChangeEvent<HTMLInputElement>) => {
-		audio.currentTime = Number(e.target.value);
-		setCurrentTime(Number(e.target.value));
+	const changeCurrentTime = (
+		e: React.MouseEvent,
+		value: number,
+	) => {
+		audio.currentTime = Number(value);
+		setCurrentTime(Number(value));
 	};
 
 	if (!active) {
@@ -76,27 +80,43 @@ export const Player: React.FC = () => {
 
 	return (
 		<div className={styles.player}>
-			<button onClick={play}>
-				{pause ? (
-					<PlayCircleTwoTone />
-				) : (
-					<PauseCircleTwoTone />
-				)}
-			</button>
-
+			<TrackProgress
+				// left={currentTime}
+				right={currentTime}
+				onChange={changeCurrentTime}
+			/>
+			<div className={styles.playerControls}>
+				<IconChangeLayout
+					onClicked={play}
+					blockStyle={styles.playPauseCircle}
+					iconOneOrTwo={pause}
+					iconOne='play-footer'
+					iconTwo='pause-footer'
+					typeBtn='footer'
+					iconStyle={{
+						color: '#fff',
+						fontSize: '60px',
+						cursor: 'pointer',
+					}}
+				></IconChangeLayout>
+			</div>
+			<div className='playback-widgets'>
+				<div className='timer'>
+					<p>
+						<span>{formatTime(currentTime)}</span>/
+						<span>{formatTime(duration)}</span>
+					</p>
+				</div>
+			</div>
 			<div>
 				<div>{active?.name}</div>
 				<div style={{ fontSize: 12, color: 'gray' }}>
 					{active?.artist}
 				</div>
 			</div>
-			<TrackProgress
-				left={currentTime}
-				right={duration}
-				onChange={changeCurrentTime}
-			/>
+
 			<button style={{ marginLeft: 'auto' }}>Vol</button>
-			<TrackProgress left={volume} right={100} onChange={changeVolume} />
+			{/* <TrackProgress left={volume} right={100} onChange={changeVolume} /> */}
 		</div>
 	);
 };

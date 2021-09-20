@@ -1,0 +1,15 @@
+.btnContainer {
+	button {
+		cursor: pointer;
+		color: rgb(7, 104, 159);
+		border: 1px solid rgb(7, 104, 159);
+		border-radius: 4px;
+		background-color: '#a2d5f2';
+		&:hover {
+			// background-color: '#a2d5f2';
+			// color: '#191919';
+			border-radius: 4px;
+			cursor: pointer;
+		}
+	}
+}
