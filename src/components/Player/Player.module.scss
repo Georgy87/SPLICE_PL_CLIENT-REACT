@@ -1,5 +1,4 @@
 .player {
-	// height: 60px;
 	width: 100%;
 	position: fixed;
 	bottom: 0;
@@ -7,10 +6,22 @@
 	flex-direction: column;
 	align-items: center;
 	padding: 0 10px;
-	&.controls {
+	.playerControls {
 		display: flex;
-	}
-}
+		flex-direction: row;
+		align-items: center;
+		width: 100%;
+		justify-content: space-between;
+		.play {
+			display: flex;
+		}
+		.trackActive {
+			display: flex;
+		}
 
-.playPauseFooter {
+		.volumeAndTimer {
+			display: flex;
+			width: 40%;
+		}
+	}
 }

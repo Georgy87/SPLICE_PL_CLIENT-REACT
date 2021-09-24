@@ -72,10 +72,9 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id }) => {
 			<img src={`http://localhost:5000/${pack.picture}`} />
 
 			<div>
-				<div>{pack.name}</div>
-				<div style={{ fontSize: 12, color: 'gray' }}>{pack.artist}</div>
+				<div>{pack.trackName}</div>
+				<div style={{ fontSize: 12, color: 'gray' }}>{pack.authorName}</div>
 			</div>
-
 			{/* {packId === active?._id && <div>02:42 / 03:22</div>} */}
 		</div>
 	);

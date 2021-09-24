@@ -4,11 +4,12 @@ import { useSelector } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useAction';
 import { selectAudio } from '../../store/selectors/playerSelectors';
-import TrackProgress from '../TrackProgress/TrackProgress';
+import { SliderProgress } from '../SliderProgress/SliderProgress';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 
-import styles from './Player.module.scss';
 import { formatTime } from '../../utils/formatTime';
+
+import styles from './Player.module.scss';
 
 export const Player: React.FC = () => {
 	const audio = useSelector(selectAudio);
@@ -61,15 +62,12 @@ export const Player: React.FC = () => {
 		}
 	};
 
-	const changeVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
-		audio.volume = Number(e.target.value) / 100;
-		setVolume(Number(e.target.value));
+	const changeVolume = (e: React.MouseEvent, value: number) => {
+		audio.volume = Number(value) / 100;
+		setVolume(Number(value));
 	};
 
-	const changeCurrentTime = (
-		e: React.MouseEvent,
-		value: number,
-	) => {
+	const changeCurrentTime = (e: React.MouseEvent, value: number) => {
 		audio.currentTime = Number(value);
 		setCurrentTime(Number(value));
 	};
@@ -80,43 +78,49 @@ export const Player: React.FC = () => {
 
 	return (
 		<div className={styles.player}>
-			<TrackProgress
-				// left={currentTime}
-				right={currentTime}
+			<SliderProgress
+				left={currentTime}
+				right={duration}
 				onChange={changeCurrentTime}
+				width={'78%'}
 			/>
 			<div className={styles.playerControls}>
-				<IconChangeLayout
-					onClicked={play}
-					blockStyle={styles.playPauseCircle}
-					iconOneOrTwo={pause}
-					iconOne='play-footer'
-					iconTwo='pause-footer'
-					typeBtn='footer'
-					iconStyle={{
-						color: '#fff',
-						fontSize: '60px',
-						cursor: 'pointer',
-					}}
-				></IconChangeLayout>
-			</div>
-			<div className='playback-widgets'>
-				<div className='timer'>
-					<p>
-						<span>{formatTime(currentTime)}</span>/
-						<span>{formatTime(duration)}</span>
-					</p>
+				<div className={styles.play}>
+					<IconChangeLayout
+						onClicked={play}
+						blockStyle={styles.playPauseCircle}
+						iconOneOrTwo={pause}
+						iconOne='play-footer'
+						iconTwo='pause-footer'
+						typeBtn='footer'
+						iconStyle={{
+							color: '#1d1b3b',
+							fontSize: '35px',
+							cursor: 'pointer',
+						}}
+					></IconChangeLayout>
 				</div>
-			</div>
-			<div>
-				<div>{active?.name}</div>
-				<div style={{ fontSize: 12, color: 'gray' }}>
-					{active?.artist}
-				</div>
-			</div>
 
-			<button style={{ marginLeft: 'auto' }}>Vol</button>
-			{/* <TrackProgress left={volume} right={100} onChange={changeVolume} /> */}
+				<div className={styles.trackActive}>
+					<div>{active?.authorName}</div>
+					<div>{active?.trackName}</div>
+				</div>
+
+				<div className={styles.volumeAndTimer}>
+					<div className='timer'>
+						<p>
+							<span>{formatTime(currentTime)}</span>/
+							<span>{formatTime(duration)}</span>
+						</p>
+					</div>
+					<SliderProgress
+						left={volume}
+						right={100}
+						onChange={changeVolume}
+						width={'30%'}
+					/>
+				</div>
+			</div>
 		</div>
 	);
 };

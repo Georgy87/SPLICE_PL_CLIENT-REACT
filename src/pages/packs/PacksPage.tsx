@@ -24,7 +24,7 @@ export const PacksPage = () => {
 	}, []);
 
 	return (
-		<div>
+		<div style={{ width: '80%' }}>
 			<div>
 				<div>
 					<h1>Список треков</h1>

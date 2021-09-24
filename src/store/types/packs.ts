@@ -1,7 +1,8 @@
 export type Pack = {
     _id: string;
-    name: string;
-    artist: string;
+    trackName: string;
+    authorName: string;
+    packInfo: string;
     text: string;
     listens: number;
     picture: string;

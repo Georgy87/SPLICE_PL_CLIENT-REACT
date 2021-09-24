@@ -36,7 +36,7 @@ export const IconChangeLayout: React.FC<PropsType> = ({
 			IconOne = <PlayCircleFilled style={iconStyle} />;
 			break;
 		case 'play-footer':
-			IconOne = <PlayArrow />;
+			IconOne = <PlayArrow style={iconStyle} />;
 			break;
 	}
 
@@ -45,7 +45,7 @@ export const IconChangeLayout: React.FC<PropsType> = ({
 			IconTwo = <PauseCircleFilled style={iconStyle} />;
 			break;
 		case 'pause-footer':
-			IconTwo = <Pause />;
+			IconTwo = <Pause style={iconStyle} />;
 			break;
 	}
 
