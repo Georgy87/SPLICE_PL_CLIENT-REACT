@@ -102,8 +102,11 @@ export const Player: React.FC = () => {
 				</div>
 
 				<div className={styles.trackActive}>
-					<div>{active?.authorName}</div>
-					<div>{active?.trackName}</div>
+					<img src={`http://localhost:5000/${active?.picture}`} alt="active-info" />
+					<div className={styles.trackInfo}>
+						<div>{active?.authorName}</div>
+						<div>{active?.trackName}</div>
+					</div>
 				</div>
 
 				<div className={styles.volumeAndTimer}>
