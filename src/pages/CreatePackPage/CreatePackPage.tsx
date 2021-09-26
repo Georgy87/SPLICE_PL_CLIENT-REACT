@@ -5,10 +5,10 @@ import React, { useState } from 'react';
 // import { TrackInfoUpload } from '../../components/TrackInfoUpload/TrackInfoUpload';
 import { fetchCreatePack } from '../../store/slices/packSlice';
 import { useAsyncAction } from '../../hooks/useAsyncAction';
+import { StepLayout } from '../../layouts/StepLayout/StepLayout';
+import { PackInfoUpload } from '../../components/PackInfoUpload/PackInfoUpload';
 
 import styles from '../../layouts/StepLayout/StepLayout.module.scss';
-
-import { StepLayout } from '../../layouts/StepLayout/StepLayout';
 
 export const CreatePackPage = () => {
 	const [activeStep, setActiveStep] = useState(0);
@@ -37,7 +37,7 @@ export const CreatePackPage = () => {
 			<StepLayout activeStep={activeStep}>
 				{activeStep === 0 && (
 					<div className={styles.stepOne}>
-						{/* <TrackInfoUpload setInfo={setInfo} /> */}
+						<PackInfoUpload setInfo={setInfo} />
 					</div>
 				)}
 				{activeStep === 1 && (
