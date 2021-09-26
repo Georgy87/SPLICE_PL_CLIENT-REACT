@@ -25,14 +25,6 @@ export const PacksPage = () => {
 
 	return (
 		<div style={{ width: '80%' }}>
-			<div>
-				<div>
-					<h1>Список треков</h1>
-					<button onClick={() => history.push('/packs/create')}>
-						Загрузить
-					</button>
-				</div>
-			</div>
 			<PacksList packs={packs} />
 			<Player />
 		</div>

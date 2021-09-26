@@ -2,8 +2,8 @@ import React from 'react';
 import {
 	DownOutlined,
 } from '@ant-design/icons';
-
 import { useHistory } from 'react-router-dom';
+
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 
 import styles from '../Navbar/Navbar.module.scss';

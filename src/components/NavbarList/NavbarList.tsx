@@ -1,10 +1,4 @@
 import React from 'react';
-import {
-	BankOutlined,
-	LoginOutlined,
-	DownOutlined,
-	NotificationTwoTone,
-} from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
 import { NavbarItem } from '../NavbarItem/NavbarItem';
@@ -18,6 +12,10 @@ export const NavbarList: React.FC<PacksListProps> = () => {
 
 	const navbarListItems = [
 		{
+			pageName: 'HOME',
+			iconName: '',
+		},
+		{
 			pageName: 'LOGIN',
 			iconName: 'login',
 		},
@@ -28,6 +26,10 @@ export const NavbarList: React.FC<PacksListProps> = () => {
 		{
 			pageName: 'GENRES',
 			iconName: 'genres',
+		},
+		{
+			pageName: 'PROFILE',
+			iconName: 'profile',
 		},
 	];
 

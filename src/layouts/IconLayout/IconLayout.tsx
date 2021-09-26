@@ -2,9 +2,11 @@ import React from 'react';
 import {
 	BankOutlined,
 	LoginOutlined,
-	DownOutlined,
 	NotificationTwoTone,
+	HomeOutlined,
 } from '@ant-design/icons';
+
+import { AccountCircleOutlined } from '@material-ui/icons';
 
 type IconLayoutProps = {
 	iconName: string;
@@ -13,6 +15,9 @@ type IconLayoutProps = {
 export const IconLayout: React.FC<IconLayoutProps> = ({ iconName }) => {
 	let icon = null;
 	switch (iconName) {
+		case '':
+			icon = <HomeOutlined />;
+			break;
 		case 'login':
 			icon = <LoginOutlined />;
 			break;
@@ -22,7 +27,14 @@ export const IconLayout: React.FC<IconLayoutProps> = ({ iconName }) => {
 		case 'genres':
 			icon = <BankOutlined />;
 			break;
+		case 'profile':
+			icon = <AccountCircleOutlined />;
+			break;
 	}
 
-	return <><div>{icon}</div></>;
+	return (
+		<>
+			<div>{icon}</div>
+		</>
+	);
 };

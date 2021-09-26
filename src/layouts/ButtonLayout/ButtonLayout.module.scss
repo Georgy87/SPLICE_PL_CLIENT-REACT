@@ -1,7 +1,23 @@
+
+
 .btnContainer {
 	button {
 		cursor: pointer;
 		color: #1d1b3b;
+		border: none;
+		border-radius: 4px;
+		background-color: transparent;
+		&:hover {
+			background-color: rgba(230, 221, 240, 0.5);
+			cursor: pointer;
+		}
+	}
+}
+
+.btnContainerPlay {
+	button {
+		cursor: pointer;
+	
 		border: none;
 		border-radius: 4px;
 		background-color: transparent;
