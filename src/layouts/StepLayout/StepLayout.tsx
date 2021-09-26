@@ -1,6 +1,8 @@
 import React from 'react';
-import styles from './StepWrapper.module.scss';
-import { Steps } from '../Steps/Steps';
+
+import { Steps } from '../../components/Steps/Steps';
+
+import styles from './StepLayout.module.scss';
 
 interface StepWrapperProps {
 	activeStep: number;
@@ -13,7 +15,7 @@ const steps = [
 	'Результат',
 ];
 
-export const StepWrapper: React.FC<StepWrapperProps> = ({
+export const StepLayout: React.FC<StepWrapperProps> = ({
 	activeStep,
 	children,
 }) => {

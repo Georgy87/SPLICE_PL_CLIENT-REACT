@@ -1,0 +1,18 @@
+.stepContainer {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+	justify-content: center;
+	width: 900px;
+}
+
+.stepNames {
+	display: flex;
+	justify-content: center;
+}
+
+.stepUploadInfo {
+	display: flex;
+	justify-content: center;
+	height: 300px;
+}

@@ -6,7 +6,9 @@ import React, { useState } from 'react';
 import { fetchCreatePack } from '../../store/slices/packSlice';
 import { useAsyncAction } from '../../hooks/useAsyncAction';
 
-import styles from '../../styles/CreateTrack.module.scss';
+import styles from '../../layouts/StepLayout/StepLayout.module.scss';
+
+import { StepLayout } from '../../layouts/StepLayout/StepLayout';
 
 export const CreatePackPage = () => {
 	const [activeStep, setActiveStep] = useState(0);
@@ -32,7 +34,7 @@ export const CreatePackPage = () => {
 
 	return (
 		<div>
-			<StepWrapper activeStep={activeStep}>
+			<StepLayout activeStep={activeStep}>
 				{activeStep === 0 && (
 					<div className={styles.stepOne}>
 						{/* <TrackInfoUpload setInfo={setInfo} /> */}
@@ -40,16 +42,16 @@ export const CreatePackPage = () => {
 				)}
 				{activeStep === 1 && (
 					<div>
-						<FileUpload setFile={setPicture} accept='image/*'>
+						{/* <FileUpload setFile={setPicture} accept='image/*'>
 							<button>Загрузить изображение</button>
-						</FileUpload>
+						</FileUpload> */}
 					</div>
 				)}
 				{activeStep === 2 && (
 					<div>
-						<FileUpload setFile={setAudio} accept='audio/*'>
+						{/* <FileUpload setFile={setAudio} accept='audio/*'>
 							<button>Загрузить аудио</button>
-						</FileUpload>
+						</FileUpload> */}
 					</div>
 				)}
 				{activeStep === 3 && (
@@ -59,7 +61,7 @@ export const CreatePackPage = () => {
 						</button>
 					</div>
 				)}
-			</StepWrapper>
+			</StepLayout>
 			<div className={styles.bottomPanel}>
 				<button disabled={activeStep === 0} onClick={back}>
 					Назад
