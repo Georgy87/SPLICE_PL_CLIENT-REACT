@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 
 import styles from './PackInfoUpload.module.scss';
 
@@ -18,7 +19,7 @@ export const PackInfoUpload: React.FC<PropsType> = ({ setInfo }) => {
 			packInfo,
 		});
 	};
-	
+
 	return (
 		<div className={styles.packUploadWrapper}>
 			<label>Названия пака</label>
@@ -44,7 +45,9 @@ export const PackInfoUpload: React.FC<PropsType> = ({ setInfo }) => {
 					setPackInfo(e.target.value)
 				}
 			/>
-			<button onClick={onSendInfo}>Добавить информацию о паке</button>
+			<ButtonLayout typeStyle='black' onClicked={onSendInfo}>
+				Добавить информацию о паке
+			</ButtonLayout>
 		</div>
 	);
 };

@@ -2,7 +2,8 @@ import axios from 'axios';
 
 export const packsApi = {
 	async createPack(formData: FormData) {
-		await axios.post('http://localhost:5000/api/pack', formData);
+		const { data } = await axios.post('http://localhost:5000/api/pack', formData);
+		return data;
 	},
 
 	async getPacks() {

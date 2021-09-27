@@ -1,0 +1,28 @@
+.stepOne {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.bottomPanel {
+	display: flex;
+	justify-content: center;
+
+	button {
+		cursor: pointer;
+
+		&:first-child {
+			margin-right: 3px;
+		}
+
+		&:last-child {
+			margin-left: 3px;
+		}
+	}
+}
+
+.send {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}

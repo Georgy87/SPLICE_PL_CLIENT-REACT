@@ -1,10 +1,16 @@
+@import '../../styles/variables.scss';
 
+%buttons {
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+	height: 35px;
+}
 
-.btnContainer {
-	button {
-		cursor: pointer;
+.platformBtn {
+	.footer {
+		@extend %buttons;
 		color: #1d1b3b;
-		border: none;
 		border-radius: 4px;
 		background-color: transparent;
 		&:hover {
@@ -12,18 +18,22 @@
 			cursor: pointer;
 		}
 	}
-}
-
-.btnContainerPlay {
-	button {
-		cursor: pointer;
-	
+	.black {
+		@extend %buttons;
+		color: $white;
+		background-color: $black;
 		border: none;
-		border-radius: 4px;
-		background-color: transparent;
-		&:hover {
-			background-color: rgba(230, 221, 240, 0.5);
-			cursor: pointer;
-		}
+	}
+	.blue {
+		@extend %buttons;
+		color: $white;
+		background-color: $blue;
+		width: 80px;
+	}
+	.blueDisabled {
+		@extend %buttons;
+		color: $white;
+		background-color: $blue-light;
+		width: 80px;
 	}
 }

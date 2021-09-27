@@ -8,7 +8,7 @@ const initialState: PacksSliceState = {
 };
 
 export const fetchCreatePack = createAsyncThunk(
-	'packs/createTrackStatus',
+	'packs/createPackStatus',
 	async (payload: any) => {
 		try {
 			const { picture, audio } = payload;
@@ -21,7 +21,8 @@ export const fetchCreatePack = createAsyncThunk(
 			formData.append('picture', picture);
 			formData.append('audio', audio);
 
-			packsApi.createPack(formData);
+			const packs = await packsApi.createPack(formData);
+			return packs;
 		} catch (error) {
 			console.log(error);
 		}
@@ -50,7 +51,7 @@ export const packSlice = createSlice({
 				pack.pause = true;
 				if (pack._id === action.payload) {
 					pack.pause = false;
-				} 
+				}
 				return pack;
 			});
 		},
@@ -65,12 +66,19 @@ export const packSlice = createSlice({
 		},
 	},
 	extraReducers: (builder) =>
-		builder.addCase(
-			fetchGetPacks.fulfilled.type,
-			(state, action: PayloadAction<Pack[]>) => {
-				state.packs = action.payload;
-			},
-		),
+		builder
+			.addCase(
+				fetchGetPacks.fulfilled.type,
+				(state, action: PayloadAction<Pack[]>) => {
+					state.packs = action.payload;
+				},
+			)
+			.addCase(
+				fetchCreatePack.fulfilled.type,
+				(state, action: PayloadAction<Pack[]>) => {
+					state.packs = action.payload;
+				},
+			),
 });
 
 export const { playPack, pausePack } = packSlice.actions;

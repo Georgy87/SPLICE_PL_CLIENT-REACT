@@ -24,7 +24,7 @@ export const PacksPage = () => {
 	}, []);
 
 	return (
-		<div style={{ width: '80%' }}>
+		<div style={{ width: '100%' }}>
 			<PacksList packs={packs} />
 			<Player />
 		</div>

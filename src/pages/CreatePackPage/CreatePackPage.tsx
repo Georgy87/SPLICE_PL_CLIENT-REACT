@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
-// import { StepWrapper } from '../../components/StepWrapper/StepWrapper';
-// import FileUpload from '../../components/FileUpload/FileUpload';
-// import { TrackInfoUpload } from '../../components/TrackInfoUpload/TrackInfoUpload';
 import { fetchCreatePack } from '../../store/slices/packSlice';
 import { useAsyncAction } from '../../hooks/useAsyncAction';
 import { StepLayout } from '../../layouts/StepLayout/StepLayout';
 import { PackInfoUpload } from '../../components/PackInfoUpload/PackInfoUpload';
+import { FileUpload } from '../../components/FileUpload/FileUpload';
 
-import styles from '../../layouts/StepLayout/StepLayout.module.scss';
+import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
+
+import styles from '../../styles/pagesStyles/CreatePackPage.module.scss';
 
 export const CreatePackPage = () => {
 	const [activeStep, setActiveStep] = useState(0);
@@ -42,31 +42,44 @@ export const CreatePackPage = () => {
 				)}
 				{activeStep === 1 && (
 					<div>
-						{/* <FileUpload setFile={setPicture} accept='image/*'>
+						<FileUpload setFile={setPicture} accept='image/*'>
 							<button>Загрузить изображение</button>
-						</FileUpload> */}
+						</FileUpload>
 					</div>
 				)}
 				{activeStep === 2 && (
 					<div>
-						{/* <FileUpload setFile={setAudio} accept='audio/*'>
+						<FileUpload setFile={setAudio} accept='audio/*'>
 							<button>Загрузить аудио</button>
-						</FileUpload> */}
+						</FileUpload>
 					</div>
 				)}
 				{activeStep === 3 && (
 					<div className={styles.send}>
-						<button onClick={() => createTrack({ info, picture, audio })}>
+						<div
+							onClick={() =>
+								createTrack({ info, picture, audio })
+							}
+						>
 							Отправить
-						</button>
+						</div>
 					</div>
 				)}
 			</StepLayout>
 			<div className={styles.bottomPanel}>
-				<button disabled={activeStep === 0} onClick={back}>
+				<ButtonLayout
+					typeStyle={activeStep === 0 ? 'blue-disabled' : 'blue'}
+					disabled={activeStep === 0}
+					onClicked={back}
+				>
 					Назад
-				</button>
-				<button onClick={next}>Далее</button>
+				</ButtonLayout>
+				<ButtonLayout
+					typeStyle='blue'
+					onClicked={next}
+				>
+					Далее
+				</ButtonLayout>
 			</div>
 		</div>
 	);

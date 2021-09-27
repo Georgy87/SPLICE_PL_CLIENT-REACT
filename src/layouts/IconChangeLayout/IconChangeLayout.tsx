@@ -52,9 +52,9 @@ export const IconChangeLayout: React.FC<PropsType> = ({
 	return (
 		<div onClick={onClicked} className={blockStyle}>
 			{iconOneOrTwo ? (
-				<ButtonLayout>{IconOne}</ButtonLayout>
+				<ButtonLayout typeStyle={typeBtn}>{IconOne}</ButtonLayout>
 			) : (
-				<ButtonLayout>{IconTwo}</ButtonLayout>
+				<ButtonLayout typeStyle={typeBtn}>{IconTwo}</ButtonLayout>
 			)}
 		</div>
 	);
