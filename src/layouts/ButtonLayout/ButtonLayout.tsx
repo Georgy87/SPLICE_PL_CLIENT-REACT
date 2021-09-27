@@ -3,6 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import styles from './ButtonLayout.module.scss';
+import { IconLayout } from '../IconLayout/IconLayout';
 
 type PropsType = {
 	typeStyle: string;
@@ -19,6 +20,7 @@ export const ButtonLayout: React.FC<PropsType> = ({ children, typeStyle, onClick
 					[styles.black]: typeStyle === 'black',
 					[styles.blue]: typeStyle === 'blue',
 					[styles.blueDisabled]: typeStyle === 'blue-disabled',
+					[styles.download]: typeStyle === 'download',
 				})}
 			>
 				{children}

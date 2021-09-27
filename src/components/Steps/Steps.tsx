@@ -1,16 +1,26 @@
 import React from 'react';
+import classNames from 'classnames';
+
 import styles from './Steps.module.scss';
 
 type PropsType = {
-    step: string;
-    color: string;
-}
+	step: string;
+	typeStyle: string;
+};
 
 export const Steps: React.FC<PropsType> = (props) => {
-    const { step, color} = props;
-    return (
-        <div className={styles.stepContainer}>
-			<p style={{ color: `${color}` }}>{step}</p>
-        </div>
-    )
-}
+	const { step, typeStyle } = props;
+	return (
+		<div className={styles.step}>
+			<div
+				className={classNames(`${styles.step}`, {
+					[styles.stepRed]: typeStyle === 'step-red',
+					[styles.stepBlue]: typeStyle === 'step-blue',
+				})}
+			>
+				{step}
+                <div className={styles.line}></div>
+			</div>
+		</div>
+	);
+};

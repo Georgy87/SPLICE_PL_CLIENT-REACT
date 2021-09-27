@@ -4,10 +4,13 @@
 	border: none;
 	cursor: pointer;
 	border-radius: 4px;
-	height: 35px;
+	height: 40px;
 }
 
 .platformBtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	.footer {
 		@extend %buttons;
 		color: #1d1b3b;
@@ -35,5 +38,14 @@
 		color: $white;
 		background-color: $blue-light;
 		width: 80px;
+	}
+	.download {
+		@extend %buttons;
+		background-color: transparent;
+		border: 1px solid rgb(160, 158, 158);
+		height: 50px;
+		svg {
+			font-size: 20px;
+		}
 	}
 }

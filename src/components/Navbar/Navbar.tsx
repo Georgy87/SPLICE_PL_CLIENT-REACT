@@ -28,9 +28,9 @@ export const Navbar = () => {
 			<div className={styles.homeSection}>
 				<div className={styles.homeContent}>
 					<MenuOutlined />
-					<div className={styles.mainText}>
+					{/* <div className={styles.mainText}>
 						Create, we'll do the rest.
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</>

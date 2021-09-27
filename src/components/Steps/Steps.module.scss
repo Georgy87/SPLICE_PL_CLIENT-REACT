@@ -1,4 +1,19 @@
+@import '../../styles/variables.scss';
 
-.stepContainer {
+.step {
 	padding: 10px;
+	font-weight: 700;
+	color: $blue;
+	.stepRed {
+		color: $lite-red;
+		.line {
+			height: 1px;
+			width: 100%;
+			background-color: $lite-red;
+		}
+	}
+
+	.stepBlue {
+		color: $blue;
+	}
 }

@@ -4,9 +4,12 @@ import {
 	LoginOutlined,
 	NotificationTwoTone,
 	HomeOutlined,
+	UploadOutlined,
 } from '@ant-design/icons';
 
 import { AccountCircleOutlined } from '@material-ui/icons';
+
+import styles from './IconLayout.module.scss';
 
 type IconLayoutProps = {
 	iconName: string;
@@ -30,11 +33,14 @@ export const IconLayout: React.FC<IconLayoutProps> = ({ iconName }) => {
 		case 'profile':
 			icon = <AccountCircleOutlined />;
 			break;
+		case 'upload':
+			icon = <UploadOutlined />;
+			break;
 	}
 
 	return (
 		<>
-			<div>{icon}</div>
+			<div className={styles.iconContainer}>{icon}</div>
 		</>
 	);
 };

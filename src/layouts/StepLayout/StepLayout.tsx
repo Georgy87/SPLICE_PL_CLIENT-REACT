@@ -19,21 +19,21 @@ export const StepLayout: React.FC<StepWrapperProps> = ({
 	activeStep,
 	children,
 }) => {
-	let col;
+	let typeStyle;
 
 	return (
 		<div className={styles.stepContainer}>
 			<div className={styles.stepNames}>
 				{steps.map((step, i) => {
 					if (activeStep === i) {
-						col = 'red';
+						typeStyle = 'step-red';
 					} else {
-						col = 'black';
+						typeStyle = 'step-blue';
 					}
 
 					return (
-						<div key={i}>
-							<Steps step={step} color={col} />
+						<div key={i} className={styles.step}>
+							<Steps step={step} typeStyle={typeStyle} />
 						</div>
 					);
 				})}

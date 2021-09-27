@@ -9,6 +9,7 @@ import { FileUpload } from '../../components/FileUpload/FileUpload';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 
 import styles from '../../styles/pagesStyles/CreatePackPage.module.scss';
+import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 
 export const CreatePackPage = () => {
 	const [activeStep, setActiveStep] = useState(0);
@@ -41,9 +42,12 @@ export const CreatePackPage = () => {
 					</div>
 				)}
 				{activeStep === 1 && (
-					<div>
+					<div className={styles.stepTwo}>
 						<FileUpload setFile={setPicture} accept='image/*'>
-							<button>Загрузить изображение</button>
+							<ButtonLayout typeStyle='download'>
+								<IconLayout iconName='upload' />
+										UPLOAD IMAGE
+							</ButtonLayout>
 						</FileUpload>
 					</div>
 				)}
@@ -74,10 +78,7 @@ export const CreatePackPage = () => {
 				>
 					Назад
 				</ButtonLayout>
-				<ButtonLayout
-					typeStyle='blue'
-					onClicked={next}
-				>
+				<ButtonLayout typeStyle='blue' onClicked={next}>
 					Далее
 				</ButtonLayout>
 			</div>
