@@ -5,11 +5,12 @@ import { useAsyncAction } from '../../hooks/useAsyncAction';
 import { StepLayout } from '../../layouts/StepLayout/StepLayout';
 import { PackInfoUpload } from '../../components/PackInfoUpload/PackInfoUpload';
 import { FileUpload } from '../../components/FileUpload/FileUpload';
+import { IconLayout } from '../../layouts/IconLayout/IconLayout';
+import { PacksPage } from '../Packs/PacksPage';
 
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 
 import styles from '../../styles/pagesStyles/CreatePackPage.module.scss';
-import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 
 export const CreatePackPage = () => {
 	const [activeStep, setActiveStep] = useState(0);
@@ -26,6 +27,7 @@ export const CreatePackPage = () => {
 
 		if (activeStep === 2) {
 			console.log(picture, audio);
+			createTrack({ info, picture, audio });
 		}
 	};
 
@@ -46,7 +48,7 @@ export const CreatePackPage = () => {
 						<FileUpload setFile={setPicture} accept='image/*'>
 							<ButtonLayout typeStyle='download'>
 								<IconLayout iconName='upload' />
-										UPLOAD IMAGE
+								UPLOAD IMAGE
 							</ButtonLayout>
 						</FileUpload>
 					</div>
@@ -54,19 +56,16 @@ export const CreatePackPage = () => {
 				{activeStep === 2 && (
 					<div>
 						<FileUpload setFile={setAudio} accept='audio/*'>
-							<button>Загрузить аудио</button>
+							<ButtonLayout typeStyle='download'>
+								<IconLayout iconName='upload' />
+								UPLOAD AUDIO
+							</ButtonLayout>
 						</FileUpload>
 					</div>
 				)}
 				{activeStep === 3 && (
 					<div className={styles.send}>
-						<div
-							onClick={() =>
-								createTrack({ info, picture, audio })
-							}
-						>
-							Отправить
-						</div>
+						<PacksPage pageName='user-packs' />
 					</div>
 				)}
 			</StepLayout>

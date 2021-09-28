@@ -11,7 +11,7 @@ type PacksListProps = {
 const PacksList: React.FC<PacksListProps> = ({ packs }) => {
 	return (
 		<>
-			{packs.map((pack) => (
+			{packs?.map((pack) => (
 				<>
 					<div className={styles.packCardContainer}>
 						<PackItem key={pack._id} pack={pack} id={pack._id} />
