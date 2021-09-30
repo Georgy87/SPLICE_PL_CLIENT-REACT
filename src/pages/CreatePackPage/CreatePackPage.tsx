@@ -36,7 +36,7 @@ export const CreatePackPage = () => {
 	};
 
 	return (
-		<div>
+		<div className={styles.createPageContainer}>
 			<StepLayout activeStep={activeStep}>
 				{activeStep === 0 && (
 					<div className={styles.stepOne}>
@@ -64,23 +64,25 @@ export const CreatePackPage = () => {
 					</div>
 				)}
 				{activeStep === 3 && (
-					<div className={styles.send}>
+					<div className={styles.userPack}>
 						<PacksPage pageName='user-packs' />
 					</div>
 				)}
 			</StepLayout>
-			<div className={styles.bottomPanel}>
-				<ButtonLayout
-					typeStyle={activeStep === 0 ? 'blue-disabled' : 'blue'}
-					disabled={activeStep === 0}
-					onClicked={back}
-				>
-					Назад
-				</ButtonLayout>
-				<ButtonLayout typeStyle='blue' onClicked={next}>
-					Далее
-				</ButtonLayout>
-			</div>
+			{activeStep != 3 && (
+				<div className={styles.bottomPanel}>
+					<ButtonLayout
+						typeStyle={activeStep === 0 ? 'blue-disabled' : 'blue'}
+						disabled={activeStep === 0}
+						onClicked={back}
+					>
+						Назад
+					</ButtonLayout>
+					<ButtonLayout typeStyle='blue' onClicked={next}>
+						Далее
+					</ButtonLayout>
+				</div>
+			)}
 		</div>
 	);
 };

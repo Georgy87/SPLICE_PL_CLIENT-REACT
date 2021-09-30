@@ -1,21 +1,35 @@
-.packCard {
-	position: relative;
+.packItemsContainer {
 	display: flex;
-	flex-direction: column;
-	img {
-		width: 190px;
-		height: 190px;
-	}
-	.playPauseCircle {
+	.packCard {
+		position: relative;
 		display: flex;
-		position: absolute;
-		width: 100%;
-		height: calc(100% - 40px);
-		align-items: center;
-		justify-content: center;
-		button {
-			background-color: transparent;
-			border: none;
+		flex-direction: column;
+		img {
+			width: 190px;
+			height: 190px;
 		}
+		.playPauseCircle {
+			display: flex;
+			position: absolute;
+			width: 100%;
+			height: calc(100% - 40px);
+			align-items: center;
+			justify-content: center;
+			button {
+				background-color: transparent;
+				border: none;
+			}
+		}
+	}
+	.drop {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: rgba(28, 29, 26, 0.63);
+		height: 100px;
+		width: 100px;
+		margin: 0 auto;
+		margin-top: 100px;
+		border: 1px solid #444413;
 	}
 }

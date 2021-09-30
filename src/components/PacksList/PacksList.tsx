@@ -6,15 +6,21 @@ import styles from './PacksList.module.scss';
 
 type PacksListProps = {
 	packs: Pack[];
+	pageName?: string;
 };
 
-const PacksList: React.FC<PacksListProps> = ({ packs }) => {
+const PacksList: React.FC<PacksListProps> = ({ packs, pageName }) => {
 	return (
 		<>
 			{packs?.map((pack) => (
 				<>
 					<div className={styles.packCardContainer}>
-						<PackItem key={pack._id} pack={pack} id={pack._id} />
+						<PackItem
+							key={pack._id}
+							pack={pack}
+							id={pack._id}
+							pageName={pageName}
+						/>
 					</div>
 				</>
 			))}

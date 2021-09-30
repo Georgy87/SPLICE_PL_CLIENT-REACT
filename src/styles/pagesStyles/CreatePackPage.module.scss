@@ -1,7 +1,10 @@
+.createPageContainer {
+	width: 100%;
+}
+
 .stepOne {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 }
 
 .stepTwo {
@@ -11,7 +14,6 @@
 
 .bottomPanel {
 	display: flex;
-	justify-content: center;
 
 	button {
 		cursor: pointer;
@@ -26,8 +28,8 @@
 	}
 }
 
-.send {
+.userPacks {
 	display: flex;
-	justify-content: center;
+	width: 100%;
 	margin-top: 20px;
 }

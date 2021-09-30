@@ -24,9 +24,8 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 
 	return (
 		<div className={styles.packsPageContainer}>
-			<PacksList packs={packs} />
-
-			{pageName != 'user-packs' && <Player />}
+			<PacksList packs={packs} pageName={pageName} />
+			<Player />
 		</div>
 	);
 };
