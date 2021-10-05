@@ -39,7 +39,7 @@ export const StepLayout: React.FC<StepWrapperProps> = ({
 				})}
 			</div>
 			<div className={styles.stepUploadInfo}>
-				<div>{children}</div>
+				<div className={styles.stepsWrapper}>{children}</div>
 			</div>
 		</div>
 	);

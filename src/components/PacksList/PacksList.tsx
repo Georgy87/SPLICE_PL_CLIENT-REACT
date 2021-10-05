@@ -21,6 +21,7 @@ const PacksList: React.FC<PacksListProps> = ({ packs, pageName }) => {
 							id={pack._id}
 							pageName={pageName}
 						/>
+
 					</div>
 				</>
 			))}

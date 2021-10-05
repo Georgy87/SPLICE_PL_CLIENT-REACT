@@ -8,7 +8,7 @@ import { ButtonLayout } from '../ButtonLayout/ButtonLayout';
 type PropsType = {
 	blockStyle: string;
 	iconOneOrTwo: boolean;
-	onClicked: () => void;
+	onClicked: any;
 	iconOne: string;
 	iconTwo: string;
 	iconStyle: {

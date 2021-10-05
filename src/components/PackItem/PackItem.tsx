@@ -10,8 +10,9 @@ import { selectAudio } from '../../store/selectors/playerSelectors';
 import { pausePack, playPack } from '../../store/slices/packSlice';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 
-import styles from './PackItem.module.scss';
 import { EventHandler } from 'redux-form';
+
+import styles from './PackItem.module.scss';
 
 type PackListProps = {
 	pack: Pack;
@@ -23,6 +24,8 @@ type PackListProps = {
 export const PackItem: React.FC<PackListProps> = ({ pack, id, pageName }) => {
 	const [packId, setPackId] = useState<string>('');
 	const [drag, setDrag] = useState<boolean>(false);
+	const [btnChange, setBtnChange] = useState(true);
+
 
 	const audio = useSelector(selectAudio);
 
@@ -39,22 +42,61 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id, pageName }) => {
 		setAudioPlay,
 		setAudioPause,
 		setAudioSrc,
+		setDuration,
+		setCurrentTime,
 	} = useActions();
 
 	const play = async (id: string) => {
-		if (pack.pause) {
+		if (btnChange) {
 			setActiveTrack({ pack, flag: true });
 			await setAudioSrc('http://localhost:5000/' + active?.audio);
-
-			dispatch(playPack(id));
-			setAudioPlay();
+			// audio.onloadedmetadata = () => {
+			// 	setDuration(Math.ceil(audio.duration));
+			// };
+			// audio.ontimeupdate = () => {
+			// 	setCurrentTime(Math.ceil(audio.currentTime));
+			// };
+			// dispatch(playPack(id));
+		
+		
+		
 			playTrack();
+			setAudioPlay();
+			setBtnChange(!btnChange);
+		
 		} else {
-			dispatch(pausePack(id));
-			setAudioPause();
+			// dispatch(pausePack(id));
+		
 			pauseTrack();
+			setAudioPause();
+			setBtnChange(!btnChange);
+		
 		}
 	};
+
+	const setAudioVal = async () => {
+		if (active) {
+			// await setAudioSrc('http://localhost:5000/' + active.audio);
+			audio.volume = volume / 100;
+			audio.onloadedmetadata = () => {
+				setDuration(Math.ceil(audio.duration));
+			};
+			audio.ontimeupdate = () => {
+				setCurrentTime(Math.ceil(audio.currentTime));
+			};
+		}
+	};
+
+	useEffect(() => {
+		setBtnChange(true);
+		// async function func() {
+		// 	await setAudioSrc('http://localhost:5000/' + active?.audio);
+		// }
+		// func();
+		
+		// setAudioVal();
+	
+	}, [active]);
 
 	const dragEnter = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
@@ -81,39 +123,39 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id, pageName }) => {
 	};
 	console.log(drag);
 	return (
-		<div className={styles.packItemsContainer}>
-			<div style={{ display: 'flex' }}>
-				<div className={styles.packCard}>
-					<IconChangeLayout
-						onClicked={() => play(pack._id)}
-						blockStyle={styles.playPauseCircle}
-						iconOneOrTwo={pack.pause}
-						iconOne='play'
-						iconTwo='pause'
-						iconStyle={{
-							color: '#fff',
-							fontSize: '60px',
-							cursor: 'pointer',
-						}}
-						typeBtn='pack'
-					></IconChangeLayout>
-					<img src={`http://localhost:5000/${pack.picture}`} />
+		<div className={styles.packCardWrapper}>
+			<div className={styles.packCard}>
+				<IconChangeLayout
+					onClicked={() => play(pack._id)}
+					blockStyle={styles.playPauseCircle}
+					iconOneOrTwo={btnChange}
+					iconOne='play'
+					iconTwo='pause'
+					iconStyle={{
+						color: '#fff',
+						fontSize: '60px',
+						cursor: 'pointer',
+					}}
+					typeBtn='pack'
+				></IconChangeLayout>
+				<img src={`http://localhost:5000/${pack.picture}`} />
 
-					<div>
-						<div>{pack.trackName}</div>
-						<div style={{ fontSize: 12, color: 'gray' }}>
-							{pack.authorName}
-						</div>
+				<div>
+					<div>{pack.trackName}</div>
+					<div style={{ fontSize: 12, color: 'gray' }}>
+						{pack.authorName}
 					</div>
 				</div>
-				{pageName === 'user-packs' && <div>
+			</div>
+			{pageName === 'user-packs' && (
+				<div className={styles.downloadSamples}>
 					{!drag ? (
 						<div
 							onDragEnter={dragEnter}
 							onDragLeave={dragLeave}
 							onDragOver={dragEnter}
 						>
-							Куда перетащить файлы
+							DOWNLOAD SAMPLES
 						</div>
 					) : (
 						<div
@@ -123,11 +165,11 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id, pageName }) => {
 							onDragOver={dragEnter}
 							onDrop={onDrop}
 						>
-							Перетащите файлы
+							DROP FILES
 						</div>
 					)}
-				</div>}
-			</div>
+				</div>
+			)}
 		</div>
 	);
 };

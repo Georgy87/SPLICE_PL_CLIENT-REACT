@@ -8,9 +8,14 @@ import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 import { CreatePackPage } from './pages/CreatePackPage/CreatePackPage';
 
 import styles from './styles/App.module.scss';
+import Context from './context/Context';
 
 export const App: React.FC = () => {
+	// var sound = new Howl({
+	// 	src: ['sound.webm', 'sound.mp3']
+	//   });
 	return (
+		<Context.Provider value={'hello'}>
 		<div className={styles.appContainer}>
 			<div className={styles.navbarBlock}>
 				<Navbar />
@@ -29,5 +34,6 @@ export const App: React.FC = () => {
 				</Switch>
 			</div>
 		</div>
+		</Context.Provider>
 	);
 };

@@ -11,8 +11,10 @@ import { formatTime } from '../../utils/formatTime';
 
 import styles from './Player.module.scss';
 
-export const Player: React.FC = () => {
+export const Player: React.FC = (props) => {
 	const audio = useSelector(selectAudio);
+
+	console.log(props);
 
 	const {
 		playTrack,
@@ -41,7 +43,7 @@ export const Player: React.FC = () => {
 
 	const setAudioVal = async () => {
 		if (active) {
-			await setAudioSrc('http://localhost:5000/' + active.audio);
+			setAudioSrc('http://localhost:5000/' + active.audio);
 			audio.volume = volume / 100;
 			audio.onloadedmetadata = () => {
 				setDuration(Math.ceil(audio.duration));
@@ -72,9 +74,9 @@ export const Player: React.FC = () => {
 		setCurrentTime(Number(value));
 	};
 
-	if (!active) {
-		return null;
-	}
+	// if (!active) {
+	// 	return null;
+	// }
 
 	return (
 		<div className={styles.player}>

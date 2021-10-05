@@ -17,6 +17,9 @@ type IconLayoutProps = {
 
 export const IconLayout: React.FC<IconLayoutProps> = ({ iconName }) => {
 	let icon = null;
+	const Icon = {
+		login: LoginOutlined,
+	}
 	switch (iconName) {
 		case '':
 			icon = <HomeOutlined />;

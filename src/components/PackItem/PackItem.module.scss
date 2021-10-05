@@ -1,5 +1,16 @@
-.packItemsContainer {
+%download {
 	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 140px;
+	width: 250px;
+	border: 1px solid #ddddd9;
+	margin: 0 auto;
+}
+
+.packCardWrapper {
+	display: flex;
+	width: 99%;
 	.packCard {
 		position: relative;
 		display: flex;
@@ -21,15 +32,11 @@
 			}
 		}
 	}
-	.drop {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background-color: rgba(28, 29, 26, 0.63);
-		height: 100px;
-		width: 100px;
-		margin: 0 auto;
-		margin-top: 100px;
-		border: 1px solid #444413;
-	}
+}
+.drop {
+	@extend %download;
+}
+.downloadSamples {
+	@extend %download;
+	margin-top: 30px;
 }
