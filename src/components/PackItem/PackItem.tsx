@@ -1,4 +1,9 @@
-import React, { DragEventHandler, useEffect, useState } from 'react';
+import React, {
+	DragEventHandler,
+	useEffect,
+	useState,
+	useContext,
+} from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -13,6 +18,7 @@ import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayou
 import { EventHandler } from 'redux-form';
 
 import styles from './PackItem.module.scss';
+import { Howl } from 'howler';
 
 type PackListProps = {
 	pack: Pack;
@@ -25,7 +31,6 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id, pageName }) => {
 	const [packId, setPackId] = useState<string>('');
 	const [drag, setDrag] = useState<boolean>(false);
 	const [btnChange, setBtnChange] = useState(true);
-
 
 	const audio = useSelector(selectAudio);
 
@@ -46,57 +51,11 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id, pageName }) => {
 		setCurrentTime,
 	} = useActions();
 
-	const play = async (id: string) => {
-		if (btnChange) {
-			setActiveTrack({ pack, flag: true });
-			await setAudioSrc('http://localhost:5000/' + active?.audio);
-			// audio.onloadedmetadata = () => {
-			// 	setDuration(Math.ceil(audio.duration));
-			// };
-			// audio.ontimeupdate = () => {
-			// 	setCurrentTime(Math.ceil(audio.currentTime));
-			// };
-			// dispatch(playPack(id));
-		
-		
-		
-			playTrack();
-			setAudioPlay();
-			setBtnChange(!btnChange);
-		
-		} else {
-			// dispatch(pausePack(id));
-		
-			pauseTrack();
-			setAudioPause();
-			setBtnChange(!btnChange);
-		
-		}
+	const play = async (id: any) => {
+		setActiveTrack({ pack, flag: true });
 	};
 
-	const setAudioVal = async () => {
-		if (active) {
-			// await setAudioSrc('http://localhost:5000/' + active.audio);
-			audio.volume = volume / 100;
-			audio.onloadedmetadata = () => {
-				setDuration(Math.ceil(audio.duration));
-			};
-			audio.ontimeupdate = () => {
-				setCurrentTime(Math.ceil(audio.currentTime));
-			};
-		}
-	};
-
-	useEffect(() => {
-		setBtnChange(true);
-		// async function func() {
-		// 	await setAudioSrc('http://localhost:5000/' + active?.audio);
-		// }
-		// func();
-		
-		// setAudioVal();
-	
-	}, [active]);
+	const stop = async () => {};
 
 	const dragEnter = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
@@ -118,10 +77,9 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id, pageName }) => {
 		let files = [eventData.files];
 
 		setDrag(false);
-
 		// files.forEach((file) => dispatch(uploadFile(file, currentDir)));
 	};
-	console.log(drag);
+
 	return (
 		<div className={styles.packCardWrapper}>
 			<div className={styles.packCard}>
@@ -138,6 +96,7 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id, pageName }) => {
 					}}
 					typeBtn='pack'
 				></IconChangeLayout>
+
 				<img src={`http://localhost:5000/${pack.picture}`} />
 
 				<div>
@@ -146,6 +105,7 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id, pageName }) => {
 						{pack.authorName}
 					</div>
 				</div>
+				<button onClick={stop}>Stop</button>
 			</div>
 			{pageName === 'user-packs' && (
 				<div className={styles.downloadSamples}>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { useTypedSelector } from '../../hooks/useTypedSelector';
@@ -13,9 +13,7 @@ import styles from './Player.module.scss';
 
 export const Player: React.FC = (props) => {
 	const audio = useSelector(selectAudio);
-
-	console.log(props);
-
+	
 	const {
 		playTrack,
 		pauseTrack,
@@ -32,14 +30,14 @@ export const Player: React.FC = (props) => {
 		(state) => state.player,
 	);
 
-	useEffect(() => {
-		if (!audio) {
-			setAudio(new Audio());
-		} else {
-			setAudioVal();
-			play();
-		}
-	}, [active]);
+	// useEffect(() => {
+	// 	if (!audio) {
+	// 		setAudio(new Audio());
+	// 	} else {
+	// 		setAudioVal();
+	// 		play();
+	// 	}
+	// }, [active]);
 
 	const setAudioVal = async () => {
 		if (active) {
@@ -55,13 +53,13 @@ export const Player: React.FC = (props) => {
 	};
 
 	const play = () => {
-		if (pause) {
-			playTrack();
-			setAudioPlay();
-		} else {
-			pauseTrack();
-			setAudioPause();
-		}
+		// if (pause) {
+		// 	playTrack();
+		// 	setAudioPlay();
+		// } else {
+		// 	pauseTrack();
+		// 	setAudioPause();
+		// }
 	};
 
 	const changeVolume = (e: React.MouseEvent, value: number) => {
