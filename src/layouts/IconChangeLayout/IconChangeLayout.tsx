@@ -17,6 +17,8 @@ type PropsType = {
 		cursor: string;
 	};
 	typeBtn: string;
+	trackId?: string;
+	currentTrackId?: string;
 };
 
 export const IconChangeLayout: React.FC<PropsType> = ({
@@ -27,12 +29,14 @@ export const IconChangeLayout: React.FC<PropsType> = ({
 	iconOne,
 	iconTwo,
 	typeBtn,
+	trackId,
+	currentTrackId,
 }) => {
 	let IconOne = null;
 	let IconTwo = null;
 
 	switch (iconOne) {
-		case 'play':
+		case 'play' :
 			IconOne = <PlayCircleFilled style={iconStyle} />;
 			break;
 		case 'play-footer':
@@ -51,12 +55,11 @@ export const IconChangeLayout: React.FC<PropsType> = ({
 
 	return (
 		<div onClick={onClicked} className={blockStyle}>
-			{iconOneOrTwo ? (
-				<ButtonLayout typeStyle={typeBtn}>{IconOne}</ButtonLayout>
-			) : (
+			{iconOneOrTwo && currentTrackId === trackId ? (
 				<ButtonLayout typeStyle={typeBtn}>{IconTwo}</ButtonLayout>
+			) : (
+				<ButtonLayout typeStyle={typeBtn}>{IconOne}</ButtonLayout>
 			)}
 		</div>
 	);
 };
-

@@ -13,14 +13,7 @@ import styles from './styles/App.module.scss';
 
 export const App: React.FC = () => {
 	const { active, pause, volume } = useTypedSelector((state) => state.player);
-
-	let sound = new Audio();
-
-	const setSrc = (src: string) => {
-		sound.src = src;
-		console.log(src);
-	};
-
+	
 	return (
 		<PlayerContext>
 			<div className={styles.appContainer}>

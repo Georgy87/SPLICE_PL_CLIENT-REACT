@@ -12,50 +12,29 @@ import { Pack } from '../../store/types/packs';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { selectPacks } from '../../store/selectors/packsSelectors';
 import { selectAudio } from '../../store/selectors/playerSelectors';
-import { pausePack, playPack } from '../../store/slices/packSlice';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
-
-import { EventHandler } from 'redux-form';
+import { useSound } from '../../hooks/useSound';
 
 import styles from './PackItem.module.scss';
-import { Howl } from 'howler';
 
 type PackListProps = {
 	pack: Pack;
 	active?: boolean;
 	id: string;
 	pageName?: string;
+	index: number;
 };
 
-export const PackItem: React.FC<PackListProps> = ({ pack, id, pageName }) => {
+export const PackItem: React.FC<PackListProps> = ({
+	pack,
+	index,
+	pageName,
+	id,
+}) => {
 	const [packId, setPackId] = useState<string>('');
 	const [drag, setDrag] = useState<boolean>(false);
-	const [btnChange, setBtnChange] = useState(true);
 
-	const audio = useSelector(selectAudio);
-
-	const { active, pause, volume } = useTypedSelector((state) => state.player);
-
-	const dispatch = useDispatch();
-
-	const router = useHistory();
-
-	const {
-		playTrack,
-		pauseTrack,
-		setActiveTrack,
-		setAudioPlay,
-		setAudioPause,
-		setAudioSrc,
-		setDuration,
-		setCurrentTime,
-	} = useActions();
-
-	const play = async (id: any) => {
-		setActiveTrack({ pack, flag: true });
-	};
-
-	const stop = async () => {};
+	const { playPack, isPlaying, currentTrackId } = useSound();
 
 	const dragEnter = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
@@ -79,14 +58,16 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id, pageName }) => {
 		setDrag(false);
 		// files.forEach((file) => dispatch(uploadFile(file, currentDir)));
 	};
-
+	console.log(isPlaying, currentTrackId);
 	return (
 		<div className={styles.packCardWrapper}>
 			<div className={styles.packCard}>
 				<IconChangeLayout
-					onClicked={() => play(pack._id)}
+					onClicked={() => playPack(index)}
 					blockStyle={styles.playPauseCircle}
-					iconOneOrTwo={btnChange}
+					iconOneOrTwo={isPlaying}
+					trackId={id}
+					currentTrackId={currentTrackId}
 					iconOne='play'
 					iconTwo='pause'
 					iconStyle={{
@@ -105,7 +86,6 @@ export const PackItem: React.FC<PackListProps> = ({ pack, id, pageName }) => {
 						{pack.authorName}
 					</div>
 				</div>
-				<button onClick={stop}>Stop</button>
 			</div>
 			{pageName === 'user-packs' && (
 				<div className={styles.downloadSamples}>

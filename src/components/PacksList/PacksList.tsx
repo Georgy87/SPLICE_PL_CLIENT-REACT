@@ -3,16 +3,18 @@ import { Pack } from '../../store/types/packs';
 import { PackItem } from '../PackItem/PackItem';
 
 import styles from './PacksList.module.scss';
+import { useSound } from '../../hooks/useSound';
 
 type PacksListProps = {
 	packs: Pack[];
 	pageName?: string;
 };
 
-const PacksList: React.FC<PacksListProps> = ({ packs, pageName }) => {
+const PacksList: React.FC<PacksListProps> = ({ pageName }) => {
+	const { packs } = useSound();
 	return (
 		<>
-			{packs?.map((pack) => (
+			{packs?.map((pack: Pack, index: number) => (
 				<>
 					<div className={styles.packCardContainer}>
 						<PackItem
@@ -20,6 +22,7 @@ const PacksList: React.FC<PacksListProps> = ({ packs, pageName }) => {
 							pack={pack}
 							id={pack._id}
 							pageName={pageName}
+							index={index}
 						/>
 
 					</div>

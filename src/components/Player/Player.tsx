@@ -1,95 +1,61 @@
 import React, { useContext, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { useActions } from '../../hooks/useAction';
-import { selectAudio } from '../../store/selectors/playerSelectors';
 import { SliderProgress } from '../SliderProgress/SliderProgress';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
-
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { formatTime } from '../../utils/formatTime';
+import { useSound } from '../../hooks/useSound';
 
 import styles from './Player.module.scss';
 
 export const Player: React.FC = (props) => {
-	const audio = useSelector(selectAudio);
-	
-	const {
-		playTrack,
-		pauseTrack,
-		setDuration,
-		setCurrentTime,
-		setVolume,
-		setAudio,
-		setAudioPlay,
-		setAudioPause,
-		setAudioSrc,
-	} = useActions();
-
 	const { pause, volume, active, duration, currentTime } = useTypedSelector(
 		(state) => state.player,
 	);
 
-	// useEffect(() => {
-	// 	if (!audio) {
-	// 		setAudio(new Audio());
-	// 	} else {
-	// 		setAudioVal();
-	// 		play();
+	const { playPack, isPlaying, currentTrackId } = useSound();
+
+	// const setAudioVal = async () => {
+	// 	if (active) {
+	// 		setAudioSrc('http://localhost:5000/' + active.audio);
+	// 		audio.volume = volume / 100;
+	// 		audio.onloadedmetadata = () => {
+	// 			setDuration(Math.ceil(audio.duration));
+	// 		};
+	// 		audio.ontimeupdate = () => {
+	// 			setCurrentTime(Math.ceil(audio.currentTime));
+	// 		};
 	// 	}
-	// }, [active]);
+	// };
 
-	const setAudioVal = async () => {
-		if (active) {
-			setAudioSrc('http://localhost:5000/' + active.audio);
-			audio.volume = volume / 100;
-			audio.onloadedmetadata = () => {
-				setDuration(Math.ceil(audio.duration));
-			};
-			audio.ontimeupdate = () => {
-				setCurrentTime(Math.ceil(audio.currentTime));
-			};
-		}
-	};
+	// const changeVolume = (e: React.MouseEvent, value: number) => {
+	// 	audio.volume = Number(value) / 100;
+	// 	setVolume(Number(value));
+	// };
 
-	const play = () => {
-		// if (pause) {
-		// 	playTrack();
-		// 	setAudioPlay();
-		// } else {
-		// 	pauseTrack();
-		// 	setAudioPause();
-		// }
-	};
+	// const changeCurrentTime = (e: React.MouseEvent, value: number) => {
+	// 	audio.currentTime = Number(value);
+	// 	setCurrentTime(Number(value));
+	// };
 
-	const changeVolume = (e: React.MouseEvent, value: number) => {
-		audio.volume = Number(value) / 100;
-		setVolume(Number(value));
-	};
-
-	const changeCurrentTime = (e: React.MouseEvent, value: number) => {
-		audio.currentTime = Number(value);
-		setCurrentTime(Number(value));
-	};
-
-	// if (!active) {
-	// 	return null;
-	// }
+	if (!active) {
+		return null;
+	}
 
 	return (
 		<div className={styles.player}>
-			<SliderProgress
+			{/* <SliderProgress
 				left={currentTime}
 				right={duration}
 				onChange={changeCurrentTime}
 				width={'78%'}
-			/>
+			/> */}
 			<div className={styles.playerControls}>
 				<div className={styles.play}>
 					<IconChangeLayout
-						onClicked={play}
+						onClicked={playPack}
 						blockStyle={styles.playPauseCircle}
-						iconOneOrTwo={pause}
+						iconOneOrTwo={isPlaying}
 						iconOne='play-footer'
 						iconTwo='pause-footer'
 						typeBtn='footer'
@@ -116,12 +82,12 @@ export const Player: React.FC = (props) => {
 							<span>{formatTime(duration)}</span>
 						</p>
 					</div>
-					<SliderProgress
+					{/* <SliderProgress
 						left={volume}
 						right={100}
 						onChange={changeVolume}
 						width={'30%'}
-					/>
+					/> */}
 				</div>
 			</div>
 		</div>
