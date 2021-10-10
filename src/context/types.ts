@@ -6,5 +6,8 @@ export type PlayerStateType = {
     currentTrackIndex: null | number;
     isPlaying: boolean;
     currentTrackId: null | string;
-    active: null,
+    active: null;
+    duration: number;
+    currentTime: number;
+    volume: number;
 }

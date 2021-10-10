@@ -9,11 +9,16 @@ import { useSound } from '../../hooks/useSound';
 import styles from './Player.module.scss';
 
 export const Player: React.FC = (props) => {
-	const { pause, volume, active, duration, currentTime } = useTypedSelector(
-		(state) => state.player,
-	);
+	const { pause, volume } = useTypedSelector((state) => state.player);
 
-	const { playPack, isPlaying, currentTrackId } = useSound();
+	const {
+		play,
+		active,
+		isPlaying,
+		currentTrackId,
+		duration,
+		currentTime,
+	} = useSound();
 
 	// const setAudioVal = async () => {
 	// 	if (active) {
@@ -41,7 +46,6 @@ export const Player: React.FC = (props) => {
 	if (!active) {
 		return null;
 	}
-
 	return (
 		<div className={styles.player}>
 			{/* <SliderProgress
@@ -53,7 +57,7 @@ export const Player: React.FC = (props) => {
 			<div className={styles.playerControls}>
 				<div className={styles.play}>
 					<IconChangeLayout
-						onClicked={playPack}
+						onClicked={play}
 						blockStyle={styles.playPauseCircle}
 						iconOneOrTwo={isPlaying}
 						iconOne='play-footer'
@@ -68,7 +72,10 @@ export const Player: React.FC = (props) => {
 				</div>
 
 				<div className={styles.trackActive}>
-					<img src={`http://localhost:5000/${active?.picture}`} alt="active-info" />
+					<img
+						src={`http://localhost:5000/${active?.picture}`}
+						alt='active-info'
+					/>
 					<div className={styles.trackInfo}>
 						<div>{active?.authorName}</div>
 						<div>{active?.trackName}</div>

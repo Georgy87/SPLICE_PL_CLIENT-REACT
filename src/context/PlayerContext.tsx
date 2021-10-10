@@ -24,10 +24,12 @@ export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 				isPlaying: false,
 				currentTrackId: null,
 				active: null,
+				duration: 0,
+				currentTime: 0,
+				volume: 50,
 			});
 		}
 	}, [packs]);
-	
 
 	return (
 		<Context.Provider value={[state, setState]}>

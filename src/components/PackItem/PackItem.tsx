@@ -34,7 +34,7 @@ export const PackItem: React.FC<PackListProps> = ({
 	const [packId, setPackId] = useState<string>('');
 	const [drag, setDrag] = useState<boolean>(false);
 
-	const { playPack, isPlaying, currentTrackId } = useSound();
+	const { playTrack, isPlaying, currentTrackId } = useSound();
 
 	const dragEnter = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
@@ -58,12 +58,12 @@ export const PackItem: React.FC<PackListProps> = ({
 		setDrag(false);
 		// files.forEach((file) => dispatch(uploadFile(file, currentDir)));
 	};
-	console.log(isPlaying, currentTrackId);
+
 	return (
 		<div className={styles.packCardWrapper}>
 			<div className={styles.packCard}>
 				<IconChangeLayout
-					onClicked={() => playPack(index)}
+					onClicked={() => playTrack(index)}
 					blockStyle={styles.playPauseCircle}
 					iconOneOrTwo={isPlaying}
 					trackId={id}
