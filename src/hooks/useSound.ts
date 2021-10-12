@@ -8,12 +8,6 @@ export const useSound = () => {
 
 	const playTrack = (index: number) => {
 		if (index === state.currentTrackIndex) {
-			// setState((state: PlayerStateType) => ({
-			// 	...state,
-			// 	active: state.packs[index],
-			// }));
-			console.log(state);
-
 			play();
 		} else {
 			state.audioPlayer.pause();
@@ -22,18 +16,14 @@ export const useSound = () => {
 			);
 
 			state.audioPlayer.volume = state.volume / 100;
+
 			state.audioPlayer.onloadedmetadata = () => {
 				setState((state: PlayerStateType) => ({
 					...state,
 					duration: Math.ceil(state.audioPlayer.duration),
 				}));
 			};
-			// state.audioPlayer.ontimeupdate = () => {
-			// 	setCurrentTime(Math.ceil(audio.currentTime));
-			// 	setState((state: PlayerStateType) => ({
-			// 		Math.ceil(state.audioPlayer)
-			// 		);
-			// };
+
 			state.audioPlayer.ontimeupdate = () => {
 				setState((state: PlayerStateType) => ({
 					...state,
@@ -61,7 +51,25 @@ export const useSound = () => {
 			isPlaying: !state.isPlaying,
 		}));
 	};
-	
+
+	const changeVolume = (e: React.MouseEvent, value: number) => {
+		setState((state: PlayerStateType) => ({
+			...state,
+			volume: Number(value),
+		}));
+
+		state.audioPlayer.volume = Number(value) / 100;
+	};
+
+	const changeCurrentTime = (e: React.MouseEvent, value: number) => {
+		setState((state: PlayerStateType) => ({
+			...state,
+			currentTime: Number(value),
+		}));
+
+		state.audioPlayer.currentTime = Number(value);
+	};
+
 	return {
 		playTrack,
 		play,
@@ -73,5 +81,8 @@ export const useSound = () => {
 		active: state.packs?.[state.currentTrackIndex],
 		duration: state.duration,
 		currentTime: state.currentTime,
+		volume: state.volume,
+		changeVolume,
+		changeCurrentTime,
 	};
 };

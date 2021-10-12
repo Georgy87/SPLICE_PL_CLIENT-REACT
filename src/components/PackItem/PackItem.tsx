@@ -1,17 +1,11 @@
 import React, {
-	DragEventHandler,
-	useEffect,
-	useState,
-	useContext,
-} from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { useActions } from '../../hooks/useAction';
+	useState,
+
+} from 'react';
+
 import { Pack } from '../../store/types/packs';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { selectPacks } from '../../store/selectors/packsSelectors';
-import { selectAudio } from '../../store/selectors/playerSelectors';
+
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 import { useSound } from '../../hooks/useSound';
 
@@ -31,7 +25,6 @@ export const PackItem: React.FC<PackListProps> = ({
 	pageName,
 	id,
 }) => {
-	const [packId, setPackId] = useState<string>('');
 	const [drag, setDrag] = useState<boolean>(false);
 
 	const { playTrack, isPlaying, currentTrackId } = useSound();

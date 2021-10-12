@@ -2,58 +2,34 @@ import React, { useContext, useEffect } from 'react';
 
 import { SliderProgress } from '../SliderProgress/SliderProgress';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { formatTime } from '../../utils/formatTime';
 import { useSound } from '../../hooks/useSound';
 
 import styles from './Player.module.scss';
 
 export const Player: React.FC = (props) => {
-	const { pause, volume } = useTypedSelector((state) => state.player);
-
 	const {
 		play,
 		active,
 		isPlaying,
-		currentTrackId,
+		volume,
 		duration,
 		currentTime,
+		changeVolume,
+		changeCurrentTime,
 	} = useSound();
-
-	// const setAudioVal = async () => {
-	// 	if (active) {
-	// 		setAudioSrc('http://localhost:5000/' + active.audio);
-	// 		audio.volume = volume / 100;
-	// 		audio.onloadedmetadata = () => {
-	// 			setDuration(Math.ceil(audio.duration));
-	// 		};
-	// 		audio.ontimeupdate = () => {
-	// 			setCurrentTime(Math.ceil(audio.currentTime));
-	// 		};
-	// 	}
-	// };
-
-	// const changeVolume = (e: React.MouseEvent, value: number) => {
-	// 	audio.volume = Number(value) / 100;
-	// 	setVolume(Number(value));
-	// };
-
-	// const changeCurrentTime = (e: React.MouseEvent, value: number) => {
-	// 	audio.currentTime = Number(value);
-	// 	setCurrentTime(Number(value));
-	// };
 
 	if (!active) {
 		return null;
 	}
 	return (
 		<div className={styles.player}>
-			{/* <SliderProgress
+			<SliderProgress
 				left={currentTime}
 				right={duration}
 				onChange={changeCurrentTime}
 				width={'78%'}
-			/> */}
+			/>
 			<div className={styles.playerControls}>
 				<div className={styles.play}>
 					<IconChangeLayout
@@ -89,12 +65,12 @@ export const Player: React.FC = (props) => {
 							<span>{formatTime(duration)}</span>
 						</p>
 					</div>
-					{/* <SliderProgress
+					<SliderProgress
 						left={volume}
 						right={100}
 						onChange={changeVolume}
 						width={'30%'}
-					/> */}
+					/>
 				</div>
 			</div>
 		</div>

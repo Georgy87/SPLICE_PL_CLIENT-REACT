@@ -8,11 +8,11 @@ import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 import { CreatePackPage } from './pages/CreatePackPage/CreatePackPage';
 import { PlayerContext } from './context/PlayerContext';
 import { useTypedSelector } from './hooks/useTypedSelector';
+import { ProfilePackPage } from './pages/ProfilePackPage/ProfilePackPage';
 
 import styles from './styles/App.module.scss';
 
 export const App: React.FC = () => {
-	const { active, pause, volume } = useTypedSelector((state) => state.player);
 	
 	return (
 		<PlayerContext>
@@ -23,9 +23,10 @@ export const App: React.FC = () => {
 
 				<div className={styles.pagesBlock}>
 					<Switch>
-						<Route path='/' component={MainPage} exact />
+						<Route path='/ee' component={MainPage} exact />
 						<Route path='/packs' component={PacksPage} />
 						<Route path='/profile' component={ProfilePage} exact />
+						<Route path='/' component={ProfilePackPage} exact />
 						<Route
 							path='/profile/create'
 							component={CreatePackPage}
