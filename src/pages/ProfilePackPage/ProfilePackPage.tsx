@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import WaveSurfer from 'wavesurfer.js';
-import { Observer } from 'wavesurfer.js/src/util';
 import { WaveSurferParams } from 'wavesurfer.js/types/params';
 
 const waveSurferOptions = (ref: HTMLDivElement | string): WaveSurferParams => ({
@@ -12,6 +11,7 @@ const waveSurferOptions = (ref: HTMLDivElement | string): WaveSurferParams => ({
 	responsive: true,
 	height: 150,
 });
+
 export const ProfilePackPage = () => {
 	const waveformRef = useRef<HTMLDivElement | any>(null);
 	const options = waveSurferOptions(waveformRef.current);

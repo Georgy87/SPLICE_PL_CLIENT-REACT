@@ -7,7 +7,7 @@ import { useSound } from '../../hooks/useSound';
 
 import styles from './Player.module.scss';
 
-export const Player: React.FC = (props) => {
+export const Player: React.FC = () => {
 	const {
 		play,
 		active,
@@ -22,6 +22,7 @@ export const Player: React.FC = (props) => {
 	if (!active) {
 		return null;
 	}
+	
 	return (
 		<div className={styles.player}>
 			<SliderProgress

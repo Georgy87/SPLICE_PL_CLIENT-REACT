@@ -5,12 +5,22 @@ import { PlayArrow } from '@material-ui/icons';
 import { Pause } from '@material-ui/icons';
 import { ButtonLayout } from '../ButtonLayout/ButtonLayout';
 
+const iconsPlay = {
+	'play': PlayCircleFilled,
+	'play-footer': PlayArrow,
+};
+
+const iconsPause = {
+	'pause': PauseCircleFilled,
+	'pause-footer': Pause,
+};
+
 type PropsType = {
 	blockStyle: string;
 	iconOneOrTwo: boolean;
 	onClicked: any;
-	iconOne: string;
-	iconTwo: string;
+	iconOne: keyof typeof iconsPlay;
+	iconTwo: keyof typeof iconsPause;
 	iconStyle: {
 		color: string;
 		fontSize: string;
@@ -32,33 +42,21 @@ export const IconChangeLayout: React.FC<PropsType> = ({
 	trackId,
 	currentTrackId,
 }) => {
-	let IconOne = null;
-	let IconTwo = null;
 
-	switch (iconOne) {
-		case 'play' :
-			IconOne = <PlayCircleFilled style={iconStyle} />;
-			break;
-		case 'play-footer':
-			IconOne = <PlayArrow style={iconStyle} />;
-			break;
-	}
+	const IconPlay = iconsPlay[iconOne];
+	const IconPause = iconsPause[iconTwo];
 
-	switch (iconTwo) {
-		case 'pause':
-			IconTwo = <PauseCircleFilled style={iconStyle} />;
-			break;
-		case 'pause-footer':
-			IconTwo = <Pause style={iconStyle} />;
-			break;
-	}
 
 	return (
 		<div onClick={onClicked} className={blockStyle}>
 			{iconOneOrTwo && currentTrackId === trackId ? (
-				<ButtonLayout typeStyle={typeBtn}>{IconTwo}</ButtonLayout>
+				<ButtonLayout typeStyle={typeBtn}>
+					<IconPause style={iconStyle} />
+				</ButtonLayout>
 			) : (
-				<ButtonLayout typeStyle={typeBtn}>{IconOne}</ButtonLayout>
+				<ButtonLayout typeStyle={typeBtn}>
+					<IconPlay style={iconStyle} />
+				</ButtonLayout>
 			)}
 		</div>
 	);

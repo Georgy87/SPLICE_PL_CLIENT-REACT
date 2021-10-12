@@ -4,13 +4,13 @@ import {
 } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
-import { IconLayout } from '../../layouts/IconLayout/IconLayout';
+import { IconLayout, icons } from '../../layouts/IconLayout/IconLayout';
 
 import styles from '../Navbar/Navbar.module.scss';
 
 type NavbarItemProps = {
 	pageName: string;
-	iconName: string;
+	iconName: keyof typeof icons;
 };
 
 export const NavbarItem: React.FC<NavbarItemProps> = ({

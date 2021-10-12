@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
 	BankOutlined,
 	LoginOutlined,
@@ -11,39 +11,27 @@ import { AccountCircleOutlined } from '@material-ui/icons';
 
 import styles from './IconLayout.module.scss';
 
-type IconLayoutProps = {
-	iconName: string;
+export const icons = {
+	home: HomeOutlined,
+	login: LoginOutlined,
+	packs: NotificationTwoTone,
+	genres: BankOutlined,
+	profile: AccountCircleOutlined,
+	upload: UploadOutlined,
+};
+
+export type IconLayoutProps = {
+	iconName: keyof typeof icons;
 };
 
 export const IconLayout: React.FC<IconLayoutProps> = ({ iconName }) => {
-	let icon = null;
-	const Icon = {
-		login: LoginOutlined,
-	}
-	switch (iconName) {
-		case '':
-			icon = <HomeOutlined />;
-			break;
-		case 'login':
-			icon = <LoginOutlined />;
-			break;
-		case 'packs':
-			icon = <NotificationTwoTone />;
-			break;
-		case 'genres':
-			icon = <BankOutlined />;
-			break;
-		case 'profile':
-			icon = <AccountCircleOutlined />;
-			break;
-		case 'upload':
-			icon = <UploadOutlined />;
-			break;
-	}
+	const Icon = icons[iconName];
 
 	return (
 		<>
-			<div className={styles.iconContainer}>{icon}</div>
+			<div className={styles.iconContainer}>
+				<Icon />
+			</div>
 		</>
 	);
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { NavbarItem } from '../NavbarItem/NavbarItem';
+import { icons } from '../../layouts/IconLayout/IconLayout';
 
 import styles from '../Navbar/Navbar.module.scss';
 
@@ -10,10 +11,20 @@ type PacksListProps = {};
 export const NavbarList: React.FC<PacksListProps> = () => {
 	const history = useHistory();
 
-	const navbarListItems = [
+	type navbarListItemsType = {
+		pageName: string;
+		iconName: keyof typeof icons;
+	}
+
+	type menuItemsType = {
+		text: string;
+		href: string;
+	}
+
+	const navbarListItems: navbarListItemsType[]  = [
 		{
 			pageName: 'HOME',
-			iconName: '',
+			iconName: 'home',
 		},
 		{
 			pageName: 'LOGIN',
@@ -33,7 +44,7 @@ export const NavbarList: React.FC<PacksListProps> = () => {
 		},
 	];
 
-	const menuItems = [
+	const menuItems: menuItemsType[] = [
 		{ text: 'TRAP', href: '#' },
 		{ text: 'CINEMA', href: '#' },
 		{ text: 'FUTURE BASE', href: '#' },
