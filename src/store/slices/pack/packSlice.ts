@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { packsApi } from '../../../services/api/packsApi';
-import { Pack, PacksSliceState } from '../../types/packs';
-import { createPackType } from './types';
+import { createPackType, Pack, PacksSliceState } from './types';
 
 const initialState: PacksSliceState = {
 	packs: [],
@@ -24,20 +23,6 @@ export const fetchCreatePack = createAsyncThunk(
 
 			const packs = await packsApi.createPack(formData);
 			return packs;
-		} catch (error) {
-			console.log(error);
-		}
-	},
-);
-
-export const fetchCreateSamples = createAsyncThunk(
-	'packs/createSamplesStatus',
-	async (payload: File[]) => {
-		try {
-			// const packs = await packsApi.getPacks();
-			const formData = new FormData();
-			formData.append('samples', payload[0]);
-			
 		} catch (error) {
 			console.log(error);
 		}

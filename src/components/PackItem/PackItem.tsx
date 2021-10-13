@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 
-import { Pack } from '../../store/types/packs';
-
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 import { useSound } from '../../hooks/useSound';
+import { useAsyncAction } from '../../hooks/useAsyncAction';
+import { Pack } from '../../store/slices/pack/types';
+import { fetchCreateSamples } from '../../store/slices/samples/samplesSlice';
 
 import styles from './PackItem.module.scss';
-import { useAsyncAction } from '../../hooks/useAsyncAction';
-import { fetchCreateSamples } from '../../store/slices/pack/packSlice';
 
 type PackListProps = {
 	pack: Pack;

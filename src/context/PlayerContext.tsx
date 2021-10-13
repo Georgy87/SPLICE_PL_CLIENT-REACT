@@ -2,7 +2,7 @@ import React, { useState, useEffect, ReactChildren, ContextType } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectPacks } from '../store/selectors/packsSelectors';
-import { Pack } from '../store/types/packs';
+
 import { Context, ContextProps } from './Context';
 import { PlayerStateType } from './types';
 

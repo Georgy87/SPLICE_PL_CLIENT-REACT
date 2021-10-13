@@ -1,11 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { playerReducer } from './slices/player/playerSlice';
-import { packsReducer } from './slices/pack/packSlice';
 import thunk from 'redux-thunk';
 
+import { packsReducer } from './slices/pack/packSlice';
+import { samplesReducer } from './slices/samples/samplesSlice';
+
 export const rootReducer = combineReducers({
-	player: playerReducer,
 	packs: packsReducer,
+	samples: samplesReducer,
 });
 
 export const store = configureStore({

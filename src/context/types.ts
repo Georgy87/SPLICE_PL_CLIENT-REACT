@@ -1,4 +1,4 @@
-import { Pack } from "../store/types/packs";
+import { Pack } from "../store/slices/pack/types";
 
 export type PlayerStateType = {
     audioPlayer: HTMLAudioElement;

@@ -1,7 +1,5 @@
-import { PlayerSliceState } from './types/player';
-import { PacksSliceState } from './types/packs';
+import { PacksSliceState } from "./slices/pack/types";
 
 export type RootState = {
-	player: PlayerSliceState;
 	packs: PacksSliceState;
 };

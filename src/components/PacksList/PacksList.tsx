@@ -1,9 +1,10 @@
 import React from 'react';
-import { Pack } from '../../store/types/packs';
+
 import { PackItem } from '../PackItem/PackItem';
 
 import styles from './PacksList.module.scss';
 import { useSound } from '../../hooks/useSound';
+import { Pack } from '../../store/slices/pack/types';
 
 type PacksListProps = {
 	packs: Pack[];
