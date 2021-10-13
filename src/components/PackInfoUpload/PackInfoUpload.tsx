@@ -8,9 +8,9 @@ type PropsType = {
 };
 
 export const PackInfoUpload: React.FC<PropsType> = ({ setInfo }) => {
-	const [trackName, setPackName] = useState('');
-	const [authorName, setAuthorName] = useState('');
-	const [packInfo, setPackInfo] = useState('');
+	const [trackName, setPackName] = useState<string>('');
+	const [authorName, setAuthorName] = useState<string>('');
+	const [packInfo, setPackInfo] = useState<string>('');
 
 	const onSendInfo = () => {
 		setInfo({

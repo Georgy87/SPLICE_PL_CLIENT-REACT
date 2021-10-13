@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { PlayerSliceState } from '../types/player';
-import { RootState } from '../types';
-import { Pack } from '../types/packs';
+import { PlayerSliceState } from '../../types/player';
+import { RootState } from '../../types';
+import { Pack } from '../../types/packs';
 
 const initialState: PlayerSliceState = {
 	currentTime: 0,

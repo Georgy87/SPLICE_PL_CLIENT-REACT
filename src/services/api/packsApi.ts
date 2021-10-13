@@ -10,4 +10,8 @@ export const packsApi = {
 		const { data } = await axios.get('http://localhost:5000/api/pack');
 		return data;
 	},
+
+	async createSamples(formData: FormData) {
+		const { data } = await axios.post('http://localhost:5000/api/samples', formData);
+	},
 };

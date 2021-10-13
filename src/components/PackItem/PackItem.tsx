@@ -1,8 +1,4 @@
-import React, {
-
-	useState,
-
-} from 'react';
+import React, { useState } from 'react';
 
 import { Pack } from '../../store/types/packs';
 
@@ -10,6 +6,8 @@ import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayou
 import { useSound } from '../../hooks/useSound';
 
 import styles from './PackItem.module.scss';
+import { useAsyncAction } from '../../hooks/useAsyncAction';
+import { fetchCreateSamples } from '../../store/slices/pack/packSlice';
 
 type PackListProps = {
 	pack: Pack;
@@ -29,10 +27,11 @@ export const PackItem: React.FC<PackListProps> = ({
 
 	const { playTrack, isPlaying, currentTrackId } = useSound();
 
+	const createSamples = useAsyncAction<any, any>(fetchCreateSamples);
+
 	const dragEnter = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
 		e.stopPropagation();
-		console.log('Enter');
 		setDrag(true);
 	};
 
@@ -49,7 +48,8 @@ export const PackItem: React.FC<PackListProps> = ({
 		let files = [eventData.files];
 
 		setDrag(false);
-		// files.forEach((file) => dispatch(uploadFile(file, currentDir)));
+
+		createSamples(files);
 	};
 
 	return (

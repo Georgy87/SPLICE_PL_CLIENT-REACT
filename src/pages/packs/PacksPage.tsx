@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchGetPacks } from '../../store/slices/packSlice';
+import { fetchGetPacks } from '../../store/slices/pack/packSlice';
 import { selectPacks } from '../../store/selectors/packsSelectors';
 import PacksList from '../../components/PacksList/PacksList';
 import { Player } from '../../components/Player/Player';

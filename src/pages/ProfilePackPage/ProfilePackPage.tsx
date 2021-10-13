@@ -22,12 +22,17 @@ export const ProfilePackPage = () => {
 	useEffect(() => {
 		wavesurfer.current = WaveSurfer.create(options);
 		wavesurfer.current.load(url);
-       wavesurfer.current.playPause();
 	}, [url]);
+
+	const handler = () => {
+		wavesurfer.current.playPause();
+	}
 
 	return (
 		<div style={{ width: 300, height: 300 }}>
+	
 			<div id='waveform' ref={waveformRef} />
+			<button onClick={() => handler()}>TEST PLAY</button>
 		</div>
 	);
 };

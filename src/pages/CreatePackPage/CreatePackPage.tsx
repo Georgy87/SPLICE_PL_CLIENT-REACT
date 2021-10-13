@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { fetchCreatePack } from '../../store/slices/packSlice';
+import { fetchCreatePack } from '../../store/slices/pack/packSlice';
 import { useAsyncAction } from '../../hooks/useAsyncAction';
 import { StepLayout } from '../../layouts/StepLayout/StepLayout';
 import { PackInfoUpload } from '../../components/PackInfoUpload/PackInfoUpload';
@@ -13,10 +13,14 @@ import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import styles from '../../styles/pagesStyles/CreatePackPage.module.scss';
 
 export const CreatePackPage = () => {
-	const [activeStep, setActiveStep] = useState(0);
-	const [info, setInfo] = useState({});
-	const [picture, setPicture] = useState(null);
-	const [audio, setAudio] = useState(null);
+	const [activeStep, setActiveStep] = useState<number>(0);
+	const [info, setInfo] = useState<{
+		trackName: string;
+		authorName: string;
+		packInfo: string;
+	} | {}>({});
+	const [picture, setPicture] = useState<File | null>(null);
+	const [audio, setAudio] = useState<File | null>(null);
 
 	const createTrack = useAsyncAction<any, any>(fetchCreatePack);
 
@@ -26,7 +30,6 @@ export const CreatePackPage = () => {
 		}
 
 		if (activeStep === 2) {
-			console.log(picture, audio);
 			createTrack({ info, picture, audio });
 		}
 	};
