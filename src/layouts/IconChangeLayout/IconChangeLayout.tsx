@@ -6,12 +6,12 @@ import { Pause } from '@material-ui/icons';
 import { ButtonLayout } from '../ButtonLayout/ButtonLayout';
 
 const iconsPlay = {
-	'play': PlayCircleFilled,
+	play: PlayCircleFilled,
 	'play-footer': PlayArrow,
 };
 
 const iconsPause = {
-	'pause': PauseCircleFilled,
+	pause: PauseCircleFilled,
 	'pause-footer': Pause,
 };
 
@@ -28,7 +28,7 @@ type PropsType = {
 	};
 	typeBtn: string;
 	trackId?: string;
-	currentTrackId?: string;
+	currentTrackId: string | boolean;
 };
 
 export const IconChangeLayout: React.FC<PropsType> = ({
@@ -42,20 +42,18 @@ export const IconChangeLayout: React.FC<PropsType> = ({
 	trackId,
 	currentTrackId,
 }) => {
-
 	const IconPlay = iconsPlay[iconOne];
 	const IconPause = iconsPause[iconTwo];
 
-
 	return (
-		<div onClick={onClicked} className={blockStyle}>
+		<div className={blockStyle}>
 			{iconOneOrTwo && currentTrackId === trackId ? (
 				<ButtonLayout typeStyle={typeBtn}>
-					<IconPause style={iconStyle} />
+					<IconPause style={iconStyle} onClick={onClicked} />
 				</ButtonLayout>
 			) : (
 				<ButtonLayout typeStyle={typeBtn}>
-					<IconPlay style={iconStyle} />
+					<IconPlay style={iconStyle} onClick={onClicked} />
 				</ButtonLayout>
 			)}
 		</div>

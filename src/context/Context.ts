@@ -1,16 +1,36 @@
 import { createContext } from 'react';
-import { PlayerStateType } from './types';
 
-// export type ContextProps = {
-// 	state: PlayerStateType;
-// 	setState: ({ type }: { type: string }) => void;
-// }
+import { PlayerStateType } from './PlayerContext/types';
+import { SamplesPlayerStateType } from './SamplesPlayerContext/types';
 
-// export const Context = createContext({} as ContextProps[]);
+export type ContextProps = [PlayerStateType, (state: any) => void];
+export type SamplesPlayerContextProps = [SamplesPlayerStateType, (state: any) => void];
 
-export type ContextProps = {
-	state: PlayerStateType;
-	setState: (state: any) => void;
-}
+export const defaultPlayerState = {
+	audioPlayer: new Audio(),
+	packs: [],
+	currentTrackIndex: null,
+	isPlaying: false,
+	currentTrackId: null,
+	active: null,
+	duration: 0,
+	currentTime: 0,
+	volume: 50,
+};
 
-export const Context = createContext([{}, () => {}]);
+export const defaultSamplesPlayerState = {
+	ready: false,
+	playList: [],
+	isPlaying: false,
+	currentIndex: 0,
+	active: null,
+};
+
+export const Context = createContext<ContextProps>([
+	defaultPlayerState,
+	() => {},
+]);
+export const SamplesContext = createContext<SamplesPlayerContextProps>([
+	defaultSamplesPlayerState,
+	() => {},
+]);

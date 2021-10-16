@@ -1,38 +1,43 @@
 import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
 import WaveSurfer from 'wavesurfer.js';
 import { WaveSurferParams } from 'wavesurfer.js/types/params';
-
-const waveSurferOptions = (ref: HTMLDivElement | string): WaveSurferParams => ({
-	container: '#waveform',
-	waveColor: 'black',
-	scrollParent: false,
-	barWidth: 3,
-	barRadius: 3,
-	responsive: true,
-	height: 150,
-});
+import { useAsyncAction } from '../../hooks/useAsyncAction';
+import {
+	selectPacks,
+	selectSamples,
+} from '../../store/selectors/packsSelectors';
+import { fetchGetPack } from '../../store/slices/pack/packSlice';
+import { WaveSurferPlayer } from '../WaveSurfer/WaveSurferPlayer';
 
 export const ProfilePackPage = () => {
-	const waveformRef = useRef<HTMLDivElement | any>(null);
-	const options = waveSurferOptions(waveformRef.current);
-	const wavesurfer = useRef<HTMLDivElement | any>(null);
-	let url =
-		'https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3';
+	const samples = useSelector(selectSamples);
+	
+	const params: { packId: string } = useParams();
+
+	const getPack = useAsyncAction<any, any>(fetchGetPack);
 
 	useEffect(() => {
-		wavesurfer.current = WaveSurfer.create(options);
-		wavesurfer.current.load(url);
-	}, [url]);
-
-	const handler = () => {
-		wavesurfer.current.playPause();
-	}
+		getPack(params?.packId);
+	}, []);
 
 	return (
-		<div style={{ width: 300, height: 300 }}>
-	
-			<div id='waveform' ref={waveformRef} />
-			<button onClick={() => handler()}>TEST PLAY</button>
+		<div>
+			{samples?.map((sample) => {
+				return (
+					<>
+						{
+							<WaveSurferPlayer
+								url={
+									`http://localhost:5000/${sample?.audio}`
+								}
+							/>
+						}
+					</>
+				);
+			})}
 		</div>
 	);
 };

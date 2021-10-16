@@ -1,10 +1,10 @@
 import React, { useState, useEffect, ReactChildren, ContextType } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectPacks } from '../store/selectors/packsSelectors';
+import { selectPacks } from '../../store/selectors/packsSelectors';
 
-import { Context, ContextProps } from './Context';
-import { PlayerStateType } from './types';
+import { Context, ContextProps, defaultPlayerState } from '../Context';
+//import { PlayerStateType } from './types';
 
 type PropsType = {
 	children: React.ReactNode;
@@ -13,7 +13,7 @@ type PropsType = {
 export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 	const packs = useSelector(selectPacks);
 
-	const [state, setState] = useState<any>({});
+	const [state, setState] = useState<ContextProps[0]>(defaultPlayerState);
 
 	useEffect(() => {
 		if (packs) {

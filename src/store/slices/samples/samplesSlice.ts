@@ -1,18 +1,22 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { samplesApi } from '../../../services/api/samplesApi';
 
 const initialState: any = {
 	samples: [],
-}; 
+};
 
 export const fetchCreateSamples = createAsyncThunk(
 	'packs/createSamplesStatus',
-	async (payload: File[]) => {
+	async (payload: { files: [Record<number, File>], packId: string}) => {
 		try {
-			// const packs = await packsApi.getPacks();
+			const { files, packId } = payload;
 			const formData = new FormData();
-			formData.append('samples', payload[0]);
-            
+
+			Object.entries(files[0]).forEach(([idx, file]) => {
+				formData.append('files', file, file.name);
+			});
+
+			await samplesApi.createSamples(formData, packId);
 		} catch (error) {
 			console.log(error);
 		}
@@ -23,20 +27,7 @@ export const samplesSlice = createSlice({
 	name: 'packs',
 	initialState,
 	reducers: {},
-	extraReducers: (builder) =>
-		builder
-			// .addCase(
-			// 	fetchGetPacks.fulfilled.type,
-			// 	(state, action: PayloadAction<Pack[]>) => {
-			// 		state.packs = action.payload;
-			// 	},
-			// )
-			// .addCase(
-			// 	fetchCreatePack.fulfilled.type,
-			// 	(state, action: PayloadAction<Pack[]>) => {
-			// 		state.packs = action.payload;
-			// 	},
-			// ),
+	extraReducers: (builder) => builder,
 });
 
 export const samplesReducer = samplesSlice.reducer;

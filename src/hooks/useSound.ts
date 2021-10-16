@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 
 import { Context } from '../context/Context';
-import { PlayerStateType } from '../context/types';
+import { PlayerStateType } from '../context/PlayerContext/types';
 
 export const useSound = () => {
-	const [state, setState] = useContext<any>(Context);
+	const [state, setState] = useContext(Context);
 
 	const playTrack = (index: number) => {
 		if (index === state.currentTrackIndex) {
@@ -78,7 +78,9 @@ export const useSound = () => {
 		currentTrackId:
 			state.currentTrackIndex !== null &&
 			state.packs?.[state.currentTrackIndex]?._id,
-		active: state.packs?.[state.currentTrackIndex],
+		active:
+			state.currentTrackIndex !== null &&
+			state.packs?.[state.currentTrackIndex],
 		duration: state.duration,
 		currentTime: state.currentTime,
 		volume: state.volume,

@@ -22,7 +22,7 @@ export const Player: React.FC = () => {
 	if (!active) {
 		return null;
 	}
-	
+
 	return (
 		<div className={styles.player}>
 			<SliderProgress
@@ -33,19 +33,22 @@ export const Player: React.FC = () => {
 			/>
 			<div className={styles.playerControls}>
 				<div className={styles.play}>
-					<IconChangeLayout
-						onClicked={play}
-						blockStyle={styles.playPauseCircle}
-						iconOneOrTwo={isPlaying}
-						iconOne='play-footer'
-						iconTwo='pause-footer'
-						typeBtn='footer'
-						iconStyle={{
-							color: '#1d1b3b',
-							fontSize: '35px',
-							cursor: 'pointer',
-						}}
-					></IconChangeLayout>
+					{
+						//@ts-ignore
+						<IconChangeLayout
+							onClicked={play}
+							blockStyle={styles.playPauseCircle}
+							iconOneOrTwo={isPlaying}
+							iconOne='play-footer'
+							iconTwo='pause-footer'
+							typeBtn='footer'
+							iconStyle={{
+								color: '#1d1b3b',
+								fontSize: '35px',
+								cursor: 'pointer',
+							}}
+						></IconChangeLayout>
+					}
 				</div>
 
 				<div className={styles.trackActive}>

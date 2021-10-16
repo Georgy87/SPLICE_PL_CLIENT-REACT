@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
+import { useHistory } from 'react-router';
 
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 import { useSound } from '../../hooks/useSound';
@@ -26,6 +27,8 @@ export const PackItem: React.FC<PackListProps> = ({
 
 	const { playTrack, isPlaying, currentTrackId } = useSound();
 
+	const history = useHistory();
+
 	const createSamples = useAsyncAction<any, any>(fetchCreateSamples);
 
 	const dragEnter = (e: React.DragEvent<HTMLDivElement>) => {
@@ -48,14 +51,20 @@ export const PackItem: React.FC<PackListProps> = ({
 
 		setDrag(false);
 
-		createSamples(files);
+		createSamples({ files, packId: pack._id });
 	};
 
 	return (
 		<div className={styles.packCardWrapper}>
-			<div className={styles.packCard}>
+			<div
+				className={styles.packCard}
+				onClick={() => history.push(`profile-pack/${pack?._id}`)}
+			>
 				<IconChangeLayout
-					onClicked={() => playTrack(index)}
+					onClicked={(e: Event) => {
+						e.stopPropagation();
+						playTrack(index);
+					}}
 					blockStyle={styles.playPauseCircle}
 					iconOneOrTwo={isPlaying}
 					trackId={id}

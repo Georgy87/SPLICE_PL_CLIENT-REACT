@@ -10,11 +10,8 @@ import { NavbarList } from '../NavbarList/NavbarList';
 
 import styles from './Navbar.module.scss';
 
-const drawerWidth = 240;
-
 export const Navbar = () => {
-	const history = useHistory();
-
+	
 	return (
 		<>
 			<div className={`${styles.sidebar}`}>`

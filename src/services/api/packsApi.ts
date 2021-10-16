@@ -7,11 +7,18 @@ export const packsApi = {
 	},
 
 	async getPacks() {
-		const { data } = await axios.get('http://localhost:5000/api/pack');
+		const { data } = await axios.get('http://localhost:5000/api/packs');
 		return data;
 	},
 
 	async createSamples(formData: FormData) {
 		const { data } = await axios.post('http://localhost:5000/api/samples', formData);
 	},
+
+	async getPack(packId: string) {
+		const { data } = await axios.get(`http://localhost:5000/api/pack?packId=${packId}`);
+		
+		return data;
+	},
+	
 };

@@ -1,5 +1,6 @@
 export type PacksSliceState = {
     packs: Pack[] | [];
+    packProfile: null | Pack;
 }
 
 export type createPackType = {
@@ -22,6 +23,13 @@ export type Pack = {
     picture: string;
     audio: string;
     pause: boolean;
+    samples: null | Samples[];
 }
 
+export type Samples = {
+    _id: string;
+    sampleName: string;
+    packId: string;
+    audio: string;
+}
 

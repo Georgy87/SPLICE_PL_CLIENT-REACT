@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
+
 import { packsApi } from '../../../services/api/packsApi';
 import { createPackType, Pack, PacksSliceState } from './types';
 
 const initialState: PacksSliceState = {
 	packs: [],
+	packProfile: null,
 };
 
 export const fetchCreatePack = createAsyncThunk(
@@ -30,7 +31,7 @@ export const fetchCreatePack = createAsyncThunk(
 );
 
 export const fetchGetPacks = createAsyncThunk(
-	'packs/getPackStatus',
+	'packs/getPacksStatus',
 	async () => {
 		try {
 			const packs = await packsApi.getPacks();
@@ -41,30 +42,22 @@ export const fetchGetPacks = createAsyncThunk(
 	},
 );
 
+export const fetchGetPack = createAsyncThunk(
+	'packs/getPackStatus',
+	async (packId: string) => {
+		try {
+			const pack = await packsApi.getPack(packId);
+			return pack;
+		} catch (error) {
+			console.log(error);
+		}
+	},
+);
+
 export const packSlice = createSlice({
 	name: 'packs',
 	initialState,
-	reducers: {
-		playPack: (state, action: PayloadAction<string | undefined>) => {
-			console.log(action.payload);
-			state.packs = state.packs.map((pack) => {
-				pack.pause = true;
-				if (pack._id === action.payload) {
-					pack.pause = false;
-				}
-				return pack;
-			});
-		},
-		pausePack: (state, action: PayloadAction<string | undefined>) => {
-			state.packs = state.packs.map((pack) => {
-				if (pack._id === action.payload) {
-					console.log(pack);
-					pack.pause = true;
-				}
-				return pack;
-			});
-		},
-	},
+	reducers: {},
 	extraReducers: (builder) =>
 		builder
 			.addCase(
@@ -78,9 +71,13 @@ export const packSlice = createSlice({
 				(state, action: PayloadAction<Pack[]>) => {
 					state.packs = action.payload;
 				},
+			)
+			.addCase(
+				fetchGetPack.fulfilled.type,
+				(state, action: PayloadAction<Pack>) => {
+					state.packProfile = action.payload;
+				},
 			),
 });
-
-export const { playPack, pausePack } = packSlice.actions;
 
 export const packsReducer = packSlice.reducer;
