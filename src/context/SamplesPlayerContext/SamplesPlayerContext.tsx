@@ -18,12 +18,11 @@ export const PlayerSamplesContext: React.FC<PropsType> = ({ children }) => {
 	const [state, setState] = useState<SamplesPlayerContextProps[0]>(
 		defaultSamplesPlayerState,
 	);
-	console.log(state, samples);
 
 	useEffect(() => {
 		setState({
 			ready: false,
-			playList: samples,
+			samples: samples,
 			isPlaying: false,
 			currentIndex: 0,
 			active: null,

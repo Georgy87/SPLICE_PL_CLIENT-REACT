@@ -20,7 +20,7 @@ export const defaultPlayerState = {
 
 export const defaultSamplesPlayerState = {
 	ready: false,
-	playList: [],
+	samples: [],
 	isPlaying: false,
 	currentIndex: 0,
 	active: null,
@@ -30,6 +30,7 @@ export const Context = createContext<ContextProps>([
 	defaultPlayerState,
 	() => {},
 ]);
+
 export const SamplesContext = createContext<SamplesPlayerContextProps>([
 	defaultSamplesPlayerState,
 	() => {},

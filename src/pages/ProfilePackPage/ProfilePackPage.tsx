@@ -1,20 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import WaveSurfer from 'wavesurfer.js';
-import { WaveSurferParams } from 'wavesurfer.js/types/params';
+import { SampleList } from '../../components/SampleList/SampleList';
 import { useAsyncAction } from '../../hooks/useAsyncAction';
-import {
-	selectPacks,
-	selectSamples,
-} from '../../store/selectors/packsSelectors';
+import { selectSamples } from '../../store/selectors/packsSelectors';
 import { fetchGetPack } from '../../store/slices/pack/packSlice';
-import { WaveSurferPlayer } from '../WaveSurfer/WaveSurferPlayer';
 
 export const ProfilePackPage = () => {
-	const samples = useSelector(selectSamples);
-	
 	const params: { packId: string } = useParams();
 
 	const getPack = useAsyncAction<any, any>(fetchGetPack);
@@ -25,19 +18,7 @@ export const ProfilePackPage = () => {
 
 	return (
 		<div>
-			{samples?.map((sample) => {
-				return (
-					<>
-						{
-							<WaveSurferPlayer
-								url={
-									`http://localhost:5000/${sample?.audio}`
-								}
-							/>
-						}
-					</>
-				);
-			})}
+			<SampleList />
 		</div>
 	);
 };

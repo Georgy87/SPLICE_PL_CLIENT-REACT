@@ -55,8 +55,8 @@ export const NavbarList: React.FC<PacksListProps> = () => {
 	return (
 		<>
 			<ul className={styles.navLinks}>
-				{navbarListItems.map(({ pageName, iconName }, i) => (
-					<NavbarItem pageName={pageName} iconName={iconName} />
+				{navbarListItems.map(({ pageName, iconName }, i: number) => (
+					<NavbarItem key={i} pageName={pageName} iconName={iconName} />
 				))}
 
 				<li>

@@ -1,3 +1,5 @@
+import { Samples } from "../../../context/SamplesPlayerContext/types";
+
 export type PacksSliceState = {
     packs: Pack[] | [];
     packProfile: null | Pack;
@@ -23,13 +25,7 @@ export type Pack = {
     picture: string;
     audio: string;
     pause: boolean;
-    samples: null | Samples[];
+    samples: Samples[];
 }
 
-export type Samples = {
-    _id: string;
-    sampleName: string;
-    packId: string;
-    audio: string;
-}
 

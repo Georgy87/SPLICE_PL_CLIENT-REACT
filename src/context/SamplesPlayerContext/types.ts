@@ -1,7 +1,14 @@
 export type SamplesPlayerStateType = {
 	ready: boolean;
-	playList: any;
+	samples?: Samples[];
 	isPlaying: boolean;
 	currentIndex: number;
 	active: null | string;
+};
+
+export type Samples = {
+	_id: string;
+	audio: string;
+	packId: string;
+	sampleName: string;
 };
