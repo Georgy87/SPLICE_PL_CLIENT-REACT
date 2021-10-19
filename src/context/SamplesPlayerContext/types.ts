@@ -2,8 +2,8 @@ export type SamplesPlayerStateType = {
 	ready: boolean;
 	samples?: Samples[];
 	isPlaying: boolean;
-	currentIndex: number;
-	active: null | string;
+	currentId: number;
+	active: null | Samples;
 };
 
 export type Samples = {

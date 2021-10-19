@@ -22,7 +22,7 @@ export const defaultSamplesPlayerState = {
 	ready: false,
 	samples: [],
 	isPlaying: false,
-	currentIndex: 0,
+	currentId: 0,
 	active: null,
 };
 

@@ -1,18 +1,50 @@
-import React from 'react';
-import { Samples } from '../../context/SamplesPlayerContext/types';
+import React, { useContext } from 'react';
+import { SamplesContext } from '../../context/Context';
+
+import {
+	Samples,
+	SamplesPlayerStateType,
+} from '../../context/SamplesPlayerContext/types';
 
 import styles from './SampleItem.module.scss';
+import { waveSurfer } from '../SamplePlayer/SamplePlayer';
 
 type PropsType = {
-    samples: Samples;
-}
-export const SampleItem: React.FC<PropsType> = () => {
+	sample: Samples;
+	idx: number;
+};
+
+export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
+	const [state, setState] = useContext(SamplesContext);
+
+	const { samples, active, currentId } = state;
+	const playSample = () => {
+		if (idx !== currentId) {
+			setState((state: SamplesPlayerStateType) => ({
+				...state,
+				currentId: idx,
+			}));
+		} else {
+			// waveSurfer.playPause();
+
+			setState((state: SamplesPlayerStateType) => ({
+				...state,
+				isPlaying: waveSurfer?.isPlaying(),
+			}));
+		}
+	};
+
 	return (
-		<div className={styles.sampleList}>
+		<div>
 			<ul>
 				<li>
-                  
-                </li>
+				
+					<div onClick={playSample}>
+						{sample.sampleName}
+						{/* {currentId === index ? <div>Play</div> : <div>Pause</div>} */}
+					</div>
+
+				</li>
 			</ul>
 		</div>
 	);

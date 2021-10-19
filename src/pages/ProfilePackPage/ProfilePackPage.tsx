@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { SampleList } from '../../components/SampleList/SampleList';
+import { SamplePlayer } from '../../components/SamplePlayer/SamplePlayer';
 import { useAsyncAction } from '../../hooks/useAsyncAction';
 import { selectSamples } from '../../store/selectors/packsSelectors';
 import { fetchGetPack } from '../../store/slices/pack/packSlice';
@@ -18,6 +19,7 @@ export const ProfilePackPage = () => {
 
 	return (
 		<div>
+			<SamplePlayer />
 			<SampleList />
 		</div>
 	);

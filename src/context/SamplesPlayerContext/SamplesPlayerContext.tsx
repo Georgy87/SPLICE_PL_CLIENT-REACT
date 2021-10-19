@@ -14,7 +14,7 @@ type PropsType = {
 
 export const PlayerSamplesContext: React.FC<PropsType> = ({ children }) => {
 	const samples = useSelector(selectSamples);
-
+	
 	const [state, setState] = useState<SamplesPlayerContextProps[0]>(
 		defaultSamplesPlayerState,
 	);
@@ -24,10 +24,12 @@ export const PlayerSamplesContext: React.FC<PropsType> = ({ children }) => {
 			ready: false,
 			samples: samples,
 			isPlaying: false,
-			currentIndex: 0,
+			currentId: 0,
 			active: null,
 		});
 	}, [samples]);
+
+	console.log(state);
 
 	return (
 		<SamplesContext.Provider value={[state, setState]}>

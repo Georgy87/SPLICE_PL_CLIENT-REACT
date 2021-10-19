@@ -30,6 +30,7 @@ export const App: React.FC = () => {
 								component={ProfilePackPage}
 								exact
 							/>
+						
 							<Route
 								path='/profile'
 								component={ProfilePage}
