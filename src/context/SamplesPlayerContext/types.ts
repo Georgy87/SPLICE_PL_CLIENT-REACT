@@ -4,6 +4,7 @@ export type SamplesPlayerStateType = {
 	isPlaying: boolean;
 	currentId: number;
 	active: null | Samples;
+	loading: boolean;
 };
 
 export type Samples = {

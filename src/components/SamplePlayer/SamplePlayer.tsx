@@ -10,7 +10,7 @@ export const SamplePlayer = () => {
 	// const { active, currentId, samples, playSample } = useSampleSound();
 
 	const [state, setState] = useContext(SamplesContext);
-	const { samples, active, currentId } = state;
+	const { samples, active, currentId, loading } = state;
 
 	useEffect(() => {
 		if (samples?.length) {
@@ -34,30 +34,21 @@ export const SamplePlayer = () => {
 					...state,
 					ready: true,
 				}));
-
 				handlePlayPause();
 			});
 		}
+		console.log(`${samples?.[currentId]?.audio}`);
+	
+	}, [loading]);
 
-		const handlePlayPause = () => {
-			waveSurfer.playPause();
-			setState((state: SamplesPlayerStateType) => ({
-				...state,
-				isPlayins: waveSurfer?.isPlaying(),
-			}));
-		};
-
-		//   waveSurfer.on('ready', () => {
-		// 	dispatch({ type: 'SET_READY_STATUS', payload: true });
-		// 	handlePlayPause();
-		//   });
-		// waveSurfer.play();
-		//   waveSurfer.on('finish', () => {
-		// 	dispatch({ type: 'SET_FINISH', payload: true });
-		//   });
-
-		//eslint-disable-next-line
-	}, [samples]);
+	const handlePlayPause = () => {
+	
+		waveSurfer?.playPause();
+		// setState((state: SamplesPlayerStateType) => ({
+		// 	...state,
+		// 	// isPlaying: waveSurfer.isPlaying(),
+		// }));
+	};
 
 	useEffect(() => {
 		setState((state: SamplesPlayerStateType) => ({
@@ -65,20 +56,11 @@ export const SamplePlayer = () => {
 			ready: false,
 		}));
 
-		setState((state: SamplesPlayerStateType) => ({
-			...state,
-			active: samples?.[currentId],
-		}));
-
 		if (waveSurfer) {
+			
 			waveSurfer.load(
 				`http://localhost:5000/${samples?.[currentId].audio}`,
 			);
-			// waveSurfer.on('ready', () => {
-			// 	playSample(currentId);
-			//   });
-			// waveSurfer.playPause();
-			console.log(`http://localhost:5000/${samples?.[currentId].audio}`);
 		}
 	}, [currentId]);
 

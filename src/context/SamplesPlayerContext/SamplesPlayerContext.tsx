@@ -26,6 +26,7 @@ export const PlayerSamplesContext: React.FC<PropsType> = ({ children }) => {
 			isPlaying: false,
 			currentId: 0,
 			active: null,
+			loading: false,
 		});
 	}, [samples]);
 

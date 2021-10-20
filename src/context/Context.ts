@@ -24,6 +24,7 @@ export const defaultSamplesPlayerState = {
 	isPlaying: false,
 	currentId: 0,
 	active: null,
+	loading: true,
 };
 
 export const Context = createContext<ContextProps>([

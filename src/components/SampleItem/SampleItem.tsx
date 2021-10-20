@@ -18,19 +18,24 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	const [state, setState] = useContext(SamplesContext);
 
 	const { samples, active, currentId } = state;
-	const playSample = () => {
+
+	const playSample = async () => {
 		if (idx !== currentId) {
 			setState((state: SamplesPlayerStateType) => ({
 				...state,
 				currentId: idx,
+				active: samples?.[currentId],
 			}));
+			// await waveSurfer?.playPause();
+			
 		} else {
-			// waveSurfer.playPause();
-
 			setState((state: SamplesPlayerStateType) => ({
 				...state,
 				isPlaying: waveSurfer?.isPlaying(),
+				currentId: idx,
+				active: samples?.[currentId],
 			}));
+			waveSurfer?.playPause();
 		}
 	};
 
@@ -38,12 +43,10 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		<div>
 			<ul>
 				<li>
-				
 					<div onClick={playSample}>
 						{sample.sampleName}
 						{/* {currentId === index ? <div>Play</div> : <div>Pause</div>} */}
 					</div>
-
 				</li>
 			</ul>
 		</div>
