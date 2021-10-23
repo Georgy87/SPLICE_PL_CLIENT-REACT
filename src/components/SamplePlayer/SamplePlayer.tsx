@@ -1,26 +1,32 @@
-import React, { useContext, useEffect } from 'react';
+import { Divider } from 'material-ui';
+import React, { useContext, useEffect, useState } from 'react';
 import WaveSurfer from 'wavesurfer.js';
-import { SamplesContext } from '../../context/Context';
 import { SamplesPlayerStateType } from '../../context/SamplesPlayerContext/types';
 import { useSampleSound } from '../../hooks/useSampleSound';
 
 export let waveSurfer: any;
 
 export const SamplePlayer = () => {
-	// const { active, currentId, samples, playSample } = useSampleSound();
+	const {
+		active,
+		currentId,
+		samples,
+		playSample,
+		loading,
+		setState,
+		isPlaying,
+	} = useSampleSound();
 
-	const [state, setState] = useContext(SamplesContext);
-	const { samples, active, currentId, loading } = state;
+	const [ load, setLoad ] = useState(false);
 
 	useEffect(() => {
 		if (samples?.length) {
 			waveSurfer = WaveSurfer.create({
 				container: '#waveform',
-				// barGap: 3,
-				// barWidth: 7,
+				barGap: 2,
+				barWidth: 1,
 				// cursorWidth: 0,
-				// barRadius: 1,
-
+				barRadius: 1,
 				waveColor: 'black',
 				progressColor: 'red',
 			});
@@ -28,26 +34,23 @@ export const SamplePlayer = () => {
 			waveSurfer?.load(
 				`http://localhost:5000/${samples?.[currentId].audio}`,
 			);
-
+			setLoad(true);
 			waveSurfer.on('ready', () => {
-				setState((state: SamplesPlayerStateType) => ({
-					...state,
-					ready: true,
-				}));
 				handlePlayPause();
+
 			});
 		}
-		console.log(`${samples?.[currentId]?.audio}`);
-	
 	}, [loading]);
 
 	const handlePlayPause = () => {
-	
 		waveSurfer?.playPause();
-		// setState((state: SamplesPlayerStateType) => ({
-		// 	...state,
-		// 	// isPlaying: waveSurfer.isPlaying(),
-		// }));
+		if (load) {
+			setState((state: SamplesPlayerStateType) => ({
+				...state,
+				isPlaying: !state.isPlaying,
+				// active: !state.active,
+			}));
+		}
 	};
 
 	useEffect(() => {
@@ -57,7 +60,6 @@ export const SamplePlayer = () => {
 		}));
 
 		if (waveSurfer) {
-			
 			waveSurfer.load(
 				`http://localhost:5000/${samples?.[currentId].audio}`,
 			);
@@ -67,6 +69,9 @@ export const SamplePlayer = () => {
 	return (
 		<div>
 			<div id='waveform' className='my-4' />
+			<button onClick={handlePlayPause}>
+				{isPlaying ? <div>Pause</div> : <div>Play</div>}
+			</button>
 		</div>
 	);
 };

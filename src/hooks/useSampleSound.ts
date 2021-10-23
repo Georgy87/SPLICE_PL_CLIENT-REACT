@@ -6,24 +6,24 @@ import { waveSurfer } from '../components/SamplePlayer/SamplePlayer';
 
 export const useSampleSound = () => {
 	const [state, setState] = useContext(SamplesContext);
+	const { samples, active, currentId, loading, isPlaying } = state;
 
-	const { samples, active, currentId } = state;
-
-	const playSample = (index: number) => () => {
-		waveSurfer.playPause();
+	const playSample = (index: any) => {
 		if (index !== currentId) {
-			setState((state:  SamplesPlayerStateType) => ({
+			setState((state: SamplesPlayerStateType) => ({
 				...state,
 				currentId: index,
+				active: true,
+				isPlaying: true,
 			}));
 			waveSurfer?.playPause();
-			
 		} else {
-			waveSurfer?.playPause();
-			setState((state:  SamplesPlayerStateType) => ({
+			setState((state: SamplesPlayerStateType) => ({
 				...state,
-				isPlaying: waveSurfer?.isPlaying(),
+				active: true,
+				isPlaying: !state.isPlaying,
 			}));
+			waveSurfer?.playPause();
 		}
 	};
 
@@ -32,5 +32,9 @@ export const useSampleSound = () => {
 		active,
 		playSample,
 		currentId,
+		loading,
+		setState,
+		state,
+		isPlaying,
 	};
 };

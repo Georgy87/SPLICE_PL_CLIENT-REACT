@@ -5,6 +5,7 @@ import { PlayerStateType } from '../context/PlayerContext/types';
 
 export const useSound = () => {
 	const [state, setState] = useContext(Context);
+	
 
 	const playTrack = (index: number) => {
 		if (index === state.currentTrackIndex) {

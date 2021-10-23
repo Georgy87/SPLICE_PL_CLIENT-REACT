@@ -8,9 +8,9 @@ import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 import { CreatePackPage } from './pages/CreatePackPage/CreatePackPage';
 import { PlayerContext } from './context/PlayerContext/PlayerContext';
 import { ProfilePackPage } from './pages/ProfilePackPage/ProfilePackPage';
+import { PlayerSamplesContext } from './context/SamplesPlayerContext/SamplesPlayerContext';
 
 import styles from './styles/App.module.scss';
-import { PlayerSamplesContext } from './context/SamplesPlayerContext/SamplesPlayerContext';
 
 export const App: React.FC = () => {
 	return (
