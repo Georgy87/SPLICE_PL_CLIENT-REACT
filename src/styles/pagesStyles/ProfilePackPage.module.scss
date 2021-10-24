@@ -1,0 +1,63 @@
+.profilePackContainer {
+	width: 100vw;
+	height: 100vh;
+	margin-top: 50px;
+}
+
+.playerInner {
+	display: flex;
+	align-items: center;
+	border-radius: 6px;
+	background-position: center;
+
+	img {
+		border-radius: 5px;
+		width: 180px;
+		height: 180px;
+		padding: 10px;
+	
+	}
+
+	h1 {
+		color: #fff;
+	}
+
+	p {
+		color: #fff;
+		line-height: 25px;
+	}
+}
+
+.packInfo {
+	margin-right: auto;
+	z-index: 1000;
+	// &:before {
+	// 	content: ' ';
+	// 	position: absolute;
+	// 	height: 100%;
+	// 	width: 100%;
+	// 	opacity: 0.7;
+	// 	z-index: 1;
+	// 	background-image: linear-gradient(
+	// 		45deg,
+	// 		rgb(63, 75, 204) 0%,
+	// 		rgb(10, 10, 10) 100%
+	// 	);
+	// 	background-image:radial-gradient(45deg,
+	// 	rgb(63, 204, 87) 0%,
+	// 	rgb(121, 32, 32) 100%)
+	// }
+	
+}
+
+.samplePlayer {
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	margin-left: 30px;
+}
+
+.sampleList {
+	margin-top: 150px;
+	width: 35%;
+}

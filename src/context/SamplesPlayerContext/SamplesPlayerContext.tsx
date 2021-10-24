@@ -30,8 +30,6 @@ export const PlayerSamplesContext: React.FC<PropsType> = ({ children }) => {
 		});
 	}, [samples]);
 
-	console.log(state);
-
 	return (
 		<SamplesContext.Provider value={[state, setState]}>
 			{children}

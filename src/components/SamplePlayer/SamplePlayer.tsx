@@ -1,5 +1,4 @@
-import { Divider } from 'material-ui';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 import { SamplesPlayerStateType } from '../../context/SamplesPlayerContext/types';
 import { useSampleSound } from '../../hooks/useSampleSound';
@@ -8,10 +7,8 @@ export let waveSurfer: any;
 
 export const SamplePlayer = () => {
 	const {
-		active,
 		currentId,
 		samples,
-		playSample,
 		loading,
 		setState,
 		isPlaying,
@@ -37,7 +34,6 @@ export const SamplePlayer = () => {
 			setLoad(true);
 			waveSurfer.on('ready', () => {
 				handlePlayPause();
-
 			});
 		}
 	}, [loading]);
