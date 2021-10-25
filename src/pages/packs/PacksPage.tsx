@@ -21,7 +21,7 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 	const dispatch = useDispatch();
 
 	const [state, setState] = useContext(SamplesContext);
-
+	
 	const { samples, active, currentId } = state;
 	// const createTrack = useAsyncAction<any, any>(fetchGetPacks);
 	useEffect(() => {

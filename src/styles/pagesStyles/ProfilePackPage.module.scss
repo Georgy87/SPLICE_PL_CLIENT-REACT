@@ -1,21 +1,27 @@
+@import '../../styles/variables.scss';
+
 .profilePackContainer {
-	width: 100vw;
-	height: 100vh;
-	margin-top: 50px;
+	width: 75vw;
+	position: absolute;
+	padding-right: 15px;
+	overflow: hidden;
 }
 
 .playerInner {
 	display: flex;
+	position: fixed;
+	width: 75vw;
+	height: 250px;
 	align-items: center;
 	border-radius: 6px;
 	background-position: center;
+	background-color: $background;
 
 	img {
 		border-radius: 5px;
-		width: 180px;
-		height: 180px;
+		width: 200px;
+		height: 200px;
 		padding: 10px;
-	
 	}
 
 	h1 {
@@ -47,14 +53,13 @@
 	// 	rgb(63, 204, 87) 0%,
 	// 	rgb(121, 32, 32) 100%)
 	// }
-	
 }
 
 .samplePlayer {
 	width: 90%;
 	display: flex;
 	flex-direction: column;
-	margin-left: 30px;
+	margin-left: 20px;
 }
 
 .sampleList {

@@ -1,5 +1,3 @@
-import { url } from 'inspector';
-import zIndex from 'material-ui/styles/zIndex';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -20,21 +18,14 @@ export const ProfilePackPage = () => {
 	const params: { packId: string } = useParams();
 	const packProfile = useSelector(selectPackProfile);
 
-	const {
-		active,
-		currentId,
-		samples,
-		playSample,
-		loading,
-		setState,
-	} = useSampleSound();
+	const { active, samples } = useSampleSound();
 
 	const getPack = useAsyncAction<any, any>(fetchGetPack);
 
 	useEffect(() => {
 		getPack(params?.packId);
 		// waveSurfer?.load(' ');
-		// waveSurfer?.cancelAjax();
+		waveSurfer?.cancelAjax();
 		waveSurfer?.toggleMute();
 	}, []);
 
@@ -67,9 +58,7 @@ export const ProfilePackPage = () => {
 				)}
 			</div>
 
-			<div className={styles.sampleList}>
-				<SampleList />
-			</div>
+			<SampleList />
 		</div>
 	);
 };

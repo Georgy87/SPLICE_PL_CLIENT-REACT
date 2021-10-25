@@ -6,12 +6,16 @@
 	flex-direction: column;
 	align-items: center;
 	padding: 10px 10px;
+	background: rgba(209, 213, 245, 0.2); // Make sure this color has an opacity of less than 1
+	backdrop-filter: blur(8px);
+	border-radius: 10px;
 	.playerControls {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		width: 100%;
 		justify-content: space-between;
+	
 		.play {
 			display: flex;
 		}

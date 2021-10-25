@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 import { SamplesPlayerStateType } from '../../context/SamplesPlayerContext/types';
 import { useSampleSound } from '../../hooks/useSampleSound';
+import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 
-export let waveSurfer: any;
+import styles from './SamplePlayer.module.scss';
+
+export let waveSurfer: WaveSurfer;
 
 export const SamplePlayer = () => {
 	const {
@@ -14,18 +17,20 @@ export const SamplePlayer = () => {
 		isPlaying,
 	} = useSampleSound();
 
-	const [ load, setLoad ] = useState(false);
+	const [load, setLoad] = useState(false);
 
 	useEffect(() => {
 		if (samples?.length) {
 			waveSurfer = WaveSurfer.create({
 				container: '#waveform',
-				barGap: 2,
+				barGap: 0,
 				barWidth: 1,
-				// cursorWidth: 0,
+				height: 40,
+			
+				cursorColor: '#49c5b6',
 				barRadius: 1,
-				waveColor: 'black',
-				progressColor: 'red',
+				waveColor: 'grey',
+				progressColor: '#49c5b6',
 			});
 
 			waveSurfer?.load(
@@ -63,11 +68,22 @@ export const SamplePlayer = () => {
 	}, [currentId]);
 
 	return (
-		<div>
-			<div id='waveform' className='my-4' />
-			<button onClick={handlePlayPause}>
-				{isPlaying ? <div>Pause</div> : <div>Play</div>}
-			</button>
+		<div className={styles.sampleWaveform}>
+			<div id='waveform' className={styles.waveform} />
+			<div className={styles.playerControl}>
+				<IconChangeLayout
+					onClicked={handlePlayPause}
+					iconOneOrTwo={isPlaying}
+					iconOne='play-footer'
+					iconTwo='pause-footer'
+					typeBtn='sample-player'
+					iconStyle={{
+						color: '#fff',
+						fontSize: '35px',
+						cursor: 'pointer',
+					}}
+				></IconChangeLayout>
+			</div>
 		</div>
 	);
 };

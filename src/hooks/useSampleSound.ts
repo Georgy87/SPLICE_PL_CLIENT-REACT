@@ -8,7 +8,7 @@ export const useSampleSound = () => {
 	const [state, setState] = useContext(SamplesContext);
 	const { samples, active, currentId, loading, isPlaying } = state;
 
-	const playSample = (index: any) => {
+	const playSample = (index: number) => {
 		if (index !== currentId) {
 			setState((state: SamplesPlayerStateType) => ({
 				...state,

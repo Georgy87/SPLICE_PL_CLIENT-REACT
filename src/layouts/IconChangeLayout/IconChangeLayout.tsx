@@ -16,7 +16,7 @@ const iconsPause = {
 };
 
 type PropsType = {
-	blockStyle: string;
+	blockStyle?: string;
 	iconOneOrTwo: boolean;
 	onClicked: any;
 	iconOne: keyof typeof iconsPlay;
@@ -27,8 +27,8 @@ type PropsType = {
 		cursor: string;
 	};
 	typeBtn: string;
-	trackId?: string;
-	currentTrackId: string | boolean;
+	trackId?: string | number;
+	currentTrackId?: string | boolean | number;
 };
 
 export const IconChangeLayout: React.FC<PropsType> = ({
@@ -50,10 +50,12 @@ export const IconChangeLayout: React.FC<PropsType> = ({
 			{iconOneOrTwo && currentTrackId === trackId ? (
 				<ButtonLayout typeStyle={typeBtn}>
 					<IconPause style={iconStyle} onClick={onClicked} />
+					{typeBtn === 'sample-player' && 'Play sample'}
 				</ButtonLayout>
 			) : (
 				<ButtonLayout typeStyle={typeBtn}>
 					<IconPlay style={iconStyle} onClick={onClicked} />
+					{typeBtn === 'sample-player' && 'Play sample'}
 				</ButtonLayout>
 			)}
 		</div>

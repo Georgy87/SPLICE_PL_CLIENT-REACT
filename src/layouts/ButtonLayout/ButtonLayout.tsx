@@ -21,6 +21,8 @@ export const ButtonLayout: React.FC<PropsType> = ({ children, typeStyle, onClick
 					[styles.blue]: typeStyle === 'blue',
 					[styles.blueDisabled]: typeStyle === 'blue-disabled',
 					[styles.download]: typeStyle === 'download',
+					[styles.samplePlayer]: typeStyle === 'sample-player',
+					[styles.sampleItem]: typeStyle === 'sample-item',
 				})}
 			>
 				{children}
