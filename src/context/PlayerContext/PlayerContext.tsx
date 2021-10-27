@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ReactChildren, ContextType } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectPacks } from '../../store/selectors/packsSelectors';
+import { selectPacks, selectSamples } from '../../store/selectors/packsSelectors';
 
 import { Context, ContextProps, defaultPlayerState } from '../Context';
 //import { PlayerStateType } from './types';
@@ -12,6 +12,7 @@ type PropsType = {
 
 export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 	const packs = useSelector(selectPacks);
+	const samples = useSelector(selectSamples);
 
 	const [state, setState] = useState<ContextProps[0]>(defaultPlayerState);
 
@@ -20,6 +21,7 @@ export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 			setState({
 				audioPlayer: new Audio(),
 				packs: packs,
+				samples: samples,
 				currentTrackIndex: null,
 				isPlaying: false,
 				currentTrackId: null,
@@ -29,8 +31,8 @@ export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 				volume: 50,
 			});
 		}
-	}, [packs]);
-
+	}, [packs, samples]);
+	
 	return (
 		<Context.Provider value={[state, setState]}>
 			{children}

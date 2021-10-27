@@ -9,6 +9,7 @@ export type SamplesPlayerContextProps = [SamplesPlayerStateType, (state: any) =>
 export const defaultPlayerState = {
 	audioPlayer: new Audio(),
 	packs: [],
+	samples: [],
 	currentTrackIndex: null,
 	isPlaying: false,
 	currentTrackId: null,

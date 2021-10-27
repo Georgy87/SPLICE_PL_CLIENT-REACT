@@ -10,9 +10,9 @@ export const Canvas = () => {
 
 	return (
 		<>
-			{samples?.map((sample) => (
+			{samples?.map((sample, index) => (
                 <div style={{width: '500px'}}>
-				<CanvasItems key={sample._id} samplesUrl={sample.audio} />
+				<CanvasItems key={sample._id} sample={sample} index={index}/>
                 </div>
 			))}
 		</>

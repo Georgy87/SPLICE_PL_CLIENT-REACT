@@ -1,19 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Samples } from '../../context/SamplesPlayerContext/types';
+import { useSound } from '../../hooks/useSound';
 import { hookAudioWave } from './hookAudioWave';
 
 type PropsType = {
-	samplesUrl: string;
+	sample: Samples;
+	index: number;
 };
 
-export const CanvasItems: React.FC<PropsType> = ({ samplesUrl }) => {
+export const CanvasItems: React.FC<PropsType> = ({ sample, index }) => {
+	const { audio } = sample;
 	const [hover, setHover] = useState(false);
+
+	const { playTrack } = useSound();
 	const canvasRef = useRef<any>(null);
 
-	console.log(samplesUrl);
-
 	useEffect(() => {
-		if (samplesUrl) {
-			fetch(`http://localhost:5000/${samplesUrl}`).then((data) => {
+		if (audio) {
+			fetch(`http://localhost:5000/${audio}`).then((data) => {
 				hookAudioWave(data.arrayBuffer(), canvasRef.current);
 			});
 		}
@@ -31,6 +35,7 @@ export const CanvasItems: React.FC<PropsType> = ({ samplesUrl }) => {
 
 	return (
 		<div style={{ width: 500 }}>
+			<button onClick={() => playTrack(index)}>Play</button>
 			<canvas
 				ref={canvasRef}
 				style={{ width: '1000px', height: '50px' }}

@@ -16,7 +16,6 @@ export const SamplePlayer = () => {
 		setState,
 		isPlaying,
 	} = useSampleSound();
-
 	const [load, setLoad] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -24,11 +23,11 @@ export const SamplePlayer = () => {
 			waveSurfer = WaveSurfer.create({
 				container: '#waveform',
 				barGap: 0,
-				barWidth: 1,
-				height: 40,
-			
+				barWidth: 0,
+				height: 150,
+
 				cursorColor: '#49c5b6',
-				barRadius: 1,
+				barRadius: 0,
 				waveColor: 'grey',
 				progressColor: '#49c5b6',
 			});
