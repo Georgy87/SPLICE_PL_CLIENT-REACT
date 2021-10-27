@@ -13,6 +13,7 @@ import { selectPackProfile } from '../../store/selectors/packsSelectors';
 import { fetchGetPack } from '../../store/slices/pack/packSlice';
 
 import styles from '../../styles/pagesStyles/ProfilePackPage.module.scss';
+import { Canvas } from '../../components/Canvas/Canvas';
 
 export const ProfilePackPage = () => {
 	const params: { packId: string } = useParams();
@@ -57,8 +58,8 @@ export const ProfilePackPage = () => {
 					</div>
 				)}
 			</div>
-
 			<SampleList />
+			<Canvas />
 		</div>
 	);
 };

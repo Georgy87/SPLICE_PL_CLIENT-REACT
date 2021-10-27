@@ -6,6 +6,7 @@ export const ProfilePage: React.FC = () => {
 
 	return (
 		<div>
+		
 			<button
 				style={{ color: 'green', height: '100px', marginTop: '300px' }}
 				onClick={() => history.push('/profile/create')}

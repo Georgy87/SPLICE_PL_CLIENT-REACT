@@ -18,7 +18,7 @@ export const PlayerSamplesContext: React.FC<PropsType> = ({ children }) => {
 	const [state, setState] = useState<SamplesPlayerContextProps[0]>(
 		defaultSamplesPlayerState,
 	);
-
+	
 	useEffect(() => {
 		setState({
 			ready: false,

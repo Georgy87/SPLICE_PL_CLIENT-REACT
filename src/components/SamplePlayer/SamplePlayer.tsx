@@ -17,7 +17,7 @@ export const SamplePlayer = () => {
 		isPlaying,
 	} = useSampleSound();
 
-	const [load, setLoad] = useState(false);
+	const [load, setLoad] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (samples?.length) {
