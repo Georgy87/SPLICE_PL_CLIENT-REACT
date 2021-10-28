@@ -11,9 +11,13 @@ export const Canvas = () => {
 	return (
 		<>
 			{samples?.map((sample, index) => (
-                <div style={{width: '500px'}}>
-				<CanvasItems key={sample._id} sample={sample} index={index}/>
-                </div>
+				<div style={{ width: '500px' }}>
+					<CanvasItems
+						key={sample._id}
+						sample={sample}
+						index={index}
+					/>
+				</div>
 			))}
 		</>
 	);

@@ -21,6 +21,21 @@ export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 			setState({
 				audioPlayer: new Audio(),
 				packs: packs,
+				samples: [],
+				currentTrackIndex: null,
+				isPlaying: false,
+				currentTrackId: null,
+				active: null,
+				duration: 0,
+				currentTime: 0,
+				volume: 50,
+			});
+		}
+
+		if (samples) {
+			setState({
+				audioPlayer: new Audio(),
+				packs: packs,
 				samples: samples,
 				currentTrackIndex: null,
 				isPlaying: false,
@@ -32,7 +47,7 @@ export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 			});
 		}
 	}, [packs, samples]);
-	
+	console.log(state);
 	return (
 		<Context.Provider value={[state, setState]}>
 			{children}

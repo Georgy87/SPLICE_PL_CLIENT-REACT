@@ -25,7 +25,7 @@ export const PackItem: React.FC<PackListProps> = ({
 }) => {
 	const [drag, setDrag] = useState<boolean>(false);
 
-	const { playTrack, isPlaying, currentTrackId } = useSound();
+	const { playTrack, isPlaying, currentPackId } = useSound();
 
 	const history = useHistory();
 
@@ -68,7 +68,7 @@ export const PackItem: React.FC<PackListProps> = ({
 					blockStyle={styles.playPauseCircle}
 					iconOneOrTwo={isPlaying}
 					trackId={id}
-					currentTrackId={currentTrackId}
+					currentTrackId={currentPackId}
 					iconOne='play'
 					iconTwo='pause'
 					iconStyle={{

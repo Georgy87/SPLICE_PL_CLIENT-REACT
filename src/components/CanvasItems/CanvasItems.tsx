@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Samples } from '../../context/SamplesPlayerContext/types';
 import { useSound } from '../../hooks/useSound';
+import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 import { hookAudioWave } from './hookAudioWave';
 
 type PropsType = {
@@ -9,10 +10,10 @@ type PropsType = {
 };
 
 export const CanvasItems: React.FC<PropsType> = ({ sample, index }) => {
-	const { audio } = sample;
+	const { audio, _id } = sample;
 	const [hover, setHover] = useState(false);
 
-	const { playTrack } = useSound();
+	const { play, playSample, isPlaying, currentSampleId } = useSound();
 	const canvasRef = useRef<any>(null);
 
 	useEffect(() => {
@@ -35,7 +36,24 @@ export const CanvasItems: React.FC<PropsType> = ({ sample, index }) => {
 
 	return (
 		<div style={{ width: 500 }}>
-			<button onClick={() => playTrack(index)}>Play</button>
+				<IconChangeLayout
+							onClicked={(e: Event) => {
+								e.stopPropagation();
+								playSample(index);
+							}}
+						iconOneOrTwo={isPlaying}
+						currentTrackId={currentSampleId}
+						trackId={_id}
+						iconOne='play'
+						iconTwo='pause'
+						typeBtn='sample-item'
+						iconStyle={{
+							color: '#49c5b6',
+							fontSize: '35px',
+							cursor: 'pointer',
+						}}
+					></IconChangeLayout>
+			{/* <button onClick={() => playSample(index)}>Play</button> */}
 			<canvas
 				ref={canvasRef}
 				style={{ width: '1000px', height: '50px' }}

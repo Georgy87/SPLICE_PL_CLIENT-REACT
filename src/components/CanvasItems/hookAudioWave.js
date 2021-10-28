@@ -34,6 +34,7 @@ const normalizeData = (filteredData) => {
 };
 
 const draw = (normalizedData, canvas) => {
+
 	// set up the canvas
 	const dpr = window.devicePixelRatio || 1;
 	const padding = 1;

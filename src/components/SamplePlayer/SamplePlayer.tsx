@@ -22,9 +22,9 @@ export const SamplePlayer = () => {
 		if (samples?.length) {
 			waveSurfer = WaveSurfer.create({
 				container: '#waveform',
-				barGap: 0,
-				barWidth: 0,
-				height: 150,
+				barGap: 1,
+				barWidth: 1,
+				height: 80,
 
 				cursorColor: '#49c5b6',
 				barRadius: 0,
