@@ -13,5 +13,4 @@ export type PlayerStateType = {
     currentTime: number;
     volume: number;
     percent: number;
-    bpmPercent: number;
 }

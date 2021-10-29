@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Samples } from '../../context/SamplesPlayerContext/types';
-import { useSampleSound } from '../../hooks/useSampleSound';
 import { useSound } from '../../hooks/useSound';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 import { selectPackProfile } from '../../store/selectors/packsSelectors';
@@ -61,7 +60,10 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 					<Slider trackId={_id} currentSampleId={currentSampleId}>
 						<canvas
 							ref={canvasRef}
-							style={{ width: '400px', height: '40px' }}
+							style={{
+								width: '400px',
+								height: '35px',
+							}}
 						/>
 					</Slider>
 				</li>

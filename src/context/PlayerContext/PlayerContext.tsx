@@ -33,7 +33,6 @@ export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 				currentTime: 0,
 				volume: 50,
 				percent: 0,
-				bpmPercent: 0,
 			});
 		}
 
@@ -50,11 +49,9 @@ export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 				currentTime: 0,
 				volume: 50,
 				percent: 0,
-				bpmPercent: 0,
 			});
 		}
 	}, [packs, samples]);
-	console.log(state);
 
 	return (
 		<Context.Provider value={[state, setState]}>

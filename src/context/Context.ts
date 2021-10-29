@@ -18,7 +18,6 @@ export const defaultPlayerState = {
 	currentTime: 0,
 	volume: 50,
 	percent: 0,
-	bpmPercent: 0,
 };
 
 export const defaultSamplesPlayerState = {
@@ -28,7 +27,6 @@ export const defaultSamplesPlayerState = {
 	currentId: 0,
 	active: null,
 	loading: true,
-	bpmPercent: 0,
 };
 
 export const Context = createContext<ContextProps>([

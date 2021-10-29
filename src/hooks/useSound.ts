@@ -65,10 +65,9 @@ export const useSound = () => {
 					currentTime: Math.ceil(state.audioPlayer.currentTime),
 					percent: Number(
 						(state.currentTime / state.duration) * 100).toFixed(2),
-
-					bpmPercent: Number(
-						((state.currentTime * 0.300) / state.duration) * 100,
-					).toFixed(5),
+					// bpmPercent: Number(
+					// 	((state.currentTime * 0.300) / state.duration) * 100,
+					// ).toFixed(5),
 				}));
 			};
 
@@ -134,6 +133,5 @@ export const useSound = () => {
 		state,
 		setState,
 		percent: state.percent,
-		bpmPercent: state.bpmPercent,
 	};
 };
