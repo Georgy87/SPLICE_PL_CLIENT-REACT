@@ -1,14 +1,17 @@
 import React, { useState, useEffect, ReactChildren, ContextType } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectPacks, selectSamples } from '../../store/selectors/packsSelectors';
+import {
+	selectPacks,
+	selectSamples,
+} from '../../store/selectors/packsSelectors';
 
 import { Context, ContextProps, defaultPlayerState } from '../Context';
 //import { PlayerStateType } from './types';
 
 type PropsType = {
 	children: React.ReactNode;
-}
+};
 
 export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 	const packs = useSelector(selectPacks);
@@ -29,6 +32,8 @@ export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 				duration: 0,
 				currentTime: 0,
 				volume: 50,
+				percent: 0,
+				bpmPercent: 0,
 			});
 		}
 
@@ -44,10 +49,13 @@ export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 				duration: 0,
 				currentTime: 0,
 				volume: 50,
+				percent: 0,
+				bpmPercent: 0,
 			});
 		}
 	}, [packs, samples]);
 	console.log(state);
+
 	return (
 		<Context.Provider value={[state, setState]}>
 			{children}

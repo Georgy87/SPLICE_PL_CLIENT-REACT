@@ -5,16 +5,11 @@ export const hookAudioWave = (data, canvas) => {
 	data.then((data) => audioContext.decodeAudioData(data)).then((data) =>
 		draw(normalizeData(filterData(data)), canvas),
 	);
-
-	// fetch(url)
-	// 	.then((response) => response.arrayBuffer())
-	// 	.then((arrayBuffer) => audioContext.decodeAudioData(arrayBuffer))
-	// 	.then((audioBuffer) => draw(normalizeData(filterData(audioBuffer))));
 };
 
 const filterData = (audioBuffer) => {
 	const rawData = audioBuffer.getChannelData(0); // We only need to work with one channel of data
-	const samples = 23000; // Number of samples we want to have in our final data set
+	const samples = 15000; // Number of samples we want to have in our final data set
 	const blockSize = Math.floor(rawData.length / samples); // the number of samples in each subdivision
 	const filteredData = [];
 	for (let i = 0; i < samples; i++) {
@@ -60,7 +55,7 @@ const draw = (normalizedData, canvas) => {
 
 const drawLineSegment = (ctx, x, height, width, isEven) => {
 	ctx.lineWidth = 1; // how thick the line is
-	ctx.strokeStyle = 'black'; // what color our line is
+	ctx.strokeStyle = '#98b2d1'; // what color our line is
 	ctx.beginPath();
 	height = isEven ? height : -height;
 	ctx.moveTo(x, 0);

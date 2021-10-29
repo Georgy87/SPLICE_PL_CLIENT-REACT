@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import { Context } from '../context/Context';
 import { PlayerStateType } from '../context/PlayerContext/types';
@@ -55,6 +55,7 @@ export const useSound = () => {
 				setState((state: PlayerStateType) => ({
 					...state,
 					duration: Math.ceil(state.audioPlayer.duration),
+					percent: state.percent,
 				}));
 			};
 
@@ -62,6 +63,12 @@ export const useSound = () => {
 				setState((state: PlayerStateType) => ({
 					...state,
 					currentTime: Math.ceil(state.audioPlayer.currentTime),
+					percent: Number(
+						(state.currentTime / state.duration) * 100).toFixed(2),
+
+					bpmPercent: Number(
+						((state.currentTime * 0.300) / state.duration) * 100,
+					).toFixed(5),
 				}));
 			};
 
@@ -126,5 +133,7 @@ export const useSound = () => {
 		changeCurrentTime,
 		state,
 		setState,
+		percent: state.percent,
+		bpmPercent: state.bpmPercent,
 	};
 };

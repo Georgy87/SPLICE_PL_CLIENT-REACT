@@ -12,4 +12,5 @@ export type Samples = {
 	audio: string;
 	packId: string;
 	sampleName: string;
+	percentBpm: number;
 };

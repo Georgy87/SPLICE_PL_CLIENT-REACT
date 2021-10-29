@@ -9,6 +9,7 @@ import { selectPackProfile } from '../../store/selectors/packsSelectors';
 import { hookAudioWave } from '../../hooks/hookAudioWave';
 
 import styles from './SampleItem.module.scss';
+import { Slider } from '../Slider/Slider';
 
 type PropsType = {
 	sample: Samples;
@@ -39,7 +40,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						src={`http://localhost:5000/${packProfile?.picture}`}
 						alt={packProfile?.picture}
 					/>
-					<p>{sample.sampleName}</p>
+
 					<IconChangeLayout
 						onClicked={(e: Event) => {
 							e.stopPropagation();
@@ -52,17 +53,19 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						iconTwo='pause'
 						typeBtn='sample-item'
 						iconStyle={{
-							color: '#49c5b6',
+							color: '#98b2d1',
 							fontSize: '35px',
 							cursor: 'pointer',
 						}}
 					></IconChangeLayout>
-					{/* <button onClick={() => playSample(index)}>Play</button> */}
-					<canvas
-						ref={canvasRef}
-						style={{ width: '1000px', height: '50px' }}
-					/>
+					<Slider trackId={_id} currentSampleId={currentSampleId}>
+						<canvas
+							ref={canvasRef}
+							style={{ width: '400px', height: '40px' }}
+						/>
+					</Slider>
 				</li>
+				<p>{sample.sampleName}</p>
 			</ul>
 		</>
 	);
