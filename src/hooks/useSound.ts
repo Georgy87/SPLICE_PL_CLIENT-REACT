@@ -110,6 +110,18 @@ export const useSound = () => {
 		state.audioPlayer.currentTime = Number(value);
 	};
 
+	const changeCurrentTimeSample = (e: React.ChangeEvent<HTMLInputElement>) => {
+	
+		
+		setState((state: PlayerStateType) => ({
+			...state,
+			// currentTime: Number(e.target.value),
+			percent: e.target.value,
+		}));
+
+		state.audioPlayer.currentTime = (state.audioPlayer.duration / 100) * +(e.target.value);
+	};
+
 	return {
 		playTrack,
 		playSample,
@@ -133,5 +145,7 @@ export const useSound = () => {
 		state,
 		setState,
 		percent: state.percent,
+		changeCurrentTimeSample
+
 	};
 };
