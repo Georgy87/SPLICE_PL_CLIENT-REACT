@@ -1,8 +1,9 @@
+@import '../../styles/variables.scss';
 .loginPage {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    overflow: hidden;
+	overflow: hidden;
 }
 
 .bgImage {
@@ -13,44 +14,72 @@
 	filter: blur(1px);
 	height: 100vh;
 	background-size: cover;
-    -webkit-filter: blur(5px);
-    filter: blur(5px);
-    transform: scale(1.1); 
+	-webkit-filter: blur(5px);
+	filter: blur(5px);
+	transform: scale(1.1);
 }
 
 .loginBox {
-    display: flex;
-    flex-direction: column;
-    border-radius: 8px;
-    justify-content: center;
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
-	font-weight: bold;
+	display: flex;
+	flex-direction: column;
+	border-radius: 8px;
+	justify-content: center;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
 	position: absolute;
 	z-index: 2;
 	width: 400px;
 	padding: 20px;
 	text-align: center;
-    h1 {
-        // width: 70px;
-        text-align: center;
-        color: #fff;
-    }
+
+	h1 {
+		margin: 0 auto;
+		width: 250px;
+		text-align: center;
+		font-weight: 500;
+		color: #fff;
+		font-size: 17px;
+		padding: 4px;
+		border-bottom: 2px solid rgb(101, 215, 243);
+		margin-bottom: 40px;
+	}
+
 }
 
 .textbox {
-    display: flex;
-    justify-content: center;
-    border: none;
-    background: none;
-    height: 58px;
-    input {
-        border: none;
-        height: 10px;
-        border-bottom: 2px solid #fff;
-        background-color: transparent;
-        padding: 10px;
+	display: flex;
+	justify-content: start;
+    flex-direction: column;
+	border: none;
+	background: none;
+	height: 58px;
+    padding-left: 40px;
+    padding-right: 40px;
+	input {
+		border: none;
+		height: 10px;
+		border-bottom: 1px solid #fff;
+		background-color: transparent;
+		color: #fff;
+		padding: 10px;
+		&:active,
+		&:hover,
+		&:focus {
+			color: #fff;
+			outline: 0;
+			outline-offset: 0;
+		}
+	}
+    p {
+        color: $error;
+        font-size: 13px;
+        font-weight: 300;
     }
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover,
+	input:-webkit-autofill:focus,
+	input:-webkit-autofill:active {
+		-webkit-transition: 'color 9999s ease-out, background-color 9999s ease-out';
+		-webkit-transition-delay: 9999s;
+	}
 }
-
-
