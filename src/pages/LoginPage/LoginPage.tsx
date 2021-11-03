@@ -3,8 +3,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import styles from './LoginPage.module.scss';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
+import { AuthorizationLayout } from '../../layouts/AuthorizationLayout.tsx/AuthorizationLayout';
+
+import styles from './LoginPage.module.scss';
 
 export type FormProps = {
 	email: string;
@@ -39,7 +41,7 @@ export const LoginPage: React.FC = () => {
 		handleSubmit,
 		formState: { errors },
 		reset,
-	} = useForm({
+	} = useForm<FormProps>({
 		resolver: yupResolver(LoginFormSchema),
 	});
 
@@ -50,36 +52,42 @@ export const LoginPage: React.FC = () => {
 	};
 
 	return (
-		<div className={styles.loginPage}>
-			<div className={styles.bgImage}></div>
-			<form className={styles.loginBox} onSubmit={handleSubmit(onSubmit)}>
-				<h1>Log In to Your Splice Account</h1>
-				<div className={styles.textbox}>
-					<input
-						type='email'
-						placeholder='Email'
-						{...register('email')}
-						value={email}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-							onChangeEmail(e)
-						}
-					/>
-					<p>{errors.email?.message}</p>
-				</div>
-				<div className={styles.textbox}>
-					<input
-						type='password'
-						placeholder='Password'
-						{...register('password')}
-						value={password}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-							onChangePassword(e)
-						}
-					/>
-					<p>{errors.password?.message}</p>
-				</div>
-				<ButtonLayout typeStyle='auth'>Log in</ButtonLayout>
-			</form>
-		</div>
+		<>
+			<AuthorizationLayout>
+				<form
+					className={styles.loginBox}
+					onSubmit={handleSubmit(onSubmit)}
+				>
+					<div className={styles.loginLabel}>
+						<h1>Log In to Your Splice Account!</h1>
+					</div>
+					<div className={styles.textbox}>
+						<input
+							type='email'
+							placeholder='Email'
+							{...register('email')}
+							value={email}
+							onChange={(
+								e: React.ChangeEvent<HTMLInputElement>,
+							) => onChangeEmail(e)}
+						/>
+						<p>{errors.email?.message}</p>
+					</div>
+					<div className={styles.textbox}>
+						<input
+							type='password'
+							placeholder='Password'
+							{...register('password')}
+							value={password}
+							onChange={(
+								e: React.ChangeEvent<HTMLInputElement>,
+							) => onChangePassword(e)}
+						/>
+						<p>{errors.password?.message}</p>
+					</div>
+					<ButtonLayout typeStyle='auth'>Log in</ButtonLayout>
+				</form>
+			</AuthorizationLayout>
+		</>
 	);
 };

@@ -1,0 +1,19 @@
+.authPagesContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.bgAuthImage {
+	width: 100vw;
+	background-image: url('https://darbaculture.com/wp-content/uploads/2018/03/asap-rocky.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	filter: blur(1px);
+	height: 100vh;
+	background-size: cover;
+	-webkit-filter: blur(5px);
+	filter: blur(5px);
+	transform: scale(1.1);
+}

@@ -1,23 +1,4 @@
 @import '../../styles/variables.scss';
-.loginPage {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	overflow: hidden;
-}
-
-.bgImage {
-	width: 100vw;
-	background-image: url('https://darbaculture.com/wp-content/uploads/2018/03/asap-rocky.jpg');
-	background-position: center center;
-	background-repeat: no-repeat;
-	filter: blur(1px);
-	height: 100vh;
-	background-size: cover;
-	-webkit-filter: blur(5px);
-	filter: blur(5px);
-	transform: scale(1.1);
-}
 
 .loginBox {
 	display: flex;
@@ -31,20 +12,22 @@
 	width: 400px;
 	padding: 20px;
 	text-align: center;
-
-	h1 {
+	.loginLabel {
+		display: flex;
+		justify-content: start;
 		margin: 0 auto;
-		width: 250px;
-		text-align: center;
-		font-weight: 500;
-		color: #fff;
-		font-size: 17px;
-		padding: 4px;
 		border-bottom: 2px solid rgb(101, 215, 243);
 		margin-bottom: 40px;
+		width: 240px;
+		h1 {
+			text-align: center;
+			font-weight: 500;
+			color: #fff;
+			font-size: 17px;
+		}
 	}
-
 }
+
 
 .textbox {
 	display: flex;
