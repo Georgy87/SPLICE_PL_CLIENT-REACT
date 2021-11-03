@@ -6,9 +6,9 @@ import { useSound } from '../../hooks/useSound';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 import { selectPackProfile } from '../../store/selectors/packsSelectors';
 import { hookAudioWave } from '../../hooks/hookAudioWave';
+import { SampleSliderLayout } from '../../layouts/SampleSliderLayout/SampleSliderLayout';
 
 import styles from './SampleItem.module.scss';
-import { Slider } from '../Slider/Slider';
 
 type PropsType = {
 	sample: Samples;
@@ -57,7 +57,10 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 							cursor: 'pointer',
 						}}
 					></IconChangeLayout>
-					<Slider trackId={_id} currentSampleId={currentSampleId}>
+					<SampleSliderLayout
+						trackId={_id}
+						currentSampleId={currentSampleId}
+					>
 						<canvas
 							ref={canvasRef}
 							style={{
@@ -65,7 +68,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 								height: '35px',
 							}}
 						/>
-					</Slider>
+					</SampleSliderLayout>
 				</li>
 				<p>{sample.sampleName}</p>
 			</ul>

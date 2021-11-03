@@ -55,7 +55,7 @@ export const useSound = () => {
 				setState((state: PlayerStateType) => ({
 					...state,
 					duration: Math.ceil(state.audioPlayer.duration),
-					percent: state.percent,
+					// percent: state.percent,
 				}));
 			};
 
@@ -111,8 +111,6 @@ export const useSound = () => {
 	};
 
 	const changeCurrentTimeSample = (e: React.ChangeEvent<HTMLInputElement>) => {
-	
-		
 		setState((state: PlayerStateType) => ({
 			...state,
 			// currentTime: Number(e.target.value),
