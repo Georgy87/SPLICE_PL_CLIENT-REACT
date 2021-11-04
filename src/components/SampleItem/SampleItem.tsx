@@ -20,7 +20,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	const [hover, setHover] = useState(false);
 
 	const { play, playSample, isPlaying, currentSampleId } = useSound();
-	const canvasRef = useRef<any>(null);
+	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
 		if (audio) {

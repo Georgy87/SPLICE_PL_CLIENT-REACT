@@ -14,6 +14,7 @@ import { PlayerContext } from './context/PlayerContext/PlayerContext';
 import { PlayerSamplesContext } from './context/SamplesPlayerContext/SamplesPlayerContext';
 
 import styles from './styles/App.module.scss';
+import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 
 export const App: React.FC = () => {
 	return (
@@ -25,19 +26,20 @@ export const App: React.FC = () => {
 					</div>
 					<div className={styles.pagesBlock}>
 						<Switch>
-							<Route path={['/home', '/']} component={MainPage} exact />
 							<Route
-								path='/login'
-								component={LoginPage}
+								path={['/home', '/']}
+								component={MainPage}
 								exact
 							/>
+							<Route path='/login' component={LoginPage} exact />
+							<Route path='/registration' component={RegistrationPage} exact />
 							<Route path='/packs' component={PacksPage} />
 							<Route
 								path='/profile-pack/:packId?'
 								component={ProfilePackPage}
 								exact
 							/>
-						
+
 							<Route
 								path='/profile'
 								component={ProfilePage}
