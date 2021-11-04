@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
-import { Samples } from '../../context/SamplesPlayerContext/types';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Samples } from '../../context/PlayerContext/types';
+import { selectSamples } from '../../store/selectors/packsSelectors';
 
-import { useSampleSound } from '../../hooks/useSampleSound';
 import { SampleItem } from '../SampleItem/SampleItem';
 
 import styles from './SampleList.module.scss';
 
 export const SampleList = () => {
-    const { samples } = useSampleSound();
+	const samples = useSelector(selectSamples);
 
 	return (
 		<div className={styles.sampleList}>

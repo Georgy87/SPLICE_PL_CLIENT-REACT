@@ -19,7 +19,6 @@ import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 export const App: React.FC = () => {
 	return (
 		<PlayerContext>
-			<PlayerSamplesContext>
 				<div className={styles.appContainer}>
 					<div className={styles.navbarBlock}>
 						<Navbar />
@@ -53,7 +52,6 @@ export const App: React.FC = () => {
 						</Switch>
 					</div>
 				</div>
-			</PlayerSamplesContext>
 		</PlayerContext>
 	);
 };

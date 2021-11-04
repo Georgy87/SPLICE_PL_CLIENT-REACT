@@ -38,17 +38,8 @@ export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 
 		if (samples) {
 			setState({
-				audioPlayer: new Audio(),
-				packs: packs,
+				...state,
 				samples: samples,
-				currentTrackIndex: null,
-				isPlaying: false,
-				currentTrackId: null,
-				active: null,
-				duration: 0,
-				currentTime: 0,
-				volume: 50,
-				percent: 0,
 			});
 		}
 	}, [packs, samples]);

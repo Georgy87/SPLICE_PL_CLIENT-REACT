@@ -1,10 +1,8 @@
 import { createContext } from 'react';
 
 import { PlayerStateType } from './PlayerContext/types';
-import { SamplesPlayerStateType } from './SamplesPlayerContext/types';
 
 export type ContextProps = [PlayerStateType, (state: any) => void];
-export type SamplesPlayerContextProps = [SamplesPlayerStateType, (state: any) => void];
 
 export const defaultPlayerState = {
 	audioPlayer: new Audio(),
@@ -31,10 +29,5 @@ export const defaultSamplesPlayerState = {
 
 export const Context = createContext<ContextProps>([
 	defaultPlayerState,
-	() => {},
-]);
-
-export const SamplesContext = createContext<SamplesPlayerContextProps>([
-	defaultSamplesPlayerState,
 	() => {},
 ]);
