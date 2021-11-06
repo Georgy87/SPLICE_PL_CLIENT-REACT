@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { NavbarItem } from '../NavbarItem/NavbarItem';
 import { icons } from '../../layouts/IconLayout/IconLayout';
 
-import styles from '../Navbar/Navbar.module.scss';
+import styles from './NavbarList.module.scss';
 
 type PacksListProps = {};
 
@@ -54,36 +54,10 @@ export const NavbarList: React.FC<PacksListProps> = () => {
 
 	return (
 		<>
-			<ul className={styles.navLinks}>
+			<ul className={styles.navItems}>
 				{navbarListItems.map(({ pageName, iconName }, i: number) => (
 					<NavbarItem key={i} pageName={pageName} iconName={iconName} />
 				))}
-
-				<li>
-					{/* <div className={styles.iocnLink}>
-						<a href='/'>
-							<BankOutlined />
-							<span className={styles.linkName}>GENRES</span>
-						</a>
-						<DownOutlined className={styles.arrow} />
-					</div> */}
-
-					<ul className={`${styles.subMenu}`}>
-						{menuItems.map(({ text, href }, index) => {
-							return (
-								<li key={index}>
-									<a
-										className={styles.navLinks}
-										onClick={() => history.push(href)}
-										href={href}
-									>
-										{text}
-									</a>
-								</li>
-							);
-						})}
-					</ul>
-				</li>
 			</ul>
 		</>
 	);

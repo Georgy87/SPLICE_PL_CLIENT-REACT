@@ -6,7 +6,7 @@ import { StepLayout } from '../../layouts/StepLayout/StepLayout';
 import { PackInfoUpload } from '../../components/PackInfoUpload/PackInfoUpload';
 import { FileUpload } from '../../components/FileUpload/FileUpload';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
-import { PacksPage } from '../Packs/PacksPage';
+import { PacksPage } from '../PacksPage/PacksPage';
 
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 

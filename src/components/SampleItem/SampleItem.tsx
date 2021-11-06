@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Samples } from '../../context/SamplesPlayerContext/types';
 import { useSound } from '../../hooks/useSound';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 import { selectPackProfile } from '../../store/selectors/packsSelectors';
 import { hookAudioWave } from '../../hooks/hookAudioWave';
 import { SampleSliderLayout } from '../../layouts/SampleSliderLayout/SampleSliderLayout';
+import { Samples } from '../../context/PlayerContext/types';
 
 import styles from './SampleItem.module.scss';
 
@@ -25,10 +25,12 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	useEffect(() => {
 		if (audio) {
 			fetch(`http://localhost:5000/${audio}`).then((data) => {
+
 				hookAudioWave(data.arrayBuffer(), canvasRef.current);
 			});
 		}
 	}, []);
+	
 	const packProfile = useSelector(selectPackProfile);
 
 	return (

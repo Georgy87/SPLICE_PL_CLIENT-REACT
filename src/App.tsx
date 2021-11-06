@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 
-import { PacksPage } from './pages/Packs/PacksPage';
+import { PacksPage } from './pages/PacksPage/PacksPage';
 import { MainPage } from './pages/MainPage/MainPage';
 import { Navbar } from './components/Navbar/Navbar';
 import { ProfilePage } from './pages/ProfilePage/ProfilePage';
@@ -11,7 +11,6 @@ import { ProfilePackPage } from './pages/ProfilePackPage/ProfilePackPage';
 import { LoginPage } from './pages/LoginPage/LoginPage';
 
 import { PlayerContext } from './context/PlayerContext/PlayerContext';
-import { PlayerSamplesContext } from './context/SamplesPlayerContext/SamplesPlayerContext';
 
 import styles from './styles/App.module.scss';
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
