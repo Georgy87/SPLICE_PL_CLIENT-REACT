@@ -1,16 +1,16 @@
 .appContainer {
 	display: flex;
+	flex-direction: column;
 	height: 100vh;
 }
 
 .navbarBlock {
 	display: flex;
-	width: 20vw;
-	overflow: hidden;
+	width: 100vw;
 }
 
 .pagesBlock {
 	display: flex;
 	justify-content: center;
-	width: 80vw;
+	// width: 80vw;
 }

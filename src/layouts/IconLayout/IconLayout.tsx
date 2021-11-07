@@ -5,7 +5,10 @@ import {
 	NotificationTwoTone,
 	HomeOutlined,
 	UploadOutlined,
+	CustomerServiceOutlined,
 } from '@ant-design/icons';
+
+import * as Icons from 'react-icons/fa';
 
 import { AccountCircleOutlined } from '@material-ui/icons';
 
@@ -18,10 +21,14 @@ export const icons = {
 	genres: BankOutlined,
 	profile: AccountCircleOutlined,
 	upload: UploadOutlined,
+	user: Icons.FaUserPlus,
+	music: CustomerServiceOutlined,
+	likes: Icons.FaHeart
 };
 
 export type IconLayoutProps = {
 	iconName: keyof typeof icons;
+	className?: string;
 };
 
 export const IconLayout: React.FC<IconLayoutProps> = ({ iconName }) => {

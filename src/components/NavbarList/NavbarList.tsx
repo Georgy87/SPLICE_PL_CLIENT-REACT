@@ -23,34 +23,14 @@ export const NavbarList: React.FC<PacksListProps> = () => {
 
 	const navbarListItems: navbarListItemsType[]  = [
 		{
-			pageName: 'HOME',
-			iconName: 'home',
-		},
-		{
-			pageName: 'LOGIN',
-			iconName: 'login',
-		},
-		{
 			pageName: 'PACKS',
 			iconName: 'packs',
 		},
 		{
-			pageName: 'GENRES',
-			iconName: 'genres',
-		},
-		{
-			pageName: 'PROFILE',
-			iconName: 'profile',
+			pageName: 'LIKES',
+			iconName: 'likes',
 		},
 	];
-
-	const menuItems: menuItemsType[] = [
-		{ text: 'TRAP', href: '#' },
-		{ text: 'CINEMA', href: '#' },
-		{ text: 'FUTURE BASE', href: '#' },
-	];
-
-	// TODO ДОРАБОТАТЬ КОМПОНЕНТ
 
 	return (
 		<>

@@ -1,0 +1,21 @@
+.sidebar {
+	position: absolute;
+	top: 10vh;
+	width: 16rem;
+	left: 0;
+	background: #1b1919;
+	height: 90vh;
+	transition: 0.3s all ease-in-out;
+}
+
+.sidebar.active {
+	left: 0%;
+}
+
+@media screen and (max-width: 900px) {
+	.sidebar.active {
+		width: 5rem;
+	}
+}
+
+

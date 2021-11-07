@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { IconLayout, icons } from '../../layouts/IconLayout/IconLayout';
 
-import styles from '../Navbar/Navbar.module.scss';
+import styles from './NavbarItem.module.scss';
 
 type NavbarItemProps = {
 	pageName: string;
@@ -19,7 +19,7 @@ export const NavbarItem: React.FC<NavbarItemProps> = ({
 
 	return (
 		<>
-			<li>
+			<li className={styles.navItem}>
 				<a onClick={() => history.push(`/${iconName}`)}>
 					<IconLayout iconName={iconName} />
 					<span className={styles.linkName}>{pageName}</span>

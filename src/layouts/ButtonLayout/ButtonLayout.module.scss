@@ -60,10 +60,9 @@
 	.sampleItem {
 		border: none;
 		background-color: transparent;
-		
+
 		padding-right: 20px;
 		padding-left: 20px;
-
 	}
 	.auth {
 		@extend %buttons;
@@ -74,5 +73,20 @@
 		font-size: 16px;
 		color: #fff;
 		margin-top: 10px;
+	}
+	.signInOut {
+		@extend %buttons;
+		display: flex;
+		align-items: center;
+		background-color: transparent;
+		border: 2px solid rgb(232, 239, 241);
+		width: 8rem;
+		font-weight: 700;
+		font-size: 16px;
+		color: #fff;
+		// width: 100%;
+		svg {
+			margin-right: 2px;
+		}
 	}
 }

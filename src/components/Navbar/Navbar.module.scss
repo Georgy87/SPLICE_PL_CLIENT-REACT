@@ -6,6 +6,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 100vw;
 }
 
 .navbarLogo {
@@ -14,70 +15,23 @@
 	font-size: 2rem;
 	display: flex;
 	align-items: center;
-	width: 9rem;
 	justify-content: space-between;
+	margin-right: 5px;
 }
 
-// .nav-items {
-// 	width: 65vw;
+// .sidebar-toggle {
 // 	display: flex;
-// 	margin-right: 2rem;
 // 	justify-content: flex-end;
+// 	width: 65wv;
 // }
 
-.nav-item {
-	list-style: none;
-	margin-left: 2rem;
-}
-
-.nav-item a {
-	display: flex;
-	align-items: center;
-	text-decoration: none;
-	color: whitesmoke;
-	font-size: 1.2rem;
-	padding: 6px 16px;
-	border-radius: 4px;
-	cursor: pointer;
-	transition: 0.3s all ease-out;
-}
-
-.nav-item a:hover {
-	background: tomato;
-}
-
-.nav-item a span {
-	cursor: pointer;
-	margin-left: 0.7rem;
-	font-size: 1.3rem;
-}
-
-.sidebar-toggle {
-	display: flex;
-	justify-content: flex-end;
-	width: 65wv;
-}
-
 .sidebarToggleLogo {
+	display: flex;
 	font-size: 2rem;
 	color: whitesmoke;
 }
 
-.sidebar {
-	position: absolute;
-	top: 10vh;
-	width: 16rem;
-	left: -100%;
-	background: #1b1919;
-	height: 90vh;
-	transition: 0.3s all ease-in-out;
-}
-
-.sidebar.active {
-	left: 0%;
-}
-
-.sidebar-items {
+.sidebarItems {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -85,7 +39,7 @@
 	font-size: 1.2rem;
 }
 
-.sidebar-item {
+.sidebarItem {
 	width: 100%;
 	height: 3rem;
 	list-style: none;
@@ -93,7 +47,7 @@
 	color: whitesmoke;
 }
 
-.sidebar-item a {
+.sidebarItem a {
 	cursor: pointer;
 	font-size: 1.2rem;
 	list-style: none;
@@ -106,18 +60,13 @@
 	transition: 0.2s all ease-out;
 }
 
-.sidebar-item a span {
+.sidebarItem a span {
 	margin-left: 1rem;
 	font-size: 1.2rem;
 }
 
 .sidebar-item a:hover {
 	background: tomato;
-}
-
-.sidebar .btn {
-	margin-top: 2.4rem;
-	width: 100%;
 }
 
 @media screen and (max-width: 900px) {

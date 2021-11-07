@@ -25,6 +25,7 @@ export const ButtonLayout: React.FC<PropsType> = ({ children, typeStyle, onClick
 					[styles.samplePlayer]: typeStyle === 'sample-player',
 					[styles.sampleItem]: typeStyle === 'sample-item',
 					[styles.auth]: typeStyle === 'auth',
+					[styles.signInOut]: typeStyle === 'sign-in-out',
 				})}
 			>
 				{children}

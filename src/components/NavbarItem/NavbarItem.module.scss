@@ -1,0 +1,29 @@
+.navItem {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	list-style: none;
+	margin-left: 2rem;
+}
+
+.navItem a {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: whitesmoke;
+	font-size: 1.2rem;
+	padding: 6px 16px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: 0.3s all ease-out;
+}
+
+.navItem a:hover {
+	background: tomato;
+}
+
+.navItem a span {
+	cursor: pointer;
+	margin-left: 0.7rem;
+	font-size: 1.3rem;
+}

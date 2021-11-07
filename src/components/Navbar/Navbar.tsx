@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { MenuOutlined, CustomerServiceOutlined } from '@ant-design/icons';
+import { CustomerServiceOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 import * as Icons from 'react-icons/fa';
 
-import { Link, useHistory } from 'react-router-dom';
-
 import { NavbarList } from '../NavbarList/NavbarList';
+import { Sidebar } from '../Sidebar/Sidebar';
+
+import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
+import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 
 import styles from './Navbar.module.scss';
 
@@ -26,6 +29,7 @@ export const Navbar = () => {
 			window.removeEventListener('resize', handleResize);
 		};
 	}, []);
+
 	return (
 		<>
 			<nav className={styles.navbar}>
@@ -34,86 +38,35 @@ export const Navbar = () => {
 					className={styles.navbarLogo}
 					onClick={() => setSideBar(true)}
 				>
-					<CustomerServiceOutlined />
-					SPLICE
+					<IconLayout iconName={'music'} />
+					SampleCloud
 				</Link>
-				{sidebar ? (
-					<Icons.FaTimes
-						className={styles.sidebarToggleLogo}
-						onClick={() => setSideBar(!sidebar)}
-					/>
-				) : (
-					<Icons.FaBars
-						className={styles.sidebarToggleLogo}
-						onClick={() => setSideBar(!sidebar)}
-					/>
-				)}
-				{!mobile && (
-					<ul className='nav-items'>
-						{/* {navItems.map((item) => {
-							return (
-								<li key={item.id} className={item.nName}>
-									<Link to={item.path}>
-										{item.icon}
-										<span>{item.title}</span>
-									</Link>
-								</li>
-							);
-						})} */}
-						<NavbarList />
-					</ul>
-				)}
-				{!mobile && (
-					<Link to='signup'>
-						<button className='btn'>
-							<Icons.FaUserPlus />
-							<span>Sign Up</span>
-						</button>
-					</Link>
-				)}
-
-				{/* {mobile && (
-					<div className='sidebar-toggle'>
+				{mobile && (
+					<>
 						{sidebar ? (
 							<Icons.FaTimes
-								className='sidebar-toggle-logo'
+								className={styles.sidebarToggleLogo}
 								onClick={() => setSideBar(!sidebar)}
 							/>
 						) : (
 							<Icons.FaBars
-								className='sidebar-toggle-logo'
+								className={styles.sidebarToggleLogo}
 								onClick={() => setSideBar(!sidebar)}
 							/>
 						)}
-					</div>
-				)} */}
+					</>
+				)}
+				{!mobile && <NavbarList />}
+				{!mobile && (
+					<Link to='/login'>
+						<ButtonLayout typeStyle={'sign-in-out'}>
+							<IconLayout iconName={'user'} />
+							<span>Log In</span>
+						</ButtonLayout>
+					</Link>
+				)}
 			</nav>
-			<div className={sidebar ? 'sidebar active' : 'sidebar'}>
-				<ul className='sidebar-items'>
-					{/* {navItems.map((item) => {
-						return (
-							<li
-								key={item.id}
-								className={item.sName}
-								onClick={() => setSideBar(false)}
-							>
-								<Link to={item.path}>
-									{item.icon}
-									<span>{item.title}</span>
-								</Link>
-							</li>
-						);
-					})} */}
-					<NavbarList />
-				</ul>
-				{/* <Button onClick={() => setSideBar(false)} /> */}
-				<Link to='signup'>
-					<button className='btn'>
-						<Icons.FaUserPlus />
-						<span>Sign Up</span>
-					</button>
-				</Link>
-			</div>
+			{mobile && <Sidebar sidebar={sidebar} />}
 		</>
 	);
 };
