@@ -34,7 +34,7 @@ export const Navbar = () => {
 		<>
 			<nav className={styles.navbar}>
 				<Link
-					to='/'
+					to='/packs'
 					className={styles.navbarLogo}
 					onClick={() => setSideBar(true)}
 				>
@@ -66,17 +66,7 @@ export const Navbar = () => {
 					</Link>
 				)}
 			</nav>
-			{mobile && <Sidebar sidebar={sidebar} />}
+			{mobile && sidebar && <Sidebar sidebar={sidebar} setSideBar={setSideBar} />}
 		</>
 	);
 };
-
-{
-	/* <div className={`${styles.sidebar}`}>`
-				<div className={styles.logoDetails}>
-					<CustomerServiceOutlined />
-					<span className={styles.logoName}>SPLICE</span>
-				</div>
-				<NavbarList/>
-			</div> */
-}

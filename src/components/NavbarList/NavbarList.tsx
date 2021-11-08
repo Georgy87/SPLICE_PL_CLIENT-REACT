@@ -30,6 +30,10 @@ export const NavbarList: React.FC<PacksListProps> = () => {
 			pageName: 'LIKES',
 			iconName: 'likes',
 		},
+		{
+			pageName: 'PROFILE',
+			iconName: 'profile',
+		},
 	];
 
 	return (

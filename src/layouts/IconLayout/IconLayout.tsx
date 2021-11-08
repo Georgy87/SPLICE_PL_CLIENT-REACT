@@ -15,7 +15,7 @@ import { AccountCircleOutlined } from '@material-ui/icons';
 import styles from './IconLayout.module.scss';
 
 export const icons = {
-	home: HomeOutlined,
+	home: Icons.FaHome,
 	login: LoginOutlined,
 	packs: NotificationTwoTone,
 	genres: BankOutlined,

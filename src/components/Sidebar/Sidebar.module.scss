@@ -4,6 +4,7 @@
 	width: 16rem;
 	left: 0;
 	background: #1b1919;
+	z-index: 1000;
 	height: 90vh;
 	transition: 0.3s all ease-in-out;
 }
@@ -14,7 +15,14 @@
 
 @media screen and (max-width: 900px) {
 	.sidebar.active {
-		width: 5rem;
+		width: 4rem;
+	}
+	.sidebar a {
+		button {
+			span {
+				display: none;
+			}
+		}
 	}
 }
 

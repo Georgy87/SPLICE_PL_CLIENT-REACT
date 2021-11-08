@@ -31,50 +31,46 @@
 	color: whitesmoke;
 }
 
-.sidebarItems {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	transition: 0.2s all ease-out;
-	font-size: 1.2rem;
-}
+// .sidebarItems {
+// 	display: flex;
+// 	align-items: center;
+// 	flex-direction: column;
+// 	transition: 0.2s all ease-out;
+// 	font-size: 1.2rem;
+// }
 
-.sidebarItem {
-	width: 100%;
-	height: 3rem;
-	list-style: none;
-	margin-top: 1rem;
-	color: whitesmoke;
-}
+// .sidebarItem {
+// 	width: 100%;
+// 	height: 3rem;
+// 	list-style: none;
+// 	margin-top: 1rem;
+// 	color: whitesmoke;
+// }
 
-.sidebarItem a {
-	cursor: pointer;
-	font-size: 1.2rem;
-	list-style: none;
-	color: whitesmoke;
-	display: flex;
-	align-items: center;
-	height: 100%;
-	border-radius: 5px;
-	justify-content: center;
-	transition: 0.2s all ease-out;
-}
+// .sidebarItem a {
+// 	cursor: pointer;
+// 	font-size: 1.2rem;
+// 	list-style: none;
+// 	color: whitesmoke;
+// 	display: flex;
+// 	align-items: center;
+// 	height: 100%;
+// 	border-radius: 5px;
+// 	justify-content: center;
+// 	transition: 0.2s all ease-out;
+// }
 
-.sidebarItem a span {
-	margin-left: 1rem;
-	font-size: 1.2rem;
-}
+// .sidebarItem a span {
+// 	margin-left: 1rem;
+// 	font-size: 1.2rem;
+// }
 
-.sidebar-item a:hover {
-	background: tomato;
-}
+// .sidebar-item a:hover {
+// 	background: tomato;
+// }
 
 @media screen and (max-width: 900px) {
 	.sidebar.active {
 		width: 5rem;
-	}
-
-	.sidebar-item a span {
-		display: none;
 	}
 }

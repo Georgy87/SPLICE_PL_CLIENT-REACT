@@ -3,42 +3,47 @@ import * as Icons from 'react-icons/fa';
 import { Link, useHistory } from 'react-router-dom';
 
 import { IconLayout, icons } from '../../layouts/IconLayout/IconLayout';
+import { SidebarItem } from '../SidebarItem/SidebarItem';
 
 import styles from './SidebarList.module.scss';
 
 type sidebarListItemsType = {
 	pageName: string;
 	iconName: keyof typeof icons;
-}
+};
 
-const navbarListItems: sidebarListItemsType[]  = [
-	{
-		pageName: 'PACKS',
-		iconName: 'packs',
-	},
+const navbarListItems: sidebarListItemsType[] = [
+	// {
+	// 	pageName: 'PACKS',
+	// 	iconName: 'packs',
+	// },
 	{
 		pageName: 'LIKES',
 		iconName: 'likes',
 	},
+	{
+		pageName: 'HOME',
+		iconName: 'home',
+	},
 ];
 
-export const SidebarList = () => {
-	const [mobile, setModile] = useState(false);
-	const [sidebar, setSideBar] = useState(false);
+type PropsType = {
+	setSideBar: (value: boolean) => void;
+}
 
-	const history = useHistory();
-
+export const SidebarList: React.FC<PropsType> = ({ setSideBar }) => {
 	return (
 		<>
 			<ul className={styles.sidebarItems}>
-			<li className={styles.navItem}>
-				<a onClick={() => history.push(`/${iconName}`)}>
-					<IconLayout iconName={iconName} />
-					<span className={styles.linkName}>{pageName}</span>
-				</a>
-			</li>
-            </ul>
-			{/* <Button onClick={() => setSideBar(false)} /> */}
+				{navbarListItems.map(({ pageName, iconName }, i: number) => (
+					<SidebarItem
+						key={i}
+						pageName={pageName}
+						iconName={iconName}
+						setSideBar={setSideBar}
+					/>
+				))}
+			</ul>
 		</>
 	);
 };

@@ -31,7 +31,7 @@ export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 				active: null,
 				duration: 0,
 				currentTime: 0,
-				volume: 50,
+				volume: 2,
 				percent: 0,
 			});
 		}
@@ -47,7 +47,7 @@ export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 				active: null,
 				duration: 0,
 				currentTime: 0,
-				volume: 50,
+				volume: 10,
 				percent: 0,
 			});
 		}

@@ -25,12 +25,11 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	useEffect(() => {
 		if (audio) {
 			fetch(`http://localhost:5000/${audio}`).then((data) => {
-
 				hookAudioWave(data.arrayBuffer(), canvasRef.current);
 			});
 		}
 	}, []);
-	
+
 	const packProfile = useSelector(selectPackProfile);
 
 	return (
