@@ -1,24 +1,33 @@
 .player {
-	width: 100%;
+	width: 100vw;
 	position: fixed;
 	bottom: 0;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 10px 10px;
-	background: rgba(209, 213, 245, 0.2); // Make sure this color has an opacity of less than 1
+	background: rgba(
+		209,
+		213,
+		245,
+		0.2
+	); // Make sure this color has an opacity of less than 1
 	backdrop-filter: blur(8px);
 	border-radius: 10px;
+	left: 0;
+	right: 0;
+
 	.playerControls {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		width: 100%;
 		justify-content: space-between;
-	
+
 		.play {
 			display: flex;
 		}
+
 		.trackActive {
 			display: flex;
 			align-items: center;
@@ -28,6 +37,7 @@
 				width: 40px;
 				height: 40px;
 			}
+
 			.trackInfo {
 				margin-left: 20px;
 			}
@@ -35,8 +45,39 @@
 
 		.volumeAndTimer {
 			display: flex;
-			width: 40%;
+			width: 24%;
 			padding-right: 10px;
+		}
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.player {
+		.playerControls {
+			width: 70%;
+
+			.trackActive {
+				display: flex;
+				align-items: center;
+
+				.trackInfo {
+					padding-left: 10px;
+					font-size: 14px;
+				}
+			}
+
+			.volumeAndTimer {
+				display: flex;
+				width: 15%;
+				padding-right: 40px;
+				.timer {
+					p {
+						span {
+							font-size: 13px;
+						}
+					}
+				}
+			}
 		}
 	}
 }

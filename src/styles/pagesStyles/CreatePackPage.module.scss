@@ -1,5 +1,5 @@
 .createPageContainer {
-	width: 100%;
+	width: 100vw;
 }
 
 .stepOne {
@@ -11,9 +11,9 @@
 	display: flex;
 }
 
-
 .bottomPanel {
 	display: flex;
+	padding: 2rem;
 
 	button {
 		cursor: pointer;

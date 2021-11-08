@@ -47,7 +47,7 @@ export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 				active: null,
 				duration: 0,
 				currentTime: 0,
-				volume: 10,
+				volume: 5,
 				percent: 0,
 			});
 		}

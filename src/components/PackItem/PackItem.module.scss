@@ -15,9 +15,10 @@
 		position: relative;
 		display: flex;
 		flex-direction: column;
+		width: 17rem;
 		img {
-			width: 190px;
-			height: 190px;
+			border-radius: 7px;
+			height: 17rem;
 		}
 		.playPauseCircle {
 			display: flex;

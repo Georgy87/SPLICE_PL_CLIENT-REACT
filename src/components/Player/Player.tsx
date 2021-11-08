@@ -29,7 +29,7 @@ export const Player: React.FC = () => {
 				left={currentTime}
 				right={duration}
 				onChange={changeCurrentTime}
-				width={'78%'}
+				width={'98vw'}
 			/>
 			<div className={styles.playerControls}>
 				<div className={styles.play}>
@@ -63,9 +63,9 @@ export const Player: React.FC = () => {
 				</div>
 
 				<div className={styles.volumeAndTimer}>
-					<div className='timer'>
+					<div className={styles.timer}>
 						<p>
-							<span>{formatTime(currentTime)}</span>/
+							<span>{formatTime(currentTime)}/</span>
 							<span>{formatTime(duration)}</span>
 						</p>
 					</div>
@@ -73,7 +73,7 @@ export const Player: React.FC = () => {
 						left={volume}
 						right={100}
 						onChange={changeVolume}
-						width={'30%'}
+						width={'15vw'}
 					/>
 				</div>
 			</div>
