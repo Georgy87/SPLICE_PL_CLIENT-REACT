@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -11,6 +11,7 @@ import styles from '../../styles/pagesStyles/ProfilePackPage.module.scss';
 
 export const ProfilePackPage = () => {
 	const params: { packId: string } = useParams();
+	const refAttr = useRef<HTMLDivElement>(null);
 	const packProfile = useSelector(selectPackProfile);
 
 	const getPack = useAsyncAction<any, any>(fetchGetPack);
@@ -25,12 +26,13 @@ export const ProfilePackPage = () => {
 
 	return (
 		<div className={styles.profilePackContainer}>
-			<div
-				className={styles.playerInner}
-				style={{
-					backgroundImage: `url(http://localhost:5000/${packProfile?.picture})`,
-				}}
-			>
+			<div className={styles.infoBackground}>
+				<img
+					src={`http://localhost:5000/${packProfile?.picture}`}
+					alt=''
+				/>
+			</div>
+			<div className={styles.playerInner}>
 				<img
 					src={`http://localhost:5000/${packProfile?.picture}`}
 					alt={packProfile?.picture}

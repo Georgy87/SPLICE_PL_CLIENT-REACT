@@ -24,8 +24,9 @@
 
 .formElement input[type='range']::-webkit-slider-thumb {
 	-webkit-appearance: none;
-	width: 3px;
+	width: 2px;
 	height: 50px;
+	z-index: -1;
 	background: #cbd1cb;
 	cursor: pointer;
 }

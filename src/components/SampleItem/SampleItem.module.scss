@@ -5,7 +5,6 @@
 	border-radius: 4px;
 	padding: 7px;
 	margin: 3px;
-	justify-content: space-between;
 	&:hover {
 		box-shadow: 0 2px 20px #e6f7f1;
 		cursor: pointer;
@@ -19,8 +18,8 @@
 			height: 50px;
 			border-radius: 4px;
 		}
-		p {
-			margin-left: 50px;
-		}
+	}
+	p {
+		margin-left: 100px;
 	}
 }
