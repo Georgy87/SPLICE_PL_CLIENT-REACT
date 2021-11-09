@@ -1,10 +1,8 @@
 @import '../../styles/variables.scss';
 
 .profilePackContainer {
-	width: 75vw;
+	width: 90vw;
 	position: relative;
-	padding-right: 15px;
-
 	.infoBackground {
 		position: fixed;
 		left: 0;
@@ -21,8 +19,6 @@
 			-webkit-filter: blur(80px);
 			transform: scale(1.1);
 			border-radius: 5px;
-			// top: -100px;
-			// height: 250px;
 			width: 100%;
 		}
 	}
@@ -31,7 +27,7 @@
 .playerInner {
 	display: flex;
 	position: fixed;
-	width: 75vw;
+	width: 85vw;
 	height: 250px;
 	align-items: center;
 	border-radius: 6px;
@@ -39,6 +35,7 @@
 	// background-color: $background;
 	z-index: 2000;
 	img {
+		display: flex;
 		border-radius: 5px;
 		width: 200px;
 		height: 200px;
@@ -54,9 +51,11 @@
 }
 
 .packInfo {
-	margin-right: auto;
-
+	margin-right: auto;	
+	margin-left: 10px;	
 	z-index: 1000;
+	// overflow-y: scroll;
+	max-height: 250px;
 }
 
 .samplePlayer {
@@ -70,3 +69,25 @@
 	margin-top: 150px;
 	width: 35%;
 }
+
+
+@media screen and (max-width: 1060px) {
+	.packInfo {
+		overflow-y: scroll;
+	}	
+}
+
+@media screen and (max-width: 900px) {
+	.packInfo {
+		overflow: visible;
+		p {
+			display: none;
+		}
+		h1 {
+			font-size: 1.5rem;
+		}
+	}
+
+	
+}
+

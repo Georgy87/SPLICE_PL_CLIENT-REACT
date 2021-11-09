@@ -63,7 +63,7 @@ export const PackItem: React.FC<PackListProps> = ({
 				<IconChangeLayout
 					onClicked={(e: Event) => {
 						e.stopPropagation();
-						playTrack(index);
+						playTrack(index, 'packs');
 					}}
 					blockStyle={styles.playPauseCircle}
 					iconOneOrTwo={isPlaying}

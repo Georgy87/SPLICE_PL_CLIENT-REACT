@@ -18,8 +18,9 @@ type PropsType = {
 export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	const { audio, _id } = sample;
 	const [hover, setHover] = useState(false);
+	const [width, setWidth] = useState<string>('550px');
 
-	const { play, playSample, isPlaying, currentSampleId } = useSound();
+	const { play, playTrack, isPlaying, currentSampleId } = useSound();
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
@@ -28,6 +29,25 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 				hookAudioWave(data.arrayBuffer(), canvasRef.current);
 			});
 		}
+
+		const handleResize = () => {
+			if (window.innerWidth < 1065) {
+				setWidth('300px');
+			} else {
+				setWidth('550px')
+			}
+			if (window.innerWidth < 900) {
+				setWidth('230px');
+			} else {
+				setWidth('550px')
+			}
+		};
+
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+			setWidth('550px')
+		};
 	}, []);
 
 	const packProfile = useSelector(selectPackProfile);
@@ -44,7 +64,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 					<IconChangeLayout
 						onClicked={(e: Event) => {
 							e.stopPropagation();
-							playSample(idx);
+							playTrack(idx, 'sample');
 						}}
 						iconOneOrTwo={isPlaying}
 						currentTrackId={currentSampleId}
@@ -59,19 +79,20 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						}}
 					></IconChangeLayout>
 					<SampleSliderLayout
+						width={width}
 						trackId={_id}
 						currentSampleId={currentSampleId}
 					>
 						<canvas
 							ref={canvasRef}
 							style={{
-								width: '550px',
+								width: width,
 								height: '35px',
 							}}
 						/>
 					</SampleSliderLayout>
+					<p>{sample.sampleName}</p>
 				</li>
-				<p>{sample.sampleName}</p>
 			</ul>
 		</>
 	);

@@ -6,14 +6,17 @@ import { PlayerStateType } from '../context/PlayerContext/types';
 export const useSound = () => {
 	const [state, setState] = useContext(Context);
 
-	const playTrack = (index: number) => {
+	const playTrack = (index: number, typeElement: string) => {
 		if (index === state.currentTrackIndex) {
 			play();
 		} else {
+			const url =
+				typeElement === 'packs'
+					? `http://localhost:5000/${state.packs[index]?.audio}`
+					: `http://localhost:5000/${state?.samples[index]?.audio}`;
+			console.log(url);
 			state.audioPlayer.pause();
-			state.audioPlayer = new Audio(
-				`http://localhost:5000/${state.packs[index]?.audio}`,
-			);
+			state.audioPlayer = new Audio(url);
 
 			state.audioPlayer.volume = state.volume / 100;
 
@@ -24,57 +27,6 @@ export const useSound = () => {
 				}));
 			};
 
-			state.audioPlayer.ontimeupdate = () => {
-				setState((state: PlayerStateType) => ({
-					...state,
-					currentTime: Math.ceil(state.audioPlayer.currentTime),
-				}));
-			};
-
-			state.audioPlayer.play();
-
-			setState((state: PlayerStateType) => ({
-				...state,
-				currentTrackIndex: index,
-				isPlaying: true,
-			}));
-
-			state.audioPlayer.onended = () => {
-				setState((state: PlayerStateType) => ({
-					...state,
-					audioPlayer: new Audio(),
-					currentTrackIndex: null,
-					isPlaying: false,
-					currentTrackId: null,
-					active: null,
-					duration: 0,
-					currentTime: 0,
-					volume: 2,
-					percent: 0,
-				}));
-			}
-		}
-	};
-
-	const playSample = (index: number) => {
-		if (index === state.currentTrackIndex) {
-			play();
-		} else {
-			state.audioPlayer.pause();
-			state.audioPlayer = new Audio(
-				`http://localhost:5000/${state?.samples[index]?.audio}`,
-			);
-
-			state.audioPlayer.volume = state.volume / 100;
-
-			state.audioPlayer.onloadedmetadata = () => {
-				setState((state: PlayerStateType) => ({
-					...state,
-					duration: Math.ceil(state.audioPlayer.duration),
-					// percent: state.percent,
-				}));
-			};
-		
 			state.audioPlayer.ontimeupdate = () => {
 				setState((state: PlayerStateType) => ({
 					...state,
@@ -82,14 +34,11 @@ export const useSound = () => {
 					percent: Number(
 						(state.currentTime / state.duration) * 100,
 					).toFixed(2),
-					// bpmPercent: Number(
-					// 	((state.currentTime * 0.300) / state.duration) * 100,
-					// ).toFixed(5),
 				}));
 			};
 
 			state.audioPlayer.play();
-			
+
 			setState((state: PlayerStateType) => ({
 				...state,
 				currentTrackIndex: index,
@@ -109,7 +58,7 @@ export const useSound = () => {
 					volume: 2,
 					percent: 0,
 				}));
-			}
+			};
 		}
 	};
 
@@ -158,7 +107,6 @@ export const useSound = () => {
 
 	return {
 		playTrack,
-		playSample,
 		play,
 		packs: state.packs,
 		isPlaying: state.isPlaying,
