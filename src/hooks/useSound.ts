@@ -32,11 +32,27 @@ export const useSound = () => {
 			};
 
 			state.audioPlayer.play();
+
 			setState((state: PlayerStateType) => ({
 				...state,
 				currentTrackIndex: index,
 				isPlaying: true,
 			}));
+
+			state.audioPlayer.onended = () => {
+				setState((state: PlayerStateType) => ({
+					...state,
+					audioPlayer: new Audio(),
+					currentTrackIndex: null,
+					isPlaying: false,
+					currentTrackId: null,
+					active: null,
+					duration: 0,
+					currentTime: 0,
+					volume: 2,
+					percent: 0,
+				}));
+			}
 		}
 	};
 
@@ -58,13 +74,14 @@ export const useSound = () => {
 					// percent: state.percent,
 				}));
 			};
-
+		
 			state.audioPlayer.ontimeupdate = () => {
 				setState((state: PlayerStateType) => ({
 					...state,
 					currentTime: Math.ceil(state.audioPlayer.currentTime),
 					percent: Number(
-						(state.currentTime / state.duration) * 100).toFixed(2),
+						(state.currentTime / state.duration) * 100,
+					).toFixed(2),
 					// bpmPercent: Number(
 					// 	((state.currentTime * 0.300) / state.duration) * 100,
 					// ).toFixed(5),
@@ -72,11 +89,27 @@ export const useSound = () => {
 			};
 
 			state.audioPlayer.play();
+			
 			setState((state: PlayerStateType) => ({
 				...state,
 				currentTrackIndex: index,
 				isPlaying: true,
 			}));
+
+			state.audioPlayer.onended = () => {
+				setState((state: PlayerStateType) => ({
+					...state,
+					audioPlayer: new Audio(),
+					currentTrackIndex: null,
+					isPlaying: false,
+					currentTrackId: null,
+					active: null,
+					duration: 0,
+					currentTime: 0,
+					volume: 2,
+					percent: 0,
+				}));
+			}
 		}
 	};
 
@@ -110,14 +143,17 @@ export const useSound = () => {
 		state.audioPlayer.currentTime = Number(value);
 	};
 
-	const changeCurrentTimeSample = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const changeCurrentTimeSample = (
+		e: React.ChangeEvent<HTMLInputElement>,
+	) => {
 		setState((state: PlayerStateType) => ({
 			...state,
 			// currentTime: Number(e.target.value),
 			percent: e.target.value,
 		}));
 
-		state.audioPlayer.currentTime = (state.audioPlayer.duration / 100) * +(e.target.value);
+		state.audioPlayer.currentTime =
+			(state.audioPlayer.duration / 100) * +e.target.value;
 	};
 
 	return {
@@ -143,7 +179,6 @@ export const useSound = () => {
 		state,
 		setState,
 		percent: state.percent,
-		changeCurrentTimeSample
-
+		changeCurrentTimeSample,
 	};
 };

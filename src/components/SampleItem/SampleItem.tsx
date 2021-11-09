@@ -65,7 +65,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						<canvas
 							ref={canvasRef}
 							style={{
-								width: '400px',
+								width: '550px',
 								height: '35px',
 							}}
 						/>

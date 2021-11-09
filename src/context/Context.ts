@@ -4,7 +4,7 @@ import { PlayerStateType } from './PlayerContext/types';
 
 export type ContextProps = [PlayerStateType, (state: any) => void];
 
-export const defaultPlayerState = {
+export const defaultPlayerStateType = {
 	audioPlayer: new Audio(),
 	packs: [],
 	samples: [],
@@ -18,16 +18,8 @@ export const defaultPlayerState = {
 	percent: 0,
 };
 
-export const defaultSamplesPlayerState = {
-	ready: false,
-	samples: [],
-	isPlaying: false,
-	currentId: 0,
-	active: null,
-	loading: true,
-};
 
 export const Context = createContext<ContextProps>([
-	defaultPlayerState,
+	defaultPlayerStateType,
 	() => {},
 ]);

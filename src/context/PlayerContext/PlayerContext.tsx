@@ -6,49 +6,45 @@ import {
 	selectSamples,
 } from '../../store/selectors/packsSelectors';
 
-import { Context, ContextProps, defaultPlayerState } from '../Context';
+import { Context, ContextProps, defaultPlayerStateType } from '../Context';
 //import { PlayerStateType } from './types';
 
 type PropsType = {
 	children: React.ReactNode;
 };
 
+const defaultState = {
+	audioPlayer: new Audio(),
+	currentTrackIndex: null,
+	isPlaying: false,
+	currentTrackId: null,
+	active: null,
+	duration: 0,
+	currentTime: 0,
+	volume: 2,
+	percent: 0,
+};
+
 export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 	const packs = useSelector(selectPacks);
 	const samples = useSelector(selectSamples);
 
-	const [state, setState] = useState<ContextProps[0]>(defaultPlayerState);
+	const [state, setState] = useState<ContextProps[0]>(defaultPlayerStateType);
 
 	useEffect(() => {
 		if (packs) {
 			setState({
-				audioPlayer: new Audio(),
+				...defaultState,
 				packs: packs,
 				samples: [],
-				currentTrackIndex: null,
-				isPlaying: false,
-				currentTrackId: null,
-				active: null,
-				duration: 0,
-				currentTime: 0,
-				volume: 2,
-				percent: 0,
 			});
 		}
 
 		if (samples) {
 			setState({
-				audioPlayer: new Audio(),
+				...defaultState,
 				packs: packs,
 				samples: samples,
-				currentTrackIndex: null,
-				isPlaying: false,
-				currentTrackId: null,
-				active: null,
-				duration: 0,
-				currentTime: 0,
-				volume: 5,
-				percent: 0,
 			});
 		}
 	}, [packs, samples]);
