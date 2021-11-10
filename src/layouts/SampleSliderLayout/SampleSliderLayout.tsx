@@ -20,7 +20,7 @@ export const SampleSliderLayout: React.FC<PropsType> = (props) => {
 			<div className={styles.sliderContainer}>
 				<div className={styles.formElement}>
 					<input
-						style={{ width: width }}
+						style={{ width: width,  transition: '.6s linear '}}
 						type='range'
 						// min='0'
 						// max='100'

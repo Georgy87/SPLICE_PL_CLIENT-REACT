@@ -32,8 +32,8 @@ export const useSound = () => {
 					...state,
 					currentTime: Math.ceil(state.audioPlayer.currentTime),
 					percent: Number(
-						(state.currentTime / state.duration) * 100,
-					).toFixed(2),
+						(100 / state.duration * state.currentTime)
+					),
 				}));
 			};
 

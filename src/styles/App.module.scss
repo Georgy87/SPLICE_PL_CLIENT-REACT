@@ -6,10 +6,13 @@
 
 .navbarBlock {
 	display: flex;
+	position: fixed;
 	width: 100vw;
+	z-index: 2002;
 }
 
 .pagesBlock {
 	display: flex;
 	justify-content: center;
+	margin-top: 8vh;
 }

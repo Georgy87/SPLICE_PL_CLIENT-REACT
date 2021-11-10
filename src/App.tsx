@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router';
 import { PacksPage } from './pages/PacksPage/PacksPage';
 import { MainPage } from './pages/MainPage/MainPage';
 import { Navbar } from './components/Navbar/Navbar';
-import { ProfilePage } from './pages/ProfilePage/ProfilePage';
+import { ProfilePage } from './pages/UserProfilePage/UserProfilePage';
 import { CreatePackPage } from './pages/CreatePackPage/CreatePackPage';
 import { ProfilePackPage } from './pages/ProfilePackPage/ProfilePackPage';
 

@@ -55,7 +55,13 @@ export const PackItem: React.FC<PackListProps> = ({
 	};
 
 	return (
-		<div className={styles.packCardWrapper}>
+		<div
+			className={
+				pageName === 'user-packs'
+					? `${styles.packCardWrapper} ${styles.changePage}`
+					: styles.packCardWrapper
+			}
+		>
 			<div
 				className={styles.packCard}
 				onClick={() => history.push(`profile-pack/${pack?._id}`)}

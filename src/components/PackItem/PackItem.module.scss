@@ -34,9 +34,20 @@
 		}
 	}
 }
+
+.packCardWrapper.changePage {
+	display: block;
+	.packCard {
+		.playPauseCircle {
+			display: none;
+		}
+	}
+}
+
 .drop {
 	@extend %download;
 }
+
 .downloadSamples {
 	@extend %download;
 	margin-top: 30px;
