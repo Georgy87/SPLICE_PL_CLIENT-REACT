@@ -8,6 +8,7 @@ import PacksList from '../../components/PacksList/PacksList';
 import { Player } from '../../components/Player/Player';
 
 import styles from '../../styles/pagesStyles/PacksPage.module.scss';
+import SearchInput from '../../components/SearchInput/SearchInput';
 
 type PropsType = {
 	pageName?: string;
@@ -25,8 +26,11 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 
 	return (
 		<div className={styles.packsPageContainer}>
-			<PacksList packs={packs} pageName={pageName} />
-			<Player />
+			<SearchInput />
+			<div className={styles.packsContainer}>
+				<PacksList packs={packs} pageName={pageName} />
+				<Player />
+			</div>
 		</div>
 	);
 };

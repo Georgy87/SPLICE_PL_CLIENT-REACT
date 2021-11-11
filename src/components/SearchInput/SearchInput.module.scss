@@ -1,0 +1,88 @@
+$clr-primary: #ff7043;
+$clr-primary-hover: #29e6a7;
+$clr-primary-dark: #039d69;
+$clr-gray100: #f9fbff;
+$clr-gray150: #f4f6fb;
+$clr-gray200: #eef1f6;
+$clr-gray300: #e1e5ee;
+$clr-gray350: #c7ccdb;
+$clr-gray400: #767b91;
+$clr-gray500: #4f546c;
+$clr-gray600: #2a324b;
+$clr-gray700: #161d34;
+
+.inputContainer {
+	width: 450px;
+	margin: 0 auto;
+	margin-top: 40px;
+	.search {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		svg {
+			height: 30px;
+			padding: 8px;
+			position: absolute;
+			cursor: pointer;
+		}
+
+		.searchIcon {
+			fill: $clr-gray400;
+			z-index: 99;
+		}
+
+		input {
+			box-shadow: 0 0 10px 5px $clr-gray300;
+			border: none;
+			border-radius: 50%;
+			font-family: inherit;
+			color: $clr-gray400;
+			outline: none;
+			width: 50px;
+			height: 50px;
+			transition: 100ms width ease-in-out, 100ms padding ease-in-out,
+				100ms border-radius ease-in-out;
+		}
+
+		.searchDelete {
+			display: none;
+		}
+
+		.searchClose {
+			right: 0;
+			fill: white;
+			transition: 100ms fill ease-in;
+		}
+	}
+
+	.search.open {
+		justify-content: flex-start;
+     
+	}
+
+	.search.open input {
+		border-radius: 0%;
+		width: 450px;
+		padding: 0px 150px 0px 80px;
+	}
+
+	.search.open svg {
+		height: 22px;
+		padding: 8px;
+		position: absolute;
+		cursor: pointer;
+	}
+
+	.search.open svg.searchClose {
+		right: 0;
+		fill: #767b91;
+		transition: 500ms fill ease-in;
+	}
+
+	.search.open svg.searchDelete {
+		fill: $clr-gray350;
+		right: 60px;
+		display: block;
+	}
+}
