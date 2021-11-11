@@ -3,17 +3,15 @@ import { ChangeHandler } from 'react-hook-form';
 
 import styles from './SearchInput.module.scss';
 
-type PropsType = {};
+type PropsType = {
+	onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
+	setValue: (value: string) => void;
+	value: string;
+};
 
-const SearchInput: React.FC<PropsType> = () => {
+const SearchInput: React.FC<PropsType> = ({ onChangeValue, setValue, value }) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [open, setOpen] = useState<boolean>(false);
-	const [value, setValue] = useState<string>('');
-
-    const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
-        e.stopPropagation();
-        setValue(e.target.value);
-    }
 
 	return (
 		<div className={styles.inputContainer}>

@@ -11,8 +11,8 @@ type PacksListProps = {
 	pageName?: string;
 };
 
-const PacksList: React.FC<PacksListProps> = ({ pageName }) => {
-	const { packs } = useSound();
+const PacksList: React.FC<PacksListProps> = ({ pageName, packs }) => {
+
 	return (
 		<>
 			{packs?.map((pack: Pack, index: number) => (
