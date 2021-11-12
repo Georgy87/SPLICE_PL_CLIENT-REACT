@@ -6,4 +6,5 @@ export type User = {
 
 export type UserSliceState = {
     user: User | null;
+    token: string | null;
 }
