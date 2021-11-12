@@ -12,6 +12,7 @@ type PropsType = {
 const SearchInput: React.FC<PropsType> = ({ onChangeValue, setValue, value }) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [open, setOpen] = useState<boolean>(false);
+	const [placeholder, setPlaceholder] = useState<boolean>(false);
 
 	return (
 		<div className={styles.inputContainer}>
@@ -37,7 +38,7 @@ const SearchInput: React.FC<PropsType> = ({ onChangeValue, setValue, value }) =>
 					className={styles.searchInput}
                     onChange={onChangeValue}
 					value={value}
-					placeholder='Search packs'
+					placeholder='Search genres, author'
 				/>
 				<svg
 					onClick={(e) => {

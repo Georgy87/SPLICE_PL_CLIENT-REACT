@@ -1,9 +1,8 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { fetchGetPacks } from '../../store/slices/pack/packSlice';
-import PacksList from '../../components/PacksList/PacksList';
 import { Player } from '../../components/Player/Player';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import { useSound } from '../../hooks/useSound';
@@ -46,6 +45,9 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 						if (
 							packs.authorName
 								.toLowerCase()
+								.includes(value.toLowerCase()) ||
+							packs.trackName
+								.toLowerCase()
 								.includes(value.toLowerCase())
 						) {
 							return packs;
@@ -54,13 +56,15 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 					.map((pack: Pack, index: number) => (
 						<>
 							<div className={styles.packCardContainer}>
-								<PackItem
-									key={pack._id}
-									pack={pack}
-									id={pack._id}
-									pageName={pageName}
-									index={index}
-								/>
+								<div className={styles.packCardContainer}>
+									<PackItem
+										key={pack._id}
+										pack={pack}
+										id={pack._id}
+										pageName={pageName}
+										index={index}
+									/>
+								</div>
 							</div>
 						</>
 					))}

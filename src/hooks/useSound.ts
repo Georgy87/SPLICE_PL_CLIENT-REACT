@@ -14,7 +14,7 @@ export const useSound = () => {
 				typeElement === 'packs'
 					? `http://localhost:5000/${state.packs[index]?.audio}`
 					: `http://localhost:5000/${state?.samples[index]?.audio}`;
-			console.log(url);
+		
 			state.audioPlayer.pause();
 			state.audioPlayer = new Audio(url);
 
@@ -35,6 +35,7 @@ export const useSound = () => {
 						(100 / state.duration * state.currentTime)
 					),
 				}));
+				console.log(state.audioPlayer.currentTime )
 			};
 
 			state.audioPlayer.play();
@@ -90,6 +91,7 @@ export const useSound = () => {
 		}));
 
 		state.audioPlayer.currentTime = Number(value);
+	
 	};
 
 	const changeCurrentTimeSample = (
@@ -103,6 +105,7 @@ export const useSound = () => {
 
 		state.audioPlayer.currentTime =
 			(state.audioPlayer.duration / 100) * +e.target.value;
+		
 	};
 
 	return {
