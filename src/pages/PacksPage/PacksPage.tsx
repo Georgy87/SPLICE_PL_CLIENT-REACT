@@ -40,8 +40,7 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 				value={value}
 			/>
 			<div className={styles.packsContainer}>
-				{packs
-					.filter((packs) => {
+				{packs?.filter((packs) => {
 						if (
 							packs.authorName
 								.toLowerCase()

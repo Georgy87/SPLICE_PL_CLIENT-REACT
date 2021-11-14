@@ -3,21 +3,23 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-import { AuthorizationLayout } from '../../layouts/AuthorizationLayout.tsx/AuthorizationLayout';
+import { AuthorizationLayout } from '../../layouts/AuthorizationLayout/AuthorizationLayout';
 
 import styles from './RegistrationPage.module.scss';
+import { fetchRegistration } from '../../store/slices/user/userSlice';
 
 export type FormProps = {
-	name: string;
+	fullname: string;
 	email: string;
 	password: string;
 	password2: string;
 };
 
 export const RegisterFormSchema = yup.object().shape({
-	name: yup.string().required('Введите свое имя'),
+	fullname: yup.string().required('Введите свое имя'),
 	email: yup
 		.string()
 		.email('Неверная почта')
@@ -35,10 +37,12 @@ export const RegistrationPage: React.FC = () => {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [password2, setPassword2] = useState<string>('');
-	const [name, setName] = useState<string>('');
+	const [fullName, setFullName] = useState<string>('');
+
+	const dispatch = useDispatch();
 
 	const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setName(e.target.value);
+		setFullName(e.target.value);
 	};
 
 	const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +57,6 @@ export const RegistrationPage: React.FC = () => {
 		setPassword2(e.target.value);
 	};
 
-
 	const {
 		register,
 		handleSubmit,
@@ -64,8 +67,8 @@ export const RegistrationPage: React.FC = () => {
 	});
 
 	const onSubmit = (data: FormProps) => {
-		const { email, password } = data;
-		console.log(data);
+		const { email, password, fullname } = data;
+		dispatch(fetchRegistration({ fullname, email, password }));
 		reset();
 	};
 
@@ -82,14 +85,14 @@ export const RegistrationPage: React.FC = () => {
 					<div className={styles.textbox}>
 						<input
 							type='text'
-							placeholder='Name'
-							{...register('name')}
-							value={name}
+							placeholder='Fullname'
+							{...register('fullname')}
+							value={fullName}
 							onChange={(
 								e: React.ChangeEvent<HTMLInputElement>,
 							) => onChangeName(e)}
 						/>
-						<p>{errors.name?.message}</p>
+						<p>{errors.fullname?.message}</p>
 					</div>
 					<div className={styles.textbox}>
 						<input

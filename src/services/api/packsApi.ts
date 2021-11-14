@@ -1,23 +1,22 @@
-import axios from 'axios';
+import { instance } from '../../core/axios';
 
 export const packsApi = {
 	async createPack(formData: FormData) {
-		const { data } = await axios.post('http://localhost:5000/api/pack', formData);
+		const { data } = await instance.post('pack', formData);
 		return data;
 	},
 
 	async getPacks() {
-		const { data } = await axios.get('http://localhost:5000/api/packs');
+		const { data } = await instance.get('packs');
 		return data;
 	},
 
 	async createSamples(formData: FormData) {
-		const { data } = await axios.post('http://localhost:5000/api/samples', formData);
+		const { data } = await instance.post('samples', formData);
 	},
 
 	async getPack(packId: string) {
-		const { data } = await axios.get(`http://localhost:5000/api/pack?packId=${packId}`);
-		
+		const { data } = await instance.get(`pack?packId=${packId}`);
 		return data;
 	},
 	

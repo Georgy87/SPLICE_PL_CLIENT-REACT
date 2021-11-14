@@ -5,15 +5,22 @@ import * as Icons from 'react-icons/fa';
 
 import { NavbarList } from '../NavbarList/NavbarList';
 import { Sidebar } from '../Sidebar/Sidebar';
-
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 
 import styles from './Navbar.module.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAuth } from '../../store/selectors/userSelectors';
+import { logout } from '../../store/slices/user/userSlice';
 
 export const Navbar = () => {
 	const [mobile, setModile] = useState(false);
 	const [sidebar, setSideBar] = useState(false);
+
+	const dispatch = useDispatch();
+
+	const isAuth = useSelector(selectAuth);
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -34,7 +41,7 @@ export const Navbar = () => {
 		<>
 			<nav className={styles.navbar}>
 				<Link
-					to='/packs'
+					to='/'
 					className={styles.navbarLogo}
 					onClick={() => setSideBar(true)}
 				>
@@ -59,14 +66,26 @@ export const Navbar = () => {
 				{!mobile && <NavbarList />}
 				{!mobile && (
 					<Link to='/login'>
-						<ButtonLayout typeStyle={'sign-in-out'}>
-							<IconLayout iconName={'user'} />
-							<span>Log In</span>
-						</ButtonLayout>
+						{isAuth ? (
+							<ButtonLayout
+								typeStyle={'sign-in-out'}
+								onClicked={() => dispatch(logout())}
+							>
+								<IconLayout iconName={'user'} />
+								<span>Log Out</span>
+							</ButtonLayout>
+						) : (
+							<ButtonLayout typeStyle={'sign-in-out'}>
+								<IconLayout iconName={'user'} />
+								<span>Log In</span>
+							</ButtonLayout>
+						)}
 					</Link>
 				)}
 			</nav>
-			{mobile && sidebar && <Sidebar sidebar={sidebar} setSideBar={setSideBar} />}
+			{mobile && sidebar && (
+				<Sidebar sidebar={sidebar} setSideBar={setSideBar} />
+			)}
 		</>
 	);
 };
