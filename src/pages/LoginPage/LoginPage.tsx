@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { NavLink, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { AuthorizationLayout } from '../../layouts/AuthorizationLayout/AuthorizationLayout';
@@ -31,6 +31,10 @@ export const LoginPage: React.FC = () => {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 
+	const auth = useSelector(selectAuth);
+
+	const history = useHistory();
+
 	const dispatch = useDispatch();
 
 	const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,10 +55,14 @@ export const LoginPage: React.FC = () => {
 	});
 
 	const onSubmit = (data: FormProps) => {
-		const { email, password } = data;
 		dispatch(fetchLogin(data));
+		
 		reset();
 	};
+
+	useEffect(() => {
+
+	}, [auth]);
 
 	return (
 		<>

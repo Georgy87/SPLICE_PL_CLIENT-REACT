@@ -1,3 +1,6 @@
 import { RootState } from '../types';
 
-export const selectAuth = (state: RootState) => state.user.isAuth;
+export const selectUserMain = (state: RootState) => state.user;
+
+export const selectAuth = (state: RootState) => selectUserMain(state).isAuth;
+export const selectUser = (state: RootState) => selectUserMain(state).user;

@@ -69,9 +69,11 @@ export const userSlice = createSlice({
 			fetchAuth.fulfilled.type,
 			(state, action: PayloadAction<{ user: User; token: string }>) => {
 				const { user, token } = action.payload;
-				state.user = user;
-				state.token = token;
-				state.isAuth = true;
+				
+					state.user = user;
+					state.token = token;
+					state.isAuth = true;
+				
 			},
 		),
 });
