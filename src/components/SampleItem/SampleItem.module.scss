@@ -9,6 +9,7 @@
 		box-shadow: 0 2px 20px #e6f7f1;
 		cursor: pointer;
 	}
+
 	li {
 		display: flex;
 		align-items: center;
@@ -19,15 +20,39 @@
 			height: 50px;
 			border-radius: 4px;
 		}
+
+		.iconChangeWrap {
+			width: 60px;
+			.sampleTime {
+				display: block;
+			}
+		}
+
 		p {
 			font-size: 0.7rem;
 			margin-left: 50px;
 		}
-	}
-}
 
-@media screen and (max-width: 900px) {
-	.listItem {
+		.playPauseSample {
+			display: none;
+		}
+
+		.sampleTime {
+			text-align: center;
+			margin: 0;
+		}
+
+		&:hover {
+			.playPauseSample {
+				display: block;
+			}
+			.sampleTime {
+				display: none;
+			}
+		}
+	}
+
+	@media screen and (max-width: 900px) {
 		li {
 			p {
 				display: none;

@@ -11,7 +11,7 @@
 		top: 30;
 		width: 100%;
 		overflow: hidden;
-		border-radius: 10px;
+		border-radius: 0px 0px 10px 10px;
 		z-index: 1;
 		img {
 			z-index: 100;
@@ -69,7 +69,6 @@
 	margin-top: 150px;
 	width: 35%;
 }
-
 
 @media screen and (max-width: 1060px) {
 	.packInfo {

@@ -28,13 +28,13 @@ export const ProfilePackPage = () => {
 		<div className={styles.profilePackContainer}>
 			<div className={styles.infoBackground}>
 				<img
-					src={`http://localhost:5000/${packProfile?.picture}`}
-					alt=''
+					src={`/${packProfile?.picture}`}
+					alt={`${packProfile?.picture}`}
 				/>
 			</div>
 			<div className={styles.playerInner}>
 				<img
-					src={`http://localhost:5000/${packProfile?.picture}`}
+					src={`/${packProfile?.picture}`}
 					alt={packProfile?.picture}
 				/>
 

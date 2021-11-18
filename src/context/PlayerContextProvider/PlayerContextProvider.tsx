@@ -6,7 +6,7 @@ import {
 	selectSamples,
 } from '../../store/selectors/packsSelectors';
 
-import { Context, ContextProps, defaultPlayerStateType } from '../Context';
+import { PlayerContext, ContextProps, defaultPlayerStateType } from '../PlayerContext';
 //import { PlayerStateType } from './types';
 
 type PropsType = {
@@ -25,7 +25,7 @@ const defaultState = {
 	percent: 0,
 };
 
-export const PlayerContext: React.FC<PropsType> = ({ children }) => {
+export const PlayerContextProvider: React.FC<PropsType> = ({ children }) => {
 	const packs = useSelector(selectPacks);
 	const samples = useSelector(selectSamples);
 
@@ -50,8 +50,8 @@ export const PlayerContext: React.FC<PropsType> = ({ children }) => {
 	}, [packs, samples]);
 
 	return (
-		<Context.Provider value={[state, setState]}>
+		<PlayerContext.Provider value={[state, setState]}>
 			{children}
-		</Context.Provider>
+		</PlayerContext.Provider>
 	);
 };

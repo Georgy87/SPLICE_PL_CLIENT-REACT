@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { ChangeHandler } from 'react-hook-form';
 
 import styles from './SearchInput.module.scss';
 
@@ -9,10 +8,20 @@ type PropsType = {
 	value: string;
 };
 
-const SearchInput: React.FC<PropsType> = ({ onChangeValue, setValue, value }) => {
+const SearchInput: React.FC<PropsType> = ({
+	onChangeValue,
+	setValue,
+	value,
+}) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [open, setOpen] = useState<boolean>(false);
-	const [placeholder, setPlaceholder] = useState<boolean>(false);
+	const [placeholder, setPlaceholder] = useState<string>(
+		'Search genres, author',
+	);
+
+	useEffect(() => {
+		setPlaceholder('');
+	}, []);
 
 	return (
 		<div className={styles.inputContainer}>
@@ -25,6 +34,7 @@ const SearchInput: React.FC<PropsType> = ({ onChangeValue, setValue, value }) =>
 					onClick={(e) => {
 						e.stopPropagation();
 						setOpen(true);
+						setPlaceholder('Search genres, author');
 					}}
 					className={styles.searchIcon}
 					viewBox='0 0 512 512'
@@ -36,14 +46,15 @@ const SearchInput: React.FC<PropsType> = ({ onChangeValue, setValue, value }) =>
 					ref={inputRef}
 					type='text'
 					className={styles.searchInput}
-                    onChange={onChangeValue}
+					onChange={onChangeValue}
 					value={value}
-					placeholder='Search genres, author'
+					placeholder={placeholder}
 				/>
 				<svg
 					onClick={(e) => {
 						e.stopPropagation();
-                        setValue('');
+						setValue('');
+						setPlaceholder('');
 						setOpen(!open);
 					}}
 					className={styles.searchClose}
@@ -53,9 +64,9 @@ const SearchInput: React.FC<PropsType> = ({ onChangeValue, setValue, value }) =>
 					<path d='M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z' />
 				</svg>
 				<svg
-                	onClick={(e) => {
+					onClick={(e) => {
 						e.stopPropagation();
-                        setValue('');
+						setValue('');
 					}}
 					className={styles.searchDelete}
 					viewBox='0 0 640 512'

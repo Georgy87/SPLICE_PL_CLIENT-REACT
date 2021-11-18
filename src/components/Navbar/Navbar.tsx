@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { CustomerServiceOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import * as Icons from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { NavbarList } from '../NavbarList/NavbarList';
 import { Sidebar } from '../Sidebar/Sidebar';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
-
-import styles from './Navbar.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
 import { selectAuth } from '../../store/selectors/userSelectors';
 import { logout } from '../../store/slices/user/userSlice';
+
+import styles from './Navbar.module.scss';
 
 export const Navbar = () => {
 	const [mobile, setModile] = useState(false);
@@ -39,7 +37,7 @@ export const Navbar = () => {
 
 	return (
 		<>
-			<nav className={styles.navbar}>
+			<nav className={isAuth ? styles.navbar : `${styles.navbar} ${styles.notAuth}`}>
 				<Link
 					to='/'
 					className={styles.navbarLogo}
@@ -63,7 +61,7 @@ export const Navbar = () => {
 						)}
 					</>
 				)}
-				{!mobile && <NavbarList />}
+				{!mobile && isAuth ? <NavbarList /> : null}
 				{!mobile && (
 					<Link to='/login'>
 						{isAuth ? (
@@ -71,12 +69,12 @@ export const Navbar = () => {
 								typeStyle={'sign-in-out'}
 								onClicked={() => dispatch(logout())}
 							>
-								<IconLayout iconName={'user'} />
+								<IconLayout iconName={'login'} />
 								<span>Log Out</span>
 							</ButtonLayout>
 						) : (
 							<ButtonLayout typeStyle={'sign-in-out'}>
-								<IconLayout iconName={'user'} />
+								<IconLayout iconName={'logout'} />
 								<span>Log In</span>
 							</ButtonLayout>
 						)}

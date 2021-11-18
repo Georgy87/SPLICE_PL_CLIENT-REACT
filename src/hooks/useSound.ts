@@ -1,10 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
-import { Context } from '../context/Context';
-import { PlayerStateType } from '../context/PlayerContext/types';
+import { PlayerContext } from '../context/PlayerContext';
+import { PlayerStateType } from '../context/PlayerContextProvider/types';
 
 export const useSound = () => {
-	const [state, setState] = useContext(Context);
+	const [state, setState] = useContext(PlayerContext);
 
 	const playTrack = (index: number, typeElement: string) => {
 		if (index === state.currentTrackIndex) {
@@ -12,8 +12,8 @@ export const useSound = () => {
 		} else {
 			const url =
 				typeElement === 'packs'
-					? `http://localhost:5000/${state.packs[index]?.audio}`
-					: `http://localhost:5000/${state?.samples[index]?.audio}`;
+					? `/${state.packs[index]?.audio}`
+					: `/${state?.samples[index]?.audio}`;
 		
 			state.audioPlayer.pause();
 			state.audioPlayer = new Audio(url);

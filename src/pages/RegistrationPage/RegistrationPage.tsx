@@ -130,10 +130,10 @@ export const RegistrationPage: React.FC = () => {
 						/>
 						<p>{errors.password2?.message}</p>
 					</div>
-					<ButtonLayout typeStyle='auth'>Log in</ButtonLayout>
+					<ButtonLayout typeStyle='auth'>Sign Up</ButtonLayout>
 					<div className={styles.formFooter}>
-						<p>У вас уже есть аккаунд?</p>
-						<NavLink to='/login'>Sign up</NavLink>
+						<p>Do you have an account?</p>
+						<NavLink to='/login'>Log In</NavLink>
 					</div>
 				</form>
 			</AuthorizationLayout>

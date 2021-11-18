@@ -8,7 +8,7 @@ import {
 	CustomerServiceOutlined,
 } from '@ant-design/icons';
 
-import * as Icons from 'react-icons/fa';
+import * as Icons from 'react-icons/all';
 
 import { AccountCircleOutlined } from '@material-ui/icons';
 
@@ -16,14 +16,15 @@ import styles from './IconLayout.module.scss';
 
 export const icons = {
 	home: Icons.FaHome,
-	login: LoginOutlined,
+	login: Icons.BiLogOutCircle,
+	logout: Icons.IoMdLogOut,
 	packs: NotificationTwoTone,
 	genres: BankOutlined,
 	profile: AccountCircleOutlined,
 	upload: UploadOutlined,
 	user: Icons.FaUserPlus,
 	music: CustomerServiceOutlined,
-	likes: Icons.FaHeart
+	likes: Icons.FaHeart,
 };
 
 export type IconLayoutProps = {

@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { PlayerStateType } from './PlayerContext/types';
+import { PlayerStateType } from './PlayerContextProvider/types';
 
 export type ContextProps = [PlayerStateType, (state: any) => void];
 
@@ -18,8 +18,7 @@ export const defaultPlayerStateType = {
 	percent: 0,
 };
 
-
-export const Context = createContext<ContextProps>([
+export const PlayerContext = createContext<ContextProps>([
 	defaultPlayerStateType,
 	() => {},
 ]);

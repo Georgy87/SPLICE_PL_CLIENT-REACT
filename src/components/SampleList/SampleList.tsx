@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Samples } from '../../context/PlayerContext/types';
+import { Samples } from '../../context/PlayerContextProvider/types';
 import { selectSamples } from '../../store/selectors/packsSelectors';
 
 import { SampleItem } from '../SampleItem/SampleItem';

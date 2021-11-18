@@ -12,10 +12,18 @@ type PropsType = {
 	type?: string;
 };
 
-export const ButtonLayout: React.FC<PropsType> = ({ children, typeStyle, onClicked, disabled }) => {
+export const ButtonLayout: React.FC<PropsType> = ({
+	children,
+	typeStyle,
+	onClicked,
+	disabled,
+}) => {
 	return (
 		<div className={styles.platformBtn}>
-			<button disabled={disabled} onClick={onClicked} type={typeStyle === 'auth' ? 'submit' : undefined}
+			<button
+				disabled={disabled}
+				onClick={onClicked}
+				type={typeStyle === 'auth' ? 'submit' : undefined}
 				className={classNames(`${styles.platformBtn}`, {
 					[styles.footer]: typeStyle === 'footer',
 					[styles.black]: typeStyle === 'black',

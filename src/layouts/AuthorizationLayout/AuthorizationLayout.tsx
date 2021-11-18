@@ -8,7 +8,7 @@ type PropsType = {
 
 export const AuthorizationLayout: React.FC<PropsType> = ({ children }) => {
 	return (
-		<div className={styles.authPagesContainer}>
+		<div className={styles.root}>
 			<div className={styles.bgAuthImage}></div>
             {children}
 		</div>

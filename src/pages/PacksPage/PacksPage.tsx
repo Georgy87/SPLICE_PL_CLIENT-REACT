@@ -34,20 +34,13 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 
 	return (
 		<div className={styles.packsPageContainer}>
-			<SearchInput
-				onChangeValue={onChangeValue}
-				setValue={setValue}
-				value={value}
-			/>
+			<SearchInput onChangeValue={onChangeValue} setValue={setValue} value={value} />
 			<div className={styles.packsContainer}>
-				{packs?.filter((packs) => {
+				{packs
+					?.filter((packs) => {
 						if (
-							packs.authorName
-								.toLowerCase()
-								.includes(value.toLowerCase()) ||
-							packs.trackName
-								.toLowerCase()
-								.includes(value.toLowerCase())
+							packs.authorName.toLowerCase().includes(value.toLowerCase()) ||
+							packs.trackName.toLowerCase().includes(value.toLowerCase())
 						) {
 							return packs;
 						}
@@ -55,15 +48,13 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 					.map((pack: Pack, index: number) => (
 						<>
 							<div className={styles.packCardContainer}>
-								<div className={styles.packCardContainer}>
-									<PackItem
-										key={pack._id}
-										pack={pack}
-										id={pack._id}
-										pageName={pageName}
-										index={index}
-									/>
-								</div>
+								<PackItem
+									key={pack._id}
+									pack={pack}
+									id={pack._id}
+									pageName={pageName}
+									index={index}
+								/>
 							</div>
 						</>
 					))}

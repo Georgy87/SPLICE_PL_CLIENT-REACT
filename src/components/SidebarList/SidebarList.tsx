@@ -13,17 +13,13 @@ type sidebarListItemsType = {
 };
 
 const navbarListItems: sidebarListItemsType[] = [
-	// {
-	// 	pageName: 'PACKS',
-	// 	iconName: 'packs',
-	// },
+	{
+		pageName: 'PROFILE',
+		iconName: 'profile',
+	},
 	{
 		pageName: 'LIKES',
 		iconName: 'likes',
-	},
-	{
-		pageName: 'HOME',
-		iconName: 'home',
 	},
 ];
 

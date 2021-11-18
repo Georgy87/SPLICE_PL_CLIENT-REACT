@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { AuthorizationLayout } from '../../layouts/AuthorizationLayout/AuthorizationLayout';
 import { fetchLogin } from '../../store/slices/user/userSlice';
+import { selectAuth } from '../../store/selectors/userSelectors';
 
 import styles from './LoginPage.module.scss';
 
@@ -56,13 +57,14 @@ export const LoginPage: React.FC = () => {
 
 	const onSubmit = (data: FormProps) => {
 		dispatch(fetchLogin(data));
-		
 		reset();
 	};
 
 	useEffect(() => {
-
-	}, [auth]);
+		if (auth) {
+			history.push('/');
+		}
+	}, [auth])
 
 	return (
 		<>
@@ -98,10 +100,10 @@ export const LoginPage: React.FC = () => {
 						/>
 						<p>{errors.password?.message}</p>
 					</div>
-					<ButtonLayout typeStyle='auth'>Log in</ButtonLayout>
+					<ButtonLayout typeStyle='auth'>Log In</ButtonLayout>
 					<div className={styles.formFooter}>
-						<p>У вас еще нет аккаунта?</p>
-						<NavLink to='/registration'>Зарегистрироваться</NavLink>
+						<p>Don't have an account?</p>
+						<NavLink to='/registration'>Sign up?</NavLink>
 					</div>
 				</form>
 			</AuthorizationLayout>

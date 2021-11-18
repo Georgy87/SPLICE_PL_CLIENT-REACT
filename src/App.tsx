@@ -3,19 +3,18 @@ import { Route, Switch } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { PacksPage } from './pages/PacksPage/PacksPage';
-import { MainPage } from './pages/MainPage/MainPage';
 import { Navbar } from './components/Navbar/Navbar';
 import { ProfilePage } from './pages/UserProfilePage/UserProfilePage';
 import { CreatePackPage } from './pages/CreatePackPage/CreatePackPage';
 import { ProfilePackPage } from './pages/ProfilePackPage/ProfilePackPage';
 
 import { LoginPage } from './pages/LoginPage/LoginPage';
-import { PlayerContext } from './context/PlayerContext/PlayerContext';
+import { PlayerContextProvider } from './context/PlayerContextProvider/PlayerContextProvider';
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 import { fetchAuth } from './store/slices/user/userSlice';
+import { selectUser } from './store/selectors/userSelectors';
 
 import styles from './styles/App.module.scss';
-import { selectUser } from './store/selectors/userSelectors';
 
 export const App: React.FC = () => {
 	const dispatch = useDispatch();
@@ -23,12 +22,10 @@ export const App: React.FC = () => {
 	const user = useSelector(selectUser);
 
 	useEffect(() => {
-		if (user) {
-			dispatch(fetchAuth());
-		}
+		dispatch(fetchAuth());
 	}, []);
 	return (
-		<PlayerContext>
+		<PlayerContextProvider>
 			<div className={styles.appContainer}>
 				<div className={styles.navbarBlock}>
 					<Navbar />
@@ -62,6 +59,6 @@ export const App: React.FC = () => {
 					</Switch>
 				</div>
 			</div>
-		</PlayerContext>
+		</PlayerContextProvider>
 	);
 };

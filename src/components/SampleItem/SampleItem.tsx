@@ -6,9 +6,10 @@ import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayou
 import { selectPackProfile } from '../../store/selectors/packsSelectors';
 import { hookAudioWave } from '../../hooks/hookAudioWave';
 import { SampleSliderLayout } from '../../layouts/SampleSliderLayout/SampleSliderLayout';
-import { Samples } from '../../context/PlayerContext/types';
+import { Samples } from '../../context/PlayerContextProvider/types';
 
 import styles from './SampleItem.module.scss';
+import { formatTime } from '../../utils/formatTime';
 
 type PropsType = {
 	sample: Samples;
@@ -16,37 +17,36 @@ type PropsType = {
 };
 
 export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
-	const { audio, _id } = sample;
-	const [hover, setHover] = useState(false);
+	const { audio, _id, audioCoordinates, duration } = sample;
 	const [width, setWidth] = useState<string>('550px');
 
 	const { play, playTrack, isPlaying, currentSampleId } = useSound();
+
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
+		console.log(audio);
 		if (audio) {
-			fetch(`http://localhost:5000/${audio}`).then((data) => {
-				hookAudioWave(data.arrayBuffer(), canvasRef.current);
-			});
+			hookAudioWave(audioCoordinates, canvasRef.current);
 		}
 
 		const handleResize = () => {
 			if (window.innerWidth < 1065) {
 				setWidth('300px');
 			} else {
-				setWidth('550px')
+				setWidth('550px');
 			}
 			if (window.innerWidth < 900) {
 				setWidth('230px');
 			} else {
-				setWidth('550px')
+				setWidth('550px');
 			}
 		};
 
 		window.addEventListener('resize', handleResize);
 		return () => {
 			window.removeEventListener('resize', handleResize);
-			setWidth('550px')
+			setWidth('550px');
 		};
 	}, []);
 
@@ -56,28 +56,28 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		<>
 			<ul className={styles.listItem}>
 				<li>
-					<img
-						src={`http://localhost:5000/${packProfile?.picture}`}
-						alt={packProfile?.picture}
-					/>
-
-					<IconChangeLayout
-						onClicked={(e: Event) => {
-							e.stopPropagation();
-							playTrack(idx, 'sample');
-						}}
-						iconOneOrTwo={isPlaying}
-						currentTrackId={currentSampleId}
-						trackId={_id}
-						iconOne='play'
-						iconTwo='pause'
-						typeBtn='sample-item'
-						iconStyle={{
-							color: '#98b2d1',
-							fontSize: '35px',
-							cursor: 'pointer',
-						}}
-					></IconChangeLayout>
+					<img src={`/${packProfile?.picture}`} alt={packProfile?.picture} />
+					<div className={styles.iconChangeWrap}>
+						<p className={styles.sampleTime}>{formatTime(duration)}</p>
+						<IconChangeLayout
+							onClicked={(e: Event) => {
+								e.stopPropagation();
+								playTrack(idx, 'sample');
+							}}
+							iconOneOrTwo={isPlaying}
+							currentTrackId={currentSampleId}
+							blockStyle={styles.playPauseSample}
+							trackId={_id}
+							iconOne='play'
+							iconTwo='pause'
+							typeBtn='sample-item'
+							iconStyle={{
+								color: '#98b2d1',
+								fontSize: '35px',
+								cursor: 'pointer',
+							}}
+						></IconChangeLayout>
+					</div>
 					<SampleSliderLayout
 						width={width}
 						trackId={_id}

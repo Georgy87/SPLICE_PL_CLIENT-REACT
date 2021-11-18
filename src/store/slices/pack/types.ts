@@ -1,4 +1,4 @@
-import { Samples } from "../../../context/PlayerContext/types";
+import { Samples } from "../../../context/PlayerContextProvider/types";
 
 export type PacksSliceState = {
     packs: Pack[] | [];

@@ -9,6 +9,11 @@
 	width: 100vw;
 }
 
+.navbar.notAuth {
+	justify-content: space-between;
+	padding: 0 2rem 0px 2rem;
+}
+
 .navbarLogo {
 	color: whitesmoke;
 	text-decoration: none;
