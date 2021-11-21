@@ -1,7 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { ProfileItems } from './ProfileItems';
+import { UserProfileItem } from '../../components/UserProfileItem/UserProfileItem';
+import { selectUser } from '../../store/selectors/userSelectors';
+import { items, ProfileItems } from './ProfileItems';
 
 import styles from './UserProfilePage.module.scss';
 
@@ -11,8 +14,8 @@ export const ProfilePage: React.FC = () => {
 	return (
 		<div className={styles.root}>
 			<ul className={styles.userInfoList}>
-				{ProfileItems.map((profileItems: string) => {
-					return <li>{profileItems}</li>;
+				{ProfileItems.map((profileItems: ProfileItems) => {
+					return <UserProfileItem profileItems={profileItems.itemName} />;
 				})}
 			</ul>
 			<button

@@ -44,7 +44,7 @@ export const IconChangeLayout: React.FC<PropsType> = ({
 }) => {
 	const IconPlay = iconsPlay[iconOne];
 	const IconPause = iconsPause[iconTwo];
-	console.log(blockStyle)
+
 	return (
 		<div className={blockStyle}>
 			{iconOneOrTwo && currentTrackId === trackId ? (
