@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { PacksPage } from './pages/PacksPage/PacksPage';
 import { Navbar } from './components/Navbar/Navbar';
-import { ProfilePage } from './pages/UserProfilePage/UserProfilePage';
+import { UserProfilePage } from './pages/UserProfilePage/UserProfilePage';
 import { CreatePackPage } from './pages/CreatePackPage/CreatePackPage';
 import { ProfilePackPage } from './pages/ProfilePackPage/ProfilePackPage';
-
 import { LoginPage } from './pages/LoginPage/LoginPage';
 import { PlayerContextProvider } from './context/PlayerContextProvider/PlayerContextProvider';
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
@@ -32,11 +31,6 @@ export const App: React.FC = () => {
 				</div>
 				<div className={styles.pagesBlock}>
 					<Switch>
-						{/* <Route
-								path={['/home', '/']}
-								component={MainPage}
-								exact
-							/> */}
 						<Route path='/login' component={LoginPage} exact />
 						<Route
 							path='/registration'
@@ -50,7 +44,7 @@ export const App: React.FC = () => {
 							exact
 						/>
 
-						<Route path='/profile' component={ProfilePage} exact />
+						<Route path='/profile' component={UserProfilePage} exact />
 						<Route
 							path='/profile/create'
 							component={CreatePackPage}
