@@ -18,4 +18,9 @@ export const userApi = {
 		const { email, fullname, password } = payload;
 		await instance.post('registration', { email, fullname, password });
 	},
+	async updateEmail(email: string | undefined) {
+		const { data } = await instance.post('users/email', { email });
+		console.log(data)
+		return data;
+	},
 };

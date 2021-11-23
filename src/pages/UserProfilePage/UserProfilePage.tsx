@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { UserProfileItem } from '../../components/UserProfileItem/UserProfileItem';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { selectUser } from '../../store/selectors/userSelectors';
-import { items, ProfileItems } from './ProfileItems';
+import { fetchUpdateEmail } from '../../store/slices/user/userSlice';
+import { ProfileItems } from './ProfileItems';
 
 import styles from './UserProfilePage.module.scss';
 
 export const UserProfilePage: React.FC = () => {
 	const history = useHistory();
+	const dispatch = useDispatch();
 
 	const user = useSelector(selectUser);
 
@@ -19,7 +21,8 @@ export const UserProfilePage: React.FC = () => {
 
 	const onUpdateInfo = () => {
 		if (user?.email != email) {
-			console.log(email);
+			console.log(user?.email, email);
+			dispatch(fetchUpdateEmail({ email }));
 		}
 
 		if (user?.fullname != name) {

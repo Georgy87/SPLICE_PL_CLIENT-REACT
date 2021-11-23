@@ -24,9 +24,7 @@ export const fetchLogin = createAsyncThunk(
 	'user/loginStatus',
 	async (payload: { email: string; password: string }) => {
 		try {
-			const data: { user: User; token: string } = await userApi.login(
-				payload,
-			);
+			const data: { user: User; token: string } = await userApi.login(payload);
 			localStorage.setItem('token', data.token);
 			return data;
 		} catch (error) {
@@ -45,6 +43,19 @@ export const fetchAuth = createAsyncThunk('user/authStatus', async () => {
 	}
 });
 
+export const fetchUpdateEmail = createAsyncThunk(
+	'user/updateEmailStatus',
+	async (payload: { email: string | undefined }) => {
+		try {
+			const data: { user: User } = await userApi.updateEmail(payload.email);
+			console.log(data);
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	},
+);
+
 export const userSlice = createSlice({
 	name: 'user',
 	initialState,
@@ -60,10 +71,7 @@ export const userSlice = createSlice({
 		builder
 			.addCase(
 				fetchLogin.fulfilled.type,
-				(
-					state,
-					action: PayloadAction<{ user: User; token: string }>,
-				) => {
+				(state, action: PayloadAction<{ user: User; token: string }>) => {
 					const { user, token } = action.payload;
 					state.user = user;
 					state.token = token;
@@ -72,16 +80,21 @@ export const userSlice = createSlice({
 			)
 			.addCase(
 				fetchAuth.fulfilled.type,
-				(
-					state,
-					action: PayloadAction<{ user: User; token: string }>,
-				) => {
+				(state, action: PayloadAction<{ user: User; token: string }>) => {
 					if (action.payload) {
 						const { user, token } = action.payload;
 
 						state.user = user;
 						state.token = token;
 						state.isAuth = true;
+					}
+				},
+			)
+			.addCase(
+				fetchUpdateEmail.fulfilled.type,
+				(state, action: PayloadAction<User>) => {
+					if (action.payload) {
+						state.user = action.payload;
 					}
 				},
 			),
