@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { UserProfileItem } from '../../components/UserProfileItem/UserProfileItem';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { selectUser } from '../../store/selectors/userSelectors';
-import { fetchUpdateEmail } from '../../store/slices/user/userSlice';
+import { fetchUpdateEmail, fetchUpdateFullName } from '../../store/slices/user/userSlice';
 import { ProfileItems } from './ProfileItems';
 
 import styles from './UserProfilePage.module.scss';
@@ -17,7 +17,7 @@ export const UserProfilePage: React.FC = () => {
 	const user = useSelector(selectUser);
 
 	const [email, setEmail] = useState<string | undefined>('');
-	const [name, setName] = useState<string | undefined>('');
+	const [fullname, setFullName] = useState<string | undefined>('');
 
 	const onUpdateInfo = () => {
 		if (user?.email != email) {
@@ -25,8 +25,8 @@ export const UserProfilePage: React.FC = () => {
 			dispatch(fetchUpdateEmail({ email }));
 		}
 
-		if (user?.fullname != name) {
-			console.log(name);
+		if (user?.fullname != fullname) {
+			dispatch(fetchUpdateFullName({ fullname }));
 		}
 	};
 
@@ -35,7 +35,7 @@ export const UserProfilePage: React.FC = () => {
 	}, [user?.email]);
 
 	useEffect(() => {
-		setName(user?.fullname);
+		setFullName(user?.fullname);
 	}, [user?.fullname]);
 
 	return (
@@ -46,7 +46,7 @@ export const UserProfilePage: React.FC = () => {
 						<UserProfileItem
 							key={idx}
 							profileItems={profileItems.itemName}
-							setName={setName}
+							setFullName={setFullName}
 							setEmail={setEmail}
 						/>
 					);

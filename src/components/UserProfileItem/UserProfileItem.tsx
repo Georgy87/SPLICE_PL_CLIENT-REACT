@@ -11,10 +11,10 @@ import styles from './UserProfileItem.module.scss';
 type PropsType = {
 	profileItems: keyof typeof items;
 	setEmail: (value: string | undefined) => void;
-	setName: (value: string) => void;
+	setFullName: (value: string) => void;
 };
 
-export const UserProfileItem: React.FC<PropsType> = ({ profileItems, setEmail, setName }) => {
+export const UserProfileItem: React.FC<PropsType> = ({ profileItems, setEmail, setFullName }) => {
 	const user = useSelector(selectUser);
 
 	return (
@@ -38,7 +38,7 @@ export const UserProfileItem: React.FC<PropsType> = ({ profileItems, setEmail, s
 				{profileItems === 'Name' && (
 					<input
 						defaultValue={user?.fullname}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFullName(e.target.value)}
 					/>
 				)}
 			</li>

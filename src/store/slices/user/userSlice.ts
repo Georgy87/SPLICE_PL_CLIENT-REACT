@@ -56,6 +56,18 @@ export const fetchUpdateEmail = createAsyncThunk(
 	},
 );
 
+export const fetchUpdateFullName = createAsyncThunk(
+	'user/updateFullNameStatus',
+	async (payload: { fullname: string | undefined }) => {
+		try {
+			const data: { user: User } = await userApi.updateFullName(payload.fullname);
+			return data;
+		} catch (error) {
+			console.log(error);
+		}
+	},
+);
+
 export const userSlice = createSlice({
 	name: 'user',
 	initialState,
@@ -83,7 +95,6 @@ export const userSlice = createSlice({
 				(state, action: PayloadAction<{ user: User; token: string }>) => {
 					if (action.payload) {
 						const { user, token } = action.payload;
-
 						state.user = user;
 						state.token = token;
 						state.isAuth = true;
@@ -92,6 +103,14 @@ export const userSlice = createSlice({
 			)
 			.addCase(
 				fetchUpdateEmail.fulfilled.type,
+				(state, action: PayloadAction<User>) => {
+					if (action.payload) {
+						state.user = action.payload;
+					}
+				},
+			)
+			.addCase(
+				fetchUpdateFullName.fulfilled.type,
 				(state, action: PayloadAction<User>) => {
 					if (action.payload) {
 						state.user = action.payload;

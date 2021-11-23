@@ -20,7 +20,10 @@ export const userApi = {
 	},
 	async updateEmail(email: string | undefined) {
 		const { data } = await instance.post('users/email', { email });
-		console.log(data)
+		return data;
+	},
+	async updateFullName(fullname: string | undefined) {
+		const { data } = await instance.post('users/fullname', { fullname });
 		return data;
 	},
 };
