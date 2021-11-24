@@ -3,11 +3,12 @@ import { Samples } from "../../../context/PlayerContextProvider/types";
 export type PacksSliceState = {
     packs: Pack[] | [];
     packProfile: null | Pack;
+    userPacks: Pack[] | [];
 }
 
 export type createPackType = {
 	info: {
-		trackName: string;
+		genre: string;
 		authorName: string;
 		packInfo: string;
 	};
@@ -17,7 +18,7 @@ export type createPackType = {
 
 export type Pack = {
     _id: string;
-    trackName: string;
+    genre: string;
     authorName: string;
     packInfo: string;
     text: string;
@@ -26,6 +27,7 @@ export type Pack = {
     audio: string;
     pause: boolean;
     samples: Samples[];
+    userId: string;
 }
 
 

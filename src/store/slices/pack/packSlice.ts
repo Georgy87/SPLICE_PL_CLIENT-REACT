@@ -6,6 +6,7 @@ import { createPackType, Pack, PacksSliceState } from './types';
 const initialState: PacksSliceState = {
 	packs: [],
 	packProfile: null,
+	userPacks: [],
 };
 
 export const fetchCreatePack = createAsyncThunk(
@@ -13,10 +14,10 @@ export const fetchCreatePack = createAsyncThunk(
 	async (payload: createPackType) => {
 		try {
 			const { picture, audio } = payload;
-			const { trackName, authorName, packInfo } = payload.info;
+			const { genre, authorName, packInfo } = payload.info;
 
 			const formData = new FormData();
-			formData.append('trackName', trackName);
+			formData.append('genre', genre);
 			formData.append('authorName', authorName);
 			formData.append('packInfo', packInfo);
 			formData.append('picture', picture);
@@ -30,29 +31,32 @@ export const fetchCreatePack = createAsyncThunk(
 	},
 );
 
-export const fetchGetPacks = createAsyncThunk(
-	'packs/getPacksStatus',
-	async () => {
-		try {
-			const packs = await packsApi.getPacks();
-			return packs;
-		} catch (error) {
-			console.log(error);
-		}
-	},
-);
+export const fetchGetPacks = createAsyncThunk('packs/getPacksStatus', async () => {
+	try {
+		const packs = await packsApi.getPacks();
+		return packs;
+	} catch (error) {
+		console.log(error);
+	}
+});
 
-export const fetchGetPack = createAsyncThunk(
-	'packs/getPackStatus',
-	async (packId: string) => {
-		try {
-			const pack = await packsApi.getPack(packId);
-			return pack;
-		} catch (error) {
-			console.log(error);
-		}
-	},
-);
+export const fetchGetPack = createAsyncThunk('packs/getPackStatus', async (packId: string) => {
+	try {
+		const pack = await packsApi.getPack(packId);
+		return pack;
+	} catch (error) {
+		console.log(error);
+	}
+});
+
+export const fetchGetUserPacks = createAsyncThunk('packs/getUserPacksStatus', async () => {
+	try {
+		const packs = await packsApi.getUserPacks();
+		return packs;
+	} catch (error) {
+		console.log(error);
+	}
+});
 
 export const packSlice = createSlice({
 	name: 'packs',
@@ -60,24 +64,18 @@ export const packSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) =>
 		builder
-			.addCase(
-				fetchGetPacks.fulfilled.type,
-				(state, action: PayloadAction<Pack[]>) => {
-					state.packs = action.payload;
-				},
-			)
-			.addCase(
-				fetchCreatePack.fulfilled.type,
-				(state, action: PayloadAction<Pack[]>) => {
-					state.packs = action.payload;
-				},
-			)
-			.addCase(
-				fetchGetPack.fulfilled.type,
-				(state, action: PayloadAction<Pack>) => {
-					state.packProfile = action.payload;
-				},
-			),
+			.addCase(fetchGetPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
+				state.packs = action.payload;
+			})
+			.addCase(fetchCreatePack.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
+				state.packs = action.payload;
+			})
+			.addCase(fetchGetPack.fulfilled.type, (state, action: PayloadAction<Pack>) => {
+				state.packProfile = action.payload;
+			})
+			.addCase(fetchGetUserPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
+				state.userPacks = action.payload;
+			}),
 });
 
 export const packsReducer = packSlice.reducer;

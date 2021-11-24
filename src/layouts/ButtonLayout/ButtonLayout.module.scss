@@ -29,15 +29,15 @@
 	}
 	.blue {
 		@extend %buttons;
+		width: 80px;
 		color: $white;
 		background-color: $blue;
-		width: 80px;
 	}
 	.blueDisabled {
 		@extend %buttons;
+		width: 80px;
 		color: $white;
 		background-color: $blue-light;
-		width: 80px;
 	}
 	.download {
 		@extend %buttons;
@@ -76,21 +76,20 @@
 	.signInOut {
 		@extend %buttons;
 		display: flex;
-		align-items: center;
-		background-color: transparent;
-		border: 2px solid rgb(232, 239, 241);
 		width: 8rem;
+		align-items: center;
 		font-weight: 700;
 		font-size: 16px;
 		color: #fff;
-		// width: 100%;
+		background-color: transparent;
+		border: 2px solid rgb(232, 239, 241);
 		svg {
 			margin-right: 2px;
 		}
 	}
 	.update {
 		display: flex;
-		width: 80px;
+		width: 6rem;
 		margin-right: auto;
 		margin-top: 1.2rem;
 		color: $white;

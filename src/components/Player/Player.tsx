@@ -58,7 +58,7 @@ export const Player: React.FC = () => {
 					/>
 					<div className={styles.trackInfo}>
 						<div>{active?.authorName}</div>
-						<div>{active?.trackName}</div>
+						<div>{active?.genre}</div>
 					</div>
 				</div>
 

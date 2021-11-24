@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { fetchCreatePack } from '../../store/slices/pack/packSlice';
+import { fetchCreatePack, fetchGetUserPacks } from '../../store/slices/pack/packSlice';
 import { useAsyncAction } from '../../hooks/useAsyncAction';
 import { StepLayout } from '../../layouts/StepLayout/StepLayout';
 import { PackInfoUpload } from '../../components/PackInfoUpload/PackInfoUpload';
 import { FileUpload } from '../../components/FileUpload/FileUpload';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { PacksPage } from '../PacksPage/PacksPage';
-
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 
 import styles from './CreatePackPage.module.scss';
@@ -21,6 +21,8 @@ export const CreatePackPage = () => {
 	} | {}>({});
 	const [picture, setPicture] = useState<File | null>(null);
 	const [audio, setAudio] = useState<File | null>(null);
+
+	const dispatch = useDispatch();
 
 	const createTrack = useAsyncAction<any, any>(fetchCreatePack);
 
@@ -37,6 +39,11 @@ export const CreatePackPage = () => {
 	const back = () => {
 		setActiveStep((prev) => prev - 1);
 	};
+
+	useEffect(() => {
+		dispatch(fetchGetUserPacks());
+	}, []);
+
 
 	return (
 		<div className={styles.createPageContainer}>

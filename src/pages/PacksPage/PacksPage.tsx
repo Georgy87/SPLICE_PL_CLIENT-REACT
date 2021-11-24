@@ -1,26 +1,28 @@
-import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchGetPacks } from '../../store/slices/pack/packSlice';
 import { Player } from '../../components/Player/Player';
 import SearchInput from '../../components/SearchInput/SearchInput';
-import { useSound } from '../../hooks/useSound';
 import { PackItem } from '../../components/PackItem/PackItem';
 import { Pack } from '../../store/slices/pack/types';
+import { selectPacks, selectUserPacks } from '../../store/selectors/packsSelectors';
 
 import styles from './PacksPage.module.scss';
 
 type PropsType = {
-	pageName?: string;
+	pageName?: 'main-packs' | 'user-packs';
 };
 
 export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 	const history = useHistory();
 	const [value, setValue] = useState<string>('');
 
-	const { packs } = useSound();
+	const packs = useSelector(selectPacks);
+	const userPacks = useSelector(selectUserPacks);
 
+	console.log(userPacks);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -36,28 +38,52 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 		<div className={styles.packsPageContainer}>
 			<SearchInput onChangeValue={onChangeValue} setValue={setValue} value={value} />
 			<div className={styles.packsContainer}>
-				{packs
-					?.filter((packs) => {
-						if (
-							packs.authorName.toLowerCase().includes(value.toLowerCase()) ||
-							packs.trackName.toLowerCase().includes(value.toLowerCase())
-						) {
-							return packs;
-						}
-					})
-					.map((pack: Pack, index: number) => (
-						<>
-							<div className={styles.packCardContainer}>
-								<PackItem
-									key={pack._id}
-									pack={pack}
-									id={pack._id}
-									pageName={pageName}
-									index={index}
-								/>
-							</div>
-						</>
-					))}
+				{pageName === 'main-packs' &&
+					packs
+						?.filter((packs) => {
+							if (
+								packs.authorName.toLowerCase().includes(value.toLowerCase()) ||
+								packs.genre.toLowerCase().includes(value.toLowerCase())
+							) {
+								return packs;
+							}
+						})
+						.map((pack: Pack, index: number) => (
+							<>
+								<div className={styles.packCardContainer}>
+									<PackItem
+										key={pack._id}
+										pack={pack}
+										id={pack._id}
+										pageName={pageName}
+										index={index}
+									/>
+								</div>
+							</>
+						))}
+				{pageName === 'user-packs' &&
+					userPacks
+						?.filter((packs) => {
+							if (
+								packs.authorName.toLowerCase().includes(value.toLowerCase()) ||
+								packs.genre.toLowerCase().includes(value.toLowerCase())
+							) {
+								return packs;
+							}
+						})
+						.map((pack: Pack, index: number) => (
+							<>
+								<div className={styles.packCardContainer}>
+									<PackItem
+										key={pack._id}
+										pack={pack}
+										id={pack._id}
+										pageName={pageName}
+										index={index}
+									/>
+								</div>
+							</>
+						))}
 
 				<Player />
 			</div>

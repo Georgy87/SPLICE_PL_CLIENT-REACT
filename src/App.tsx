@@ -37,7 +37,7 @@ export const App: React.FC = () => {
 							component={RegistrationPage}
 							exact
 						/>
-						<Route path={'/'} component={PacksPage} exact />
+						<Route path={'/'} component={() => <PacksPage pageName={'main-packs'} />} exact />
 						<Route
 							path='/profile-pack/:packId?'
 							component={ProfilePackPage}

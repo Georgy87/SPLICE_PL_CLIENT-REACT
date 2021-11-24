@@ -88,7 +88,7 @@ export const PackItem: React.FC<PackListProps> = ({
 				<img src={`${pack.picture}`} />
 
 				<div>
-					<div>{pack.trackName}</div>
+					<div>{pack.genre}</div>
 					<div style={{ fontSize: 12, color: 'gray' }}>
 						{pack.authorName}
 					</div>
