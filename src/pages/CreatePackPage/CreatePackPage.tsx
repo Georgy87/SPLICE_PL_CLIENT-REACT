@@ -10,7 +10,7 @@ import { PacksPage } from '../PacksPage/PacksPage';
 
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 
-import styles from '../../styles/pagesStyles/CreatePackPage.module.scss';
+import styles from './CreatePackPage.module.scss';
 
 export const CreatePackPage = () => {
 	const [activeStep, setActiveStep] = useState<number>(0);

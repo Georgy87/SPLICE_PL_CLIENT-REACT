@@ -7,7 +7,7 @@ import { useAsyncAction } from '../../hooks/useAsyncAction';
 import { selectPackProfile } from '../../store/selectors/packsSelectors';
 import { fetchGetPack } from '../../store/slices/pack/packSlice';
 
-import styles from '../../styles/pagesStyles/ProfilePackPage.module.scss';
+import styles from './ProfilePackPage.module.scss';
 
 export const ProfilePackPage = () => {
 	const params: { packId: string } = useParams();
@@ -28,13 +28,13 @@ export const ProfilePackPage = () => {
 		<div className={styles.profilePackContainer}>
 			<div className={styles.infoBackground}>
 				<img
-					src={`/${packProfile?.picture}`}
+					src={`${packProfile?.picture}`}
 					alt={`${packProfile?.picture}`}
 				/>
 			</div>
 			<div className={styles.playerInner}>
 				<img
-					src={`/${packProfile?.picture}`}
+					src={`${packProfile?.picture}`}
 					alt={packProfile?.picture}
 				/>
 

@@ -13,7 +13,7 @@ import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 import { fetchAuth } from './store/slices/user/userSlice';
 import { selectUser } from './store/selectors/userSelectors';
 
-import styles from './styles/App.module.scss';
+import styles from './App.module.scss';
 
 export const App: React.FC = () => {
 	const dispatch = useDispatch();

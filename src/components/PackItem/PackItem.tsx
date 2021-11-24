@@ -85,7 +85,7 @@ export const PackItem: React.FC<PackListProps> = ({
 					typeBtn='pack'
 				></IconChangeLayout>
 
-				<img src={`/${pack.picture}`} />
+				<img src={`${pack.picture}`} />
 
 				<div>
 					<div>{pack.trackName}</div>

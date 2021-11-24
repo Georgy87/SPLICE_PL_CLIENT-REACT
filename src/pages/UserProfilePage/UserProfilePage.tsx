@@ -51,17 +51,23 @@ export const UserProfilePage: React.FC = () => {
 						/>
 					);
 				})}
-				<ButtonLayout typeStyle='update' onClicked={onUpdateInfo}>
-					Update
-				</ButtonLayout>
-			</ul>
+				<div className={styles.downloadPack}>
+					<h1>Update</h1>
+					<ButtonLayout typeStyle='update' onClicked={onUpdateInfo}>
+						Update
+					</ButtonLayout>
+				</div>
 
-			<button
-				style={{ color: 'green', height: '100px', marginTop: '300px' }}
-				onClick={() => history.push('/profile/create')}
-			>
-				DOWNLOAD PACK
-			</button>
+				<div className={styles.downloadPack}>
+					<h1>DOWNLOAD PACK</h1>
+					<ButtonLayout
+						onClicked={() => history.push('/profile/create')}
+						typeStyle='update'
+					>
+						Download
+					</ButtonLayout>
+				</div>
+			</ul>
 		</div>
 	);
 };

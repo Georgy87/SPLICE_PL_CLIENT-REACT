@@ -13,12 +13,11 @@ export const PackInfoUpload: React.FC<PropsType> = ({ setInfo }) => {
 	const [packInfo, setPackInfo] = useState<string>('');
 
 	const onSendInfo = () => {
-		console.log(trackName);
-		// setInfo({
-		// 	trackName,
-		// 	authorName,
-		// 	packInfo,
-		// });
+		setInfo({
+			trackName,
+			authorName,
+			packInfo,
+		});
 	};
 
 	return (

@@ -53,7 +53,7 @@ export const Player: React.FC = () => {
 
 				<div className={styles.trackActive}>
 					<img
-						src={`http://localhost:5000/${active?.picture}`}
+						src={`${active?.picture}`}
 						alt='active-info'
 					/>
 					<div className={styles.trackInfo}>

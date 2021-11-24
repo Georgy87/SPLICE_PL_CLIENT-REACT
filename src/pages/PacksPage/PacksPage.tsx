@@ -6,10 +6,10 @@ import { fetchGetPacks } from '../../store/slices/pack/packSlice';
 import { Player } from '../../components/Player/Player';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import { useSound } from '../../hooks/useSound';
-
-import styles from '../../styles/pagesStyles/PacksPage.module.scss';
 import { PackItem } from '../../components/PackItem/PackItem';
 import { Pack } from '../../store/slices/pack/types';
+
+import styles from './PacksPage.module.scss';
 
 type PropsType = {
 	pageName?: string;

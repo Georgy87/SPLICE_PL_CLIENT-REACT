@@ -3,5 +3,16 @@
 }
 
 .userInfoList {
-    margin-top: 100px;
+    margin-top: 3.4rem;
+}
+
+.downloadPack {
+    display: flex;
+    margin-top: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgb(201, 197, 197);
+    h1 {
+        flex: 1;
+        font-size: 1.4rem;
+    }
 }

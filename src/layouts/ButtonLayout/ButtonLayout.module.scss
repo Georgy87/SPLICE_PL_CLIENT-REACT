@@ -12,10 +12,10 @@
 	justify-content: center;
 	align-items: center;
 	.footer {
-		@extend %buttons;
 		color: #1d1b3b;
-		border-radius: 4px;
 		background-color: transparent;
+		border-radius: 4px;
+		@extend %buttons;
 		&:hover {
 			background-color: rgba(230, 221, 240, 0.5);
 			cursor: pointer;
@@ -87,5 +87,15 @@
 		svg {
 			margin-right: 2px;
 		}
+	}
+	.update {
+		display: flex;
+		width: 80px;
+		margin-right: auto;
+		margin-top: 1.2rem;
+		color: $white;
+		font-size: 1rem;
+		background-color: $blue;
+		@extend %buttons;
 	}
 }

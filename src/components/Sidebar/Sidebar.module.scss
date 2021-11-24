@@ -1,11 +1,11 @@
 .sidebar {
 	position: absolute;
-	top: 8vh;
-	width: 16rem;
+	top: 55px;
 	left: 0;
-	background: #1b1919;
+	width: 16rem;
+	height: calc(100vh - 55px);
 	z-index: 2001;
-	height: 92vh;
+	background: #1b1919;
 	transition: 0.3s all ease-in-out;
 }
 

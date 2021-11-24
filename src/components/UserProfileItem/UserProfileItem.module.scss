@@ -3,10 +3,10 @@
 .profileListItem {
 	display: flex;
 	align-items: center;
-	list-style: none;
 	height: 3rem;
-	border-bottom: 0.1rem solid rgb(187, 186, 186);
 	padding: 1rem 0 1rem 0;
+	list-style: none;
+	border-bottom: 0.1rem solid rgb(187, 186, 186);
 	label {
 		flex: 1;
 		font-size: 1rem;
@@ -18,15 +18,15 @@
 		color: $gray;
 	}
 	input {
+		display: block;
+		width: 75%;
+		padding: 0.75em;
+		outline: none;
+		line-height: 1rem;
+		font-size: 1rem;
 		background-color: #fff;
 		border: 1px solid #babec2;
 		border-radius: 3;
-		padding: 0.75em;
-		line-height: 15px;
-		font-size: 13px;
-		outline: none;
-		display: block;
-		width: 100%;
 	}
 }
 
