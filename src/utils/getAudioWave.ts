@@ -1,5 +1,5 @@
 
-export const hookAudioWave = (
+export const getAudioWave = (
 	// data: Promise<ArrayBuffer>,
 	audioCoordinates: number[],
 	canvas: HTMLCanvasElement | null,

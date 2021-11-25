@@ -13,7 +13,7 @@ export const useSound = () => {
 			const url =
 				typeElement === 'packs'
 					? `${state.packs[index]?.audio}`
-					: `${state?.samples[index]?.audio}`;
+					: `/${state?.samples[index]?.audio}`;
 		
 			state.audioPlayer.pause();
 			state.audioPlayer = new Audio(url);

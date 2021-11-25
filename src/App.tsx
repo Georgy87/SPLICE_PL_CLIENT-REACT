@@ -12,6 +12,7 @@ import { PlayerContextProvider } from './context/PlayerContextProvider/PlayerCon
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 import { fetchAuth } from './store/slices/user/userSlice';
 import { selectUser } from './store/selectors/userSelectors';
+import { UserPacksPage } from './pages/UserPacksPage/UserPacksPage';
 
 import styles from './App.module.scss';
 
@@ -32,24 +33,17 @@ export const App: React.FC = () => {
 				<div className={styles.pagesBlock}>
 					<Switch>
 						<Route path='/login' component={LoginPage} exact />
+						<Route path='/registration' component={RegistrationPage} exact />
 						<Route
-							path='/registration'
-							component={RegistrationPage}
+							path={'/'}
+							component={() => <PacksPage pageName={'main-packs'} />}
 							exact
 						/>
-						<Route path={'/'} component={() => <PacksPage pageName={'main-packs'} />} exact />
-						<Route
-							path='/profile-pack/:packId?'
-							component={ProfilePackPage}
-							exact
-						/>
+						<Route path='/profile-pack/:packId?' component={ProfilePackPage} exact />
 
 						<Route path='/profile' component={UserProfilePage} exact />
-						<Route
-							path='/profile/create'
-							component={CreatePackPage}
-							exact
-						/>
+						<Route path='/profile/create' component={CreatePackPage} exact />
+						<Route path='/profile/packs' component={UserPacksPage} exact />
 					</Switch>
 				</div>
 			</div>

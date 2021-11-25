@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import avatar from '../../assets/avatar/unnamed.jpg';
-import { items } from '../../pages/UserProfilePage/ProfileItems';
+import { userInfoItems } from '../../pages/UserProfilePage/ProfileItems';
 import { selectUser } from '../../store/selectors/userSelectors';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 
 import styles from './UserProfileItem.module.scss';
 
 type PropsType = {
-	profileItems: keyof typeof items;
+	profileItems: keyof typeof userInfoItems;
 	setEmail: (value: string | undefined) => void;
 	setFullName: (value: string) => void;
 };

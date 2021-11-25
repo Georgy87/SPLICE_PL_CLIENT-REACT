@@ -22,7 +22,6 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 	const packs = useSelector(selectPacks);
 	const userPacks = useSelector(selectUserPacks);
 
-	console.log(userPacks);
 	const dispatch = useDispatch();
 
 	useEffect(() => {

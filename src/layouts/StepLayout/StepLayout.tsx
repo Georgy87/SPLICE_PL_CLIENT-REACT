@@ -12,7 +12,6 @@ const steps = [
 	'Информация о пакете',
 	'Загрузите обложку для пакета',
 	'Загрузка сэмплов для пакета',
-	'Результат',
 ];
 
 export const StepLayout: React.FC<StepWrapperProps> = ({

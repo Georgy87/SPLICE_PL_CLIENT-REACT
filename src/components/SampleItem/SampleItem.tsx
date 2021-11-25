@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 import { useSound } from '../../hooks/useSound';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 import { selectPackProfile } from '../../store/selectors/packsSelectors';
-import { hookAudioWave } from '../../hooks/hookAudioWave';
 import { SampleSliderLayout } from '../../layouts/SampleSliderLayout/SampleSliderLayout';
 import { Samples } from '../../context/PlayerContextProvider/types';
+import { formatTime } from '../../utils/formatTime';
+import { getAudioWave } from '../../utils/getAudioWave';
 
 import styles from './SampleItem.module.scss';
-import { formatTime } from '../../utils/formatTime';
 
 type PropsType = {
 	sample: Samples;
@@ -27,7 +27,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	useEffect(() => {
 		console.log(audio);
 		if (audio) {
-			hookAudioWave(audioCoordinates, canvasRef.current);
+			getAudioWave(audioCoordinates, canvasRef.current);
 		}
 
 		const handleResize = () => {
@@ -56,7 +56,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		<>
 			<ul className={styles.listItem}>
 				<li>
-					<img src={`/${packProfile?.picture}`} alt={packProfile?.picture} />
+					<img src={`${packProfile?.picture}`} alt={packProfile?.picture} />
 					<div className={styles.iconChangeWrap}>
 						<p className={styles.sampleTime}>{formatTime(duration)}</p>
 						<IconChangeLayout

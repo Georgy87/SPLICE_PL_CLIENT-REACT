@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import { fetchCreatePack, fetchGetUserPacks } from '../../store/slices/pack/packSlice';
 import { useAsyncAction } from '../../hooks/useAsyncAction';
@@ -13,16 +14,17 @@ import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import styles from './CreatePackPage.module.scss';
 
 export const CreatePackPage = () => {
+	const history = useHistory();
+
 	const [activeStep, setActiveStep] = useState<number>(0);
 	const [info, setInfo] = useState<{
 		trackName: string;
 		authorName: string;
 		packInfo: string;
 	} | {}>({});
+
 	const [picture, setPicture] = useState<File | null>(null);
 	const [audio, setAudio] = useState<File | null>(null);
-
-	const dispatch = useDispatch();
 
 	const createTrack = useAsyncAction<any, any>(fetchCreatePack);
 
@@ -32,6 +34,7 @@ export const CreatePackPage = () => {
 		}
 
 		if (activeStep === 2) {
+			history.push('/profile/packs');
 			createTrack({ info, picture, audio });
 		}
 	};
@@ -39,11 +42,6 @@ export const CreatePackPage = () => {
 	const back = () => {
 		setActiveStep((prev) => prev - 1);
 	};
-
-	useEffect(() => {
-		dispatch(fetchGetUserPacks());
-	}, []);
-
 
 	return (
 		<div className={styles.createPageContainer}>
