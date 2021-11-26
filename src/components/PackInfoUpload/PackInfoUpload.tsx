@@ -8,13 +8,13 @@ type PropsType = {
 };
 
 export const PackInfoUpload: React.FC<PropsType> = ({ setInfo }) => {
-	const [trackName, setPackName] = useState<string>('');
+	const [genre, setGenre] = useState<string>('');
 	const [authorName, setAuthorName] = useState<string>('');
 	const [packInfo, setPackInfo] = useState<string>('');
 
 	const onSendInfo = () => {
 		setInfo({
-			trackName,
+			genre,
 			authorName,
 			packInfo,
 		});
@@ -22,31 +22,28 @@ export const PackInfoUpload: React.FC<PropsType> = ({ setInfo }) => {
 
 	return (
 		<div className={styles.packUploadWrapper}>
-			<label>Названия пака</label>
+			<label>GENRE</label>
 			<input
-				style={{ marginTop: 10 }}
 				onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-					setPackName(e.target.value)
+					setGenre(e.target.value)
 				}
 			/>
 
-			<label>Имя автора</label>
+			<label>AUTHOR NAME</label>
 			<input
-				style={{ marginTop: 10 }}
 				onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 					setAuthorName(e.target.value)
 				}
 			/>
 
-			<label>Описание</label>
+			<label>DESCRIPTION</label>
 			<textarea
-				style={{ marginTop: 10 }}
 				onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
 					setPackInfo(e.target.value)
 				}
 			/>
 			<ButtonLayout typeStyle='black' onClicked={onSendInfo}>
-				Добавить информацию о паке
+				SAVE INFO
 			</ButtonLayout>
 		</div>
 	);

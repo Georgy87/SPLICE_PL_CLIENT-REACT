@@ -1,4 +1,4 @@
-.createPageContainer {
+.root {
 	width: 100vw;
 }
 
@@ -13,15 +13,13 @@
 
 .bottomPanel {
 	display: flex;
+	justify-content: center;
 	padding: 2rem;
-
 	button {
 		cursor: pointer;
-
 		&:first-child {
 			margin-right: 3px;
 		}
-
 		&:last-child {
 			margin-left: 3px;
 		}

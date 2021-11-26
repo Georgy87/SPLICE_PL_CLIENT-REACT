@@ -25,7 +25,6 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
-		console.log(audio);
 		if (audio) {
 			getAudioWave(audioCoordinates, canvasRef.current);
 		}
@@ -56,7 +55,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		<>
 			<ul className={styles.listItem}>
 				<li>
-					<img src={`${packProfile?.picture}`} alt={packProfile?.picture} />
+					<img src={`/${packProfile?.picture}`} alt={packProfile?.picture} />
 					<div className={styles.iconChangeWrap}>
 						<p className={styles.sampleTime}>{formatTime(duration)}</p>
 						<IconChangeLayout

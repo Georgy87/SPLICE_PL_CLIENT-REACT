@@ -14,17 +14,15 @@ const SearchInput: React.FC<PropsType> = ({
 	value,
 }) => {
 	const inputRef = useRef<HTMLInputElement>(null);
-	const [open, setOpen] = useState<boolean>(false);
+	const [open, setOpen] = useState<boolean>(true);
 	const [placeholder, setPlaceholder] = useState<string>(
 		'Search genres, author',
 	);
 
-	useEffect(() => {
-		setPlaceholder('');
-	}, []);
 
 	return (
 		<div className={styles.inputContainer}>
+			<label>Sounds</label>
 			<div
 				className={
 					open ? `${styles.search} ${styles.open}` : styles.search

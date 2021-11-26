@@ -18,6 +18,7 @@ export const defaultPlayerStateType = {
 	percent: 0,
 };
 
+
 export const PlayerContext = createContext<ContextProps>([
 	defaultPlayerStateType,
 	() => {},

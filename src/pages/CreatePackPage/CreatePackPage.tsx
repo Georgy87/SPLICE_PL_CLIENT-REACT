@@ -44,7 +44,7 @@ export const CreatePackPage = () => {
 	};
 
 	return (
-		<div className={styles.createPageContainer}>
+		<div className={styles.root}>
 			<StepLayout activeStep={activeStep}>
 				{activeStep === 0 && (
 					<div className={styles.stepOne}>
@@ -84,10 +84,10 @@ export const CreatePackPage = () => {
 						disabled={activeStep === 0}
 						onClicked={back}
 					>
-						Назад
+						PREV
 					</ButtonLayout>
 					<ButtonLayout typeStyle='blue' onClicked={next}>
-						Далее
+						NEXT
 					</ButtonLayout>
 				</div>
 			)}

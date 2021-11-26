@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { PacksPage } from './pages/PacksPage/PacksPage';
@@ -17,11 +17,15 @@ import { UserPacksPage } from './pages/UserPacksPage/UserPacksPage';
 import styles from './App.module.scss';
 
 export const App: React.FC = () => {
+	const history = useHistory();
 	const dispatch = useDispatch();
 
 	const user = useSelector(selectUser);
 
 	useEffect(() => {
+		if (!user) {
+			history.push('login');
+		}
 		dispatch(fetchAuth());
 	}, []);
 	return (

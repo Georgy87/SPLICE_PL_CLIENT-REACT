@@ -10,11 +10,12 @@ export const useSound = () => {
 		if (index === state.currentTrackIndex) {
 			play();
 		} else {
+			
 			const url =
 				typeElement === 'packs'
-					? `${state.packs[index]?.audio}`
-					: `/${state?.samples[index]?.audio}`;
-		
+					? `http://localhost:5000/${state.packs[index]?.audio}`
+					: `http://localhost:5000/${state?.samples[index]?.audio}`;
+					
 			state.audioPlayer.pause();
 			state.audioPlayer = new Audio(url);
 
@@ -35,7 +36,7 @@ export const useSound = () => {
 						(100 / state.duration * state.currentTime)
 					),
 				}));
-				console.log(state.audioPlayer.currentTime )
+				console.log(state.audioPlayer.currentTime)
 			};
 
 			state.audioPlayer.play();

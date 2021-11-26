@@ -9,9 +9,9 @@ interface StepWrapperProps {
 }
 
 const steps = [
-	'Информация о пакете',
-	'Загрузите обложку для пакета',
-	'Загрузка сэмплов для пакета',
+	'pack information',
+	'pack cover',
+	'pack audio',
 ];
 
 export const StepLayout: React.FC<StepWrapperProps> = ({
@@ -38,7 +38,7 @@ export const StepLayout: React.FC<StepWrapperProps> = ({
 				})}
 			</div>
 			<div className={styles.stepUploadInfo}>
-				<div className={styles.stepsWrapper}>{children}</div>
+				{children}
 			</div>
 		</div>
 	);

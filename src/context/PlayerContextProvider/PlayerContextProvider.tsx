@@ -48,7 +48,7 @@ export const PlayerContextProvider: React.FC<PropsType> = ({ children }) => {
 			});
 		}
 	}, [packs, samples]);
-
+	
 	return (
 		<PlayerContext.Provider value={[state, setState]}>
 			{children}

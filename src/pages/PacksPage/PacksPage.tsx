@@ -34,9 +34,9 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 	};
 
 	return (
-		<div className={styles.packsPageContainer}>
+		<>
 			<SearchInput onChangeValue={onChangeValue} setValue={setValue} value={value} />
-			<div className={styles.packsContainer}>
+			<div className={styles.root}>
 				{pageName === 'main-packs' &&
 					packs
 						?.filter((packs) => {
@@ -86,6 +86,6 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 
 				<Player />
 			</div>
-		</div>
+		</>
 	);
 };
