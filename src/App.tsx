@@ -8,7 +8,10 @@ import { UserProfilePage } from './pages/UserProfilePage/UserProfilePage';
 import { CreatePackPage } from './pages/CreatePackPage/CreatePackPage';
 import { ProfilePackPage } from './pages/ProfilePackPage/ProfilePackPage';
 import { LoginPage } from './pages/LoginPage/LoginPage';
-import { PlayerContextProvider } from './context/PlayerContextProvider/PlayerContextProvider';
+import {
+	defaultState,
+	PlayerContextProvider,
+} from './context/PlayerContextProvider/PlayerContextProvider';
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 import { fetchAuth } from './store/slices/user/userSlice';
 import { selectUser } from './store/selectors/userSelectors';
@@ -26,8 +29,10 @@ export const App: React.FC = () => {
 		// if (!user) {
 		// 	history.push('login');
 		// }
+
 		dispatch(fetchAuth());
 	}, []);
+	
 	return (
 		<PlayerContextProvider>
 			<div className={styles.appContainer}>

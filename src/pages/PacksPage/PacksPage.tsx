@@ -10,22 +10,31 @@ import { Pack } from '../../store/slices/pack/types';
 import { selectPacks, selectUserPacks } from '../../store/selectors/packsSelectors';
 
 import styles from './PacksPage.module.scss';
+import { defaultState } from '../../context/PlayerContextProvider/PlayerContextProvider';
+import { useSound } from '../../hooks/useSound';
 
 type PropsType = {
 	pageName?: 'main-packs' | 'user-packs';
 };
 
 export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
-	const history = useHistory();
-	const [value, setValue] = useState<string>('');
-
 	const packs = useSelector(selectPacks);
 	const userPacks = useSelector(selectUserPacks);
+
+	const [value, setValue] = useState<string>('');
+
+	const history = useHistory();
+
+	const { state, setState } = useSound();
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(fetchGetPacks());
+		// setState({
+		// 	...defaultState,
+		// 	samples: [],
+		// });
 	}, []);
 
 	const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {

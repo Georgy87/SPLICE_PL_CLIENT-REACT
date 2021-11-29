@@ -109,7 +109,7 @@ export const useSound = () => {
 			(state.audioPlayer.duration / 100) * +e.target.value;
 		
 	};
-console.log(state.percent, state.currentTime)
+
 	return {
 		playTrack,
 		play,

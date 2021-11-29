@@ -4,4 +4,7 @@ export const samplesApi = {
 	async createSamples(formData: FormData, packId: string) {
 		await instance.post(`samples?packId=${packId}`, formData);
 	},
+	async setLike(sampleId: string) {
+		await instance.post(`samples/like?sampleId=${sampleId}`);
+	},
 };

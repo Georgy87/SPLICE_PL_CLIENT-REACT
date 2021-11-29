@@ -73,7 +73,13 @@ export const fetchSearchPacks = createAsyncThunk(
 export const packSlice = createSlice({
 	name: 'packs',
 	initialState,
-	reducers: {},
+	reducers: {
+		setDefaultPackState: (state) => {
+			state.packs = [];
+			state.packProfile = null;
+			state.userPacks = [];
+		},
+	},
 	extraReducers: (builder) =>
 		builder
 			.addCase(fetchGetPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
@@ -93,5 +99,7 @@ export const packSlice = createSlice({
 			}),
 
 });
+
+export const { setDefaultPackState } = packSlice.actions;
 
 export const packsReducer = packSlice.reducer;

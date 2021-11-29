@@ -12,14 +12,14 @@ type PropsType = {
 	children: React.ReactNode;
 };
 
-const defaultState = {
+export const defaultState = {
 	audioPlayer: new Audio(),
 	currentTrackIndex: null,
 	isPlaying: false,
 	currentTrackId: null,
 	active: null,
 	duration: 0,
-	currentTime: 1,
+	currentTime: 0,
 	volume: 2,
 	percent: 0,
 };
@@ -29,7 +29,7 @@ export const PlayerContextProvider: React.FC<PropsType> = ({ children }) => {
 	const samples = useSelector(selectSamples);
 
 	const [state, setState] = useState<ContextProps[0]>(defaultPlayerStateType);
-
+	
 	useEffect(() => {
 		if (packs) {
 			setState({
@@ -39,17 +39,16 @@ export const PlayerContextProvider: React.FC<PropsType> = ({ children }) => {
 			});
 		}
 
-		if (samples) {
-			setState({
-				...defaultState,
-				packs: packs,
-				samples: samples,
-			});
-		}
+		// if (samples) {
+		// 	setState({
+		// 		...defaultState,
+		// 		packs: packs,
+		// 		samples: samples,
+		// 	});
+		// }
 	
-	}, [packs, samples]);
-
-	
+	}, [packs]);
+	console.log(state);
 	return (
 		<PlayerContext.Provider value={[state, setState]}>
 			{children}

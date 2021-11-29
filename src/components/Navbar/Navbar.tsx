@@ -9,6 +9,7 @@ import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { selectAuth } from '../../store/selectors/userSelectors';
 import { logout } from '../../store/slices/user/userSlice';
+import { setDefaultPackState } from '../../store/slices/pack/packSlice';
 
 import styles from './Navbar.module.scss';
 
@@ -67,7 +68,10 @@ export const Navbar = () => {
 						{isAuth ? (
 							<ButtonLayout
 								typeStyle={'sign-in-out'}
-								onClicked={() => dispatch(logout())}
+								onClicked={() => { 
+									dispatch(logout());
+									dispatch(setDefaultPackState());
+								}}
 							>
 								<IconLayout iconName={'login'} />
 								<span>Log Out</span>

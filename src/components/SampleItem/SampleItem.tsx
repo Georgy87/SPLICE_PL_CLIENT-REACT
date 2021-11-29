@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useSound } from '../../hooks/useSound';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
@@ -9,6 +9,7 @@ import { formatTime } from '../../utils/formatTime';
 import { getAudioWave } from '../../utils/getAudioWave';
 import { Samples } from '../../store/slices/samples/types';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
+import { fetchSetLike } from '../../store/slices/samples/samplesSlice';
 
 import styles from './SampleItem.module.scss';
 
@@ -18,15 +19,21 @@ type PropsType = {
 };
 
 export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
-	const { audio, _id, audioCoordinates, duration } = sample;
+	const packProfile = useSelector(selectPackProfile);
+
+	const { audio, _id, audioCoordinates, duration, likes } = sample;
+
 	const [width, setWidth] = useState<string>('550px');
 	const [like, setLike] = useState<boolean>(false);
 
-	const { play, playTrack, isPlaying, currentSampleId } = useSound();
+	const { playTrack, isPlaying, currentSampleId } = useSound();
+
+	const dispatch = useDispatch();
 
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
+		setLike(likes.length === 1);
 		if (audio) {
 			getAudioWave(audioCoordinates, canvasRef.current);
 		}
@@ -51,7 +58,10 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		};
 	}, []);
 
-	const packProfile = useSelector(selectPackProfile);
+	const onChangeLike = () => {
+		setLike(!like);
+		dispatch(fetchSetLike({ sampleId: _id }));
+	};
 
 	return (
 		<>
@@ -93,7 +103,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						/>
 					</SampleSliderLayout>
 					<p className={styles.sampleName}>{sample.sampleName}</p>
-					<div className={styles.rightWrap} onClick={() => setLike(!like)}>
+					<div className={styles.rightWrap} onClick={onChangeLike}>
 						{!like ? <IconLayout iconName='dislike' /> : <IconLayout iconName='like' />}
 					</div>
 				</li>
