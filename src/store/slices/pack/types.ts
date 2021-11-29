@@ -1,4 +1,4 @@
-import { Samples } from "../../../context/PlayerContextProvider/types";
+import { Samples } from "../samples/types";
 
 export type PacksSliceState = {
     packs: Pack[] | [];
@@ -19,7 +19,7 @@ export type createPackType = {
 export type Pack = {
     _id: string;
     genre: string;
-    authorName: string;
+    name: string;
     packInfo: string;
     text: string;
     listens: number;

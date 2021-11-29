@@ -5,9 +5,10 @@ import { useSound } from '../../hooks/useSound';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 import { selectPackProfile } from '../../store/selectors/packsSelectors';
 import { SampleSliderLayout } from '../../layouts/SampleSliderLayout/SampleSliderLayout';
-import { Samples } from '../../context/PlayerContextProvider/types';
 import { formatTime } from '../../utils/formatTime';
 import { getAudioWave } from '../../utils/getAudioWave';
+import { Samples } from '../../store/slices/samples/types';
+import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 
 import styles from './SampleItem.module.scss';
 
@@ -19,6 +20,7 @@ type PropsType = {
 export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	const { audio, _id, audioCoordinates, duration } = sample;
 	const [width, setWidth] = useState<string>('550px');
+	const [like, setLike] = useState<boolean>(false);
 
 	const { play, playTrack, isPlaying, currentSampleId } = useSound();
 
@@ -90,7 +92,10 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 							}}
 						/>
 					</SampleSliderLayout>
-					<p>{sample.sampleName}</p>
+					<p className={styles.sampleName}>{sample.sampleName}</p>
+					<div className={styles.rightWrap} onClick={() => setLike(!like)}>
+						{!like ? <IconLayout iconName='dislike' /> : <IconLayout iconName='like' />}
+					</div>
 				</li>
 			</ul>
 		</>

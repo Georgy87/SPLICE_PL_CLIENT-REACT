@@ -11,10 +11,6 @@ export const packsApi = {
 		return data;
 	},
 
-	// async createSamples(formData: FormData) {
-	// 	const { data } = await instance.post('packs/samples', formData);
-	// },
-
 	async getPack(packId: string) {
 		const { data } = await instance.get(`packs/pack?packId=${packId}`);
 		return data;
@@ -22,6 +18,11 @@ export const packsApi = {
 
 	async getUserPacks() {
 		const { data } = await instance.get('packs/user-packs');
+		return data;
+	},
+
+	async searchPacks(search: string) {
+		const { data } = await instance.get(`packs/search-packs?search=${search}`);
 		return data;
 	},
 };

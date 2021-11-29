@@ -23,9 +23,9 @@ export const App: React.FC = () => {
 	const user = useSelector(selectUser);
 
 	useEffect(() => {
-		if (!user) {
-			history.push('login');
-		}
+		// if (!user) {
+		// 	history.push('login');
+		// }
 		dispatch(fetchAuth());
 	}, []);
 	return (

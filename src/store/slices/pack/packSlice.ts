@@ -18,7 +18,7 @@ export const fetchCreatePack = createAsyncThunk(
 
 			const formData = new FormData();
 			formData.append('genre', genre);
-			formData.append('authorName', authorName);
+			formData.append('name', authorName);
 			formData.append('packInfo', packInfo);
 			formData.append('picture', picture);
 			formData.append('audio', audio);
@@ -58,6 +58,18 @@ export const fetchGetUserPacks = createAsyncThunk('packs/getUserPacksStatus', as
 	}
 });
 
+export const fetchSearchPacks = createAsyncThunk(
+	'packs/getSearchPacksStatus',
+	async (search: string) => {
+		try {
+			const pack = await packsApi.searchPacks(search);
+			return pack;
+		} catch (error) {
+			console.log(error);
+		}
+	},
+);
+
 export const packSlice = createSlice({
 	name: 'packs',
 	initialState,
@@ -75,7 +87,11 @@ export const packSlice = createSlice({
 			})
 			.addCase(fetchGetUserPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
 				state.userPacks = action.payload;
+			})
+			.addCase(fetchSearchPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
+				state.packs = action.payload;
 			}),
+
 });
 
 export const packsReducer = packSlice.reducer;

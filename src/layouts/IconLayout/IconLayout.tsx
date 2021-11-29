@@ -6,6 +6,7 @@ import {
 	HomeOutlined,
 	UploadOutlined,
 	CustomerServiceOutlined,
+	HeartOutlined,
 } from '@ant-design/icons';
 
 import * as Icons from 'react-icons/all';
@@ -25,6 +26,8 @@ export const icons = {
 	user: Icons.FaUserPlus,
 	music: CustomerServiceOutlined,
 	likes: Icons.FaHeart,
+	like: Icons.FaHeart,
+	dislike: HeartOutlined,
 };
 
 export type IconLayoutProps = {

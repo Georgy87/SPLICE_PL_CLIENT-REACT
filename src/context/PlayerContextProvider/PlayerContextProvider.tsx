@@ -1,11 +1,10 @@
-import React, { useState, useEffect, ReactChildren, ContextType } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import {
 	selectPacks,
 	selectSamples,
 } from '../../store/selectors/packsSelectors';
-
 import { PlayerContext, ContextProps, defaultPlayerStateType } from '../PlayerContext';
 //import { PlayerStateType } from './types';
 
@@ -20,7 +19,7 @@ const defaultState = {
 	currentTrackId: null,
 	active: null,
 	duration: 0,
-	currentTime: 0,
+	currentTime: 1,
 	volume: 2,
 	percent: 0,
 };
@@ -47,7 +46,9 @@ export const PlayerContextProvider: React.FC<PropsType> = ({ children }) => {
 				samples: samples,
 			});
 		}
+	
 	}, [packs, samples]);
+
 	
 	return (
 		<PlayerContext.Provider value={[state, setState]}>

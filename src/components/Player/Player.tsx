@@ -57,7 +57,7 @@ export const Player: React.FC = () => {
 						alt='active-info'
 					/>
 					<div className={styles.trackInfo}>
-						<div>{active?.authorName}</div>
+						<div>{active?.name}</div>
 						<div>{active?.genre}</div>
 					</div>
 				</div>

@@ -35,8 +35,9 @@ export const useSound = () => {
 					percent: Number(
 						(100 / state.duration * state.currentTime)
 					),
+					
 				}));
-				console.log(state.audioPlayer.currentTime)
+			
 			};
 
 			state.audioPlayer.play();
@@ -108,7 +109,7 @@ export const useSound = () => {
 			(state.audioPlayer.duration / 100) * +e.target.value;
 		
 	};
-
+console.log(state.percent, state.currentTime)
 	return {
 		playTrack,
 		play,

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Samples } from '../../context/PlayerContextProvider/types';
-import { selectSamples } from '../../store/selectors/packsSelectors';
 
+import { selectSamples } from '../../store/selectors/packsSelectors';
+import { Samples } from '../../store/slices/samples/types';
 import { SampleItem } from '../SampleItem/SampleItem';
 
 import styles from './SampleList.module.scss';

@@ -39,7 +39,7 @@ export const ProfilePackPage = () => {
 				/>
 
 				<div className={styles.packInfo}>
-					<h1>{packProfile?.authorName}</h1>
+					<h1>{packProfile?.name}</h1>
 					<p>{packProfile?.packInfo}</p>
 				</div>
 			</div>

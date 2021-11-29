@@ -90,7 +90,7 @@ export const PackItem: React.FC<PackListProps> = ({
 				<div>
 					<div>{pack.genre}</div>
 					<div style={{ fontSize: 12, color: 'gray' }}>
-						{pack.authorName}
+						{pack.name}
 					</div>
 				</div>
 			</div>

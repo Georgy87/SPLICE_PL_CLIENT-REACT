@@ -1,4 +1,5 @@
 import { Pack } from "../../store/slices/pack/types";
+import { Samples } from "../../store/slices/samples/types";
 
 export type PlayerStateType = {
     audioPlayer: HTMLAudioElement;
@@ -13,13 +14,3 @@ export type PlayerStateType = {
     volume: number;
     percent: number;
 }
-
-export type Samples = {
-	_id: string;
-	audio: string;
-	packId: string;
-	sampleName: string;
-	audioCoordinates: number[];
-    duration: number;
-};
-

@@ -1,47 +1,42 @@
 .listItem {
-	list-style: none;
 	display: flex;
-	border: 1px solid #f4f7f6;
-	border-radius: 4px;
 	padding: 7px;
 	margin: 3px;
+	border: 1px solid #f4f7f6;
+	border-radius: 4px;
+	list-style: none;
 	&:hover {
 		box-shadow: 0 2px 20px #e6f7f1;
 		cursor: pointer;
 	}
-
 	li {
 		display: flex;
+		justify-content: space-between;
 		align-items: center;
-		max-width: fit-content;
-
+		width: 100%;
 		img {
 			width: 50px;
 			height: 50px;
 			border-radius: 4px;
 		}
-
 		.iconChangeWrap {
 			width: 60px;
 			.sampleTime {
 				display: block;
 			}
 		}
-
-		p {
-			font-size: 0.7rem;
+		.sampleName {
+			font-size: 1rem;
 			margin-left: 50px;
 		}
-
 		.playPauseSample {
 			display: none;
 		}
-
 		.sampleTime {
-			text-align: center;
 			margin: 0;
+			font-size: 0.8rem;
+			text-align: center;
 		}
-
 		&:hover {
 			.playPauseSample {
 				display: block;
@@ -49,6 +44,11 @@
 			.sampleTime {
 				display: none;
 			}
+		}
+		.rightWrap {
+			display: flex;
+			margin-left: auto;
+			margin-right: 5px;
 		}
 	}
 

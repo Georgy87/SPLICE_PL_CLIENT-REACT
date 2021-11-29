@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchGetPacks } from '../../store/slices/pack/packSlice';
+import { fetchGetPacks, fetchSearchPacks } from '../../store/slices/pack/packSlice';
 import { Player } from '../../components/Player/Player';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import { PackItem } from '../../components/PackItem/PackItem';
@@ -31,6 +31,7 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 	const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
 		e.stopPropagation();
 		setValue(e.target.value);
+		dispatch(fetchSearchPacks(value));
 	};
 
 	return (
@@ -39,14 +40,14 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 			<div className={styles.root}>
 				{pageName === 'main-packs' &&
 					packs
-						?.filter((packs) => {
-							if (
-								packs.authorName.toLowerCase().includes(value.toLowerCase()) ||
-								packs.genre.toLowerCase().includes(value.toLowerCase())
-							) {
-								return packs;
-							}
-						})
+						// ?.filter((packs) => {
+						// 	if (
+						// 		packs.name.toLowerCase().includes(value.toLowerCase()) ||
+						// 		packs.genre.toLowerCase().includes(value.toLowerCase())
+						// 	) {
+						// 		return packs;
+						// 	}
+						// })
 						.map((pack: Pack, index: number) => (
 							<>
 								<div className={styles.packCardContainer}>
@@ -64,7 +65,7 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 					userPacks
 						?.filter((packs) => {
 							if (
-								packs.authorName.toLowerCase().includes(value.toLowerCase()) ||
+								packs.name.toLowerCase().includes(value.toLowerCase()) ||
 								packs.genre.toLowerCase().includes(value.toLowerCase())
 							) {
 								return packs;
