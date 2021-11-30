@@ -9,7 +9,7 @@ import { formatTime } from '../../utils/formatTime';
 import { getAudioWave } from '../../utils/getAudioWave';
 import { Samples } from '../../store/slices/samples/types';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
-import { fetchSetLike } from '../../store/slices/samples/samplesSlice';
+import { fetchSetLike, fetchDeleteLike } from '../../store/slices/samples/samplesSlice';
 
 import styles from './SampleItem.module.scss';
 
@@ -33,7 +33,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
-		setLike(likes.length === 1);
+		setLike(likes.length >= 1);
 		if (audio) {
 			getAudioWave(audioCoordinates, canvasRef.current);
 		}
@@ -58,16 +58,17 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		};
 	}, []);
 
-	useEffect(() => {
-		if (likes.length === 0) {
-			console.log(likes.length);
-			dispatch(fetchSetLike({ sampleId: _id }));
-		}
-	}, [likes.length]);
+	// useEffect(() => {
+	// 	if (likes.length === 0) {
+	// 		dispatch(fetchSetLike({ sampleId: _id }));
+	// 		console.log('Set like');
+	// 	}
 
-	const onChangeLike = () => {
-		setLike(!like);
-	};
+	// 	// if (likes.length >= 1) {
+	// 	// 	dispatch(fetchDeleteLike({ sampleId: _id }));
+	// 	// 	console.log('Delete like');
+	// 	// }
+	// }, [likes.length]);
 
 	return (
 		<>
@@ -109,8 +110,24 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						/>
 					</SampleSliderLayout>
 					<p className={styles.sampleName}>{sample.sampleName}</p>
-					<div className={styles.rightWrap} onClick={onChangeLike}>
-						{!like ? <IconLayout iconName='dislike' /> : <IconLayout iconName='like' />}
+					<div className={styles.rightWrap}>
+						{!like ? (
+							<IconLayout
+								iconName='dislike'
+								onClicked={() => {
+									dispatch(fetchSetLike({ sampleId: _id }));
+									setLike(!like);
+								}}
+							/>
+						) : (
+							<IconLayout
+								iconName='like'
+								onClicked={() => {
+									dispatch(fetchDeleteLike({ sampleId: _id }));
+									setLike(!like);
+								}}
+							/>
+						)}
 					</div>
 				</li>
 			</ul>

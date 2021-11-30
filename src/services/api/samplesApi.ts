@@ -7,4 +7,7 @@ export const samplesApi = {
 	async setLike(sampleId: string) {
 		await instance.post(`samples/like?sampleId=${sampleId}`);
 	},
+	async deleteLike(sampleId: string) {
+		await instance.delete(`samples/like?sampleId=${sampleId}`);
+	},
 };

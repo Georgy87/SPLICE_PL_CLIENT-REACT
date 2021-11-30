@@ -19,11 +19,11 @@ export const userApi = {
 		await instance.post('registration', { email, fullname, password });
 	},
 	async updateEmail(email: string | undefined) {
-		const { data } = await instance.post('users/email', { email });
+		const { data } = await instance.put('users/email', { email });
 		return data;
 	},
 	async updateFullName(fullname: string | undefined) {
-		const { data } = await instance.post('users/fullname', { fullname });
+		const { data } = await instance.put('users/fullname', { fullname });
 		return data;
 	},
 };

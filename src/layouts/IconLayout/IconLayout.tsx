@@ -33,14 +33,15 @@ export const icons = {
 export type IconLayoutProps = {
 	iconName: keyof typeof icons;
 	className?: string;
+	onClicked?: () => void;
 };
 
-export const IconLayout: React.FC<IconLayoutProps> = ({ iconName }) => {
+export const IconLayout: React.FC<IconLayoutProps> = ({ iconName, onClicked }) => {
 	const Icon = icons[iconName];
 
 	return (
 		<>
-			<div className={styles.iconContainer}>
+			<div className={styles.iconContainer} onClick={onClicked}>
 				<Icon />
 			</div>
 		</>

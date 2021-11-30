@@ -34,6 +34,17 @@ export const fetchSetLike = createAsyncThunk(
 	},
 );
 
+export const fetchDeleteLike = createAsyncThunk(
+	'packs/deleteLikeSampleStatus',
+	async (payload: { sampleId: string}) => {
+		try {
+			await samplesApi.deleteLike(payload.sampleId);
+		} catch (error) {
+			console.log(error);
+		}
+	},
+);
+
 export const samplesSlice = createSlice({
 	name: 'packs',
 	initialState,
