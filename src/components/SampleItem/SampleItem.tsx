@@ -58,9 +58,15 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		};
 	}, []);
 
+	useEffect(() => {
+		if (likes.length === 0) {
+			console.log(likes.length);
+			dispatch(fetchSetLike({ sampleId: _id }));
+		}
+	}, [likes.length]);
+
 	const onChangeLike = () => {
 		setLike(!like);
-		dispatch(fetchSetLike({ sampleId: _id }));
 	};
 
 	return (
