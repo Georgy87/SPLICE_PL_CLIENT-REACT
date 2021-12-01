@@ -84,11 +84,9 @@ export const userSlice = createSlice({
 			.addCase(
 				fetchLogin.fulfilled.type,
 				(state, action: PayloadAction<{ user: User; token: string }>) => {
-					if (action.payload?.user && action.payload?.token) {
-						state.user = action.payload?.user;
-						state.token = action.payload?.token;
-						state.isAuth = true;
-					}
+					state.user = action.payload?.user;
+					state.token = action.payload?.token;
+					state.isAuth = true;
 				},
 			)
 			.addCase(

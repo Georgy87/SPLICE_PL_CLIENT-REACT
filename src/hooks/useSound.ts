@@ -4,52 +4,59 @@ import { PlayerContext } from '../context/PlayerContext';
 import { PlayerStateType } from '../context/PlayerContextProvider/types';
 
 export const useSound = () => {
-	const [state, setState] = useContext(PlayerContext);
+	const [playerState, setPlayerState] = useContext(PlayerContext);
+
+	// const {
+	// 	packs,
+	// 	samples,
+	// 	audioPlayer,
+	// 	isPlaying,
+	// 	currentTime,
+	// 	duration,
+	// 	currentTrackIndex,
+	// 	volume,
+	// 	percent,
+	// } = playerState;
 
 	const playTrack = (index: number, typeElement: string) => {
-		if (index === state.currentTrackIndex) {
+		if (index === playerState.currentTrackIndex) {
 			play();
 		} else {
-			
 			const url =
 				typeElement === 'packs'
-					? `http://localhost:5000/${state.packs[index]?.audio}`
-					: `http://localhost:5000/${state?.samples[index]?.audio}`;
-					
-			state.audioPlayer.pause();
-			state.audioPlayer = new Audio(url);
+					? `http://localhost:5000/${playerState.packs[index]?.audio}`
+					: `http://localhost:5000/${playerState?.samples[index]?.audio}`;
 
-			state.audioPlayer.volume = state.volume / 100;
+			playerState.audioPlayer.pause();
+			playerState.audioPlayer = new Audio(url);
 
-			state.audioPlayer.onloadedmetadata = () => {
-				setState((state: PlayerStateType) => ({
+			playerState.audioPlayer.volume = playerState.volume / 100;
+
+			playerState.audioPlayer.onloadedmetadata = () => {
+				setPlayerState((state: PlayerStateType) => ({
 					...state,
 					duration: Math.ceil(state.audioPlayer.duration),
 				}));
 			};
 
-			state.audioPlayer.ontimeupdate = () => {
-				setState((state: PlayerStateType) => ({
+			playerState.audioPlayer.ontimeupdate = () => {
+				setPlayerState((state: PlayerStateType) => ({
 					...state,
 					currentTime: Math.ceil(state.audioPlayer.currentTime),
-					percent: Number(
-						(100 / state.duration * state.currentTime)
-					),
-					
+					percent: Number((100 / state.duration) * state.currentTime),
 				}));
-			
 			};
 
-			state.audioPlayer.play();
+			playerState.audioPlayer.play();
 
-			setState((state: PlayerStateType) => ({
+			setPlayerState((state: PlayerStateType) => ({
 				...state,
 				currentTrackIndex: index,
 				isPlaying: true,
 			}));
 
-			state.audioPlayer.onended = () => {
-				setState((state: PlayerStateType) => ({
+			playerState.audioPlayer.onended = () => {
+				setPlayerState((state: PlayerStateType) => ({
 					...state,
 					audioPlayer: new Audio(),
 					currentTrackIndex: null,
@@ -66,72 +73,68 @@ export const useSound = () => {
 	};
 
 	const play = () => {
-		if (state.isPlaying) {
-			state.audioPlayer.pause();
+		if (playerState.isPlaying) {
+			playerState.audioPlayer.pause();
 		} else {
-			state.audioPlayer.play();
+			playerState.audioPlayer.play();
 		}
-		setState((state: PlayerStateType) => ({
-			...state,
-			isPlaying: !state.isPlaying,
+		setPlayerState((playerState: PlayerStateType) => ({
+			...playerState,
+			isPlaying: !playerState.isPlaying,
 		}));
 	};
 
 	const changeVolume = (e: React.MouseEvent, value: number) => {
-		setState((state: PlayerStateType) => ({
-			...state,
+		setPlayerState((playerState: PlayerStateType) => ({
+			...playerState,
 			volume: Number(value),
 		}));
 
-		state.audioPlayer.volume = Number(value) / 100;
+		playerState.audioPlayer.volume = Number(value) / 100;
 	};
 
 	const changeCurrentTime = (e: React.MouseEvent, value: number) => {
-		setState((state: PlayerStateType) => ({
-			...state,
+		setPlayerState((playerState: PlayerStateType) => ({
+			...playerState,
 			currentTime: Number(value),
 		}));
 
-		state.audioPlayer.currentTime = Number(value);
-	
+		playerState.audioPlayer.currentTime = Number(value);
 	};
 
-	const changeCurrentTimeSample = (
-		e: React.ChangeEvent<HTMLInputElement>,
-	) => {
-		setState((state: PlayerStateType) => ({
-			...state,
+	const changeCurrentTimeSample = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setPlayerState((playerState: PlayerStateType) => ({
+			...playerState,
 			// currentTime: Number(e.target.value),
 			percent: e.target.value,
 		}));
 
-		state.audioPlayer.currentTime =
-			(state.audioPlayer.duration / 100) * +e.target.value;
-		
+		playerState.audioPlayer.currentTime =
+			(playerState.audioPlayer.duration / 100) * +e.target.value;
 	};
 
 	return {
 		playTrack,
 		play,
-		packs: state.packs,
-		isPlaying: state.isPlaying,
+		packs: playerState.packs,
+		isPlaying: playerState.isPlaying,
 		currentPackId:
-			state.currentTrackIndex !== null &&
-			state.packs?.[state.currentTrackIndex]?._id,
+			playerState.currentTrackIndex !== null &&
+			playerState.packs?.[playerState.currentTrackIndex]?._id,
 		currentSampleId:
-			state.currentTrackIndex !== null &&
-			state.samples?.[state.currentTrackIndex]?._id,
+			playerState.currentTrackIndex !== null &&
+			playerState.samples?.[playerState.currentTrackIndex]?._id,
 		active:
-			state.currentTrackIndex !== null &&
-			state.packs?.[state.currentTrackIndex],
-		duration: state.duration,
-		currentTime: state.currentTime,
-		volume: state.volume,
+			playerState.currentTrackIndex !== null &&
+			playerState.packs?.[playerState.currentTrackIndex],
+		duration: playerState.duration,
+		currentTime: playerState.currentTime,
+		volume: playerState.volume,
 		changeVolume,
 		changeCurrentTime,
-		state,
-		setState,
-		percent: state.percent,
+		playerState,
+		setPlayerState,
+		percent: playerState.percent,
 		changeCurrentTimeSample,
 	};
 };

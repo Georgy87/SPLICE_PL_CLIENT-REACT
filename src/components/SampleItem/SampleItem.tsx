@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useSound } from '../../hooks/useSound';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
-import { selectPackProfile } from '../../store/selectors/packsSelectors';
+import { selectLoading, selectPackProfile } from '../../store/selectors/packsSelectors';
 import { SampleSliderLayout } from '../../layouts/SampleSliderLayout/SampleSliderLayout';
 import { formatTime } from '../../utils/formatTime';
 import { getAudioWave } from '../../utils/getAudioWave';
@@ -12,6 +12,7 @@ import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { fetchSetLike, fetchDeleteLike } from '../../store/slices/samples/samplesSlice';
 
 import styles from './SampleItem.module.scss';
+import { Loader } from '../Loader/Loader';
 
 type PropsType = {
 	sample: Samples;
@@ -19,23 +20,25 @@ type PropsType = {
 };
 
 export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
-	const packProfile = useSelector(selectPackProfile);
-
 	const { audio, _id, audioCoordinates, duration, likes } = sample;
+
+	const packProfile = useSelector(selectPackProfile);
 
 	const [width, setWidth] = useState<string>('550px');
 	const [like, setLike] = useState<boolean>(false);
 
 	const { playTrack, isPlaying, currentSampleId } = useSound();
-
 	const dispatch = useDispatch();
-
 	const canvasRef = useRef<HTMLCanvasElement>(null);
+
+	const current = canvasRef.current;
+
+	const audioCoordinatesParse: number[] = JSON.parse(audioCoordinates);
 
 	useEffect(() => {
 		setLike(likes.length >= 1);
 		if (audio) {
-			getAudioWave(audioCoordinates, canvasRef.current);
+			getAudioWave(audioCoordinatesParse, canvasRef.current);
 		}
 
 		const handleResize = () => {
@@ -52,23 +55,12 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		};
 
 		window.addEventListener('resize', handleResize);
+	
 		return () => {
 			window.removeEventListener('resize', handleResize);
 			setWidth('550px');
 		};
 	}, []);
-
-	// useEffect(() => {
-	// 	if (likes.length === 0) {
-	// 		dispatch(fetchSetLike({ sampleId: _id }));
-	// 		console.log('Set like');
-	// 	}
-
-	// 	// if (likes.length >= 1) {
-	// 	// 	dispatch(fetchDeleteLike({ sampleId: _id }));
-	// 	// 	console.log('Delete like');
-	// 	// }
-	// }, [likes.length]);
 
 	return (
 		<>

@@ -26,31 +26,21 @@ export const defaultState = {
 
 export const PlayerContextProvider: React.FC<PropsType> = ({ children }) => {
 	const packs = useSelector(selectPacks);
-	const samples = useSelector(selectSamples);
 
-	const [state, setState] = useState<ContextProps[0]>(defaultPlayerStateType);
+	const [playerState, setPlayerState] = useState<ContextProps[0]>(defaultPlayerStateType);
 	
 	useEffect(() => {
 		if (packs) {
-			setState({
+			setPlayerState({
 				...defaultState,
 				packs: packs,
 				samples: [],
 			});
 		}
-
-		// if (samples) {
-		// 	setState({
-		// 		...defaultState,
-		// 		packs: packs,
-		// 		samples: samples,
-		// 	});
-		// }
-	
 	}, [packs]);
-	console.log(state);
+
 	return (
-		<PlayerContext.Provider value={[state, setState]}>
+		<PlayerContext.Provider value={[playerState, setPlayerState]}>
 			{children}
 		</PlayerContext.Provider>
 	);

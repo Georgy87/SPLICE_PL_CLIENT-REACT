@@ -5,7 +5,8 @@ export type Samples = {
 	audio: string;
 	packId: string;
 	sampleName: string;
-	audioCoordinates: number[];
+	audioCoordinates: string;
+	// audioCoordinatesParse: number[] ;
     duration: number;
     likes: User[];
 };

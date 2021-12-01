@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchGetPacks, fetchSearchPacks } from '../../store/slices/pack/packSlice';
+import { fetchGetPacks, fetchSearchPacks, setDefaultPackState } from '../../store/slices/pack/packSlice';
 import { Player } from '../../components/Player/Player';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import { PackItem } from '../../components/PackItem/PackItem';
@@ -23,18 +23,11 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 
 	const [value, setValue] = useState<string>('');
 
-	const history = useHistory();
-
-	const { state, setState } = useSound();
-
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(fetchGetPacks());
-		// setState({
-		// 	...defaultState,
-		// 	samples: [],
-		// });
+		dispatch(setDefaultPackState());
 	}, []);
 
 	const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,22 +35,13 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 		setValue(e.target.value);
 		dispatch(fetchSearchPacks(value));
 	};
-
+	
 	return (
 		<>
 			<SearchInput onChangeValue={onChangeValue} setValue={setValue} value={value} />
 			<div className={styles.root}>
 				{pageName === 'main-packs' &&
-					packs
-						// ?.filter((packs) => {
-						// 	if (
-						// 		packs.name.toLowerCase().includes(value.toLowerCase()) ||
-						// 		packs.genre.toLowerCase().includes(value.toLowerCase())
-						// 	) {
-						// 		return packs;
-						// 	}
-						// })
-						.map((pack: Pack, index: number) => (
+					packs.map((pack: Pack, index: number) => (
 							<>
 								<div className={styles.packCardContainer}>
 									<PackItem
@@ -71,16 +55,7 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 							</>
 						))}
 				{pageName === 'user-packs' &&
-					userPacks
-						?.filter((packs) => {
-							if (
-								packs.name.toLowerCase().includes(value.toLowerCase()) ||
-								packs.genre.toLowerCase().includes(value.toLowerCase())
-							) {
-								return packs;
-							}
-						})
-						.map((pack: Pack, index: number) => (
+					userPacks.map((pack: Pack, index: number) => (
 							<>
 								<div className={styles.packCardContainer}>
 									<PackItem

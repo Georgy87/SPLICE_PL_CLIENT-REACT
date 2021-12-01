@@ -4,6 +4,7 @@ export type PacksSliceState = {
     packs: Pack[] | [];
     packProfile: null | Pack;
     userPacks: Pack[] | [];
+    loading: boolean;
 }
 
 export type createPackType = {

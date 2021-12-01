@@ -7,6 +7,7 @@ const initialState: PacksSliceState = {
 	packs: [],
 	packProfile: null,
 	userPacks: [],
+	loading: false,
 };
 
 export const fetchCreatePack = createAsyncThunk(
@@ -78,7 +79,11 @@ export const packSlice = createSlice({
 			state.packs = [];
 			state.packProfile = null;
 			state.userPacks = [];
+			state.loading = false;
 		},
+		// setLoading: (state, action: PayloadAction<any>) => {
+		// 	state.loading = action.payload;
+		// }
 	},
 	extraReducers: (builder) =>
 		builder
@@ -90,6 +95,7 @@ export const packSlice = createSlice({
 			})
 			.addCase(fetchGetPack.fulfilled.type, (state, action: PayloadAction<Pack>) => {
 				state.packProfile = action.payload;
+				state.loading = true
 			})
 			.addCase(fetchGetUserPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
 				state.userPacks = action.payload;
