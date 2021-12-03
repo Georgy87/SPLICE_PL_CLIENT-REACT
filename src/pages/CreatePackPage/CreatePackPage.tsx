@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import { fetchCreatePack, fetchGetUserPacks } from '../../store/slices/pack/packSlice';
@@ -10,22 +10,21 @@ import { FileUpload } from '../../components/FileUpload/FileUpload';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { PacksPage } from '../PacksPage/PacksPage';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
+import { selectSamples } from '../../store/selectors/packsSelectors';
 
 import styles from './CreatePackPage.module.scss';
 
 export const CreatePackPage = () => {
-	const history = useHistory();
-
 	const [activeStep, setActiveStep] = useState<number>(0);
 	const [info, setInfo] = useState<{
 		trackName: string;
 		authorName: string;
 		packInfo: string;
 	} | {}>({});
-
 	const [picture, setPicture] = useState<File | null>(null);
 	const [audio, setAudio] = useState<File | null>(null);
 
+	const history = useHistory();
 	const createTrack = useAsyncAction<any, any>(fetchCreatePack);
 
 	const next = () => {

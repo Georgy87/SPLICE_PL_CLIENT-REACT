@@ -31,8 +31,6 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	const dispatch = useDispatch();
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
-	const current = canvasRef.current;
-
 	const audioCoordinatesParse: number[] = JSON.parse(audioCoordinates);
 
 	useEffect(() => {

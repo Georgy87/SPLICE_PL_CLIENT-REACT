@@ -6,12 +6,7 @@
 	flex-direction: column;
 	align-items: center;
 	padding: 10px 10px;
-	background: rgba(
-		209,
-		213,
-		245,
-		0.2
-	); // Make sure this color has an opacity of less than 1
+	background: rgba(209, 213, 245, 0.2);
 	backdrop-filter: blur(8px);
 	border-radius: 10px;
 	left: 0;
@@ -23,26 +18,21 @@
 		align-items: center;
 		width: 100%;
 		justify-content: space-between;
-
 		.play {
 			display: flex;
 		}
-
 		.trackActive {
 			display: flex;
 			align-items: center;
-
 			img {
 				border-radius: 4px;
 				width: 40px;
 				height: 40px;
 			}
-
 			.trackInfo {
 				margin-left: 20px;
 			}
 		}
-
 		.volumeAndTimer {
 			display: flex;
 			width: 24%;
@@ -55,17 +45,14 @@
 	.player {
 		.playerControls {
 			width: 70%;
-
 			.trackActive {
 				display: flex;
 				align-items: center;
-
 				.trackInfo {
 					padding-left: 10px;
 					font-size: 14px;
 				}
 			}
-
 			.volumeAndTimer {
 				display: flex;
 				width: 15%;

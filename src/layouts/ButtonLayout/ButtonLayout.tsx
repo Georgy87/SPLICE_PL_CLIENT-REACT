@@ -30,6 +30,7 @@ export const ButtonLayout: React.FC<PropsType> = ({ children, typeStyle, onClick
 					[styles.auth]: typeStyle === 'auth',
 					[styles.signInOut]: typeStyle === 'sign-in-out',
 					[styles.update]: typeStyle === 'update',
+					[styles.packProfile]: typeStyle === 'pack-profile',
 				})}
 			>
 				{children}

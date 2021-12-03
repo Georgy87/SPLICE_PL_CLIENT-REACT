@@ -17,16 +17,16 @@ export const useSound = () => {
 	// 	volume,
 	// 	percent,
 	// } = playerState;
-
+	
 	const playTrack = (index: number, typeElement: string) => {
 		if (index === playerState.currentTrackIndex) {
 			play();
 		} else {
-			const url =
+			let url =
 				typeElement === 'packs'
 					? `http://localhost:5000/${playerState.packs[index]?.audio}`
 					: `http://localhost:5000/${playerState?.samples[index]?.audio}`;
-
+	
 			playerState.audioPlayer.pause();
 			playerState.audioPlayer = new Audio(url);
 

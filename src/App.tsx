@@ -8,10 +8,7 @@ import { UserProfilePage } from './pages/UserProfilePage/UserProfilePage';
 import { CreatePackPage } from './pages/CreatePackPage/CreatePackPage';
 import { ProfilePackPage } from './pages/ProfilePackPage/ProfilePackPage';
 import { LoginPage } from './pages/LoginPage/LoginPage';
-import {
-	defaultState,
-	PlayerContextProvider,
-} from './context/PlayerContextProvider/PlayerContextProvider';
+import { PlayerContextProvider } from './context/PlayerContextProvider/PlayerContextProvider';
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 import { fetchAuth } from './store/slices/user/userSlice';
 import { selectUser } from './store/selectors/userSelectors';
@@ -20,10 +17,10 @@ import { UserPacksPage } from './pages/UserPacksPage/UserPacksPage';
 import styles from './App.module.scss';
 
 export const App: React.FC = () => {
+	const user = useSelector(selectUser);
+
 	const history = useHistory();
 	const dispatch = useDispatch();
-
-	const user = useSelector(selectUser);
 
 	useEffect(() => {
 		// if (!user) {
@@ -32,7 +29,7 @@ export const App: React.FC = () => {
 
 		dispatch(fetchAuth());
 	}, []);
-	
+
 	return (
 		<PlayerContextProvider>
 			<div className={styles.appContainer}>

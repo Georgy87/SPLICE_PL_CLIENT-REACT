@@ -1,10 +1,10 @@
 @import '../../styles/variables.scss';
 
 %buttons {
+	height: 40px;
 	border: none;
 	cursor: pointer;
 	border-radius: 4px;
-	height: 40px;
 }
 
 .platformBtn {
@@ -15,66 +15,65 @@
 		color: #1d1b3b;
 		background-color: transparent;
 		border-radius: 4px;
-		@extend %buttons;
 		&:hover {
 			background-color: rgba(230, 221, 240, 0.5);
 			cursor: pointer;
 		}
+		@extend %buttons;
 	}
 	.black {
-		@extend %buttons;
 		color: $white;
 		background-color: $black;
 		border: none;
+		@extend %buttons;
 	}
 	.blue {
-		@extend %buttons;
 		width: 80px;
 		color: $white;
 		background-color: $blue;
+		@extend %buttons;
 	}
 	.blueDisabled {
-		@extend %buttons;
 		width: 80px;
 		color: $white;
 		background-color: $blue-light;
+		@extend %buttons;
 	}
 	.download {
-		@extend %buttons;
 		background-color: transparent;
 		border: 1px solid rgb(160, 158, 158);
 		height: 50px;
 		svg {
 			font-size: 20px;
 		}
+		@extend %buttons;
 	}
 	.samplePlayer {
-		@extend %buttons;
 		justify-content: space-around;
 		width: 120px;
 		background-color: $blue-light-var-1;
 		color: #fff;
 		font-size: 13px;
 		border-radius: 25px;
+		@extend %buttons;
 	}
 	.sampleItem {
-		border: none;
-		background-color: transparent;
 		padding-right: 20px;
 		padding-left: 20px;
+		border: none;
+		background-color: transparent;
 	}
 	.auth {
-		@extend %buttons;
-		background-color: transparent;
-		border: 2px solid rgb(61, 181, 228);
 		width: 150px;
+		margin-top: 10px;
 		font-weight: 700;
 		font-size: 16px;
 		color: #fff;
-		margin-top: 10px;
+		background-color: transparent;
+		border: 2px solid rgb(61, 181, 228);
+		@extend %buttons;
 	}
 	.signInOut {
-		@extend %buttons;
 		display: flex;
 		width: 8rem;
 		align-items: center;
@@ -86,6 +85,7 @@
 		svg {
 			margin-right: 2px;
 		}
+		@extend %buttons;
 	}
 	.update {
 		display: flex;
@@ -95,6 +95,18 @@
 		color: $white;
 		font-size: 1rem;
 		background-color: $blue;
+		@extend %buttons;
+	}
+	.packProfile {
+		display: inline-flex;
+		justify-content: center;
+		width: 11rem;
+		padding: 0.5rem 1.9rem;
+		font-weight: 500;
+		font-size: 1rem;
+		color: $white;
+		background-color: $blue;
+		border-radius: 100px;
 		@extend %buttons;
 	}
 }

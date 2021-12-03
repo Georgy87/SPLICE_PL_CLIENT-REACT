@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Loader } from '../../components/Loader/Loader';
@@ -13,6 +13,7 @@ import {
 	selectSamples,
 } from '../../store/selectors/packsSelectors';
 import { fetchGetPack } from '../../store/slices/pack/packSlice';
+import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 
 import styles from './ProfilePackPage.module.scss';
 
@@ -22,8 +23,7 @@ export const ProfilePackPage = () => {
 	const loading = useSelector(selectLoading);
 
 	const params: { packId: string } = useParams();
-
-	const { setPlayerState } = useSound();
+	const { setPlayerState, playTrack, isPlaying } = useSound();
 
 	const getPack = useAsyncAction<any, any>(fetchGetPack);
 
@@ -34,9 +34,10 @@ export const ProfilePackPage = () => {
 	useEffect(() => {
 		setPlayerState({
 			...defaultState,
-			samples: samples,
+			samples: samples,	
+			packs: [packProfile],
 		});
-	}, [samples]);
+	}, [packProfile]);
 
 	return (
 		<>
@@ -51,9 +52,25 @@ export const ProfilePackPage = () => {
 						<div className={styles.packInfo}>
 							<h1>{packProfile?.name}</h1>
 							<p>{packProfile?.packInfo}</p>
+							<IconChangeLayout
+									onClicked={(e: Event) => {
+										e.stopPropagation();
+										playTrack(0, 'packs');
+									}}
+									blockStyle={styles.playPausePack}
+									iconOneOrTwo={isPlaying}
+									iconOne='play-footer'
+									iconTwo='pause-footer'
+									typeBtn='pack-profile'
+									iconStyle={{
+										color: '#fff',
+										fontSize: '28px',
+										cursor: 'pointer',
+									}}
+							>Play demo</IconChangeLayout>
 						</div>
 					</div>
-					<SampleList />
+					<SampleList samples={samples} />
 				</div>
 			) : (
 				<Loader />

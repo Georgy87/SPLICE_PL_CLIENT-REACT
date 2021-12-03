@@ -5,14 +5,18 @@ import { useSound } from '../../hooks/useSound';
 import styles from './SampleSliderLayout.module.scss';
 
 type PropsType = {
-	trackId: string;
-	currentSampleId: string | false;
+	trackId?: string | null;
+	currentSampleId?: string | false;
 	children: React.ReactNode;
 	width: string;
 };
 
-export const SampleSliderLayout: React.FC<PropsType> = (props) => {
-	const { children, trackId, currentSampleId, width } = props;
+export const SampleSliderLayout: React.FC<PropsType> = ({
+	children,
+	trackId,
+	currentSampleId,
+	width,
+}) => {
 	const { percent, changeCurrentTimeSample } = useSound();
 
 	return (

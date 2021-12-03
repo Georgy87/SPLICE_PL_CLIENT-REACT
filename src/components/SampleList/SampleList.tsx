@@ -8,9 +8,11 @@ import { SampleItem } from '../SampleItem/SampleItem';
 
 import styles from './SampleList.module.scss';
 
-export const SampleList = () => {
-	const samples = useSelector(selectSamples);
+type PropsType = {
+	samples?: Samples[];
+}
 
+export const SampleList: React.FC<PropsType> = ({ samples }) => {
 	return (
 		<>
 			<div className={styles.sampleList}>

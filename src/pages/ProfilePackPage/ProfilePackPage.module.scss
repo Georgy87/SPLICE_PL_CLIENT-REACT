@@ -46,7 +46,6 @@
 	}
 	p {
 		color: #fff;
-		line-height: 25px;
 	}
 }
 
@@ -70,6 +69,11 @@
 	width: 35%;
 }
 
+.playPausePack {
+	display: flex;
+	justify-content: start;
+}
+
 @media screen and (max-width: 1060px) {
 	.packInfo {
 		overflow-y: scroll;
@@ -86,7 +90,5 @@
 			font-size: 1.5rem;
 		}
 	}
-
-	
 }
 

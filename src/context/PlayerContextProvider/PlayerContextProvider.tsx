@@ -26,6 +26,7 @@ export const defaultState = {
 
 export const PlayerContextProvider: React.FC<PropsType> = ({ children }) => {
 	const packs = useSelector(selectPacks);
+	const samples = useSelector(selectSamples);
 
 	const [playerState, setPlayerState] = useState<ContextProps[0]>(defaultPlayerStateType);
 	
@@ -37,6 +38,7 @@ export const PlayerContextProvider: React.FC<PropsType> = ({ children }) => {
 				samples: [],
 			});
 		}
+	
 	}, [packs]);
 
 	return (

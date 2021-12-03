@@ -29,9 +29,11 @@ type PropsType = {
 	typeBtn: string;
 	trackId?: string | number;
 	currentTrackId?: string | boolean | number;
+	children?: React.ReactNode;
 };
 
 export const IconChangeLayout: React.FC<PropsType> = ({
+	children,
 	blockStyle,
 	onClicked,
 	iconStyle,
@@ -51,11 +53,13 @@ export const IconChangeLayout: React.FC<PropsType> = ({
 				<ButtonLayout typeStyle={typeBtn}>
 					<IconPause style={iconStyle} onClick={onClicked} />
 					{typeBtn === 'sample-player' && 'Play sample'}
+					{children}
 				</ButtonLayout>
 			) : (
 				<ButtonLayout typeStyle={typeBtn}>
 					<IconPlay style={iconStyle} onClick={onClicked} />
 					{typeBtn === 'sample-player' && 'Play sample'}
+					{children}
 				</ButtonLayout>
 			)}
 		</div>
