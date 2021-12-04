@@ -29,6 +29,7 @@ export type Pack = {
     pause: boolean;
     samples: Samples[];
     userId: string;
+    update: boolean;
 }
 
 

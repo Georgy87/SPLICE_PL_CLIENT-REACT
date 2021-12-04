@@ -10,9 +10,9 @@ import { getAudioWave } from '../../utils/getAudioWave';
 import { Samples } from '../../store/slices/samples/types';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { fetchSetLike, fetchDeleteLike } from '../../store/slices/samples/samplesSlice';
+import { Loader } from '../Loader/Loader';
 
 import styles from './SampleItem.module.scss';
-import { Loader } from '../Loader/Loader';
 
 type PropsType = {
 	sample: Samples;
@@ -20,9 +20,11 @@ type PropsType = {
 };
 
 export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
-	const { audio, _id, audioCoordinates, duration, likes } = sample;
+	const { audio, _id, audioCoordinates, duration, likes, canvasImage } = sample;
 
 	const packProfile = useSelector(selectPackProfile);
+
+	const profileUpdate = packProfile?.update;
 
 	const [width, setWidth] = useState<string>('550px');
 	const [like, setLike] = useState<boolean>(false);
@@ -36,7 +38,12 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	useEffect(() => {
 		setLike(likes.length >= 1);
 		if (audio) {
-			getAudioWave(audioCoordinatesParse, canvasRef.current);
+			getAudioWave(
+				audioCoordinatesParse,
+				canvasRef.current,
+				_id,
+				profileUpdate,
+			);
 		}
 
 		const handleResize = () => {
@@ -53,7 +60,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		};
 
 		window.addEventListener('resize', handleResize);
-	
+
 		return () => {
 			window.removeEventListener('resize', handleResize);
 			setWidth('550px');
@@ -91,14 +98,26 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						trackId={_id}
 						currentSampleId={currentSampleId}
 					>
-						<canvas
-							ref={canvasRef}
-							style={{
-								width: width,
-								height: '35px',
-							}}
-						/>
+						{profileUpdate ? (
+							<canvas
+								ref={canvasRef}
+								style={{
+									width: width,
+									height: '35px',
+								}}
+							/>
+						) : (
+							<img
+								src={`/${canvasImage}`}
+								style={{
+									width: width,
+									height: '35px',
+								}}
+								alt={canvasImage}
+							/>
+						)}
 					</SampleSliderLayout>
+
 					<p className={styles.sampleName}>{sample.sampleName}</p>
 					<div className={styles.rightWrap}>
 						{!like ? (

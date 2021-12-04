@@ -2,7 +2,8 @@ import { instance } from '../../core/axios';
 
 export const samplesApi = {
 	async createSamples(formData: FormData, packId: string) {
-		await instance.post(`samples?packId=${packId}`, formData);
+		const { data } = await instance.post<{ status: string}>(`samples?packId=${packId}`, formData);
+		return data.status;
 	},
 	async setLike(sampleId: string) {
 		await instance.post(`samples/like?sampleId=${sampleId}`);

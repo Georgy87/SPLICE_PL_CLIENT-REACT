@@ -43,7 +43,7 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 				{pageName === 'main-packs' &&
 					packs.map((pack: Pack, index: number) => (
 							<>
-								<div className={styles.packCardContainer}>
+								{!pack.update && <div className={styles.packCardContainer}>
 									<PackItem
 										key={pack._id}
 										pack={pack}
@@ -51,7 +51,7 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 										pageName={pageName}
 										index={index}
 									/>
-								</div>
+								</div>}
 							</>
 						))}
 				{pageName === 'user-packs' &&

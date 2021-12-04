@@ -1,21 +1,36 @@
+import { instance } from '../core/axios';
+
 export const getAudioWave = (
 	// data: Promise<ArrayBuffer>,
 	audioCoordinates: number[],
 	canvas: HTMLCanvasElement | null,
+	sampleId: string,
+	profileUpdate: boolean | undefined,
 ) => {
-	draw(audioCoordinates, canvas);
+	draw(audioCoordinates, canvas, sampleId, profileUpdate);
 };
 
-const draw = (audioCoordinates: number[], canvas: HTMLCanvasElement | null) => {
+const draw = (
+	audioCoordinates: number[],
+	canvas: HTMLCanvasElement | null,
+	sampleId: string,
+	profileUpdate: boolean | undefined,
+) => {
 	const dpr = window.devicePixelRatio || 1;
 	const padding = 1;
+
+	// const worker = new Worker(worker_script);
+   	// worker.onmessage = ev => {	
+    //   console.log("got data back from worker");
+    //   console.log(ev);
+    // };
 
 	if (canvas === null) return;
 
 	canvas.width = canvas.offsetWidth * dpr;
 	canvas.height = (canvas.offsetHeight + padding * 2) * dpr;
 	const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
-	console.log(dpr)
+
 	ctx?.scale(dpr, dpr);
 	ctx?.translate(0, canvas.offsetHeight / 2 + padding);
 
@@ -33,34 +48,36 @@ const draw = (audioCoordinates: number[], canvas: HTMLCanvasElement | null) => {
 		drawLineSegment(ctx, x, height, width, (i + 1) % 2);
 	}
 
-	canvas.toBlob(function(blob) {
+	const base64String = canvas.toDataURL('image/png');
+	// document.body.appendChild(newImg);
 
-		var newImg = document.createElement('img'),
-			url = URL.createObjectURL(blob);
+	const base64StringtoFile = (base64String: string, filename: string) => {
+		let arr = base64String.split(','),
+			// mime = arr[0].match(/:(.*?);/)[1],
+			bstr = atob(arr[1]),
+			n = bstr.length,
+			u8arr = new Uint8Array(n);
+		while (n--) {
+			u8arr[n] = bstr.charCodeAt(n);
+		}
+		return new File([u8arr], filename, { type: 'png' });
+	};
 
-		newImg.onload = function() {
-			// больше не нужно читать blob, поэтому он отменён
-			URL.revokeObjectURL(url);
-		};
-		newImg.src = url;
-		// const base64String = canvas.toDataURL('image/png');
-		// document.body.appendChild(newImg);
+	const resultFiles: File = base64StringtoFile(base64String, 'png');
 
-		// const base64StringtoFile = (base64String: string, filename: string) => {
-		// 	let arr = base64String.split(','),
-		// 		// mime = arr[0].match(/:(.*?);/)[1],
-		// 		bstr = atob(arr[1]),
-		// 		n = bstr.length,
-		// 		u8arr = new Uint8Array(n);
-		// 	while (n--) {
-		// 		u8arr[n] = bstr.charCodeAt(n);
-		// 	}
-		// 	return new File([u8arr], filename, { type: 'png' });
-		// };
-		// const file = base64StringtoFile(base64String, 'sample-cloud');
+	const sendFileImages = async (file: File, profileUpdate: boolean | undefined) => {
+		try {
+			if (file && profileUpdate) {
+				const formData = new FormData();
+				formData.append('file', file);
+				await instance.post(`samples/images?sampleId=${sampleId}`, formData);
+			}
+		} catch (e) {
+			console.log(e);
+		}
+	};
 
-		// console.log(file);
-	});
+	sendFileImages(resultFiles, profileUpdate);
 };
 
 const drawLineSegment = (
