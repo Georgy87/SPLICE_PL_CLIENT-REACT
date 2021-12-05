@@ -71,6 +71,18 @@ export const fetchSearchPacks = createAsyncThunk(
 	},
 );
 
+export const fetchPackUpdate = createAsyncThunk(
+	'packs/packUpdateStatus',
+	async (payload: { update: boolean; packId: string }) => {
+		try {
+			const { update, packId } = payload;
+			await packsApi.packUpdate(update, packId);
+		} catch (error) {
+			console.log(error);
+		}
+	},
+);
+
 export const packSlice = createSlice({
 	name: 'packs',
 	initialState,
@@ -95,7 +107,7 @@ export const packSlice = createSlice({
 			})
 			.addCase(fetchGetPack.fulfilled.type, (state, action: PayloadAction<Pack>) => {
 				state.packProfile = action.payload;
-				state.loading = true
+				state.loading = true;
 			})
 			.addCase(fetchGetUserPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
 				state.userPacks = action.payload;
@@ -103,7 +115,6 @@ export const packSlice = createSlice({
 			.addCase(fetchSearchPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
 				state.packs = action.payload;
 			}),
-
 });
 
 export const { setDefaultPackState } = packSlice.actions;

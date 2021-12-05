@@ -1,4 +1,5 @@
-import { instance } from '../core/axios';
+import { base64StringtoFile } from './base64StringtoFile';
+import { sendFileImages } from './sendFileImages';
 
 export const getAudioWave = (
 	// data: Promise<ArrayBuffer>,
@@ -19,16 +20,11 @@ const draw = (
 	const dpr = window.devicePixelRatio || 1;
 	const padding = 1;
 
-	// const worker = new Worker(worker_script);
-   	// worker.onmessage = ev => {	
-    //   console.log("got data back from worker");
-    //   console.log(ev);
-    // };
-
 	if (canvas === null) return;
 
 	canvas.width = canvas.offsetWidth * dpr;
 	canvas.height = (canvas.offsetHeight + padding * 2) * dpr;
+
 	const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
 
 	ctx?.scale(dpr, dpr);
@@ -49,35 +45,10 @@ const draw = (
 	}
 
 	const base64String = canvas.toDataURL('image/png');
-	// document.body.appendChild(newImg);
-
-	const base64StringtoFile = (base64String: string, filename: string) => {
-		let arr = base64String.split(','),
-			// mime = arr[0].match(/:(.*?);/)[1],
-			bstr = atob(arr[1]),
-			n = bstr.length,
-			u8arr = new Uint8Array(n);
-		while (n--) {
-			u8arr[n] = bstr.charCodeAt(n);
-		}
-		return new File([u8arr], filename, { type: 'png' });
-	};
 
 	const resultFiles: File = base64StringtoFile(base64String, 'png');
-
-	const sendFileImages = async (file: File, profileUpdate: boolean | undefined) => {
-		try {
-			if (file && profileUpdate) {
-				const formData = new FormData();
-				formData.append('file', file);
-				await instance.post(`samples/images?sampleId=${sampleId}`, formData);
-			}
-		} catch (e) {
-			console.log(e);
-		}
-	};
-
-	sendFileImages(resultFiles, profileUpdate);
+	
+	sendFileImages(resultFiles, profileUpdate, sampleId);
 };
 
 const drawLineSegment = (

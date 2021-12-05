@@ -6,8 +6,11 @@ import { useSound } from '../../hooks/useSound';
 import { useAsyncAction } from '../../hooks/useAsyncAction';
 import { Pack } from '../../store/slices/pack/types';
 import { fetchCreateSamples } from '../../store/slices/samples/samplesSlice';
+import { useSelector } from 'react-redux';
+import { selectSamplesLoading } from '../../store/selectors/samplesSelectors';
 
 import styles from './PackItem.module.scss';
+
 
 type PackListProps = {
 	pack: Pack;
@@ -23,11 +26,12 @@ export const PackItem: React.FC<PackListProps> = ({
 	pageName,
 	id,
 }) => {
+	const loading = useSelector(selectSamplesLoading);
+
 	const [drag, setDrag] = useState<boolean>(false);
 
 	const { playTrack, isPlaying, currentPackId } = useSound();
 	const history = useHistory();
-
 	const createSamples = useAsyncAction<any, any>(fetchCreateSamples);
 
 	const dragEnter = (e: React.DragEvent<HTMLDivElement>) => {
@@ -93,6 +97,7 @@ export const PackItem: React.FC<PackListProps> = ({
 					</div>
 				</div>
 			</div>
+
 			{pageName === 'user-packs' && (
 				<div className={styles.downloadSamples}>
 					{!drag ? (
@@ -114,8 +119,10 @@ export const PackItem: React.FC<PackListProps> = ({
 							DROP FILES
 						</div>
 					)}
+
 				</div>
 			)}
+		
 		</div>
 	);
 };

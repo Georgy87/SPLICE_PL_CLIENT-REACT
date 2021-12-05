@@ -25,4 +25,9 @@ export const packsApi = {
 		const { data } = await instance.get(`packs/search-packs?search=${search}`);
 		return data;
 	},
+
+	async packUpdate(update: boolean, packId: string) {
+		console.log(update, packId)
+		await instance.put(`packs/update?update=${update}&packId=${packId}`);
+	},
 };
