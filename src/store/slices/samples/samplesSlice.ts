@@ -56,7 +56,7 @@ export const samplesSlice = createSlice({
 	reducers: {
 		setSampleFiles: (state, action: PayloadAction<FileList[]>) => {
 			state.files = action.payload;
-		}
+		},
 	},
 	extraReducers: (builder) =>
 		builder.addCase(

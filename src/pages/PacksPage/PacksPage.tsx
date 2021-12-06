@@ -12,9 +12,9 @@ import { PackItem } from '../../components/PackItem/PackItem';
 import { Pack } from '../../store/slices/pack/types';
 import { selectPacks, selectUserPacks } from '../../store/selectors/packsSelectors';
 import { selectSamplesFiles } from '../../store/selectors/samplesSelectors';
+import { CanvasList } from '../../components/CanvasList/CanvasList';
 
 import styles from './PacksPage.module.scss';
-import { CanvasRender } from '../../components/Canvas/Canvas';
 
 type PropsType = {
 	pageName?: 'main-packs' | 'user-packs';
@@ -74,7 +74,7 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 						</>
 					))}
 				<Player />
-				<CanvasRender />
+				<CanvasList />
 			</div>
 		</>
 	);
