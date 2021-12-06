@@ -66,11 +66,8 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	useEffect(() => {
 		if (audio && canvasRef?.current) {
 			// getAudioWave(audioCoordinatesParse, canvasRef.current, _id, profileUpdate);
-			//@ts-ignore
-			// const offscreen = new OffscreenCanvas(1100, 70);
 
-			//@ts-ignore
-			const offscreen = canvasRef?.current.transferControlToOffscreen(1100, 70);
+			const offscreen = canvasRef?.current.transferControlToOffscreen();
 			//@ts-ignore
 			workerInstance.postMessage(
 				{

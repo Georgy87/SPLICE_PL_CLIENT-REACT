@@ -67,7 +67,8 @@ const drawLineSegment = (
 	height = isEven ? height : -height;
 	ctx.moveTo(x, 0);
 	ctx.lineTo(x, height);
-	ctx.arc(x + width / 2, height, width / 2, Math.PI, 6, isEven);
+	// ctx.arc(x + width / 2, height, width / 2, Math.PI, 6, isEven);
+	// ctx.rect(x, height);
 	ctx.lineTo(x + width, 0);
 	ctx.stroke();
 };

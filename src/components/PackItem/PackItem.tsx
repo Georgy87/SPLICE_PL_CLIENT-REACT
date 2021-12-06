@@ -11,7 +11,6 @@ import { selectSamplesLoading } from '../../store/selectors/samplesSelectors';
 
 import styles from './PackItem.module.scss';
 
-
 type PackListProps = {
 	pack: Pack;
 	active?: boolean;
@@ -20,12 +19,7 @@ type PackListProps = {
 	index: number;
 };
 
-export const PackItem: React.FC<PackListProps> = ({
-	pack,
-	index,
-	pageName,
-	id,
-}) => {
+export const PackItem: React.FC<PackListProps> = ({ pack, index, pageName, id }) => {
 	const loading = useSelector(selectSamplesLoading);
 
 	const [drag, setDrag] = useState<boolean>(false);
@@ -52,7 +46,20 @@ export const PackItem: React.FC<PackListProps> = ({
 		const eventData = (e as React.DragEvent).dataTransfer;
 		let files = [eventData.files];
 
+	
+		// const audioContext = new AudioContext();
 		setDrag(false);
+
+		// const reader = new FileReader();
+		// Object.values(files[0]).forEach((file) => {
+		// 	reader.readAsArrayBuffer(file);
+		// });
+
+		// reader.onload = function(e) {
+		// 	const arrayBuffer: any = reader.result;
+			
+		// 	audioContext.decodeAudioData(arrayBuffer).then(data => console.log(data.getChannelData(0)));
+		// };
 
 		createSamples({ files, packId: pack._id });
 	};
@@ -92,20 +99,14 @@ export const PackItem: React.FC<PackListProps> = ({
 
 				<div>
 					<div>{pack.genre}</div>
-					<div style={{ fontSize: 12, color: 'gray' }}>
-						{pack.name}
-					</div>
+					<div style={{ fontSize: 12, color: 'gray' }}>{pack.name}</div>
 				</div>
 			</div>
 
 			{pageName === 'user-packs' && (
 				<div className={styles.downloadSamples}>
 					{!drag ? (
-						<div
-							onDragEnter={dragEnter}
-							onDragLeave={dragLeave}
-							onDragOver={dragEnter}
-						>
+						<div onDragEnter={dragEnter} onDragLeave={dragLeave} onDragOver={dragEnter}>
 							DOWNLOAD SAMPLES
 						</div>
 					) : (
@@ -119,10 +120,8 @@ export const PackItem: React.FC<PackListProps> = ({
 							DROP FILES
 						</div>
 					)}
-
 				</div>
 			)}
-		
 		</div>
 	);
 };
