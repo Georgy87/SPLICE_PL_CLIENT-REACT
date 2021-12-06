@@ -3,6 +3,7 @@ import { User } from "../user/types";
 export type SampleSliceState = {
 	samples: Samples[];
 	loading: boolean;
+	files: FileList[] | null;
 }
 
 export type Samples = {

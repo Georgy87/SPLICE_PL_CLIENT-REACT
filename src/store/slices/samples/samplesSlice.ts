@@ -6,6 +6,7 @@ import { SampleSliceState } from './types';
 const initialState: SampleSliceState = {
 	samples: [],
 	loading: false,
+	files: null,
 };
 
 export const fetchCreateSamples = createAsyncThunk(
@@ -52,7 +53,11 @@ export const fetchDeleteLike = createAsyncThunk(
 export const samplesSlice = createSlice({
 	name: 'packs',
 	initialState,
-	reducers: {},
+	reducers: {
+		setSampleFiles: (state, action: PayloadAction<FileList[]>) => {
+			state.files = action.payload;
+		}
+	},
 	extraReducers: (builder) =>
 		builder.addCase(
 			fetchCreateSamples.fulfilled.type,
@@ -63,5 +68,7 @@ export const samplesSlice = createSlice({
 			},
 		),
 });
+
+export const { setSampleFiles } = samplesSlice.actions;
 
 export const samplesReducer = samplesSlice.reducer;

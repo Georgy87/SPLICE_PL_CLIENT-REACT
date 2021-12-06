@@ -1,13 +1,12 @@
 import React, { MouseEventHandler, useState } from 'react';
 import { useHistory } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 import { useSound } from '../../hooks/useSound';
 import { useAsyncAction } from '../../hooks/useAsyncAction';
 import { Pack } from '../../store/slices/pack/types';
-import { fetchCreateSamples } from '../../store/slices/samples/samplesSlice';
-import { useSelector } from 'react-redux';
-import { selectSamplesLoading } from '../../store/selectors/samplesSelectors';
+import { fetchCreateSamples, setSampleFiles } from '../../store/slices/samples/samplesSlice';
 
 import styles from './PackItem.module.scss';
 
@@ -20,13 +19,13 @@ type PackListProps = {
 };
 
 export const PackItem: React.FC<PackListProps> = ({ pack, index, pageName, id }) => {
-	const loading = useSelector(selectSamplesLoading);
 
 	const [drag, setDrag] = useState<boolean>(false);
 
 	const { playTrack, isPlaying, currentPackId } = useSound();
 	const history = useHistory();
 	const createSamples = useAsyncAction<any, any>(fetchCreateSamples);
+	const dispatch = useDispatch();
 
 	const dragEnter = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
@@ -46,7 +45,6 @@ export const PackItem: React.FC<PackListProps> = ({ pack, index, pageName, id })
 		const eventData = (e as React.DragEvent).dataTransfer;
 		let files = [eventData.files];
 
-	
 		// const audioContext = new AudioContext();
 		setDrag(false);
 
@@ -57,11 +55,11 @@ export const PackItem: React.FC<PackListProps> = ({ pack, index, pageName, id })
 
 		// reader.onload = function(e) {
 		// 	const arrayBuffer: any = reader.result;
-			
+
 		// 	audioContext.decodeAudioData(arrayBuffer).then(data => console.log(data.getChannelData(0)));
 		// };
-
-		createSamples({ files, packId: pack._id });
+		dispatch(setSampleFiles(files));
+		// createSamples({ files, packId: pack._id });
 	};
 
 	return (

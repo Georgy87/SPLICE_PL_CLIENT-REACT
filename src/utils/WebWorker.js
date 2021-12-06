@@ -7,7 +7,7 @@ export default function WebWorker() {
 		if (e.data.canvas === null) return;
 	
 		canvas.width = cssCanvasWidth * dpr;
-		canvas.height = (cssCanvasHeight * 2) * dpr;
+		canvas.height = (cssCanvasHeight * dpr);
 	
 		ctx?.scale(dpr, dpr);
 		ctx?.translate(0, cssCanvasHeight / 2);
