@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { selectSamplesFiles } from '../../store/selectors/samplesSelectors';
-import { sendFileImages } from '../../utils/sendFileImages';
+import { selectPackId, selectSamplesFiles } from '../../store/selectors/samplesSelectors';
+import { sendFileImages } from '../../utils/createSamples';
 import WebWorker from '../../utils/WebWorker';
 import WebWorkerEnabler from '../../utils/WebWorkerEnabler';
+import { filterData, normalizeData } from '../../utils/getAudioCoordinates';
+import { fetchCreateSamples } from '../../store/slices/samples/samplesSlice';
 
 const workerInstance = new WebWorkerEnabler(WebWorker);
 
@@ -13,31 +15,42 @@ type PropsType = {
 };
 
 export const Canvas: React.FC<PropsType> = ({ file }) => {
-	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const packId = useSelector(selectPackId);
 
-    useEffect(() => {
-        if (canvasRef?.current) {
-            const offscreen: any = canvasRef?.current.transferControlToOffscreen();
-            //@ts-ignore
-            workerInstance.postMessage(
-                {
-                    canvas: offscreen,
-                    files: file,
-                    cssCanvasWidth: 550,
-                    cssCanvasHeight: 50,
-                    dpr: 2,
-                },
-                [offscreen],
-            );
-    
-            //@ts-ignore
-            workerInstance.addEventListener('message', (e: any) => {
-                const { file, sampleId, profileUpdate } = e.data;
-                sendFileImages(file, profileUpdate, sampleId);
-            });
-        }
-    
-    }, [canvasRef.current])
+	let canvasRef = useRef<HTMLCanvasElement>(null);
+
+	useEffect(() => {
+		if (canvasRef?.current) {
+			const offscreen = canvasRef?.current.transferControlToOffscreen();
+			// const offscreen = new OffscreenCanvas(1100, 100);
+
+			const audioContext = new AudioContext();
+			const reader = new FileReader();
+
+			reader.readAsArrayBuffer(file);
+
+			reader.onload = function() {
+				const arrayBuffer: any = reader.result;
+				audioContext.decodeAudioData(arrayBuffer).then((data) => {
+					const audioCoordinates = normalizeData(filterData(data));
+
+					//@ts-ignore
+					workerInstance.postMessage(
+						{
+							audioCoordinates,
+							packId,
+							canvas: offscreen,
+							files: file,
+							cssCanvasWidth: 550,
+							cssCanvasHeight: 50,
+							dpr: 2,
+						},
+						[offscreen],
+					);
+				});
+			};
+		}
+	}, []);
 
 	return (
 		<>

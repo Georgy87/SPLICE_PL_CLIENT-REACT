@@ -1,5 +1,5 @@
 import { base64StringtoFile } from './base64StringtoFile';
-import { sendFileImages } from './sendFileImages';
+import { sendFileImages } from './createSamples';
 
 export const getAudioWave = (
 	// data: Promise<ArrayBuffer>,

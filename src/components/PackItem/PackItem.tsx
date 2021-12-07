@@ -19,12 +19,11 @@ type PackListProps = {
 };
 
 export const PackItem: React.FC<PackListProps> = ({ pack, index, pageName, id }) => {
-
 	const [drag, setDrag] = useState<boolean>(false);
 
 	const { playTrack, isPlaying, currentPackId } = useSound();
 	const history = useHistory();
-	const createSamples = useAsyncAction<any, any>(fetchCreateSamples);
+
 	const dispatch = useDispatch();
 
 	const dragEnter = (e: React.DragEvent<HTMLDivElement>) => {
@@ -44,21 +43,10 @@ export const PackItem: React.FC<PackListProps> = ({ pack, index, pageName, id })
 		e.stopPropagation();
 		const eventData = (e as React.DragEvent).dataTransfer;
 		let files = [eventData.files];
-
-		// const audioContext = new AudioContext();
+	
 		setDrag(false);
 
-		// const reader = new FileReader();
-		// Object.values(files[0]).forEach((file) => {
-		// 	reader.readAsArrayBuffer(file);
-		// });
-
-		// reader.onload = function(e) {
-		// 	const arrayBuffer: any = reader.result;
-
-		// 	audioContext.decodeAudioData(arrayBuffer).then(data => console.log(data.getChannelData(0)));
-		// };
-		dispatch(setSampleFiles(files));
+		dispatch(setSampleFiles({ files, packId: id }));
 		// createSamples({ files, packId: pack._id });
 	};
 

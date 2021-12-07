@@ -7,21 +7,24 @@ const initialState: SampleSliceState = {
 	samples: [],
 	loading: false,
 	files: null,
+	packId: null,
 };
 
 export const fetchCreateSamples = createAsyncThunk(
 	'packs/createSamplesStatus',
-	async (payload: { files: [Record<number, File>]; packId: string }) => {
+	async (payload: { file: File; packId: string, audioCoordinates: number[] }) => {
 		try {
-			const { files, packId } = payload;
+			const { file, packId, audioCoordinates } = payload;
+			console.log(file);
+			console.log(packId);
+			console.log(audioCoordinates);
+
 			const formData = new FormData();
-
-			Object.entries(files[0]).forEach(([idx, file]) => {
-				formData.append('files', file, file.name);
-			});
-
-			const status = await samplesApi.createSamples(formData, packId);
-			return status;
+			
+			formData.append('file', file);
+			
+			// const status = await samplesApi.createSamples(formData, packId);
+			// return status;
 		} catch (error) {
 			console.log(error);
 		}
@@ -54,8 +57,10 @@ export const samplesSlice = createSlice({
 	name: 'packs',
 	initialState,
 	reducers: {
-		setSampleFiles: (state, action: PayloadAction<FileList[]>) => {
-			state.files = action.payload;
+		setSampleFiles: (state, action: PayloadAction<{files: FileList[], packId: string}>) => {
+			const { files, packId } = action.payload;
+			state.files = files;
+			state.packId = packId;
 		},
 	},
 	extraReducers: (builder) =>

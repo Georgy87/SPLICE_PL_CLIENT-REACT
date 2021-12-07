@@ -74,7 +74,7 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 						</>
 					))}
 				<Player />
-				<CanvasList />
+				{pageName === 'user-packs' && <CanvasList />}
 			</div>
 		</>
 	);

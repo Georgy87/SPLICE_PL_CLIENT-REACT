@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectSamplesFiles } from '../../store/selectors/samplesSelectors';
-import { sendFileImages } from '../../utils/sendFileImages';
+import { sendFileImages } from '../../utils/createSamples';
 import WebWorker from '../../utils/WebWorker';
 import WebWorkerEnabler from '../../utils/WebWorkerEnabler';
 import { Canvas } from '../Canvas/Canvas';

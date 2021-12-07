@@ -1,44 +1,41 @@
 export default function WebWorker() {
 	onmessage = (e) => {
-		const { canvas, files, cssCanvasWidth, cssCanvasHeight, dpr } = e.data;
+		const { audioCoordinates, packId, cssCanvasWidth, cssCanvasHeight, dpr } = e.data;
+		const ctx = e.data.canvas.getContext('2d');
+		const { canvas } = e.data;
 
-		console.log(files);
-		// const ctx = e.data.canvas.getContext('2d');
+		if (e.data.canvas === null) return;
 
-		console.log(canvas);
-	
-		// if (e.data.canvas === null) return;
-	
-		// canvas.width = cssCanvasWidth * dpr;
-		// canvas.height = (cssCanvasHeight * dpr);
-	
-		// ctx?.scale(dpr, dpr);
-		// ctx?.translate(0, cssCanvasHeight / 2);
+		canvas.width = cssCanvasWidth * dpr;
+		canvas.height = cssCanvasHeight * dpr;
 
-		// const barWidth = cssCanvasWidth / audioCoordinates.length;
+		ctx?.scale(dpr, dpr);
+		ctx?.translate(0, cssCanvasHeight / 2);
 
-		// ctx.strokeStyle = '#98b2d1';
-		// ctx.beginPath();
-		
-		// for (let i = 0; i < audioCoordinates.length; i++) {
-		// 	const x = barWidth * i;
-		// 	let height = audioCoordinates[i];
-		// 	drawLineSegment(ctx, x, height, barWidth, (i + 1) % 2, canvas);
-		// }
+		const barWidth = cssCanvasWidth / audioCoordinates.length;
 
-		// ctx.stroke();
-		// canvas.convertToBlob({ type: 'image/png' }).then((blob) => fileCreator(blob));
+		ctx.strokeStyle = '#98b2d1';
+		ctx.beginPath();
 
-		// function fileCreator(blob) {
-		// 	const file = new File([blob], 'png', { type: 'png' });
-		// 	postMessage({ file, sampleId, profileUpdate });
-		// }
+		for (let i = 0; i < audioCoordinates.length; i++) {
+			const x = barWidth * i;
+			let height = audioCoordinates[i];
+			drawLineSegment(ctx, x, height, barWidth, (i + 1) % 2, canvas);
+		}
+
+		ctx.stroke();
+		canvas.convertToBlob({ type: 'image/png' }).then((blob) => fileCreator(blob));
+
+		function fileCreator(blob) {
+			const file = new File([blob], 'png', { type: 'png' });
+			console.log(file, audioCoordinates, packId);
+			
+		}
 	};
 
-	const drawLineSegment = (ctx, x, height, barWidth) => {
+	const drawLineSegment = (ctx, x, height, barWidth, canvas) => {
 		if (ctx === null) return;
 		ctx.moveTo(x, 0);
 		ctx.rect(x + barWidth / 2, -(height / 2), 2, height);
 	};
 }
-

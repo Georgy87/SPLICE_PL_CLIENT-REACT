@@ -4,6 +4,7 @@ export type SampleSliceState = {
 	samples: Samples[];
 	loading: boolean;
 	files: FileList[] | null;
+	packId: string | null;
 }
 
 export type Samples = {
