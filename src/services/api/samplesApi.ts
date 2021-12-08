@@ -1,7 +1,7 @@
 import { instance } from '../../core/axios';
 
 export const samplesApi = {
-	async createSamples(formData: FormData, packId: string) {
+	async createSamples(formData: FormData, audioCoordinates: number, packId: string) {
 		const { data } = await instance.post<{ status: string}>(`samples?packId=${packId}`, formData);
 		return data.status;
 	},

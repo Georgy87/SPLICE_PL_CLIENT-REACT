@@ -1,14 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { selectPackId, selectSamplesFiles } from '../../store/selectors/samplesSelectors';
-import { sendFileImages } from '../../utils/createSamples';
-import WebWorker from '../../utils/WebWorker';
-import WebWorkerEnabler from '../../utils/WebWorkerEnabler';
+import { selectPackId } from '../../store/selectors/samplesSelectors';
+import { workerInstance } from '../../utils/WebWorkerEnabler';
 import { filterData, normalizeData } from '../../utils/getAudioCoordinates';
-import { fetchCreateSamples } from '../../store/slices/samples/samplesSlice';
-
-const workerInstance = new WebWorkerEnabler(WebWorker);
 
 type PropsType = {
 	file: File;
@@ -40,7 +35,7 @@ export const Canvas: React.FC<PropsType> = ({ file }) => {
 							audioCoordinates,
 							packId,
 							canvas: offscreen,
-							files: file,
+							// file: file,
 							cssCanvasWidth: 550,
 							cssCanvasHeight: 50,
 							dpr: 2,
@@ -64,3 +59,4 @@ export const Canvas: React.FC<PropsType> = ({ file }) => {
 		</>
 	);
 };
+

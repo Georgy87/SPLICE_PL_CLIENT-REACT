@@ -1,5 +1,5 @@
 import { base64StringtoFile } from './base64StringtoFile';
-import { sendFileImages } from './createSamples';
+// import { sendFileImages } from './createSamples';
 
 export const getAudioWave = (
 	// data: Promise<ArrayBuffer>,
@@ -48,7 +48,7 @@ const draw = (
 
 	const resultFiles: File = base64StringtoFile(base64String, 'png');
 	
-	sendFileImages(resultFiles, profileUpdate, sampleId);
+	// sendFileImages(resultFiles, profileUpdate, sampleId);
 };
 
 const drawLineSegment = (

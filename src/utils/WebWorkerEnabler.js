@@ -1,3 +1,6 @@
+import WebWorker from "./WebWorker";
+import WebWorkerViewSample from "./WebWorkerViewSample";
+
 export default class WebWorkerEnabler {
 	constructor(worker) {
 		let code = worker.toString();
@@ -7,3 +10,6 @@ export default class WebWorkerEnabler {
 		return new Worker(URL.createObjectURL(blob));
 	}
 }
+
+export const workerInstance = new WebWorkerEnabler(WebWorker);
+export const workerInstanceSamplePage = new WebWorkerEnabler(WebWorkerViewSample);

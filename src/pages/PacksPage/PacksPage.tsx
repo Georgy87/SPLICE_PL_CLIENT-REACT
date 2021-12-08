@@ -11,14 +11,21 @@ import SearchInput from '../../components/SearchInput/SearchInput';
 import { PackItem } from '../../components/PackItem/PackItem';
 import { Pack } from '../../store/slices/pack/types';
 import { selectPacks, selectUserPacks } from '../../store/selectors/packsSelectors';
-import { selectSamplesFiles } from '../../store/selectors/samplesSelectors';
 import { CanvasList } from '../../components/CanvasList/CanvasList';
+import { createSamples } from '../../utils/createSamples';
+import { workerInstance } from '../../utils/WebWorkerEnabler';
 
 import styles from './PacksPage.module.scss';
 
 type PropsType = {
 	pageName?: 'main-packs' | 'user-packs';
 };
+
+//@ts-ignore
+workerInstance.addEventListener('message', (e: any) => {
+	const { file, audioCoordinates, packId } = e.data;
+	createSamples(file, audioCoordinates, packId);
+});
 
 export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 	const packs = useSelector(selectPacks);

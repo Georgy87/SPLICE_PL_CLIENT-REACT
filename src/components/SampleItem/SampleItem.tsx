@@ -10,18 +10,14 @@ import { getAudioWave } from '../../utils/getAudioWave';
 import { Samples } from '../../store/slices/samples/types';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { fetchSetLike, fetchDeleteLike } from '../../store/slices/samples/samplesSlice';
-// import WebWorkerEnabler from '../../utils/WebWorkerEnabler';
-// import WebWorker from '../../utils/WebWorker';
 
 import styles from './SampleItem.module.scss';
-import { sendFileImages } from '../../utils/createSamples';
+import { workerInstanceSamplePage } from '../../utils/WebWorkerEnabler';
 
 type PropsType = {
 	sample: Samples;
 	idx: number;
 };
-
-// const workerInstance = new WebWorkerEnabler(WebWorker);
 
 export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	const { audio, _id, audioCoordinates, duration, likes, canvasImage } = sample;
@@ -40,6 +36,21 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	const audioCoordinatesParse: number[] = JSON.parse(audioCoordinates);
 
 	useEffect(() => {
+		if (canvasRef?.current) {
+			const offscreen = canvasRef?.current.transferControlToOffscreen();
+			//@ts-ignore
+			workerInstanceSamplePage.postMessage(
+				{
+					audioCoordinates: audioCoordinatesParse,
+					canvas: offscreen,
+					cssCanvasWidth: 550,
+					cssCanvasHeight: 50,
+					dpr: 2,
+				},
+				[offscreen],
+			);
+		}
+
 		setLike(likes.length >= 1);
 
 		const handleResize = () => {
@@ -62,34 +73,6 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 			setWidth('550px');
 		};
 	}, []);
-
-	// useEffect(() => {
-	// 	if (audio && canvasRef?.current) {
-	// 		// getAudioWave(audioCoordinatesParse, canvasRef.current, _id, profileUpdate);
-
-	// 		// const offscreen = canvasRef?.current.transferControlToOffscreen();
-	// 		// //@ts-ignore
-	// 		// workerInstance.postMessage(
-	// 		// 	{
-	// 		// 		canvas: offscreen,
-	// 		// 		audioCoordinates: audioCoordinatesParse,
-	// 		// 		sampleId: _id,
-	// 		// 		profileUpdate,
-	// 		// 		cssCanvasWidth: 550,
-	// 		// 		cssCanvasHeight: 50,
-	// 		// 		dpr: 2,
-	// 		// 	},
-	// 		// 	[offscreen],
-	// 		// );
-
-	// 		// //@ts-ignore
-	// 		// workerInstance.addEventListener('message', (e: any) => {
-	// 		// 	const { file, sampleId, profileUpdate } = e.data;
-
-	// 		// 	sendFileImages(file, profileUpdate, sampleId);
-	// 		// });
-	// 	}
-	// }, [profileUpdate]);
 
 	return (
 		<>
@@ -122,7 +105,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						trackId={_id}
 						currentSampleId={currentSampleId}
 					>
-						{profileUpdate ? (
+						{!profileUpdate ? (
 							<canvas
 								ref={canvasRef}
 								style={{
