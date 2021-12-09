@@ -2,9 +2,8 @@ import { createSamples } from './createSamples';
 
 export default function WebWorker() {
 	onmessage = (e) => {
-		const { audioCoordinates, file, packId, cssCanvasWidth, cssCanvasHeight, dpr } = e.data;
+		const { audioCoordinates, audioFile, canvas, packId, cssCanvasWidth, cssCanvasHeight, dpr } = e.data;
 		const ctx = e.data.canvas.getContext('2d');
-		const { canvas } = e.data;
 
 		if (e.data.canvas === null) return;
 
@@ -22,21 +21,22 @@ export default function WebWorker() {
 		for (let i = 0; i < audioCoordinates.length; i++) {
 			const x = barWidth * i;
 			let barHeight = audioCoordinates[i];
-			drawLineSegment(ctx, x, barHeight, barWidth, (i + 1) % 2, canvas);
+			drawLineSegment(ctx, x, barHeight, barWidth, canvas);
 		}
 
 		ctx.stroke();
 		canvas.convertToBlob({ type: 'image/png' }).then((blob) => fileCreator(blob));
 
 		function fileCreator(blob) {
-			const file = new File([blob], 'png', { type: 'png' });
-			postMessage({ file, audioCoordinates, packId });
+			const imageFile = new File([blob], 'png', { type: 'png' });
+			postMessage({ imageFile, audioFile, audioCoordinates, packId });
 		}
 	};
 
-	const drawLineSegment = (ctx, x, barHeight, barWidth) => {
+	const drawLineSegment = (ctx, x, barHeight, barWidth, canvas) => {
 		if (ctx === null) return;
 		ctx.moveTo(x, 0);
 		ctx.rect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
+		ctx.clearRect(100, 0, 1100, 100);
 	};
 }

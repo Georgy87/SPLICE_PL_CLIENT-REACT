@@ -19,7 +19,6 @@ const SearchInput: React.FC<PropsType> = ({
 		'Search genres, author',
 	);
 
-
 	return (
 		<div className={styles.inputContainer}>
 			<label>Sounds</label>

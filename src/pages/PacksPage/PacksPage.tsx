@@ -21,15 +21,10 @@ type PropsType = {
 	pageName?: 'main-packs' | 'user-packs';
 };
 
-//@ts-ignore
-workerInstance.addEventListener('message', (e: any) => {
-	const { file, audioCoordinates, packId } = e.data;
-	createSamples(file, audioCoordinates, packId);
-});
-
 export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 	const packs = useSelector(selectPacks);
-	const userPacks = useSelector(selectUserPacks);
+	// const userPacks = useSelector(selectUserPacks);
+	const [update, setUpdate] = useState(false);
 
 	const [value, setValue] = useState<string>('');
 
@@ -38,6 +33,7 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 	useEffect(() => {
 		dispatch(fetchGetPacks());
 		dispatch(setDefaultPackState());
+	
 	}, []);
 
 	const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,35 +49,20 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 				{pageName === 'main-packs' &&
 					packs.map((pack: Pack, index: number) => (
 						<>
-							{!pack.update && (
+							{
 								<div className={styles.packCardContainer}>
 									<PackItem
 										key={pack._id}
 										pack={pack}
 										id={pack._id}
-										pageName={pageName}
 										index={index}
 									/>
 								</div>
-							)}
+							}
 						</>
 					))}
-				{pageName === 'user-packs' &&
-					userPacks.map((pack: Pack, index: number) => (
-						<>
-							<div className={styles.packCardContainer} key={index}>
-								<PackItem
-									key={pack._id}
-									pack={pack}
-									id={pack._id}
-									pageName={pageName}
-									index={index}
-								/>
-							</div>
-						</>
-					))}
+
 				<Player />
-				{pageName === 'user-packs' && <CanvasList />}
 			</div>
 		</>
 	);

@@ -1,0 +1,54 @@
+%download {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 140px;
+	width: 250px;
+	border: 1px solid #ddddd9;
+	margin: 0 auto;
+}
+
+.packCardWrapper {
+	display: flex;
+	width: 99%;
+	.packCard {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		width: 17rem;
+		img {
+			border-radius: 7px;
+			height: 17rem;
+		}
+		.playPauseCircle {
+			display: flex;
+			position: absolute;
+			width: 100%;
+			height: calc(100% - 40px);
+			align-items: center;
+			justify-content: center;
+			button {
+				background-color: transparent;
+				border: none;
+			}
+		}
+	}
+}
+
+.packCardWrapper.changePage {
+	display: block;
+	.packCard {
+		.playPauseCircle {
+			display: none;
+		}
+	}
+}
+
+.drop {
+	@extend %download;
+}
+
+.downloadSamples {
+	@extend %download;
+	margin-top: 30px;
+}

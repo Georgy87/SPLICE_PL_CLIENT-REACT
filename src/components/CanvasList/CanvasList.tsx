@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { selectSamplesFiles } from '../../store/selectors/samplesSelectors';
 import { Canvas } from '../Canvas/Canvas';
 
-import styles from './Canvas.module.scss';
 
 export const CanvasList = () => {
 	const sampleFiles = useSelector(selectSamplesFiles);

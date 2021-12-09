@@ -1,12 +1,10 @@
-import React, { MouseEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 import { useSound } from '../../hooks/useSound';
-import { useAsyncAction } from '../../hooks/useAsyncAction';
 import { Pack } from '../../store/slices/pack/types';
-import { fetchCreateSamples, setSampleFiles } from '../../store/slices/samples/samplesSlice';
 
 import styles from './PackItem.module.scss';
 
@@ -14,50 +12,15 @@ type PackListProps = {
 	pack: Pack;
 	active?: boolean;
 	id: string;
-	pageName?: string;
 	index: number;
 };
 
-export const PackItem: React.FC<PackListProps> = ({ pack, index, pageName, id }) => {
-	const [drag, setDrag] = useState<boolean>(false);
-
+export const PackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 	const { playTrack, isPlaying, currentPackId } = useSound();
 	const history = useHistory();
 
-	const dispatch = useDispatch();
-
-	const dragEnter = (e: React.DragEvent<HTMLDivElement>) => {
-		e.preventDefault();
-		e.stopPropagation();
-		setDrag(true);
-	};
-
-	const dragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-		e.preventDefault();
-		e.stopPropagation();
-		setDrag(false);
-	};
-
-	const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
-		e.preventDefault();
-		e.stopPropagation();
-		const eventData = (e as React.DragEvent).dataTransfer;
-		let files = [eventData.files];
-	
-		setDrag(false);
-
-		dispatch(setSampleFiles({ files, packId: id }));
-		// createSamples({ files, packId: pack._id });
-	};
-
 	return (
-		<div
-			className={
-				pageName === 'user-packs'
-					? `${styles.packCardWrapper} ${styles.changePage}`
-					: styles.packCardWrapper
-			}
-		>
+		<div className={styles.packCardWrapper}>
 			<div
 				className={styles.packCard}
 				onClick={() => history.push(`/profile-pack/${pack?._id}`)}
@@ -88,26 +51,6 @@ export const PackItem: React.FC<PackListProps> = ({ pack, index, pageName, id })
 					<div style={{ fontSize: 12, color: 'gray' }}>{pack.name}</div>
 				</div>
 			</div>
-
-			{pageName === 'user-packs' && (
-				<div className={styles.downloadSamples}>
-					{!drag ? (
-						<div onDragEnter={dragEnter} onDragLeave={dragLeave} onDragOver={dragEnter}>
-							DOWNLOAD SAMPLES
-						</div>
-					) : (
-						<div
-							className={styles.drop}
-							onDragEnter={dragEnter}
-							onDragLeave={dragLeave}
-							onDragOver={dragEnter}
-							onDrop={onDrop}
-						>
-							DROP FILES
-						</div>
-					)}
-				</div>
-			)}
 		</div>
 	);
 };

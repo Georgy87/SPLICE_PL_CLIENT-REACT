@@ -22,22 +22,15 @@ export default function WebWorkerViewSample() {
 		for (let i = 0; i < audioCoordinates.length; i++) {
 			const x = barWidth * i;
 			let barHeight = audioCoordinates[i];
-			drawLineSegment(ctx, x, barHeight, barWidth, (i + 1) % 2, canvas);
+			drawLineSegment(ctx, x, barHeight, barWidth);
 		}
 
 		ctx.stroke();
-		// canvas.convertToBlob({ type: 'image/png' }).then((blob) => fileCreator(blob));
 
-		// function fileCreator(blob) {
-
-		// 	const file = new File([blob], 'png', { type: 'png' });
-
-		// }
 		postMessage({ audioCoordinates });
 	};
 
 	const drawLineSegment = (ctx, x, barHeight, barWidth) => {
-		console.log(ctx);
 		if (ctx === null) return;
 		ctx.moveTo(x, 0);
 		ctx.rect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);

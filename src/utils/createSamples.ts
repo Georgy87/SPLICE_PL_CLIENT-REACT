@@ -1,10 +1,11 @@
 import { instance } from '../core/axios';
 
-export const createSamples = async (file: File, audioCoordinates: number[], packId: string) => {
+export const createSamples = async (image: File, audio: File, audioCoordinates: number[], packId: string) => {
 	try {
-		if (file) {
+		if (image && audio) {
 			const formData = new FormData();
-			formData.append('file', file);
+			formData.append('image', image);
+			formData.append('audio', audio);
 			formData.append('coordinates', JSON.stringify(audioCoordinates));
 			await instance.post(`samples?packId=${packId}`, formData);
 		}

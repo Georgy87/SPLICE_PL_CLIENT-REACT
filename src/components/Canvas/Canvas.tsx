@@ -32,10 +32,10 @@ export const Canvas: React.FC<PropsType> = ({ file }) => {
 					//@ts-ignore
 					workerInstance.postMessage(
 						{
+							audioFile: file,
 							audioCoordinates,
 							packId,
 							canvas: offscreen,
-							// file: file,
 							cssCanvasWidth: 550,
 							cssCanvasHeight: 50,
 							dpr: 2,
