@@ -35,7 +35,6 @@ export const UserPacksPage = () => {
 		dispatch(fetchGetUserPacks());
 	}, []);
 
-
 	return (
 		<>
 			<div className={styles.root}>

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { Pack } from '../../store/slices/pack/types';
 import { setSampleFiles } from '../../store/slices/samples/samplesSlice';
+import { useDropzone } from '../../hooks/useDropzone';
 
 import styles from './UserPackItem.module.scss';
 
@@ -15,23 +16,11 @@ type PackListProps = {
 };
 
 export const UserPackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
-	const [drag, setDrag] = useState<boolean>(false);
+	const { drag, setDrag, dragEnter, dragLeave } = useDropzone();
 
 	const history = useHistory();
 
 	const dispatch = useDispatch();
-
-	const dragEnter = (e: React.DragEvent<HTMLDivElement>) => {
-		e.preventDefault();
-		e.stopPropagation();
-		setDrag(true);
-	};
-
-	const dragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-		e.preventDefault();
-		e.stopPropagation();
-		setDrag(false);
-	};
 
 	const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();

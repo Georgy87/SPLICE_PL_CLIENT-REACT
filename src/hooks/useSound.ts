@@ -24,8 +24,8 @@ export const useSound = () => {
 		} else {
 			let url =
 				typeElement === 'packs'
-					? `http://localhost:5000/${playerState.packs[index]?.audio}`
-					: `http://localhost:5000/${playerState?.samples[index]?.audio}`;
+					? `/${playerState.packs[index]?.audio}`
+					: `/${playerState?.samples[index]?.audio}`;
 	
 			playerState.audioPlayer.pause();
 			playerState.audioPlayer = new Audio(url);

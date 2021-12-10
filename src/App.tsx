@@ -13,6 +13,7 @@ import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 import { fetchAuth } from './store/slices/user/userSlice';
 import { selectUser } from './store/selectors/userSelectors';
 import { UserPacksPage } from './pages/UserPacksPage/UserPacksPage';
+import { AvatarEditorPage } from './pages/AvatarEditorPage/AvatarEditorPage';
 
 import styles from './App.module.scss';
 
@@ -50,6 +51,7 @@ export const App: React.FC = () => {
 						<Route path='/profile' component={UserProfilePage} exact />
 						<Route path='/profile/create' component={CreatePackPage} exact />
 						<Route path='/profile/packs' component={UserPacksPage} exact />
+						<Route path='/profile/avatar' component={AvatarEditorPage} exact />
 					</Switch>
 				</div>
 			</div>

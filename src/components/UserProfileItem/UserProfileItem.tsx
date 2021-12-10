@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import avatar from '../../assets/avatar/unnamed.jpg';
 import { userInfoItems } from '../../pages/UserProfilePage/ProfileItems';
 import { selectUser } from '../../store/selectors/userSelectors';
-import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 
 import styles from './UserProfileItem.module.scss';
 
@@ -17,12 +17,14 @@ type PropsType = {
 export const UserProfileItem: React.FC<PropsType> = ({ profileItems, setEmail, setFullName }) => {
 	const user = useSelector(selectUser);
 
+	const history = useHistory();
+
 	return (
 		<>
 			<li className={styles.profileListItem}>
 				<label>{profileItems}</label>
 				{profileItems === 'Photo' && (
-					<div className={styles.avatar}>
+					<div className={styles.avatar} onClick={() => history.push('profile/avatar')}>
 						<img src={avatar} alt={avatar} />
 					</div>
 				)}
