@@ -12,17 +12,13 @@ const initialState: SampleSliceState = {
 
 export const fetchCreateSamples = createAsyncThunk(
 	'packs/createSamplesStatus',
-	async (payload: { file: File; packId: string, audioCoordinates: number[] }) => {
+	async (payload: { file: File; packId: string; audioCoordinates: number[] }) => {
 		try {
 			const { file, packId, audioCoordinates } = payload;
-			console.log(file);
-			console.log(packId);
-			console.log(audioCoordinates);
 
 			const formData = new FormData();
-			
+
 			formData.append('file', file);
-			
 			// const status = await samplesApi.createSamples(formData, packId);
 			// return status;
 		} catch (error) {
@@ -57,10 +53,13 @@ export const samplesSlice = createSlice({
 	name: 'packs',
 	initialState,
 	reducers: {
-		setSampleFiles: (state, action: PayloadAction<{files: FileList[], packId: string}>) => {
+		setSampleFiles: (state, action: PayloadAction<{ files: FileList[]; packId: string }>) => {
 			const { files, packId } = action.payload;
 			state.files = files;
 			state.packId = packId;
+		},
+		deleteSampleFiles: (state) => {
+			state.files = null;
 		},
 	},
 	extraReducers: (builder) =>
@@ -74,6 +73,6 @@ export const samplesSlice = createSlice({
 		),
 });
 
-export const { setSampleFiles } = samplesSlice.actions;
+export const { setSampleFiles, deleteSampleFiles } = samplesSlice.actions;
 
 export const samplesReducer = samplesSlice.reducer;

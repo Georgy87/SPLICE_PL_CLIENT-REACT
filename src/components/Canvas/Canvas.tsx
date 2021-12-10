@@ -13,10 +13,12 @@ export const Canvas: React.FC<PropsType> = ({ file }) => {
 	const packId = useSelector(selectPackId);
 
 	let canvasRef = useRef<HTMLCanvasElement>(null);
+	const [data, setData] = useState(true);
 
 	useEffect(() => {
 		if (canvasRef?.current) {
 			const offscreen = canvasRef?.current.transferControlToOffscreen();
+
 			// const offscreen = new OffscreenCanvas(1100, 100);
 
 			const audioContext = new AudioContext();
@@ -59,4 +61,3 @@ export const Canvas: React.FC<PropsType> = ({ file }) => {
 		</>
 	);
 };
-

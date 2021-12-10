@@ -22,21 +22,26 @@ export default function WebWorker() {
 			const x = barWidth * i;
 			let barHeight = audioCoordinates[i];
 			drawLineSegment(ctx, x, barHeight, barWidth, canvas);
+			ctx.canvas.width = ctx.canvas.width;
+		
+			// ctx.clearRect(0, cssCanvasHeight / 2, ctx.canvas.width, ctx.canvas.height);
 		}
-
+	
 		ctx.stroke();
 		canvas.convertToBlob({ type: 'image/png' }).then((blob) => fileCreator(blob));
 
 		function fileCreator(blob) {
 			const imageFile = new File([blob], 'png', { type: 'png' });
+		
 			postMessage({ imageFile, audioFile, audioCoordinates, packId });
+		
 		}
 	};
 
-	const drawLineSegment = (ctx, x, barHeight, barWidth, canvas) => {
+	const drawLineSegment = (ctx, x, barHeight, barWidth) => {
 		if (ctx === null) return;
 		ctx.moveTo(x, 0);
 		ctx.rect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
-		ctx.clearRect(100, 0, 1100, 100);
+		
 	};
 }

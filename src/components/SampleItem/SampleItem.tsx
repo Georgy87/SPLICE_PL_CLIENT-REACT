@@ -104,7 +104,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						trackId={_id}
 						currentSampleId={currentSampleId}
 					>
-						{!profileUpdate ? (
+						{profileUpdate ? (
 							<canvas
 								ref={canvasRef}
 								style={{

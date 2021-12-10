@@ -51,7 +51,7 @@ export const ProfilePackPage = () => {
 						<div className={styles.packInfo}>
 							<h1>{packProfile?.name}</h1>
 							<p>{packProfile?.packInfo}</p>
-							<IconChangeLayout
+							{/* <IconChangeLayout
 								onClicked={(e: Event) => {
 									e.stopPropagation();
 									playTrack(0, 'packs');
@@ -68,7 +68,7 @@ export const ProfilePackPage = () => {
 								}}
 							>
 								Play demo
-							</IconChangeLayout>
+							</IconChangeLayout> */}
 						</div>
 					</div>
 					<SampleList samples={samples} />

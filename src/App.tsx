@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Route, Switch, useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -26,7 +26,7 @@ export const App: React.FC = () => {
 		// if (!user) {
 		// 	history.push('login');
 		// }
-
+		
 		dispatch(fetchAuth());
 	}, []);
 

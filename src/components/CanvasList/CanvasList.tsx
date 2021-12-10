@@ -7,7 +7,7 @@ import { Canvas } from '../Canvas/Canvas';
 
 export const CanvasList = () => {
 	const sampleFiles = useSelector(selectSamplesFiles);
-
+	
 	return (
 		<>
 			{sampleFiles &&
