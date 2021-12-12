@@ -8,7 +8,7 @@ import { fetchGetUserPacks } from '../../store/slices/pack/packSlice';
 import { Pack } from '../../store/slices/pack/types';
 import { deleteSampleFiles } from '../../store/slices/samples/samplesSlice';
 import { createSamples } from '../../utils/createSamples';
-import { workerInstance } from '../../utils/WebWorkerEnabler';
+import { workerInstance } from '../../workers/WebWorkerEnabler';
 
 import styles from './UserPacksPage.module.scss';
 

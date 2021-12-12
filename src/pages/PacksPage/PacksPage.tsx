@@ -10,10 +10,7 @@ import { Player } from '../../components/Player/Player';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import { PackItem } from '../../components/PackItem/PackItem';
 import { Pack } from '../../store/slices/pack/types';
-import { selectPacks, selectUserPacks } from '../../store/selectors/packsSelectors';
-import { CanvasList } from '../../components/CanvasList/CanvasList';
-import { createSamples } from '../../utils/createSamples';
-import { workerInstance } from '../../utils/WebWorkerEnabler';
+import { selectPacks } from '../../store/selectors/packsSelectors';
 
 import styles from './PacksPage.module.scss';
 

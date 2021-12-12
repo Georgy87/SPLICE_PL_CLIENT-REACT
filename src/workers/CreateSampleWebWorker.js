@@ -1,6 +1,4 @@
-import { createSamples } from './createSamples';
-
-export default function WebWorker() {
+export default function CreateSampleWebWorker() {
 	onmessage = (e) => {
 		const { audioCoordinates, audioFile, canvas, packId, cssCanvasWidth, cssCanvasHeight, dpr } = e.data;
 		const ctx = e.data.canvas.getContext('2d');
@@ -23,7 +21,6 @@ export default function WebWorker() {
 			let barHeight = audioCoordinates[i];
 			drawLineSegment(ctx, x, barHeight, barWidth, canvas);
 			ctx.canvas.width = ctx.canvas.width;
-		
 			// ctx.clearRect(0, cssCanvasHeight / 2, ctx.canvas.width, ctx.canvas.height);
 		}
 	
@@ -34,14 +31,11 @@ export default function WebWorker() {
 			const imageFile = new File([blob], 'png', { type: 'png' });
 		
 			postMessage({ imageFile, audioFile, audioCoordinates, packId });
-		
 		}
 	};
 
 	const drawLineSegment = (ctx, x, barHeight, barWidth) => {
-		if (ctx === null) return;
 		ctx.moveTo(x, 0);
 		ctx.rect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
-		
 	};
 }

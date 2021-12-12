@@ -9,7 +9,7 @@ import { formatTime } from '../../utils/formatTime';
 import { Samples } from '../../store/slices/samples/types';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { fetchSetLike, fetchDeleteLike } from '../../store/slices/samples/samplesSlice';
-import { workerInstanceSamplePage } from '../../utils/WebWorkerEnabler';
+import { workerInstanceSamplePage } from '../../workers/WebWorkerEnabler';
 
 import styles from './SampleItem.module.scss';
 

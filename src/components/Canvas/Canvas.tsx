@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectPackId } from '../../store/selectors/samplesSelectors';
-import { workerInstance } from '../../utils/WebWorkerEnabler';
+
 import { filterData, normalizeData } from '../../utils/getAudioCoordinates';
+import { workerInstance } from '../../workers/WebWorkerEnabler';
 
 type PropsType = {
 	file: File;

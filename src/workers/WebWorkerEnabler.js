@@ -1,5 +1,5 @@
-import WebWorker from "./WebWorker";
-import WebWorkerViewSample from "./WebWorkerViewSample";
+import WebWorker from "./CreateSampleWebWorker";
+import WebWorkerViewSample from "./SampleViewWebWorker";
 
 export default class WebWorkerEnabler {
 	constructor(worker) {

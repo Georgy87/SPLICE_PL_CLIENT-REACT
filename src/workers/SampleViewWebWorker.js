@@ -1,6 +1,4 @@
-import { createSamples } from './createSamples';
-
-export default function WebWorkerViewSample() {
+export default function SampleViewWebWorker() {
 	onmessage = (e) => {
 		const { audioCoordinates, cssCanvasWidth, cssCanvasHeight, dpr } = e.data;
 		const ctx = e.data.canvas.getContext('2d');
