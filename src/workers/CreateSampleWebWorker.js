@@ -20,8 +20,6 @@ export default function CreateSampleWebWorker() {
 			const x = barWidth * i;
 			let barHeight = audioCoordinates[i];
 			drawLineSegment(ctx, x, barHeight, barWidth, canvas);
-			ctx.canvas.width = ctx.canvas.width;
-			// ctx.clearRect(0, cssCanvasHeight / 2, ctx.canvas.width, ctx.canvas.height);
 		}
 	
 		ctx.stroke();

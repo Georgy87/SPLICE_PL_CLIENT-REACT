@@ -21,7 +21,7 @@ export const AvatarEditorPage = () => {
 	const [crop, setCrop] = useState<any>({ unit: '%', width: 30, aspect: 1 / 1 });
 	const [completedCrop, setCompletedCrop] = useState(null);
 
-	const { drag, setDrag, dragEnter, dragLeave } = useDropzone();
+	const { dragEnter, dragLeave } = useDropzone();
 
 	const handleOnDrop = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();

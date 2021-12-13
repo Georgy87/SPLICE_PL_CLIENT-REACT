@@ -29,7 +29,7 @@ export const UserPackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 		let files = [eventData.files];
 
 		setDrag(false);
-
+		
 		dispatch(setSampleFiles({ files, packId: id }));
 	};
 

@@ -7,7 +7,8 @@ export const createSamples = async (image: File, audio: File, audioCoordinates: 
 			formData.append('image', image);
 			formData.append('audio', audio);
 			formData.append('coordinates', JSON.stringify(audioCoordinates));
-			await instance.post(`samples?packId=${packId}`, formData);
+			const { data } = await instance.post(`samples?packId=${packId}`, formData);
+			return data.status;
 		}
 	} catch (e) {
 		console.log(e);

@@ -8,17 +8,9 @@ import { fetchGetUserPacks } from '../../store/slices/pack/packSlice';
 import { Pack } from '../../store/slices/pack/types';
 import { deleteSampleFiles } from '../../store/slices/samples/samplesSlice';
 import { createSamples } from '../../utils/createSamples';
-import { workerInstance } from '../../workers/WebWorkerEnabler';
+import { workerInstanceCreateSample } from '../../workers/WebWorkerEnabler';
 
 import styles from './UserPacksPage.module.scss';
-
-//@ts-ignore
-workerInstance.addEventListener('message', (e: any) => {
-	const { imageFile, audioFile, audioCoordinates, packId } = e.data;
-	if (e.data) {
-		createSamples(imageFile, audioFile, audioCoordinates, packId);
-	}
-});
 
 export const UserPacksPage = () => {
 	const userPacks = useSelector(selectUserPacks);
@@ -26,12 +18,21 @@ export const UserPacksPage = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		//@ts-ignore
-		workerInstance.addEventListener('message', (e: any) => {
+		const create = async (e: any) => {
+			const { imageFile, audioFile, audioCoordinates, packId } = e.data;
+
 			if (e.data) {
-				dispatch(deleteSampleFiles());
+				const data = await createSamples(imageFile, audioFile, audioCoordinates, packId);
+
+				if (data === 'SUCCESS') {
+					dispatch(deleteSampleFiles());
+
+					workerInstanceCreateSample.removeEventListener('message', create);
+				}
 			}
-		});
+		};
+
+		workerInstanceCreateSample.addEventListener('message', create);
 		dispatch(fetchGetUserPacks());
 	}, []);
 

@@ -1,8 +1,6 @@
 import { Crop } from "react-image-crop";
 
 class AvatarService {
-	constructor() {}
-
 	extractImageFileExtensionFromBase64(base64Data: string | ArrayBuffer | null) {
 		if (base64Data && typeof base64Data === 'string') {
 			return base64Data.substring('data:image/'.length, base64Data.indexOf(';base64'));

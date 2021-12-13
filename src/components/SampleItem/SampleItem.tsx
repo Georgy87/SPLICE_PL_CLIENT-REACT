@@ -9,7 +9,7 @@ import { formatTime } from '../../utils/formatTime';
 import { Samples } from '../../store/slices/samples/types';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { fetchSetLike, fetchDeleteLike } from '../../store/slices/samples/samplesSlice';
-import { workerInstanceSamplePage } from '../../workers/WebWorkerEnabler';
+import { workerInstanceViewSample } from '../../workers/WebWorkerEnabler';
 
 import styles from './SampleItem.module.scss';
 
@@ -37,8 +37,8 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	useEffect(() => {
 		if (canvasRef?.current) {
 			const offscreen = canvasRef?.current.transferControlToOffscreen();
-			//@ts-ignore
-			workerInstanceSamplePage.postMessage(
+			
+			workerInstanceViewSample.postMessage(
 				{
 					audioCoordinates: audioCoordinatesParse,
 					canvas: offscreen,
