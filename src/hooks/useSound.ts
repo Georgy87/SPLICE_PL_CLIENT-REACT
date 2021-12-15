@@ -43,7 +43,7 @@ export const useSound = () => {
 				setPlayerState((state: PlayerStateType) => ({
 					...state,
 					currentTime: Math.ceil(state.audioPlayer.currentTime),
-					percent: Number((100 / state.duration) * state.currentTime),
+					percent: Number((550 / state.duration) * state.currentTime),
 				}));
 			};
 
@@ -108,7 +108,7 @@ export const useSound = () => {
 			// currentTime: Number(e.target.value),
 			percent: e.target.value,
 		}));
-
+		console.log(e.target.value);
 		playerState.audioPlayer.currentTime =
 			(playerState.audioPlayer.duration / 100) * +e.target.value;
 	};

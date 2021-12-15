@@ -8,6 +8,12 @@
 	top: 15%;
 	left: 0;
 	z-index: -1;
+	.cursor {
+		position: absolute;
+		height: 50px;
+		width: 1px;
+		color: rgb(47, 245, 21);
+	}
 }
 
 .formElement input[type='range'] {
@@ -21,7 +27,7 @@
 	outline: none;
 	overflow: hidden;
 	-webkit-transition: .2s;
-  transition: opacity .2s;
+  	transition: opacity .2s;
 }
 
 .formElement input[type='range']::-webkit-slider-thumb {
@@ -30,6 +36,7 @@
 	width: 2px;
 	height: 50px;
 	z-index: -1;
-	background: #cbd1cb;
+	// background: #cbd1cb;
 	cursor: pointer;
 }
+

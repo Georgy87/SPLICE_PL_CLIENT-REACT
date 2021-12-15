@@ -13,7 +13,7 @@ export default function CreateSampleWebWorker() {
 
 		const barWidth = cssCanvasWidth / audioCoordinates.length;
 
-		ctx.strokeStyle = '#98b2d1';
+		ctx.strokeStyle = 'grey';
 		ctx.beginPath();
 
 		for (let i = 0; i < audioCoordinates.length; i++) {
@@ -34,6 +34,6 @@ export default function CreateSampleWebWorker() {
 
 	const drawLineSegment = (ctx, x, barHeight, barWidth) => {
 		ctx.moveTo(x, 0);
-		ctx.rect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
+		ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
 	};
 }

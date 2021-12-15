@@ -18,7 +18,7 @@ export const SampleSliderLayout: React.FC<PropsType> = ({
 	width,
 }) => {
 	const { percent, changeCurrentTimeSample } = useSound();
-
+	
 	return (
 		<>
 			<div className={styles.sliderContainer}>
@@ -32,6 +32,19 @@ export const SampleSliderLayout: React.FC<PropsType> = ({
 						value={trackId === currentSampleId ? percent : 0}
 						onChange={changeCurrentTimeSample}
 					></input>
+					{/* {trackId === currentSampleId && <div
+						className={styles.cursor}
+						style={{
+							height: '50px',
+							width: '2px',
+							backgroundColor: 'red',
+							top: 0,
+
+							position: 'absolute',
+							zIndex: 10000,
+							left: `${percent}px`,
+						}}
+					></div>} */}
 					<div className={styles.sliderWave}>{children}</div>
 				</div>
 			</div>

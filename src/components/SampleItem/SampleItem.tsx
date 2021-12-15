@@ -23,32 +23,32 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 
 	const packProfile = useSelector(selectPackProfile);
 
-	const profileUpdate = packProfile?.update;
-
 	const [width, setWidth] = useState<string>('550px');
 	const [like, setLike] = useState<boolean>(false);
 
-	const { playTrack, isPlaying, currentSampleId } = useSound();
+	const { playTrack, isPlaying, currentSampleId, currentTime, percent } = useSound();
 	const dispatch = useDispatch();
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
-	const audioCoordinatesParse: number[] = JSON.parse(audioCoordinates);
+	const canvas: HTMLCanvasElement | null = canvasRef.current;
 
+	const audioCoordinatesParse: number[] = JSON.parse(audioCoordinates);
 	useEffect(() => {
-		if (canvasRef?.current) {
-			const offscreen = canvasRef?.current.transferControlToOffscreen();
-			
-			workerInstanceViewSample.postMessage(
-				{
-					audioCoordinates: audioCoordinatesParse,
-					canvas: offscreen,
-					cssCanvasWidth: 550,
-					cssCanvasHeight: 50,
-					dpr: 2,
-				},
-				[offscreen],
-			);
-		}
+		// if (canvasRef?.current) {
+		// 	const offscreen = canvasRef?.current.transferControlToOffscreen();
+
+		// 	workerInstanceViewSample.postMessage(
+		// 		{
+		// 			audioCoordinates: audioCoordinatesParse,
+		// 			canvas: offscreen,
+		// 			cssCanvasWidth: 550,
+		// 			cssCanvasHeight: 50,
+		// 			dpr: 2,
+		// 			currentTime: currentTime,
+		// 		},
+		// 		[offscreen],
+		// 	);
+		// }
 
 		setLike(likes.length >= 1);
 
@@ -72,6 +72,82 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 			setWidth('550px');
 		};
 	}, []);
+
+	useEffect(() => {
+		if (canvas != null) {
+			if (currentSampleId === _id) {
+				const dpr = window.devicePixelRatio || 1;
+		
+				canvas.width = 550 * 2;
+				canvas.height = 50 * 2;
+				const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
+				if (ctx === null) return;
+	
+				ctx?.scale(2, 2);
+				ctx?.translate(0, 50 / 2);
+	
+				const barWidth = canvas.offsetWidth / audioCoordinatesParse.length;
+				
+				ctx.strokeStyle = 'blue';
+				ctx.beginPath();
+				ctx.stroke();
+			
+				const drawLineSegment = (ctx: any, x: any, barHeight: any, barWidth: any) => {
+					// ctx.moveTo(x, 0);
+					ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
+					ctx.fillStyle = 'blue';
+				};
+
+				// const drawCursor = (ctx: any, x: any, barHeight: any, barWidth: any) => {
+				// 	ctx.moveTo(x, 0);
+				// 	ctx.fillRect(x + 4, -(barHeight / 2), 2, barHeight);
+				// 	ctx.fillStyle = 'blue';
+				// };
+				
+				for (let i = 0; i < ((audioCoordinatesParse.length / duration) * currentTime); i++) {
+					const x = barWidth * i;
+					
+					let barHeight = audioCoordinatesParse[i];
+					drawLineSegment(ctx, x, barHeight, barWidth);
+					// drawCursor(ctx, i, barHeight, barWidth);
+				}
+
+				// for (let i = 0; i < 2; i++) {
+				// 	const x = barWidth * i;
+				// 	console.log(x);
+				// 	let barHeight = audioCoordinatesParse[i];
+				// 	ctx.fillRect(x, -(barHeight / 2), 2, barHeight);
+				// 	ctx.fillStyle = 'blue';
+				// 	// drawCursor(ctx, i, barHeight, barWidth);
+				// }
+			} else {
+				canvas.width = 550 * 2;
+				canvas.height = 50 * 2;
+				const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
+				if (ctx === null) return;
+	
+				ctx?.scale(2, 2);
+				ctx?.translate(0, 50 / 2);
+	
+				const barWidth = canvas.offsetWidth / audioCoordinatesParse.length;
+	
+				ctx.strokeStyle = 'red';
+				ctx.beginPath();
+				ctx.stroke();
+				// // const drawLineSegment = (ctx: any, x: any, barHeight: any, barWidth: any) => {
+				
+				// // 	ctx.moveTo(x, 0);
+				// // 	ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
+				// // 	ctx.fillStyle = 'red';
+				// // };
+				// for (let i = 0; i < (currentTime * 6); i++) {
+				// 	const x = barWidth * i;
+				// 	let barHeight = audioCoordinatesParse[i];
+				// 	// drawLineSegment(ctx, x, barHeight, barWidth);
+				// }
+			}
+		} 
+	}, [canvas, currentTime]);
 
 	return (
 		<>
@@ -104,24 +180,26 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						trackId={_id}
 						currentSampleId={currentSampleId}
 					>
-						{profileUpdate ? (
-							<canvas
-								ref={canvasRef}
-								style={{
-									width: width,
-									height: '35px',
-								}}
-							/>
-						) : (
-							<img
-								src={`/${canvasImage}`}
-								style={{
-									width: width,
-									height: '35px',
-								}}
-								alt={canvasImage}
-							/>
-						)}
+						<canvas
+							ref={canvasRef}
+							style={{
+								width: width,
+								height: '35px',
+								zIndex: 50,
+								position: 'absolute',
+							}}
+						/>
+
+						<img
+							src={`/${canvasImage}`}
+							style={{
+								position: 'relative',
+								width: width,
+								height: '35px',
+								zIndex: -50,
+							}}
+							alt={canvasImage}
+						/>
 					</SampleSliderLayout>
 
 					<p className={styles.sampleName}>{sample.sampleName}</p>

@@ -1,6 +1,7 @@
 export default function SampleViewWebWorker() {
 	onmessage = (e) => {
-		const { audioCoordinates, cssCanvasWidth, cssCanvasHeight, dpr } = e.data;
+		const { audioCoordinates, cssCanvasWidth, cssCanvasHeight, dpr, currentTime } = e.data;
+
 		const ctx = e.data.canvas.getContext('2d');
 		const { canvas } = e.data;
 
@@ -13,24 +14,22 @@ export default function SampleViewWebWorker() {
 		ctx?.translate(0, cssCanvasHeight / 2);
 
 		const barWidth = cssCanvasWidth / audioCoordinates.length;
-
-		ctx.strokeStyle = '#98b2d1';
+		ctx.strokeStyle = 'red';
 		ctx.beginPath();
 
 		for (let i = 0; i < audioCoordinates.length; i++) {
 			const x = barWidth * i;
+
 			let barHeight = audioCoordinates[i];
 			drawLineSegment(ctx, x, barHeight, barWidth);
 		}
-
-		ctx.stroke();
-
 		postMessage({ audioCoordinates });
 	};
 
 	const drawLineSegment = (ctx, x, barHeight, barWidth) => {
-		if (ctx === null) return;
+		
 		ctx.moveTo(x, 0);
-		ctx.rect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
+		ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
+		ctx.fillStyle = 'red';
 	};
 }

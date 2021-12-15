@@ -23,11 +23,10 @@ export const UserPacksPage = () => {
 
 			if (e.data) {
 				const data = await createSamples(imageFile, audioFile, audioCoordinates, packId);
-
+				
 				if (data === 'SUCCESS') {
-					dispatch(deleteSampleFiles());
-
 					workerInstanceCreateSample.removeEventListener('message', create);
+					dispatch(deleteSampleFiles());
 				}
 			}
 		};
