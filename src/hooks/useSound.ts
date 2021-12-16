@@ -17,7 +17,7 @@ export const useSound = () => {
 	// 	volume,
 	// 	percent,
 	// } = playerState;
-	
+
 	const playTrack = (index: number, typeElement: string) => {
 		if (index === playerState.currentTrackIndex) {
 			play();
@@ -26,7 +26,7 @@ export const useSound = () => {
 				typeElement === 'packs'
 					? `/${playerState.packs[index]?.audio}`
 					: `/${playerState?.samples[index]?.audio}`;
-	
+
 			playerState.audioPlayer.pause();
 			playerState.audioPlayer = new Audio(url);
 
@@ -43,7 +43,10 @@ export const useSound = () => {
 				setPlayerState((state: PlayerStateType) => ({
 					...state,
 					currentTime: Math.ceil(state.audioPlayer.currentTime),
-					percent: Number((550 / state.duration) * state.currentTime),
+					percent: (
+						(550 / state.audioPlayer.duration) *
+						state.audioPlayer.currentTime
+					).toFixed(2),
 				}));
 			};
 
@@ -97,20 +100,17 @@ export const useSound = () => {
 		setPlayerState((playerState: PlayerStateType) => ({
 			...playerState,
 			currentTime: Number(value),
+			percent: Number((100 / playerState.duration) * playerState.currentTime),
 		}));
-
-		playerState.audioPlayer.currentTime = Number(value);
 	};
 
-	const changeCurrentTimeSample = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const changeCurrentTimeSample = (e: any) => {
 		setPlayerState((playerState: PlayerStateType) => ({
 			...playerState,
-			// currentTime: Number(e.target.value),
-			percent: e.target.value,
+			// currentTime: (playerState.audioPlayer.duration / 550) * (e.clientX - 183),
+			// percent: +e.screenX,
 		}));
-		console.log(e.target.value);
-		playerState.audioPlayer.currentTime =
-			(playerState.audioPlayer.duration / 100) * +e.target.value;
+		playerState.audioPlayer.currentTime = (playerState.audioPlayer.duration / 550) * (e.clientX - 183);
 	};
 
 	return {

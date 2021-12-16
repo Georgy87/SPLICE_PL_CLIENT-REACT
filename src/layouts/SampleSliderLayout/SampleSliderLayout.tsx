@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEventHandler, useRef } from 'react';
 
 import { useSound } from '../../hooks/useSound';
 
@@ -17,34 +17,36 @@ export const SampleSliderLayout: React.FC<PropsType> = ({
 	currentSampleId,
 	width,
 }) => {
-	const { percent, changeCurrentTimeSample } = useSound();
+	const { percent, changeCurrentTimeSample, currentTime, duration } = useSound();
 	
 	return (
 		<>
 			<div className={styles.sliderContainer}>
 				<div className={styles.formElement}>
-					<input
-						style={{ width: width }}
-						type='range'
-						// min='0'
-						// max='100'
-						// step='0.01'
-						value={trackId === currentSampleId ? percent : 0}
-						onChange={changeCurrentTimeSample}
-					></input>
-					{/* {trackId === currentSampleId && <div
-						className={styles.cursor}
-						style={{
-							height: '50px',
-							width: '2px',
-							backgroundColor: 'red',
-							top: 0,
-
-							position: 'absolute',
-							zIndex: 10000,
-							left: `${percent}px`,
-						}}
-					></div>} */}
+					{trackId === currentSampleId && (
+						// <input
+						// 	onMouseMove={handleMouseMove}
+						// 	style={{ width: width }}
+						// 	type='range'
+						// 	// step='0.01'
+						// 	value={percent}
+						// 	onChange={changeCurrentTimeSample}
+						// ></input>
+						<div
+							style={{ width: '550px', height: '50px', position: 'absolute', zIndex: 5000 }}
+							onMouseUp={changeCurrentTimeSample}
+						>
+							<div
+								style={{
+									position: 'absolute',
+									height: '50px',
+									left: `${percent}px`,
+									backgroundColor: 'blue',
+									width: '2px',
+								}}
+							></div>
+						</div>
+					)}
 					<div className={styles.sliderWave}>{children}</div>
 				</div>
 			</div>

@@ -88,38 +88,23 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	
 				const barWidth = canvas.offsetWidth / audioCoordinatesParse.length;
 				
-				ctx.strokeStyle = 'blue';
+				ctx.strokeStyle = 'red';
 				ctx.beginPath();
 				ctx.stroke();
 			
 				const drawLineSegment = (ctx: any, x: any, barHeight: any, barWidth: any) => {
-					// ctx.moveTo(x, 0);
+					ctx.moveTo(x, 0);
 					ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
-					ctx.fillStyle = 'blue';
+					ctx.fillStyle = 'red';
 				};
 
-				// const drawCursor = (ctx: any, x: any, barHeight: any, barWidth: any) => {
-				// 	ctx.moveTo(x, 0);
-				// 	ctx.fillRect(x + 4, -(barHeight / 2), 2, barHeight);
-				// 	ctx.fillStyle = 'blue';
-				// };
-				
-				for (let i = 0; i < ((audioCoordinatesParse.length / duration) * currentTime); i++) {
+				for (let i = 0; i < (audioCoordinatesParse.length / duration) * currentTime; i++) {
 					const x = barWidth * i;
 					
 					let barHeight = audioCoordinatesParse[i];
 					drawLineSegment(ctx, x, barHeight, barWidth);
-					// drawCursor(ctx, i, barHeight, barWidth);
+				
 				}
-
-				// for (let i = 0; i < 2; i++) {
-				// 	const x = barWidth * i;
-				// 	console.log(x);
-				// 	let barHeight = audioCoordinatesParse[i];
-				// 	ctx.fillRect(x, -(barHeight / 2), 2, barHeight);
-				// 	ctx.fillStyle = 'blue';
-				// 	// drawCursor(ctx, i, barHeight, barWidth);
-				// }
 			} else {
 				canvas.width = 550 * 2;
 				canvas.height = 50 * 2;
@@ -134,17 +119,6 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 				ctx.strokeStyle = 'red';
 				ctx.beginPath();
 				ctx.stroke();
-				// // const drawLineSegment = (ctx: any, x: any, barHeight: any, barWidth: any) => {
-				
-				// // 	ctx.moveTo(x, 0);
-				// // 	ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
-				// // 	ctx.fillStyle = 'red';
-				// // };
-				// for (let i = 0; i < (currentTime * 6); i++) {
-				// 	const x = barWidth * i;
-				// 	let barHeight = audioCoordinatesParse[i];
-				// 	// drawLineSegment(ctx, x, barHeight, barWidth);
-				// }
 			}
 		} 
 	}, [canvas, currentTime]);
@@ -202,7 +176,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						/>
 					</SampleSliderLayout>
 
-					<p className={styles.sampleName}>{sample.sampleName}</p>
+					{/* <p className={styles.sampleName}>{sample.sampleName}</p> */}
 					<div className={styles.rightWrap}>
 						{!like ? (
 							<IconLayout
