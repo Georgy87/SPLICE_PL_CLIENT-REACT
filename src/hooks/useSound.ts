@@ -43,10 +43,7 @@ export const useSound = () => {
 				setPlayerState((state: PlayerStateType) => ({
 					...state,
 					currentTime: Math.ceil(state.audioPlayer.currentTime),
-					percent: (
-						(550 / state.audioPlayer.duration) *
-						state.audioPlayer.currentTime
-					).toFixed(2),
+					percent: (550 / state.audioPlayer.duration) * state.audioPlayer.currentTime,
 				}));
 			};
 
@@ -105,12 +102,8 @@ export const useSound = () => {
 	};
 
 	const changeCurrentTimeSample = (e: any) => {
-		setPlayerState((playerState: PlayerStateType) => ({
-			...playerState,
-			// currentTime: (playerState.audioPlayer.duration / 550) * (e.clientX - 183),
-			// percent: +e.screenX,
-		}));
-		playerState.audioPlayer.currentTime = (playerState.audioPlayer.duration / 550) * (e.clientX - 183);
+		playerState.audioPlayer.currentTime =
+			(playerState.audioPlayer.duration / 550) * (e.clientX - 183);
 	};
 
 	return {

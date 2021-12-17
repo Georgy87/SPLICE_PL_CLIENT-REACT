@@ -74,53 +74,46 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	}, []);
 
 	useEffect(() => {
+		// const canvasData = {
+		// 	audioCoordinates: audioCoordinatesParse,
+		// 	cssCanvasWidth: 550,
+		// 	cssCanvasHeight: 50,
+		// 	dpr: 2,
+		// 	currentTime: currentTime,
+		// };
+
 		if (canvas != null) {
 			if (currentSampleId === _id) {
-				const dpr = window.devicePixelRatio || 1;
-		
 				canvas.width = 550 * 2;
 				canvas.height = 50 * 2;
 				const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
 				if (ctx === null) return;
-	
+
 				ctx?.scale(2, 2);
 				ctx?.translate(0, 50 / 2);
-	
+
 				const barWidth = canvas.offsetWidth / audioCoordinatesParse.length;
-				
+
 				ctx.strokeStyle = 'red';
 				ctx.beginPath();
 				ctx.stroke();
-			
+
 				const drawLineSegment = (ctx: any, x: any, barHeight: any, barWidth: any) => {
-					ctx.moveTo(x, 0);
+					// ctx.moveTo(x, 0);
 					ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
 					ctx.fillStyle = 'red';
 				};
 
 				for (let i = 0; i < (audioCoordinatesParse.length / duration) * currentTime; i++) {
 					const x = barWidth * i;
-					
+					console.log(i);
+					// console.log(((audioCoordinatesParse.length * 3.6) / duration) * currentTime)
+					// console.log((550 / duration) * currentTime);
 					let barHeight = audioCoordinatesParse[i];
 					drawLineSegment(ctx, x, barHeight, barWidth);
-				
 				}
-			} else {
-				canvas.width = 550 * 2;
-				canvas.height = 50 * 2;
-				const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
-				if (ctx === null) return;
-	
-				ctx?.scale(2, 2);
-				ctx?.translate(0, 50 / 2);
-	
-				const barWidth = canvas.offsetWidth / audioCoordinatesParse.length;
-	
-				ctx.strokeStyle = 'red';
-				ctx.beginPath();
-				ctx.stroke();
-			}
-		} 
+			} 
+		}
 	}, [canvas, currentTime]);
 
 	return (
@@ -154,7 +147,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						trackId={_id}
 						currentSampleId={currentSampleId}
 					>
-						<canvas
+						{currentSampleId === _id && <canvas
 							ref={canvasRef}
 							style={{
 								width: width,
@@ -162,7 +155,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 								zIndex: 50,
 								position: 'absolute',
 							}}
-						/>
+						/>}
 
 						<img
 							src={`/${canvasImage}`}
