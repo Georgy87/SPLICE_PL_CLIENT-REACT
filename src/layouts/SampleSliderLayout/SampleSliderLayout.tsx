@@ -16,18 +16,18 @@ export const SampleSliderLayout: React.FC<PropsType> = ({
 	trackId,
 	currentSampleId,
 }) => {
-	const { percent, changeCurrentTimeSample, currentTime, duration } = useSound();
+	const { percent, changeCurrentTimeSample } = useSound();
 
 	return (
 		<div className={styles.sliderContainer} onMouseUp={changeCurrentTimeSample}>
-			{trackId === currentSampleId && (
+			{/* {trackId === currentSampleId && (
 				<div
 					style={{
 						left: `${percent}px`,
 					}}
 					className={styles.cursor}
 				></div>
-			)}
+			)} */}
 			<div className={styles.sliderWave}>{children}</div>
 		</div>
 	);

@@ -42,7 +42,7 @@ export const useSound = () => {
 			playerState.audioPlayer.ontimeupdate = () => {
 				setPlayerState((state: PlayerStateType) => ({
 					...state,
-					currentTime: Math.ceil(state.audioPlayer.currentTime),
+					currentTime: state.audioPlayer.currentTime,
 					percent: (550 / state.audioPlayer.duration) * state.audioPlayer.currentTime,
 				}));
 			};

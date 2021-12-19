@@ -33,6 +33,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	const canvas: HTMLCanvasElement | null = canvasRef.current;
 
 	const audioCoordinatesParse: number[] = JSON.parse(audioCoordinates);
+
 	useEffect(() => {
 		// if (canvasRef?.current) {
 		// 	const offscreen = canvasRef?.current.transferControlToOffscreen();
@@ -82,37 +83,37 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		// 	currentTime: currentTime,
 		// };
 
+		const dpr = window.devicePixelRatio || 1;
+
+		const cssCanvasWidth: number = 550;
+		const cssCanvasHeight: number = 50;
+
 		if (canvas != null) {
 			if (currentSampleId === _id) {
-				canvas.width = 550 * 2;
-				canvas.height = 50 * 2;
+				canvas.width = cssCanvasWidth * dpr;
+				canvas.height = cssCanvasHeight * dpr;
 				const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
 				if (ctx === null) return;
 
-				ctx?.scale(2, 2);
-				ctx?.translate(0, 50 / 2);
+				ctx?.scale(dpr, dpr);
+				ctx?.translate(0, cssCanvasHeight / dpr);
 
 				const barWidth = canvas.offsetWidth / audioCoordinatesParse.length;
 
-				ctx.strokeStyle = 'red';
 				ctx.beginPath();
-				ctx.stroke();
 
-				const drawLineSegment = (ctx: any, x: any, barHeight: any, barWidth: any) => {
-					// ctx.moveTo(x, 0);
-					ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
+				const drawLineSegment = (ctx: CanvasRenderingContext2D, x: number, barHeight: number, barWidth: number) => {
 					ctx.fillStyle = 'red';
+					ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 0.5, barHeight);
+					ctx.stroke();
 				};
-
-				for (let i = 0; i < (audioCoordinatesParse.length / duration) * currentTime; i++) {
+			
+				for (let i = 0; i < percent; i++) {
 					const x = barWidth * i;
-					console.log(i);
-					// console.log(((audioCoordinatesParse.length * 3.6) / duration) * currentTime)
-					// console.log((550 / duration) * currentTime);
 					let barHeight = audioCoordinatesParse[i];
 					drawLineSegment(ctx, x, barHeight, barWidth);
 				}
-			} 
+			}
 		}
 	}, [canvas, currentTime]);
 
@@ -147,15 +148,17 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						trackId={_id}
 						currentSampleId={currentSampleId}
 					>
-						{currentSampleId === _id && <canvas
-							ref={canvasRef}
-							style={{
-								width: width,
-								height: '35px',
-								zIndex: 50,
-								position: 'absolute',
-							}}
-						/>}
+						{currentSampleId === _id && (
+							<canvas
+								ref={canvasRef}
+								style={{
+									width: width,
+									height: '35px',
+									zIndex: 50,
+									position: 'absolute',
+								}}
+							/>
+						)}
 
 						<img
 							src={`/${canvasImage}`}
@@ -169,7 +172,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						/>
 					</SampleSliderLayout>
 
-					{/* <p className={styles.sampleName}>{sample.sampleName}</p> */}
+					<p className={styles.sampleName}>{sample.sampleName}</p>
 					<div className={styles.rightWrap}>
 						{!like ? (
 							<IconLayout

@@ -27,8 +27,7 @@ export default function SampleViewWebWorker() {
 	};
 
 	const drawLineSegment = (ctx, x, barHeight, barWidth) => {
-		
-		ctx.moveTo(x, 0);
+		// ctx.moveTo(x, 0);
 		ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
 		ctx.fillStyle = 'red';
 	};

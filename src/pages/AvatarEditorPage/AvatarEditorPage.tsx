@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
 
 import { useDropzone } from '../../hooks/useDropzone';
-import { avatarService } from '../../utils/avatarService';
+import { avatarService } from '../../services/api/avatarService';
 
 import './UserProfilePhoto.css';
 

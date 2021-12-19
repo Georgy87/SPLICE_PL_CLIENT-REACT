@@ -2,7 +2,7 @@ class AudioService {
 	private filterData(audioBuffer: AudioBuffer) {
 		const rawData = audioBuffer.getChannelData(0);
 
-		const samples: number = 150;
+		const samples: number = 550;
 		const blockSize: number = Math.floor(rawData.length / samples);
 		const filteredData: number[] = [];
 
@@ -19,7 +19,7 @@ class AudioService {
 	}
 
 	private normalizeData(filteredData: number[]) {
-		const multiplier = 36 / Math.max(...filteredData);
+		const multiplier = 50 / Math.max(...filteredData);
 		return filteredData.map((n: number) => ((n * multiplier) + 1).toFixed());
 	}
 
