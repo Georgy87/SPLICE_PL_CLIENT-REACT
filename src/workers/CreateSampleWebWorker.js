@@ -34,6 +34,6 @@ export default function CreateSampleWebWorker() {
 
 	const drawLineSegment = (ctx, x, barHeight, barWidth) => {
 		ctx.fillStyle = 'gray';
-		ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 0.5, barHeight);
+		ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 0.6, barHeight);
 	};
 }

@@ -12,6 +12,8 @@ import { fetchSetLike, fetchDeleteLike } from '../../store/slices/samples/sample
 import { workerInstanceViewSample } from '../../workers/WebWorkerEnabler';
 
 import styles from './SampleItem.module.scss';
+import { canvasService } from '../../services/canvasService';
+import { url } from 'inspector';
 
 type PropsType = {
 	sample: Samples;
@@ -35,22 +37,6 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	const audioCoordinatesParse: number[] = JSON.parse(audioCoordinates);
 
 	useEffect(() => {
-		// if (canvasRef?.current) {
-		// 	const offscreen = canvasRef?.current.transferControlToOffscreen();
-
-		// 	workerInstanceViewSample.postMessage(
-		// 		{
-		// 			audioCoordinates: audioCoordinatesParse,
-		// 			canvas: offscreen,
-		// 			cssCanvasWidth: 550,
-		// 			cssCanvasHeight: 50,
-		// 			dpr: 2,
-		// 			currentTime: currentTime,
-		// 		},
-		// 		[offscreen],
-		// 	);
-		// }
-
 		setLike(likes.length >= 1);
 
 		const handleResize = () => {
@@ -75,45 +61,8 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	}, []);
 
 	useEffect(() => {
-		// const canvasData = {
-		// 	audioCoordinates: audioCoordinatesParse,
-		// 	cssCanvasWidth: 550,
-		// 	cssCanvasHeight: 50,
-		// 	dpr: 2,
-		// 	currentTime: currentTime,
-		// };
-
-		const dpr = window.devicePixelRatio || 1;
-
-		const cssCanvasWidth: number = 550;
-		const cssCanvasHeight: number = 50;
-
-		if (canvas != null) {
-			if (currentSampleId === _id) {
-				canvas.width = cssCanvasWidth * dpr;
-				canvas.height = cssCanvasHeight * dpr;
-				const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
-				if (ctx === null) return;
-
-				ctx?.scale(dpr, dpr);
-				ctx?.translate(0, cssCanvasHeight / dpr);
-
-				const barWidth = canvas.offsetWidth / audioCoordinatesParse.length;
-
-				ctx.beginPath();
-
-				const drawLineSegment = (ctx: CanvasRenderingContext2D, x: number, barHeight: number, barWidth: number) => {
-					ctx.fillStyle = 'red';
-					ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 0.5, barHeight);
-					ctx.stroke();
-				};
-			
-				for (let i = 0; i < percent; i++) {
-					const x = barWidth * i;
-					let barHeight = audioCoordinatesParse[i];
-					drawLineSegment(ctx, x, barHeight, barWidth);
-				}
-			}
+		if (currentSampleId === _id) {
+			canvasService.sampleCanvas(canvas, audioCoordinatesParse, percent);
 		}
 	}, [canvas, currentTime]);
 
@@ -149,26 +98,38 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						currentSampleId={currentSampleId}
 					>
 						{currentSampleId === _id && (
-							<canvas
-								ref={canvasRef}
-								style={{
-									width: width,
-									height: '35px',
-									zIndex: 50,
-									position: 'absolute',
-								}}
-							/>
+							<>
+								<canvas
+									ref={canvasRef}
+									style={{
+										width: width,
+										height: '35px',
+										zIndex: 50,
+										position: 'absolute',
+										top: 0,
+										left: 0,
+									}}
+								/>
+								<div
+									style={{
+										height: '35px',
+										zIndex: 49,
+										position: 'absolute',
+										top: 0,
+										left: 0,
+										backgroundColor: '#fff',
+										width: `${percent}px`,
+									}}
+								/>
+							</>
 						)}
 
-						<img
-							src={`/${canvasImage}`}
+						<div
+							className={styles.backgroundWave}
 							style={{
-								position: 'relative',
+								backgroundImage: `url(/${canvasImage})`,
 								width: width,
-								height: '35px',
-								zIndex: -50,
 							}}
-							alt={canvasImage}
 						/>
 					</SampleSliderLayout>
 

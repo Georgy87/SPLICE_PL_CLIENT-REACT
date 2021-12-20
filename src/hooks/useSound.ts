@@ -103,7 +103,8 @@ export const useSound = () => {
 
 	const changeCurrentTimeSample = (e: any) => {
 		playerState.audioPlayer.currentTime =
-			(playerState.audioPlayer.duration / 550) * (e.clientX - 183);
+			(playerState.audioPlayer.duration / 550) * (e.clientX - 184);
+			console.log(e.clientX)
 	};
 
 	return {

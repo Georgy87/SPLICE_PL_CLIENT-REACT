@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectPackId } from '../../store/selectors/samplesSelectors';
-import { audioService } from '../../services/api/audioService';
+import { audioService } from '../../services/audioService';
 import { workerInstanceCreateSample } from '../../workers/WebWorkerEnabler';
 
 type PropsType = {

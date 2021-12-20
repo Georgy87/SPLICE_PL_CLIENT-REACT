@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useRef } from 'react';
+import React from 'react';
 
 import { useSound } from '../../hooks/useSound';
 
