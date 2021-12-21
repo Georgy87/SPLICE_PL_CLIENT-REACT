@@ -5,6 +5,7 @@ import { PlayerStateType } from '../context/PlayerContextProvider/types';
 
 export const useSound = () => {
 	const [playerState, setPlayerState] = useContext(PlayerContext);
+	let myReq: any;
 
 	// const {
 	// 	packs,
@@ -21,6 +22,7 @@ export const useSound = () => {
 	const playTrack = (index: number, typeElement: string) => {
 		if (index === playerState.currentTrackIndex) {
 			play();
+		
 		} else {
 			let url =
 				typeElement === 'packs'
@@ -39,13 +41,30 @@ export const useSound = () => {
 				}));
 			};
 
-			playerState.audioPlayer.ontimeupdate = () => {
+			// playerState.audioPlayer.ontimeupdate = () => {
+			// 	setPlayerState((state: PlayerStateType) => ({
+			// 		...state,
+			// 		currentTime: state.audioPlayer.currentTime,
+			// 		packCurrentTime: state.audioPlayer.currentTime,
+			// 		percent: (550 / state.audioPlayer.duration) * state.audioPlayer.currentTime,
+			// 	}));
+			// };
+
+		
+			//@ts-ignore
+			function step() {
 				setPlayerState((state: PlayerStateType) => ({
 					...state,
 					currentTime: state.audioPlayer.currentTime,
+					packCurrentTime: state.audioPlayer.currentTime,
 					percent: (550 / state.audioPlayer.duration) * state.audioPlayer.currentTime,
 				}));
-			};
+			
+				myReq = window.requestAnimationFrame(step);
+				console.log('test')
+			}
+
+			myReq = window.requestAnimationFrame(step);
 
 			playerState.audioPlayer.play();
 
@@ -54,7 +73,7 @@ export const useSound = () => {
 				currentTrackIndex: index,
 				isPlaying: true,
 			}));
-
+			
 			playerState.audioPlayer.onended = () => {
 				setPlayerState((state: PlayerStateType) => ({
 					...state,
@@ -65,18 +84,23 @@ export const useSound = () => {
 					active: null,
 					duration: 0,
 					currentTime: 0,
+					packCurrentTime: 0,
 					volume: 2,
 					percent: 0,
 				}));
+				cancelAnimationFrame(myReq);
 			};
 		}
 	};
 
 	const play = () => {
 		if (playerState.isPlaying) {
+			cancelAnimationFrame(myReq);
 			playerState.audioPlayer.pause();
+		
 		} else {
 			playerState.audioPlayer.play();
+			cancelAnimationFrame(myReq);
 		}
 		setPlayerState((playerState: PlayerStateType) => ({
 			...playerState,
@@ -84,32 +108,20 @@ export const useSound = () => {
 		}));
 	};
 
-	const changeVolume = (e: React.MouseEvent, value: number) => {
-		setPlayerState((playerState: PlayerStateType) => ({
-			...playerState,
-			volume: Number(value),
-		}));
-
-		playerState.audioPlayer.volume = Number(value) / 100;
+	const changeVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+		playerState.audioPlayer.volume = Number(e.target.value) / 100;
 	};
 
-	const changeCurrentTime = (e: React.MouseEvent, value: number) => {
-		setPlayerState((playerState: PlayerStateType) => ({
-			...playerState,
-			currentTime: Number(value),
-			percent: Number((100 / playerState.duration) * playerState.currentTime),
-		}));
+	const changeCurrentTime = (e: React.ChangeEvent<HTMLInputElement>) => {
+		playerState.audioPlayer.currentTime = Number(e.target.value);
 	};
 
-	const changeCurrentTimeSample = (e: any) => {
+	const changeCurrentTimeSample = (e: React.MouseEvent) => {
 		playerState.audioPlayer.currentTime =
 			(playerState.audioPlayer.duration / 550) * (e.clientX - 184);
-			console.log(e.clientX)
 	};
 
 	return {
-		playTrack,
-		play,
 		packs: playerState.packs,
 		isPlaying: playerState.isPlaying,
 		currentPackId:
@@ -123,12 +135,15 @@ export const useSound = () => {
 			playerState.packs?.[playerState.currentTrackIndex],
 		duration: playerState.duration,
 		currentTime: playerState.currentTime,
+		packCurrentTime: playerState.packCurrentTime,
 		volume: playerState.volume,
+		playerState,
+		percent: playerState.percent,
+		playTrack,
+		play,
 		changeVolume,
 		changeCurrentTime,
-		playerState,
 		setPlayerState,
-		percent: playerState.percent,
 		changeCurrentTimeSample,
 	};
 };

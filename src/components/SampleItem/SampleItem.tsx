@@ -9,11 +9,9 @@ import { formatTime } from '../../utils/formatTime';
 import { Samples } from '../../store/slices/samples/types';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { fetchSetLike, fetchDeleteLike } from '../../store/slices/samples/samplesSlice';
-import { workerInstanceViewSample } from '../../workers/WebWorkerEnabler';
+import { canvasService } from '../../services/canvasService';
 
 import styles from './SampleItem.module.scss';
-import { canvasService } from '../../services/canvasService';
-import { url } from 'inspector';
 
 type PropsType = {
 	sample: Samples;
@@ -110,7 +108,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 										left: 0,
 									}}
 								/>
-								<div
+								{/* <div
 									style={{
 										height: '35px',
 										zIndex: 49,
@@ -120,7 +118,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 										backgroundColor: '#fff',
 										width: `${percent}px`,
 									}}
-								/>
+								/> */}
 							</>
 						)}
 

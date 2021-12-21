@@ -11,6 +11,7 @@ export type PlayerStateType = {
     active: null;
     duration: number;
     currentTime: number;
+    packCurrentTime: number;
     volume: number;
     percent: number;
 }

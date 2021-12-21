@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 
 import { SliderProgress } from '../SliderProgress/SliderProgress';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
@@ -15,6 +15,7 @@ export const Player: React.FC = () => {
 		volume,
 		duration,
 		currentTime,
+		packCurrentTime,
 		changeVolume,
 		changeCurrentTime,
 	} = useSound();
@@ -26,7 +27,8 @@ export const Player: React.FC = () => {
 	return (
 		<div className={styles.player}>
 			<SliderProgress
-				left={currentTime}
+				sliderType='currentTime'
+				currentTime={packCurrentTime}
 				right={duration}
 				onChange={changeCurrentTime}
 				width={'98vw'}
@@ -52,10 +54,7 @@ export const Player: React.FC = () => {
 				</div>
 
 				<div className={styles.trackActive}>
-					<img
-						src={`${active?.picture}`}
-						alt='active-info'
-					/>
+					<img src={`${active?.picture}`} alt='active-info' />
 					<div className={styles.trackInfo}>
 						<div>{active?.name}</div>
 						<div>{active?.genre}</div>
@@ -70,10 +69,11 @@ export const Player: React.FC = () => {
 						</p>
 					</div>
 					<SliderProgress
-						left={volume}
+						volume={volume}
 						right={100}
 						onChange={changeVolume}
-						width={'15vw'}
+						width='10rem'
+						sliderType='volume'
 					/>
 				</div>
 			</div>

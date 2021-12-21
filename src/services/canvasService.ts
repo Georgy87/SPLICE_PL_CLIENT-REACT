@@ -1,5 +1,9 @@
 class CanvasService {
-	sampleCanvas(canvas: HTMLCanvasElement | null, audioCoordinatesParse: number[], percent: number) {
+	sampleCanvas(
+		canvas: HTMLCanvasElement | null,
+		audioCoordinatesParse: number[],
+		percent: number,
+	) {
 		const dpr = window.devicePixelRatio || 1;
 
 		const cssCanvasWidth: number = 550;
@@ -9,7 +13,7 @@ class CanvasService {
 
 		canvas.width = cssCanvasWidth * dpr;
 		canvas.height = cssCanvasHeight * dpr;
-        
+
 		const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
 		if (ctx === null) return;
 
@@ -26,12 +30,12 @@ class CanvasService {
 			barHeight: number,
 			barWidth: number,
 		) => {
-			ctx.fillStyle = 'black';
-			console.log(x + barWidth / 2)
+			ctx.fillStyle = '#338BA8';
+
 			ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 0.5, barHeight);
 			ctx.stroke();
 		};
-
+		console.log(percent);
 		for (let i = 0; i < percent; i++) {
 			const x = barWidth * i;
 			let barHeight = audioCoordinatesParse[i];
