@@ -35,7 +35,7 @@ class CanvasService {
 			ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 0.5, barHeight);
 			ctx.stroke();
 		};
-		console.log(percent);
+	
 		for (let i = 0; i < percent; i++) {
 			const x = barWidth * i;
 			let barHeight = audioCoordinatesParse[i];

@@ -9,13 +9,13 @@ import styles from './Player.module.scss';
 
 export const Player: React.FC = () => {
 	const {
-		play,
 		active,
 		isPlaying,
 		volume,
 		duration,
 		currentTime,
 		packCurrentTime,
+		play,
 		changeVolume,
 		changeCurrentTime,
 	} = useSound();
@@ -31,7 +31,7 @@ export const Player: React.FC = () => {
 				currentTime={packCurrentTime}
 				right={duration}
 				onChange={changeCurrentTime}
-				width={'98vw'}
+				width='98vw'
 			/>
 			<div className={styles.playerControls}>
 				<div className={styles.play}>

@@ -5,7 +5,7 @@ import { PlayerStateType } from '../context/PlayerContextProvider/types';
 
 export const useSound = () => {
 	const [playerState, setPlayerState] = useContext(PlayerContext);
-	let myReq: any;
+	let myReq: number = 0;
 
 	// const {
 	// 	packs,
@@ -20,93 +20,80 @@ export const useSound = () => {
 	// } = playerState;
 
 	const playTrack = (index: number, typeElement: string) => {
-		if (index === playerState.currentTrackIndex) {
-			play();
-		
-		} else {
-			let url =
-				typeElement === 'packs'
-					? `/${playerState.packs[index]?.audio}`
-					: `/${playerState?.samples[index]?.audio}`;
+		if (index === playerState.currentTrackIndex) return play();
 
-			playerState.audioPlayer.pause();
-			playerState.audioPlayer = new Audio(url);
+		let url =
+			typeElement === 'packs'
+				? `/${playerState.packs[index]?.audio}`
+				: `/${playerState?.samples[index]?.audio}`;
 
-			playerState.audioPlayer.volume = playerState.volume / 100;
+		playerState.audioPlayer.pause();
+		playerState.audioPlayer = new Audio(url);
 
-			playerState.audioPlayer.onloadedmetadata = () => {
-				setPlayerState((state: PlayerStateType) => ({
-					...state,
-					duration: Math.ceil(state.audioPlayer.duration),
-				}));
-			};
+		playerState.audioPlayer.volume = playerState.volume / 100;
 
-			// playerState.audioPlayer.ontimeupdate = () => {
-			// 	setPlayerState((state: PlayerStateType) => ({
-			// 		...state,
-			// 		currentTime: state.audioPlayer.currentTime,
-			// 		packCurrentTime: state.audioPlayer.currentTime,
-			// 		percent: (550 / state.audioPlayer.duration) * state.audioPlayer.currentTime,
-			// 	}));
-			// };
+		playerState.audioPlayer.onloadedmetadata = () => {
+			setPlayerState((state: PlayerStateType) => ({
+				...state,
+				duration: Math.ceil(state.audioPlayer.duration),
+			}));
+		};
 
-		
-			//@ts-ignore
-			function step() {
-				setPlayerState((state: PlayerStateType) => ({
-					...state,
-					currentTime: state.audioPlayer.currentTime,
-					packCurrentTime: state.audioPlayer.currentTime,
-					percent: (550 / state.audioPlayer.duration) * state.audioPlayer.currentTime,
-				}));
-			
-				myReq = window.requestAnimationFrame(step);
-				console.log('test')
-			}
+		playerState.audioPlayer.play();
 
-			myReq = window.requestAnimationFrame(step);
-
-			playerState.audioPlayer.play();
-
+		playerState.audioPlayer.onplay = () => {
 			setPlayerState((state: PlayerStateType) => ({
 				...state,
 				currentTrackIndex: index,
 				isPlaying: true,
 			}));
-			
-			playerState.audioPlayer.onended = () => {
-				setPlayerState((state: PlayerStateType) => ({
-					...state,
-					audioPlayer: new Audio(),
-					currentTrackIndex: null,
-					isPlaying: false,
-					currentTrackId: null,
-					active: null,
-					duration: 0,
-					currentTime: 0,
-					packCurrentTime: 0,
-					volume: 2,
-					percent: 0,
-				}));
-				cancelAnimationFrame(myReq);
-			};
-		}
+			onTimeUpdate();
+		};
+
+		playerState.audioPlayer.onpause = () => {
+			cancelAnimationFrame(myReq);
+		};
+
+		playerState.audioPlayer.onended = () => {
+			setPlayerState((state: PlayerStateType) => ({
+				...state,
+				audioPlayer: new Audio(),
+				currentTrackIndex: null,
+				isPlaying: false,
+				currentTrackId: null,
+				active: null,
+				duration: 0,
+				currentTime: 0,
+				packCurrentTime: 0,
+				volume: 2,
+				percent: 0,
+			}));
+			cancelAnimationFrame(myReq);
+		};
 	};
 
 	const play = () => {
 		if (playerState.isPlaying) {
-			cancelAnimationFrame(myReq);
 			playerState.audioPlayer.pause();
-		
 		} else {
 			playerState.audioPlayer.play();
-			cancelAnimationFrame(myReq);
 		}
-		setPlayerState((playerState: PlayerStateType) => ({
-			...playerState,
+		setPlayerState((state: PlayerStateType) => ({
+			...state,
 			isPlaying: !playerState.isPlaying,
 		}));
 	};
+
+	const onTimeUpdate = () => {
+		setPlayerState((state: PlayerStateType) => ({
+			...state,
+			currentTime: state.audioPlayer.currentTime,
+			packCurrentTime: state.audioPlayer.currentTime,
+			percent: (550 / state.audioPlayer.duration) * state.audioPlayer.currentTime,
+		}));
+		myReq = window.requestAnimationFrame(onTimeUpdate);
+		console.log(playerState.percent);
+	}
 
 	const changeVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
 		playerState.audioPlayer.volume = Number(e.target.value) / 100;
