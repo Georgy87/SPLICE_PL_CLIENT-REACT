@@ -5,7 +5,7 @@ import { PlayerStateType } from '../context/PlayerContextProvider/types';
 
 export const useSound = () => {
 	const [playerState, setPlayerState] = useContext(PlayerContext);
-	let myReq: number = 0;
+	let requestID: number = 0;
 
 	// const {
 	// 	packs,
@@ -51,7 +51,7 @@ export const useSound = () => {
 		};
 
 		playerState.audioPlayer.onpause = () => {
-			cancelAnimationFrame(myReq);
+			cancelAnimationFrame(requestID);
 		};
 
 		playerState.audioPlayer.onended = () => {
@@ -68,7 +68,7 @@ export const useSound = () => {
 				volume: 2,
 				percent: 0,
 			}));
-			cancelAnimationFrame(myReq);
+			cancelAnimationFrame(requestID);
 		};
 	};
 
@@ -90,17 +90,18 @@ export const useSound = () => {
 			currentTime: state.audioPlayer.currentTime,
 			packCurrentTime: state.audioPlayer.currentTime,
 			percent: (550 / state.audioPlayer.duration) * state.audioPlayer.currentTime,
+			packPercent: (100 / state.audioPlayer.duration) * state.audioPlayer.currentTime,
 		}));
-		myReq = window.requestAnimationFrame(onTimeUpdate);
-		console.log(playerState.percent);
-	}
+		requestID = window.requestAnimationFrame(onTimeUpdate);
+	};
 
 	const changeVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
 		playerState.audioPlayer.volume = Number(e.target.value) / 100;
 	};
 
 	const changeCurrentTime = (e: React.ChangeEvent<HTMLInputElement>) => {
-		playerState.audioPlayer.currentTime = Number(e.target.value);
+		playerState.audioPlayer.currentTime =
+			(playerState.audioPlayer.duration / 100) * Number(e.target.value);
 	};
 
 	const changeCurrentTimeSample = (e: React.MouseEvent) => {
@@ -126,6 +127,7 @@ export const useSound = () => {
 		volume: playerState.volume,
 		playerState,
 		percent: playerState.percent,
+		packPercent: playerState.packPercent,
 		playTrack,
 		play,
 		changeVolume,

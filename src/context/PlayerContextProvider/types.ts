@@ -14,4 +14,5 @@ export type PlayerStateType = {
     packCurrentTime: number;
     volume: number;
     percent: number;
+    packPercent: number;
 }

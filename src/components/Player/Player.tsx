@@ -8,17 +8,7 @@ import { useSound } from '../../hooks/useSound';
 import styles from './Player.module.scss';
 
 export const Player: React.FC = () => {
-	const {
-		active,
-		isPlaying,
-		volume,
-		duration,
-		currentTime,
-		packCurrentTime,
-		play,
-		changeVolume,
-		changeCurrentTime,
-	} = useSound();
+	const { active, isPlaying, duration, currentTime, play } = useSound();
 
 	if (!active) {
 		return null;
@@ -26,17 +16,10 @@ export const Player: React.FC = () => {
 
 	return (
 		<div className={styles.player}>
-			<SliderProgress
-				sliderType='currentTime'
-				currentTime={packCurrentTime}
-				right={duration}
-				onChange={changeCurrentTime}
-				width='98vw'
-			/>
+			<SliderProgress sliderType='currentTime' width='98vw' />
 			<div className={styles.playerControls}>
 				<div className={styles.play}>
 					{
-						//@ts-ignore
 						<IconChangeLayout
 							onClicked={play}
 							blockStyle={styles.playPauseCircle}
@@ -68,13 +51,7 @@ export const Player: React.FC = () => {
 							<span>{formatTime(duration)}</span>
 						</p>
 					</div>
-					<SliderProgress
-						volume={volume}
-						right={100}
-						onChange={changeVolume}
-						width='10rem'
-						sliderType='volume'
-					/>
+					<SliderProgress width='10rem' sliderType='volume' />
 				</div>
 			</div>
 		</div>

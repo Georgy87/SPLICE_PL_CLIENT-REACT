@@ -17,6 +17,7 @@ export const defaultPlayerStateType = {
 	packCurrentTime: 0,
 	volume: 50,
 	percent: 0,
+	packPercent: 0,
 };
 
 export const PlayerContext = createContext<ContextProps>([
