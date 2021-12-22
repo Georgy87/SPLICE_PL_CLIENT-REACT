@@ -30,7 +30,7 @@ class CanvasService {
 			barHeight: number,
 			barWidth: number,
 		) => {
-			ctx.fillStyle = '#338BA8';
+			ctx.fillStyle = '#03f';
 
 			ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 0.5, barHeight);
 			ctx.stroke();

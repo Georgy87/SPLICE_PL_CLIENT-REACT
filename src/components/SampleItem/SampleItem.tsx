@@ -84,7 +84,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 							iconTwo='pause'
 							typeBtn='sample-item'
 							iconStyle={{
-								color: '#98b2d1',
+								color: '#03f',
 								fontSize: '35px',
 								cursor: 'pointer',
 							}}
@@ -150,6 +150,11 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 								}}
 							/>
 						)}
+					</div>
+					<div className={styles.addInfo}>
+						<p></p>
+						<p></p>
+						<p></p>
 					</div>
 				</li>
 			</ul>
