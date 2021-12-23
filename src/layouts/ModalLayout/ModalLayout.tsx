@@ -1,34 +1,21 @@
 import React from 'react';
 
-import './Modal.css';
+import styles from './Modal.module.scss';
 
 export type PropsModalType = {
 	active: boolean;
 	setActive: (active: boolean) => void;
-	video: string;
 	children?: React.ReactNode;
-	profileId: string;
 };
 
-export const Modal: React.FC<PropsModalType> = ({
-	active,
-	setActive,
-	children,
-}): React.ReactElement => {
+export const Modal: React.FC<PropsModalType> = ({ active, setActive, children }) => {
 	return (
-		<>
-			<div
-				className={active ? 'modal-course active' : 'modal-course'}
-				onClick={() => setActive(false)}
-			>
-				<div
-					className={active ? 'modal-course-content active' : 'modal-course-content'}
-					onClick={(e) => e.stopPropagation()}
-				>
-					{children}
-				</div>
-			</div>
-		</>
+		<div
+			className={active ? `${styles.modalCourse} ${styles.active}` : `${styles.modalCourse}`}
+			onClick={() => setActive(false)}
+		>
+			{children}
+		</div>
 	);
 };
 

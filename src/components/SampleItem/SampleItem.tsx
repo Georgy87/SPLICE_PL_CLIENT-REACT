@@ -10,6 +10,7 @@ import { Samples } from '../../store/slices/samples/types';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { fetchSetLike, fetchDeleteLike } from '../../store/slices/samples/samplesSlice';
 import { canvasService } from '../../services/canvasService';
+import { AddSampleInfoModal } from '../AddSampleInfoModal/AddSampleInfoModal';
 
 import styles from './SampleItem.module.scss';
 
@@ -25,6 +26,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 
 	const [width, setWidth] = useState<string>('550px');
 	const [like, setLike] = useState<boolean>(false);
+	const [activeModal, setActiveModal] = useState<boolean>(false);
 
 	const { playTrack, isPlaying, currentSampleId, currentTime, percent } = useSound();
 	const dispatch = useDispatch();
@@ -151,11 +153,12 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 							/>
 						)}
 					</div>
-					<div className={styles.addInfo}>
+					<div className={styles.addInfo} onClick={() => setActiveModal(true)}>
 						<p></p>
 						<p></p>
 						<p></p>
 					</div>
+					{activeModal && <AddSampleInfoModal setActive={setActiveModal} active={activeModal} />}
 				</li>
 			</ul>
 		</>
