@@ -5,32 +5,35 @@ import { PlayerStateType } from '../context/PlayerContextProvider/types';
 
 export const useSound = () => {
 	const [playerState, setPlayerState] = useContext(PlayerContext);
-	let requestID: number = 0;
 
-	// const {
-	// 	packs,
-	// 	samples,
-	// 	audioPlayer,
-	// 	isPlaying,
-	// 	currentTime,
-	// 	duration,
-	// 	currentTrackIndex,
-	// 	volume,
-	// 	percent,
-	// } = playerState;
+	let requestID: number = 0;
+	const canvasWidth: number = 550;
+
+	let {
+		packs,
+		samples,
+		isPlaying,
+		currentTime,
+		duration,
+		currentTrackIndex,
+		volume,
+		percent,
+		packCurrentTime,
+		packPercent,
+	} = playerState;
 
 	const playTrack = (index: number, typeElement: string) => {
-		if (index === playerState.currentTrackIndex) return play();
+		if (index === currentTrackIndex) return play();
 
 		let url =
 			typeElement === 'packs'
-				? `/${playerState.packs[index]?.audio}`
-				: `/${playerState?.samples[index]?.audio}`;
+				? `/${packs[index]?.audio}`
+				: `/${samples[index]?.audio}`;
 
 		playerState.audioPlayer.pause();
 		playerState.audioPlayer = new Audio(url);
 
-		playerState.audioPlayer.volume = playerState.volume / 100;
+		playerState.audioPlayer.volume = volume / 100;
 
 		playerState.audioPlayer.onloadedmetadata = () => {
 			setPlayerState((state: PlayerStateType) => ({
@@ -85,13 +88,16 @@ export const useSound = () => {
 	};
 
 	const onTimeUpdate = () => {
-		setPlayerState((state: PlayerStateType) => ({
-			...state,
-			currentTime: state.audioPlayer.currentTime,
-			packCurrentTime: state.audioPlayer.currentTime,
-			percent: (550 / state.audioPlayer.duration) * state.audioPlayer.currentTime,
-			packPercent: (100 / state.audioPlayer.duration) * state.audioPlayer.currentTime,
-		}));
+		setPlayerState((state: PlayerStateType) => {
+			const { audioPlayer } = state;
+			return {
+				...state,
+				currentTime: audioPlayer.currentTime,
+				packCurrentTime: audioPlayer.currentTime,
+				percent: (canvasWidth / audioPlayer.duration) * audioPlayer.currentTime,
+				packPercent: (100 / audioPlayer.duration) * audioPlayer.currentTime,
+			};
+		});
 		requestID = window.requestAnimationFrame(onTimeUpdate);
 	};
 
@@ -106,28 +112,22 @@ export const useSound = () => {
 
 	const changeCurrentTimeSample = (e: React.MouseEvent) => {
 		playerState.audioPlayer.currentTime =
-			(playerState.audioPlayer.duration / 550) * (e.clientX - 184);
+			(playerState.audioPlayer.duration / canvasWidth) * (e.clientX - 184);
 	};
 
 	return {
-		packs: playerState.packs,
-		isPlaying: playerState.isPlaying,
-		currentPackId:
-			playerState.currentTrackIndex !== null &&
-			playerState.packs?.[playerState.currentTrackIndex]?._id,
-		currentSampleId:
-			playerState.currentTrackIndex !== null &&
-			playerState.samples?.[playerState.currentTrackIndex]?._id,
-		active:
-			playerState.currentTrackIndex !== null &&
-			playerState.packs?.[playerState.currentTrackIndex],
-		duration: playerState.duration,
-		currentTime: playerState.currentTime,
-		packCurrentTime: playerState.packCurrentTime,
-		volume: playerState.volume,
+		packs: packs,
+		isPlaying: isPlaying,
+		currentPackId: currentTrackIndex !== null && packs?.[currentTrackIndex]?._id,
+		currentSampleId: currentTrackIndex !== null && samples?.[currentTrackIndex]?._id,
+		active: currentTrackIndex !== null && packs?.[currentTrackIndex],
+		duration: duration,
+		currentTime: currentTime,
+		packCurrentTime: packCurrentTime,
+		volume: volume,
 		playerState,
-		percent: playerState.percent,
-		packPercent: playerState.packPercent,
+		percent: percent,
+		packPercent: packPercent,
 		playTrack,
 		play,
 		changeVolume,

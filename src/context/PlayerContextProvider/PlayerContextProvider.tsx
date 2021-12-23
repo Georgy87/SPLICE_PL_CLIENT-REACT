@@ -6,7 +6,6 @@ import {
 	selectSamples,
 } from '../../store/selectors/packsSelectors';
 import { PlayerContext, ContextProps, defaultPlayerStateType } from '../PlayerContext';
-//import { PlayerStateType } from './types';
 
 type PropsType = {
 	children: React.ReactNode;

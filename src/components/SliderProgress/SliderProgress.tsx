@@ -1,27 +1,16 @@
 import React from 'react';
-import Slider from '@material-ui/core/Slider';
+import { useSound } from '../../hooks/useSound';
 
 import styles from './SliderProgress.module.scss';
-import { useSound } from '../../hooks/useSound';
 
 interface SliderProgressProps {
 	width: string;
 	sliderType: 'volume' | 'currentTime';
 }
 
-export const SliderProgress: React.FC<SliderProgressProps> = ({
-	width,
-	sliderType,
-}) => {
+export const SliderProgress: React.FC<SliderProgressProps> = ({ width, sliderType }) => {
+	const { volume, packPercent, changeVolume, changeCurrentTime } = useSound();
 
-	const {
-		volume,
-		packPercent,
-		percent,
-		changeVolume,
-		changeCurrentTime,
-	} = useSound();
-console.log(packPercent)
 	return (
 		<div className={styles.slider}>
 			{sliderType === 'volume' ? (
