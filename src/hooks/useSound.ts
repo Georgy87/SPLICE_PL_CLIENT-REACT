@@ -25,10 +25,7 @@ export const useSound = () => {
 	const playTrack = (index: number, typeElement: string) => {
 		if (index === currentTrackIndex) return play();
 
-		let url =
-			typeElement === 'packs'
-				? `/${packs[index]?.audio}`
-				: `/${samples[index]?.audio}`;
+		let url = typeElement === 'packs' ? `/${packs[index]?.audio}` : `/${samples[index]?.audio}`;
 
 		playerState.audioPlayer.pause();
 		playerState.audioPlayer = new Audio(url);
@@ -45,12 +42,12 @@ export const useSound = () => {
 		playerState.audioPlayer.play();
 
 		playerState.audioPlayer.onplay = () => {
-	
 			setPlayerState((state: PlayerStateType) => ({
 				...state,
 				currentTrackIndex: index,
 				isPlaying: true,
 			}));
+			
 			onTimeUpdate();
 		};
 
@@ -99,6 +96,7 @@ export const useSound = () => {
 				packPercent: (100 / audioPlayer.duration) * audioPlayer.currentTime,
 			};
 		});
+		console.log(requestID)
 		requestID = window.requestAnimationFrame(onTimeUpdate);
 	};
 

@@ -17,7 +17,8 @@ export const Canvas: React.FC<PropsType> = ({ file }) => {
 	useEffect(() => {
 		if (canvasRef?.current) {
 			const offscreen = canvasRef?.current.transferControlToOffscreen();
-
+			
+			window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			const audioContext = new AudioContext();
 			const reader = new FileReader();
 

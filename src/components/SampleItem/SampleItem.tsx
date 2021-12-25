@@ -111,7 +111,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 											left: 0,
 										}}
 									/>
-									<div
+									{/* <div
 										style={{
 											height: '35px',
 											zIndex: 49,
@@ -121,7 +121,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 											backgroundColor: '#fff',
 											width: `${percent}px`,
 										}}
-									/>
+									/> */}
 								</>
 							)}
 

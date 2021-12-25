@@ -5,7 +5,7 @@ class CanvasService {
 		percent: number,
 	) {
 		const dpr = window.devicePixelRatio || 1;
-
+		console.log(window.devicePixelRatio)
 		const cssCanvasWidth: number = 550;
 		const cssCanvasHeight: number = 50;
 

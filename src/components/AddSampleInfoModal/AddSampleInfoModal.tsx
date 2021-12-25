@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 import { Modal } from '../../layouts/ModalLayout/ModalLayout';
+import { sampleCategories } from './sampleCategories';
 
 import styles from './AddSampleInfoModal.module.scss';
-import { sampleCategories } from './sampleCategories';
 
 export type AddSampleInfoModalType = {
 	active: boolean;
@@ -13,12 +13,11 @@ export type AddSampleInfoModalType = {
 export const AddSampleInfoModal: React.FC<AddSampleInfoModalType> = (props: any) => {
 	const [value, setValue] = useState<number>(0);
 	const [bpmValue, setBpmValue] = useState<number>(0);
-	const [isActive, setIsActive] = useState(false);
-	const [selected, setSelected] = useState('Choose One');
+	const [isActive, setIsActive] = useState<boolean>(false);
+	const [selected, setSelected] = useState<string>('Choose One');
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(+e.target.value);
-
 		setBpmValue(+e.target.value);
 	};
 
