@@ -24,7 +24,7 @@ export const SliderProgress: React.FC<SliderProgressProps> = ({ width, sliderTyp
 				<input
 					style={{ width: width }}
 					type='range'
-					value={packPercent}
+					value={String(packPercent)}
 					onChange={changeCurrentTime}
 					// min='0'
 					// max='100'

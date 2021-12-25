@@ -45,6 +45,7 @@ export const useSound = () => {
 		playerState.audioPlayer.play();
 
 		playerState.audioPlayer.onplay = () => {
+	
 			setPlayerState((state: PlayerStateType) => ({
 				...state,
 				currentTrackIndex: index,
@@ -110,9 +111,9 @@ export const useSound = () => {
 			(playerState.audioPlayer.duration / 100) * Number(e.target.value);
 	};
 
-	const changeCurrentTimeSample = (e: React.MouseEvent) => {
+	const changeCurrentTimeSample = (e: React.MouseEvent, canvasOffSetLeft: number) => {
 		playerState.audioPlayer.currentTime =
-			(playerState.audioPlayer.duration / canvasWidth) * (e.clientX - 184);
+			(playerState.audioPlayer.duration / canvasWidth) * (e.clientX - canvasOffSetLeft);
 	};
 
 	return {

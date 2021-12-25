@@ -21,17 +21,16 @@ export const UserPacksPage = () => {
 		const create = async (e: any) => {
 			const { imageFile, audioFile, audioCoordinates, packId } = e.data;
 
-			if (e.data) {
-				const data = await createSamples(imageFile, audioFile, audioCoordinates, packId);
-				
-				if (data === 'SUCCESS') {
-					workerInstanceCreateSample.removeEventListener('message', create);
-					dispatch(deleteSampleFiles());
-				}
-			}
+			await createSamples(imageFile, audioFile, audioCoordinates, packId);
+			
 		};
 
+		// setTimeout(() => {
+		// 	dispatch(deleteSampleFiles());
+		// 	workerInstanceCreateSample.removeEventListener('message', create);
+		// }, 5000);
 		workerInstanceCreateSample.addEventListener('message', create);
+
 		dispatch(fetchGetUserPacks());
 	}, []);
 

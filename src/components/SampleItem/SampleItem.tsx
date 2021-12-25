@@ -25,8 +25,10 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	const packProfile = useSelector(selectPackProfile);
 
 	const [width, setWidth] = useState<string>('550px');
+	const [visible, setVisible] = useState<boolean>(true);
 	const [like, setLike] = useState<boolean>(false);
 	const [activeModal, setActiveModal] = useState<boolean>(false);
+	const [canvasOffsetLeft, setCanvasOffsetLeft] = useState<number>(0);
 
 	const { playTrack, isPlaying, currentSampleId, currentTime, percent } = useSound();
 	const dispatch = useDispatch();
@@ -40,16 +42,8 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		setLike(likes.length >= 1);
 
 		const handleResize = () => {
-			if (window.innerWidth < 1065) {
-				setWidth('300px');
-			} else {
-				setWidth('550px');
-			}
-			if (window.innerWidth < 900) {
-				setWidth('230px');
-			} else {
-				setWidth('550px');
-			}
+			if (window.innerWidth < 1200) return setVisible(false);
+			setVisible(true);
 		};
 
 		window.addEventListener('resize', handleResize);
@@ -65,6 +59,11 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 			canvasService.sampleCanvas(canvas, audioCoordinatesParse, percent);
 		}
 	}, [canvas, currentTime]);
+
+	useEffect(() => {
+		if (!canvasRef.current) return;
+		setCanvasOffsetLeft(canvasRef.current?.getBoundingClientRect().left);
+	}, [canvas]);
 
 	return (
 		<>
@@ -92,46 +91,49 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 							}}
 						></IconChangeLayout>
 					</div>
-					<SampleSliderLayout
-						width={width}
-						trackId={_id}
-						currentSampleId={currentSampleId}
-					>
-						{currentSampleId === _id && (
-							<>
-								<canvas
-									ref={canvasRef}
-									style={{
-										width: width,
-										height: '35px',
-										zIndex: 50,
-										position: 'absolute',
-										top: 0,
-										left: 0,
-									}}
-								/>
-								{/* <div
-									style={{
-										height: '35px',
-										zIndex: 49,
-										position: 'absolute',
-										top: 0,
-										left: 0,
-										backgroundColor: '#fff',
-										width: `${percent}px`,
-									}}
-								/> */}
-							</>
-						)}
+					{visible && (
+						<SampleSliderLayout
+							canvasOffSetLeft={canvasOffsetLeft}
+							width={width}
+							trackId={_id}
+							currentSampleId={currentSampleId}
+						>
+							{currentSampleId === _id && (
+								<>
+									<canvas
+										ref={canvasRef}
+										style={{
+											width: '550px',
+											height: '35px',
+											zIndex: 50,
+											position: 'absolute',
+											top: 0,
+											left: 0,
+										}}
+									/>
+									<div
+										style={{
+											height: '35px',
+											zIndex: 49,
+											position: 'absolute',
+											top: 0,
+											left: 0,
+											backgroundColor: '#fff',
+											width: `${percent}px`,
+										}}
+									/>
+								</>
+							)}
 
-						<div
-							className={styles.backgroundWave}
-							style={{
-								backgroundImage: `url(/${canvasImage})`,
-								width: width,
-							}}
-						/>
-					</SampleSliderLayout>
+							<div
+								className={styles.backgroundWave}
+								style={{
+									backgroundImage: `url(/${canvasImage})`,
+									width: '550px',
+								}}
+							/>
+						</SampleSliderLayout>
+					)}
 
 					<p className={styles.sampleName}>{sample.sampleName}</p>
 					<div className={styles.rightWrap}>
@@ -158,7 +160,9 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						<p></p>
 						<p></p>
 					</div>
-					{activeModal && <AddSampleInfoModal setActive={setActiveModal} active={activeModal} />}
+					{activeModal && (
+						<AddSampleInfoModal setActive={setActiveModal} active={activeModal} />
+					)}
 				</li>
 			</ul>
 		</>
