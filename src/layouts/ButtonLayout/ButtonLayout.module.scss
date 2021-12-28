@@ -114,8 +114,7 @@
 		left: 0;
 		height: 32px;
 		color: $white;
-		border: 1px solid $white;
-		background-color: transparent;
+		background-color: $blue-light;
 		@extend %buttons;
 	}
 }

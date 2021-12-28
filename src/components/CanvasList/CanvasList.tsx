@@ -10,10 +10,10 @@ export const CanvasList = () => {
 	
 	return (
 		<>
-			{sampleFiles &&
-				Object.values(sampleFiles[0]).map((file: File, idx: number) => {
+			{/* {sampleFiles &&
+				Object.values(sampleFiles[0]).map((file: any, idx: number) => {
 					return <Canvas file={file} key={idx} />;
-				})}
+				})} */}
 		</>
 	);
 };

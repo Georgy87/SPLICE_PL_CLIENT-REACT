@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Pack } from '../../store/slices/pack/types';
 import { setSampleFiles } from '../../store/slices/samples/samplesSlice';
@@ -26,11 +27,13 @@ export const UserPackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 		e.preventDefault();
 		e.stopPropagation();
 		const eventData = (e as React.DragEvent).dataTransfer;
-		let files = [eventData.files];
+		let file = [eventData.files];
 
 		setDrag(false);
-		
-		dispatch(setSampleFiles({ files, packId: id }));
+
+		Object.values(file[0]).forEach((file: File) => {
+			dispatch(setSampleFiles({ id: uuidv4(), file, packId: id }));
+		});
 	};
 
 	return (

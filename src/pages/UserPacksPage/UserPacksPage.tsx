@@ -10,6 +10,7 @@ import { deleteSampleFiles } from '../../store/slices/samples/samplesSlice';
 import { createSamples } from '../../utils/createSamples';
 import { workerInstanceCreateSample } from '../../workers/WebWorkerEnabler';
 
+
 import styles from './UserPacksPage.module.scss';
 
 export const UserPacksPage = () => {
@@ -22,13 +23,13 @@ export const UserPacksPage = () => {
 			const { imageFile, audioFile, audioCoordinates, packId } = e.data;
 
 			await createSamples(imageFile, audioFile, audioCoordinates, packId);
-			
+
+			setTimeout(() => {
+				// dispatch(deleteSampleFiles());
+				workerInstanceCreateSample.removeEventListener('message', create);
+			}, 5000);
 		};
 
-		// setTimeout(() => {
-		// 	dispatch(deleteSampleFiles());
-		// 	workerInstanceCreateSample.removeEventListener('message', create);
-		// }, 5000);
 		workerInstanceCreateSample.addEventListener('message', create);
 
 		dispatch(fetchGetUserPacks());
@@ -40,7 +41,7 @@ export const UserPacksPage = () => {
 				{userPacks.map((pack: Pack, index: number) => (
 					<>
 						<div className={styles.packCardContainer} key={index}>
-							<UserPackItem key={pack._id} pack={pack} id={pack._id} index={index} />
+							<UserPackItem key={index} pack={pack} id={pack._id} index={index} />
 						</div>
 					</>
 				))}

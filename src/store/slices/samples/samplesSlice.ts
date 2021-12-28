@@ -6,7 +6,7 @@ import { SampleSliceState } from './types';
 const initialState: SampleSliceState = {
 	samples: [],
 	loading: false,
-	files: null,
+	files: [],
 	packId: null,
 };
 
@@ -62,7 +62,7 @@ export const fetchSetSampleCategory = createAsyncThunk(
 
 export const fetchSetSampleBpm = createAsyncThunk(
 	'sample/setSampleBpmStatus',
-	async (payload: { sampleId: string; bpm: number; }) => {
+	async (payload: { sampleId: string; bpm: number }) => {
 		try {
 			await samplesApi.setSampleBpm(payload);
 		} catch (error) {
@@ -75,13 +75,16 @@ export const samplesSlice = createSlice({
 	name: 'sample',
 	initialState,
 	reducers: {
-		setSampleFiles: (state, action: PayloadAction<{ files: FileList[]; packId: string }>) => {
-			const { files, packId } = action.payload;
-			state.files = files;
+		setSampleFiles: (
+			state,
+			action: PayloadAction<{ id: string; file: File; packId: string }>,
+		) => {
+			const { id, file, packId } = action.payload;
+			state.files = [...state.files, { id, file }];
 			state.packId = packId;
 		},
 		deleteSampleFiles: (state) => {
-			state.files = null;
+			state.files = [];
 		},
 	},
 	extraReducers: (builder) =>

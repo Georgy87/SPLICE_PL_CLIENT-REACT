@@ -74,10 +74,9 @@
 .sampleCategory {
 	margin-top: 30px;
 	.dropdown {
-		width: 300px;
-		user-select: none;
-		margin: 0 auto;
 		position: relative;
+		width: 300px;
+		margin-bottom: 40px;
 	}
 	.dropdown .dropdownBtn {
 		display: flex;
@@ -108,6 +107,7 @@
 		color: $white;
 		width: 100%;
 		overflow-y: scroll;
+		z-index: 2000;
 		&::-webkit-scrollbar {
 			background: transparent;
 		}

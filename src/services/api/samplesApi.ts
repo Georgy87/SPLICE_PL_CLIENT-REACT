@@ -22,12 +22,10 @@ export const samplesApi = {
 	},
 	async setSampleCategory(payload: { sampleId: string; category: string }) {
 		const { sampleId, category } = payload;
-		console.log(payload);
-		// await instance.post(`samples/category?sampleId=${sampleId}&category=${category}`);
+		await instance.post(`samples/category?sampleId=${sampleId}&category=${category}`);
 	},
 	async setSampleBpm(payload: { sampleId: string; bpm: number }) {
 		const { sampleId, bpm } = payload;
-		console.log(payload);
-		// await instance.post(`samples/bpm?sampleId=${sampleId}&bpm=${bpm}`);
+		await instance.post(`samples/bpm?sampleId=${sampleId}&bpm=${bpm}`);
 	},
 };

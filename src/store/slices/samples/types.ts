@@ -1,9 +1,14 @@
 import { User } from "../user/types";
 
+type FileListType = {
+	id: string;
+	file: File;
+}
+
 export type SampleSliceState = {
 	samples: Samples[];
 	loading: boolean;
-	files: FileList[] | null;
+	files: FileListType[] | [];
 	packId: string | null;
 }
 
