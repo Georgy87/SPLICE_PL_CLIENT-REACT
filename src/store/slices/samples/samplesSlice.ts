@@ -11,7 +11,7 @@ const initialState: SampleSliceState = {
 };
 
 export const fetchCreateSamples = createAsyncThunk(
-	'packs/createSamplesStatus',
+	'sample/createSamplesStatus',
 	async (payload: { file: File; packId: string; audioCoordinates: number[] }) => {
 		try {
 			const { file, packId, audioCoordinates } = payload;
@@ -28,7 +28,7 @@ export const fetchCreateSamples = createAsyncThunk(
 );
 
 export const fetchSetLike = createAsyncThunk(
-	'packs/setLikeSampleStatus',
+	'sample/setLikeSampleStatus',
 	async (payload: { sampleId: string }) => {
 		try {
 			await samplesApi.setLike(payload.sampleId);
@@ -39,7 +39,7 @@ export const fetchSetLike = createAsyncThunk(
 );
 
 export const fetchDeleteLike = createAsyncThunk(
-	'packs/deleteLikeSampleStatus',
+	'sample/deleteLikeSampleStatus',
 	async (payload: { sampleId: string }) => {
 		try {
 			await samplesApi.deleteLike(payload.sampleId);
@@ -49,8 +49,30 @@ export const fetchDeleteLike = createAsyncThunk(
 	},
 );
 
+export const fetchSetSampleCategory = createAsyncThunk(
+	'sample/setSampleCategoryStatus',
+	async (payload: { sampleId: string; category: string }) => {
+		try {
+			await samplesApi.setSampleCategory(payload);
+		} catch (error) {
+			console.log(error);
+		}
+	},
+);
+
+export const fetchSetSampleBpm = createAsyncThunk(
+	'sample/setSampleBpmStatus',
+	async (payload: { sampleId: string; bpm: number; }) => {
+		try {
+			await samplesApi.setSampleBpm(payload);
+		} catch (error) {
+			console.log(error);
+		}
+	},
+);
+
 export const samplesSlice = createSlice({
-	name: 'packs',
+	name: 'sample',
 	initialState,
 	reducers: {
 		setSampleFiles: (state, action: PayloadAction<{ files: FileList[]; packId: string }>) => {

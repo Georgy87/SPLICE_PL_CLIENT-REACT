@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Modal } from '../../layouts/ModalLayout/ModalLayout';
 import { sampleCategories } from './sampleCategories';
+import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
+import { fetchSetSampleBpm, fetchSetSampleCategory } from '../../store/slices/samples/samplesSlice';
 
 import styles from './AddSampleInfoModal.module.scss';
 
 export type AddSampleInfoModalType = {
 	active: boolean;
 	setActive: (active: boolean) => void;
+	sampleId: string;
 };
 
-export const AddSampleInfoModal: React.FC<AddSampleInfoModalType> = (props: any) => {
+export const AddSampleInfoModal: React.FC<AddSampleInfoModalType> = (props) => {
+	const { sampleId } = props;
+
 	const [value, setValue] = useState<number>(0);
 	const [bpmValue, setBpmValue] = useState<number>(0);
+	const [category, setCategory] = useState<string>('Choose One');
 	const [isActive, setIsActive] = useState<boolean>(false);
-	const [selected, setSelected] = useState<string>('Choose One');
+
+	const dispatch = useDispatch();
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(+e.target.value);
@@ -39,16 +47,15 @@ export const AddSampleInfoModal: React.FC<AddSampleInfoModalType> = (props: any)
 							max='300'
 						/>
 					</div>
-
+					<ButtonLayout typeStyle="sample-update" onClicked={() => dispatch(fetchSetSampleBpm({ sampleId, bpm: bpmValue } ))}>Update bpm</ButtonLayout>
 					<div className={styles.sampleCategory}>
 						<p>Sample category</p>
-
 						<div className={styles.dropdown}>
 							<div
 								className={styles.dropdownBtn}
 								onClick={(e) => setIsActive(!isActive)}
 							>
-								{selected}
+								{category}
 								<span className='fas fa-caret-down'></span>
 							</div>
 							{isActive && (
@@ -56,7 +63,7 @@ export const AddSampleInfoModal: React.FC<AddSampleInfoModalType> = (props: any)
 									{sampleCategories.map((option) => (
 										<div
 											onClick={(e) => {
-												setSelected(option);
+												setCategory(option);
 												setIsActive(false);
 											}}
 											className={styles.dropdownItem}
@@ -67,6 +74,7 @@ export const AddSampleInfoModal: React.FC<AddSampleInfoModalType> = (props: any)
 								</div>
 							)}
 						</div>
+						<ButtonLayout typeStyle="sample-update" onClicked={() => dispatch(fetchSetSampleCategory({ sampleId, category } ))}>Update Category</ButtonLayout>
 					</div>
 				</div>
 			</div>

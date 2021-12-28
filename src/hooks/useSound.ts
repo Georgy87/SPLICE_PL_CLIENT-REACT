@@ -96,7 +96,7 @@ export const useSound = () => {
 				packPercent: (100 / audioPlayer.duration) * audioPlayer.currentTime,
 			};
 		});
-		console.log(requestID)
+	
 		requestID = window.requestAnimationFrame(onTimeUpdate);
 	};
 

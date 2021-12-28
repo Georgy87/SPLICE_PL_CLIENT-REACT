@@ -1,12 +1,27 @@
 import React from 'react';
 
 import classNames from 'classnames';
-
-import styles from './ButtonLayout.module.scss';
 import { IconLayout } from '../IconLayout/IconLayout';
 
+import styles from './ButtonLayout.module.scss';
+
 type PropsType = {
-	typeStyle: string;
+	typeStyle:
+		| 'auth'
+		| 'submit'
+		| 'footer'
+		| 'black'
+		| 'blue'
+		| 'blue-disabled'
+		| 'download'
+		| 'sample-player'
+		| 'sample-item'
+		| 'auth'
+		| 'sign-in-out'
+		| 'update'
+		| 'pack-profile'
+		| 'sample-update'
+		| string;
 	onClicked?: () => void;
 	disabled?: boolean;
 	type?: string;
@@ -31,6 +46,7 @@ export const ButtonLayout: React.FC<PropsType> = ({ children, typeStyle, onClick
 					[styles.signInOut]: typeStyle === 'sign-in-out',
 					[styles.update]: typeStyle === 'update',
 					[styles.packProfile]: typeStyle === 'pack-profile',
+					[styles.sampleUpdate]: typeStyle === 'sample-update',
 				})}
 			>
 				{children}

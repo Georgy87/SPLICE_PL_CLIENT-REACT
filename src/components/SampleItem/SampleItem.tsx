@@ -161,7 +161,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						<p></p>
 					</div>
 					{activeModal && (
-						<AddSampleInfoModal setActive={setActiveModal} active={activeModal} />
+						<AddSampleInfoModal setActive={setActiveModal} active={activeModal} sampleId={_id} />
 					)}
 				</li>
 			</ul>

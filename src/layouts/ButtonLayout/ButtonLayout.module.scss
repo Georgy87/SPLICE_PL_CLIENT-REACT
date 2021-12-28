@@ -109,4 +109,13 @@
 		border-radius: 100px;
 		@extend %buttons;
 	}
+	.sampleUpdate {
+		position: absolute;
+		left: 0;
+		height: 32px;
+		color: $white;
+		border: 1px solid $white;
+		background-color: transparent;
+		@extend %buttons;
+	}
 }

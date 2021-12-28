@@ -12,7 +12,10 @@ export const packsApi = {
 	},
 
 	async getPack(packId: string) {
-		const { data } = await instance.get(`packs/pack?packId=${packId}`);
+		const { data } = await instance.get(
+			`packs/pack?packId=${packId}`,
+		);
+
 		return data;
 	},
 
@@ -27,7 +30,6 @@ export const packsApi = {
 	},
 
 	async packUpdate(update: boolean, packId: string) {
-		console.log(update, packId)
 		await instance.put(`packs/update?update=${update}&packId=${packId}`);
 	},
 };
