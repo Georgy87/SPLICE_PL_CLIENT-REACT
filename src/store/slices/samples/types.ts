@@ -22,5 +22,7 @@ export type Samples = {
     duration: number;
     likes: User[];
 	canvasImage: string;
+	bpm: number;
+	category: string;
 };
 

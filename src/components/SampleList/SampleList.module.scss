@@ -1,6 +1,21 @@
+.samplesLabel {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 3px;
+	padding: 10px;
+	font-weight: 700;
+	border: 1px solid #f4f7f6;
+	border-radius: 4px;
+	p {
+		display: flex;
+	}
+	p:last-child {
+		margin-right: 150px;
+	}
+}
+
 .sampleList {
 	margin-top: 280px;
 	width: 100%;
-	// overflow-y: scroll;
-	// overflow: scroll;
 }

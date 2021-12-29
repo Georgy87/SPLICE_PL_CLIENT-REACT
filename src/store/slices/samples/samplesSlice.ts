@@ -14,13 +14,11 @@ export const fetchCreateSamples = createAsyncThunk(
 	'sample/createSamplesStatus',
 	async (payload: { file: File; packId: string; audioCoordinates: number[] }) => {
 		try {
-			const { file, packId, audioCoordinates } = payload;
+			const { file } = payload;
 
 			const formData = new FormData();
 
 			formData.append('file', file);
-			// const status = await samplesApi.createSamples(formData, packId);
-			// return status;
 		} catch (error) {
 			console.log(error);
 		}
@@ -81,10 +79,11 @@ export const samplesSlice = createSlice({
 		) => {
 			const { id, file, packId } = action.payload;
 			state.files = [...state.files, { id, file }];
+
 			state.packId = packId;
 		},
-		deleteSampleFiles: (state) => {
-			state.files = [];
+		deleteSampleFiles: (state, action: PayloadAction<string>) => {
+			state.files = state.files.filter((el) => el.id != action.payload);
 		},
 	},
 	extraReducers: (builder) =>

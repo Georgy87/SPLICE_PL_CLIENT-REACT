@@ -20,7 +20,7 @@ type PropsType = {
 };
 
 export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
-	const { _id, audioCoordinates, duration, likes, canvasImage } = sample;
+	const { _id, audioCoordinates, duration, likes, canvasImage, bpm, sampleName } = sample;
 
 	const packProfile = useSelector(selectPackProfile);
 
@@ -135,7 +135,8 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						</SampleSliderLayout>
 					)}
 
-					<p className={styles.sampleName}>{sample.sampleName}</p>
+					<p className={styles.sampleName}>{sampleName}</p>
+					<div className={styles.sampleBpm}>{bpm}</div>
 					<div className={styles.rightWrap}>
 						{!like ? (
 							<IconLayout

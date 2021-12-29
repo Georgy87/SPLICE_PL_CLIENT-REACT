@@ -10,12 +10,16 @@ import styles from './SampleList.module.scss';
 
 type PropsType = {
 	samples?: Samples[];
-}
+};
 
 export const SampleList: React.FC<PropsType> = ({ samples }) => {
 	return (
 		<>
 			<div className={styles.sampleList}>
+				<div className={styles.samplesLabel}>
+					<p>Sample</p>
+					<p>Bpm</p>
+				</div>
 				{samples?.map((sample: Samples, index: number) => {
 					return <SampleItem key={sample._id} sample={sample} idx={index} />;
 				})}

@@ -7,9 +7,10 @@ import { workerInstanceCreateSample } from '../../workers/WebWorkerEnabler';
 
 type PropsType = {
 	file: File;
+	fileId: string;
 };
 
-export const Canvas: React.FC<PropsType> = ({ file }) => {
+export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 	const packId = useSelector(selectPackId);
 
 	const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -39,6 +40,7 @@ export const Canvas: React.FC<PropsType> = ({ file }) => {
 							cssCanvasWidth: 550,
 							cssCanvasHeight: 50,
 							dpr: 2,
+							fileId,
 						},
 						[offscreen],
 					);

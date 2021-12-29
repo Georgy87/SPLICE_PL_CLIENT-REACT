@@ -18,7 +18,7 @@ type PackListProps = {
 export const PackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 	const { playTrack, isPlaying, currentPackId } = useSound();
 	const history = useHistory();
-
+	
 	return (
 		<div className={styles.packCardWrapper}>
 			<div

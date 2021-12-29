@@ -15,7 +15,6 @@ export const packsApi = {
 		const { data } = await instance.get(
 			`packs/pack?packId=${packId}`,
 		);
-
 		return data;
 	},
 
