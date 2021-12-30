@@ -42,7 +42,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		setLike(likes.length >= 1);
 
 		const handleResize = () => {
-			if (window.innerWidth < 1200) return setVisible(false);
+			if (window.innerWidth < 1060) return setVisible(false);
 			setVisible(true);
 		};
 
@@ -136,8 +136,8 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 					)}
 
 					<p className={styles.sampleName}>{sampleName}</p>
-					<div className={styles.sampleBpm}>{bpm}</div>
 					<div className={styles.rightWrap}>
+						<div className={styles.sampleBpm}>{bpm}</div>
 						{!like ? (
 							<IconLayout
 								iconName='dislike'
@@ -155,14 +155,19 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 								}}
 							/>
 						)}
-					</div>
-					<div className={styles.addInfo} onClick={() => setActiveModal(true)}>
-						<p></p>
-						<p></p>
-						<p></p>
+
+						<div className={styles.addInfo} onClick={() => setActiveModal(true)}>
+							<p></p>
+							<p></p>
+							<p></p>
+						</div>
 					</div>
 					{activeModal && (
-						<AddSampleInfoModal setActive={setActiveModal} active={activeModal} sampleId={_id} />
+						<AddSampleInfoModal
+							setActive={setActiveModal}
+							active={activeModal}
+							sampleId={_id}
+						/>
 					)}
 				</li>
 			</ul>

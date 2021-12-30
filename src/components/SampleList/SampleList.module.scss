@@ -2,16 +2,23 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	height: 60px;
 	margin: 3px;
 	padding: 10px;
-	font-weight: 700;
 	border: 1px solid #f4f7f6;
 	border-radius: 4px;
-	p {
+	.sample {
 		display: flex;
+		font-weight: 700;
 	}
-	p:last-child {
-		margin-right: 150px;
+	.tags {
+		display: flex;
+		align-items: center;
+		height: 100%;
+	}
+	.bpm {
+		width: 100px;
+		font-weight: 700;
 	}
 }
 

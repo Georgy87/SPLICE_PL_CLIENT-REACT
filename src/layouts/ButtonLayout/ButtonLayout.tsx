@@ -47,6 +47,7 @@ export const ButtonLayout: React.FC<PropsType> = ({ children, typeStyle, onClick
 					[styles.update]: typeStyle === 'update',
 					[styles.packProfile]: typeStyle === 'pack-profile',
 					[styles.sampleUpdate]: typeStyle === 'sample-update',
+					[styles.tags]: typeStyle === 'tags',
 				})}
 			>
 				{children}
