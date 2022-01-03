@@ -7,6 +7,7 @@ const initialState: PacksSliceState = {
 	packs: [],
 	packProfile: null,
 	userPacks: [],
+	tag: null,
 	loading: false,
 };
 
@@ -41,14 +42,18 @@ export const fetchGetPacks = createAsyncThunk('packs/getPacksStatus', async () =
 	}
 });
 
-export const fetchGetPack = createAsyncThunk('packs/getPackStatus', async (packId: string) => {
-	try {
-		const pack = await packsApi.getPack(packId);
-		return pack;
-	} catch (error) {
-		console.log(error);
-	}
-});
+export const fetchGetPack = createAsyncThunk(
+	'packs/getPackStatus',
+	async (payload: { packId: string; tag: string | null }) => {
+		try {
+			const { packId, tag } = payload;
+			const pack = await packsApi.getPack(packId, tag);
+			return pack;
+		} catch (error) {
+			console.log(error);
+		}
+	},
+);
 
 export const fetchGetUserPacks = createAsyncThunk('packs/getUserPacksStatus', async () => {
 	try {
@@ -93,6 +98,9 @@ export const packSlice = createSlice({
 			state.userPacks = [];
 			state.loading = false;
 		},
+		setTag: (state, action: PayloadAction<string | null>) => {
+			state.tag = action.payload;
+		},
 		// setLoading: (state, action: PayloadAction<any>) => {
 		// 	state.loading = action.payload;
 		// }
@@ -117,6 +125,6 @@ export const packSlice = createSlice({
 			}),
 });
 
-export const { setDefaultPackState } = packSlice.actions;
+export const { setDefaultPackState, setTag } = packSlice.actions;
 
 export const packsReducer = packSlice.reducer;

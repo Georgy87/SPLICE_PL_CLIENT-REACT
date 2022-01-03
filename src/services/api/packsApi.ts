@@ -11,9 +11,9 @@ export const packsApi = {
 		return data;
 	},
 
-	async getPack(packId: string) {
+	async getPack(packId: string, tag: string | null) {
 		const { data } = await instance.get(
-			`packs/pack?packId=${packId}`,
+			`packs/pack?packId=${packId}&tag=${tag}`,
 		);
 		return data;
 	},

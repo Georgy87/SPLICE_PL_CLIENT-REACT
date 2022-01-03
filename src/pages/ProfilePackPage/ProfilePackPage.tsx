@@ -11,6 +11,7 @@ import {
 	selectLoading,
 	selectPackProfile,
 	selectSamples,
+	selectTag,
 } from '../../store/selectors/packsSelectors';
 import { fetchGetPack } from '../../store/slices/pack/packSlice';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
@@ -21,14 +22,19 @@ export const ProfilePackPage = () => {
 	const packProfile = useSelector(selectPackProfile);
 	const samples = useSelector(selectSamples);
 	const loading = useSelector(selectLoading);
+	const tag = useSelector(selectTag);
 
 	const params: { packId: string } = useParams();
 	const { setPlayerState, playTrack, isPlaying } = useSound();
 	const getPack = useAsyncAction<any, any>(fetchGetPack);
 
 	useEffect(() => {
-		getPack(params?.packId);
+		getPack({ packId: params?.packId, tag: null });
 	}, []);
+
+	useEffect(() => {
+		getPack({ packId: params?.packId, tag });
+	}, [tag]);
 
 	useEffect(() => {
 		setPlayerState({
