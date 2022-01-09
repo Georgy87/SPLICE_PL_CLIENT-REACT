@@ -29,7 +29,7 @@ export const useSound = () => {
 
 		playerState.audioPlayer.pause();
 		playerState.audioPlayer = new Audio(url);
-
+		
 		playerState.audioPlayer.volume = volume / 100;
 
 		playerState.audioPlayer.onloadedmetadata = () => {
