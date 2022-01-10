@@ -1,139 +1,178 @@
 import React, { useState } from 'react';
+import { sequencerService } from '../../services/sequencerService';
 
 //@ts-ignore
 var AUDIO = new window.AudioContext();
 export const SequencerPage = () => {
-    const [playerState, setPlayerState] = useState<any>({
-		audioPlayer: new Audio(),
-		isPlaying: false,
-		noteTime: 0,
-		startTime: 0,
-		ti: 0,
-		currentStep: 0,
-		tempo: 60,
-		tic: 60 / 60 / 4,
-		currentPattern: null,
-		bank: {},
-		totalCount: 0,
-		// audioContext: new (window.AudioContext)(),
-		pattern: {
-			sequence: {
-				openHat: '0101010101010101',
-				closedHat: '0000000100000000',
-				snare: '1010101010001000',
-			},
-		},
-	});
+	// const [playerState, setPlayerState] = useState<any>({
+	// 	isPlaying: false,
+	// 	noteTime: 0,
+	// 	startTime: 0,
+	// 	ti: 0,
+	// 	currentStep: 0,
+	// 	tempo: 60,
+	// 	tic: 60 / 60 / 4,
+	// 	currentPattern: null,
+	// 	bank: {},
+	// 	totalCount: 0,
+	// 	pattern: {
+	// 		sequence: {
+	// 			openHat: '0101010101010101',
+	// 			closedHat: '0000000100000000',
+	// 			snare: '1010101010001000',
+	// 		},
+	// 	},
+	// 	initialPattern: [
+	// 		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+	// 		[0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+	// 		[0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+	// 	],
+	// });
 
-	function onPlay() {
-		playerState.isPlaying = true;
-		playerState.noteTime = 0.0;
-		playerState.startTime = AUDIO.currentTime + 0.005;
-		scheduleNote();
-	}
+	// let {
+	// 	isPlaying,
+	// 	noteTime,
+	// 	startTime,
+	// 	ti,
+	// 	currentStep,
+	// 	tempo,
+	// 	tic,
+	// 	currentPattern,
+	// 	bank,
+	// 	totalCount,
+	// 	pattern,
+	// } = playerState;
 
-	function setTempo() {
-		playerState.tic = 60 / 160 / 4; // 16th
-	}
+	// function onPlay() {
+	// 	isPlaying = true;
+	// 	noteTime = 0.0;
+	// 	startTime = AUDIO.currentTime + 0.005;
+	// 	scheduleNote();
+	// }
 
-	setTempo();
+	// function setTempo() {
+	// 	tic = 60 / 60 / 4; // 16th
+	// }
 
-	function scheduleNote() {
-		if (!playerState.isPlaying) return false;
-		var ct = AUDIO.currentTime;
+	// setTempo();
 
-		ct -= playerState.startTime;
+	// function scheduleNote() {
+	// 	if (!isPlaying) return false;
+	// 	var ct = AUDIO.currentTime;
 
-		while (playerState.noteTime < ct + 0.2) {
-			var pt = playerState.noteTime + playerState.startTime;
+	// 	ct -= startTime;
 
-			playPatternStepAtTime(pt);
-			nextNote();
-		}
-		playerState.ti = window.requestAnimationFrame(scheduleNote);
-	}
+	// 	while (noteTime < ct + 0.2) {
+	// 		var pt = noteTime + startTime;
 
-	function nextNote() {
-		playerState.currentStep++;
+	// 		playPatternStepAtTime(pt);
+	// 		nextNote();
+	// 	}
+	// 	ti = window.requestAnimationFrame(scheduleNote);
+	// }
 
-		console.log(playerState.currentStep);
+	// function nextNote() {
+	// 	currentStep++;
 
-		if (playerState.currentStep == 16) playerState.currentStep = 0;
+	// 	if (currentStep == 16) currentStep = 0;
 
-		playerState.noteTime += playerState.tic;
-	}
+	// 	noteTime += tic;
+	// }
 
-	function playPatternStepAtTime(pt: number) {
-		for (var k in playerState.currentPattern) {
-			if (playerState.currentPattern[k][playerState.currentStep] == '1') {
-				// console.log(k, pt);
+	// function playPatternStepAtTime(pt: number) {
+	// 	for (var k in currentPattern) {
+	// 		if (currentPattern[k][currentStep] == '1') {
+	// 			playPattern(k, pt);
+	// 		}
+	// 	}
+	// }
 
-				playPattern(k, pt);
-			}
-		}
-	}
+	// function playPattern(id: any, when: any) {
+	// 	const s = AUDIO.createBufferSource();
 
-	function playPattern(id: any, when: any) {
-		const s = AUDIO.createBufferSource();
+	// 	s.buffer = bank[id];
+	// 	console.log(s.buffer);
+	// 	s.connect(AUDIO.destination);
+	// 	s.start(when || 0);
+	// }
 
-		s.buffer = playerState.bank[id];
+	// function _parsePattern(pattern: any) {
+	// 	console.log(pattern);
+	// 	currentPattern = {};
+	// 	if (!currentPattern) return;
+	// 	for (var k in pattern.sequence) {
+	// 		var pat = _parseLine(pattern.sequence[k]);
 
-		s.connect(AUDIO.destination);
-		s.start(when || 0);
-	}
+	// 		currentPattern[k] = pat;
+	// 	}
 
-	function _parsePattern(pattern: any) {
-		playerState.currentPattern = {};
+	// 	currentPattern[Symbol.iterator] = function() {
+	// 		const entries = Object.entries(this);
+	// 		let index = -1;
 
-		for (var k in pattern.sequence) {
-			var pat = _parseLine(pattern.sequence[k]);
+	// 		return {
+	// 			next() {
+	// 				index++;
+	// 				return {
+	// 					value: entries[index],
+	// 					done: index >= entries.length,
+	// 				};
+	// 			},
+	// 		};
+	// 	};
 
-			playerState.currentPattern[k] = pat;
-		}
-	}
+	// 	// for (let values of playerState.currentPattern) {
+	// 	//     playerState.currentPattern[values[0]] = ['test']
 
-	function _parseLine(line: any) {
-		if (line.length !== 16) console.error('Invalid line length', playerState.pattern);
+	// 	// }
+	// 	// console.log(playerState.currentPattern, 'teeest');
 
-		return line.split('');
-	}
+	// 	// console.log(Object.entries(pattern.sequence));
+	// }
 
-	function loadSamples(srcObj: any) {
-		for (var k in srcObj) {
-			playerState.totalCount++;
-		}
-		for (var k in srcObj) {
-			_loadSample(k, srcObj[k]);
-		}
-		// _onSamplesLoaded = callback;
-	}
+	// _parsePattern(pattern);
 
-	async function _loadSample(key: any, url: any) {
-		const response = await fetch(`${url}`);
-		const arrayBuffer = await response.arrayBuffer();
+	// function _parseLine(line: any) {
+	// 	if (line.length !== 16) console.error('Invalid line length', pattern);
 
-		const data = await AUDIO.decodeAudioData(arrayBuffer);
+	// 	return line.split('');
+	// }
 
-		_handleSampleLoad(key, data);
-	}
+	// function loadSamples(srcObj: any) {
+	// 	for (var k in srcObj) {
+	// 		totalCount++;
+	// 	}
+	// 	for (var k in srcObj) {
+	// 		_loadSample(k, srcObj[k]);
+	// 	}
+	// }
 
-	function _handleSampleLoad(key: any, buffer: any) {
-		playerState.bank[key] = buffer;
-	}
+	// async function _loadSample(key: any, url: any) {
+	// 	const response = await fetch(`${url}`);
+	// 	const arrayBuffer = await response.arrayBuffer();
 
-	_parsePattern(playerState.pattern);
+	// 	const data = await AUDIO.decodeAudioData(arrayBuffer);
 
-	let samples: any = {};
-	let sampleList = ['snare', 'openHat', 'closedHat'];
-	sampleList.forEach(function(id) {
-		samples[id] = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/' + id + '.wav';
-	});
+	// 	_handleSampleLoad(key, data);
+	// }
 
-	loadSamples(samples);
+	// function _handleSampleLoad(key: any, buffer: any) {
+	// 	bank[key] = buffer;
+	// }
+
+	// let samples: any = {};
+	// let sampleList = ['snare', 'openHat', 'closedHat'];
+	// sampleList.forEach(function(id) {
+	// 	samples[id] = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/' + id + '.wav';
+	// });
+
+	// loadSamples(samples);
+
+
 
 	return (
 		<div className='App'>
-			<button onClick={onPlay}>Play</button>
+			<button onClick={() => sequencerService.onPlay()}>Play</button>
 		</div>
 	);
-}
+};
