@@ -168,8 +168,6 @@ export const SequencerPage = () => {
 
 	// loadSamples(samples);
 
-
-
 	return (
 		<div className='App'>
 			<button onClick={() => sequencerService.onPlay()}>Play</button>
