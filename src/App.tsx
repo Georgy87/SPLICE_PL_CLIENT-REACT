@@ -42,17 +42,17 @@ export const App: React.FC = () => {
 					<Switch>
 						<Route path='/login' component={LoginPage} exact />
 						<Route path='/registration' component={RegistrationPage} exact />
-						<Route
+						{/* <Route
 							path={'/'}
 							component={() => <PacksPage pageName={'main-packs'} />}
 							exact
-						/>
+						/> */}
 						<Route path='/profile-pack/:packId?' component={ProfilePackPage} exact />
 						<Route path='/profile' component={UserProfilePage} exact />
 						<Route path='/profile/create' component={CreatePackPage} exact />
 						<Route path='/profile/packs' component={UserPacksPage} exact />
 						<Route path='/profile/avatar' component={AvatarEditorPage} exact />
-						{/* <Route path='/' component={SequencerPage} exact /> */}
+						<Route path='/' component={SequencerPage} exact />
 					</Switch>
 				</div>
 			</div>
