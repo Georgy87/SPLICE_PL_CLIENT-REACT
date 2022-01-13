@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { sequencerService } from '../../services/sequencerService';
 
 import styles from './SequencerPage.module.scss';
 
 export const SequencerPage = () => {
-	const [pattern, setPattern] = useState(sequencerService.initialPattern);
+	const [pattern, setPattern] = useState<number[][]>(sequencerService.initialPattern);
+	const [sequencerStep, setSequencerStep] = useState<number>(sequencerService.currentStep);
 
 	function updatePattern({ x, y, value }: { x: number; y: number; value: number }) {
-		console.log(x, y, value);
-		const patternCopy = [...pattern];
-		console.log(patternCopy);
+		const patternCopy: number[][] = [...pattern];
 		patternCopy[y][x] = +!value;
 
 		setPattern(patternCopy);
 	}
 
+	useEffect(() => {
+		setSequencerStep(sequencerService.currentStep);
+		
+	}, []);
+	console.log(sequencerService.currentStep);
 	return (
 		<div className={styles.root}>
 			<button onClick={() => sequencerService.onPlay()}>Play</button>
@@ -25,7 +29,11 @@ export const SequencerPage = () => {
 					<div>
 						{row.map((value: number, x: number) => (
 							<button
-								className={styles.sampleBox}
+								className={
+									x === sequencerService.currentStep
+										? `${styles.sampleBox} ${styles.active}`
+										: `${styles.sampleBox}`
+								}
 								onClick={() => updatePattern({ x, y, value })}
 							>
 								{value}

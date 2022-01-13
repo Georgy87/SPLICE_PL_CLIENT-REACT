@@ -1,4 +1,3 @@
-	
 class SequencerService {
 	isPlaying: any;
 	noteTime: any;
@@ -7,10 +6,8 @@ class SequencerService {
 	currentStep: any;
 	tempo: any;
 	tic: any;
-	currentPattern: any;
 	bank: any;
 	totalCount: any;
-	pattern: any;
 	initialPattern: any;
 	currentInitialPattern: any;
 	AUDIO: any;
@@ -22,7 +19,6 @@ class SequencerService {
 		this.currentStep = 0;
 		this.tempo = 160;
 		this.tic = 60 / 160 / 4;
-		this.currentPattern = null;
 		this.bank = [];
 		this.totalCount = 0;
 		this.initialPattern = [
@@ -56,10 +52,9 @@ class SequencerService {
 		};
 		_scheduleNote();
 	}
-
+	
 	nextNote() {
 		this.currentStep++;
-
 		if (this.currentStep == 16) this.currentStep = 0;
 		this.noteTime += this.tic;
 	}
@@ -73,7 +68,6 @@ class SequencerService {
 	}
 
 	playPattern(id: any, when: any) {
-		console.log(this.bank, when);
 		const s = this.AUDIO.createBufferSource();
 		s.buffer = this.bank[id];
 
@@ -81,7 +75,7 @@ class SequencerService {
 		s.start(when || 0);
 	}
 
-	_parsePattern(pattern: any) {
+	_parsePattern() {
 		this.currentInitialPattern = [];
 
 		for (let k in this.initialPattern) {
@@ -115,7 +109,7 @@ class SequencerService {
 		this.startTime = this.AUDIO.currentTime + 0.005;
 		this.scheduleNote(this);
 		this.setTempo();
-		this._parsePattern(this.pattern);
+		this._parsePattern();
 
 		let sampleList = [
 			'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/snare.wav',
