@@ -10,6 +10,7 @@ export type SampleSliceState = {
 	loading: boolean;
 	files: FileListType[] | [];
 	packId: string | null;
+	currentStep: number;
 }
 
 export type Samples = {

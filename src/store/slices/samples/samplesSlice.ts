@@ -8,6 +8,7 @@ const initialState: SampleSliceState = {
 	loading: false,
 	files: [],
 	packId: null,
+	currentStep: 0,
 };
 
 export const fetchCreateSamples = createAsyncThunk(
@@ -85,6 +86,9 @@ export const samplesSlice = createSlice({
 		deleteSampleFiles: (state, action: PayloadAction<string>) => {
 			state.files = state.files.filter((el) => el.id != action.payload);
 		},
+		setCurrentStep: (state, action: PayloadAction<number>) => {
+			state.currentStep = action.payload;
+		},
 	},
 	extraReducers: (builder) =>
 		builder.addCase(
@@ -97,6 +101,6 @@ export const samplesSlice = createSlice({
 		),
 });
 
-export const { setSampleFiles, deleteSampleFiles } = samplesSlice.actions;
+export const { setSampleFiles, deleteSampleFiles, setCurrentStep } = samplesSlice.actions;
 
 export const samplesReducer = samplesSlice.reducer;

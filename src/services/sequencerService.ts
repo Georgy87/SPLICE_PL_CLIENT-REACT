@@ -31,7 +31,7 @@ class SequencerService {
 	}
 
 	setTempo() {
-		this.tic = 60 / 120 / 4;
+		this.tic = 60 / 160 / 4;
 	}
 
 	scheduleNote(context: any) {
