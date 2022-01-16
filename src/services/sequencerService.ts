@@ -1,5 +1,5 @@
 class SequencerService {
-	isPlaying: any;
+	isPlaying: boolean;
 	noteTime: any;
 	startTime: any;
 	ti: any;

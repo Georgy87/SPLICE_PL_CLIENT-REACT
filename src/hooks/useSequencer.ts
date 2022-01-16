@@ -10,9 +10,6 @@ import snare from './Output 1-2.wav';
 //@ts-ignore
 import smpl from './Out.wav';
 
-import { ContextProps, SequencerContext } from '../context/SequencerContext';
-import { setCurrentStep } from '../store/slices/samples/samplesSlice';
-
 let AUDIO = new window.AudioContext();
 export type SequencerStateType = {
 	isPlaying: any;
