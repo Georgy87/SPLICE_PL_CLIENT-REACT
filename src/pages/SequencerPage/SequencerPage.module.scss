@@ -1,11 +1,35 @@
 .root {
 }
 
-.sampleBox {
+.sequencerContainer {
+	display: flex;
+}
 
+.dropBoxes {
+	display: flex;
+	flex-direction: column;
+	button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 60px;
+		height: 50px;
+		margin: 3px;
+		background-color: white;
+		border-radius: 5px;
+		border: 2px solid rgb(139, 173, 149);
+		svg {
+			height: 30px;
+			width: 30px;
+			color: rgb(139, 173, 149);
+		}
+	}
+}
+
+.sampleBox {
 	align-items: center;
-	width: 8px;
-	height: 20px;
+	width: 30px;
+	height: 50px;
 	margin: 3px;
 	background-color: white;
 	border: 2px solid black;

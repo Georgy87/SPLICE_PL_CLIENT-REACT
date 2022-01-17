@@ -8,9 +8,7 @@ import {
 	CustomerServiceOutlined,
 	HeartOutlined,
 } from '@ant-design/icons';
-
 import * as Icons from 'react-icons/all';
-
 import { AccountCircleOutlined } from '@material-ui/icons';
 
 import styles from './IconLayout.module.scss';
@@ -28,11 +26,14 @@ export const icons = {
 	likes: Icons.FaHeart,
 	like: Icons.FaHeart,
 	dislike: HeartOutlined,
+	drop: Icons.TiDropbox,
 };
 
 export type IconLayoutProps = {
 	iconName: keyof typeof icons;
 	className?: string;
+	width?: string;
+	height?: string;
 	onClicked?: () => void;
 };
 

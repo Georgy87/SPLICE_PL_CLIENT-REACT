@@ -15,7 +15,6 @@ import { selectUser } from './store/selectors/userSelectors';
 import { UserPacksPage } from './pages/UserPacksPage/UserPacksPage';
 import { AvatarEditorPage } from './pages/AvatarEditorPage/AvatarEditorPage';
 import { SequencerPage } from './pages/SequencerPage/SequencerPage';
-import { SequencerContextProvider } from './context/SequencerContextProvider/SequencerContextProvider';
 
 import styles from './App.module.scss';
 
