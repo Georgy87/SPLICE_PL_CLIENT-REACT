@@ -21,10 +21,17 @@ type PropsType = {
 		| 'update'
 		| 'pack-profile'
 		| 'sample-update'
-		| string;
+		| 'tags'
+		| 'sequencer'
+		| 'sample-player'
+		| 'Play sample'
+		| 'pack';
+
 	onClicked?: () => void;
 	disabled?: boolean;
 	type?: string;
+	className?: string;
+	onClick?: () => void;
 };
 
 export const ButtonLayout: React.FC<PropsType> = ({ children, typeStyle, onClicked, disabled }) => {
@@ -48,6 +55,7 @@ export const ButtonLayout: React.FC<PropsType> = ({ children, typeStyle, onClick
 					[styles.packProfile]: typeStyle === 'pack-profile',
 					[styles.sampleUpdate]: typeStyle === 'sample-update',
 					[styles.tags]: typeStyle === 'tags',
+					[styles.sequencer]: typeStyle === 'sequencer',
 				})}
 			>
 				{children}

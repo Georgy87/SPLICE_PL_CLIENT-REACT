@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useSequencer } from '../../hooks/useSequencer';
 import { getColumnColor } from '../../utils/getColumnColor';
@@ -8,14 +8,20 @@ import snare from '../../assets/drums-images/png-transparent-snare-drums-musical
 import hihat from '../../assets/drums-images/png-transparent-hi-hats-avedis-zildjian-company-cymbal-drums-musical-instruments-drums-hat-drum-cymbal.png';
 import bass from '../../assets/drums-images/bass-guitar-electric-guitar-rickenbacker-4003-bass-guitar-png-clip-art.png';
 import smpl from '../../assets/drums-images/png-transparent-digital-audio-wav-audio-file-format-audio-interchange-file-format-mp4-icon-text-trademark-logo.png';
+import { IconLayout } from '../../layouts/IconLayout/IconLayout';
+import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 
 import styles from './SequencerPage.module.scss';
-import { IconLayout } from '../../layouts/IconLayout/IconLayout';
+import { fetchGetLikedSamples } from '../../store/slices/user/userSlice';
 
 export const SequencerPage = () => {
 	const { onPlay, onStop, initialPattern, step } = useSequencer();
 
 	const [pattern, setPattern] = useState<number[][]>(initialPattern);
+
+	const dispatch = useDispatch();
+
+	const samplesBoxs = [kick, snare, hihat, bass, smpl];
 
 	function updatePattern({ x, y, value }: { x: number; y: number; value: number }) {
 		const patternCopy: number[][] = [...pattern];
@@ -24,7 +30,9 @@ export const SequencerPage = () => {
 		setPattern(patternCopy);
 	}
 
-	const samplesBoxs = [kick, snare, hihat, bass, smpl];
+	useEffect(() => {
+		dispatch(fetchGetLikedSamples());
+	}, []);
 
 	return (
 		<div className={styles.root}>
@@ -33,9 +41,11 @@ export const SequencerPage = () => {
 			<div className={styles.sequencerContainer}>
 				<div className={styles.dropBoxes}>
 					{samplesBoxs.map((src: string) => {
-						return <button ><IconLayout iconName='drop'>
-
-						</IconLayout></button>;
+						return (
+							<ButtonLayout typeStyle='sequencer'>
+								<IconLayout iconName='drop'></IconLayout>
+							</ButtonLayout>
+						);
 					})}
 				</div>
 				<div className={styles.sequencerSteps}>

@@ -2,36 +2,32 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { User, UserSliceState } from './types';
 import { userApi } from '../../../services/api/userApi';
+import { Samples } from '../samples/types';
 
 const initialState: UserSliceState = {
 	user: null,
 	token: null,
 	isAuth: false,
+	samples: null,
 };
 
-export const fetchRegistration = createAsyncThunk(
-	'user/registrationStatus',
-	async (payload: User) => {
-		try {
-			await userApi.registration(payload);
-		} catch (error) {
-			console.log(error);
-		}
-	},
-);
+export const fetchRegistration = createAsyncThunk('user/registrationStatus', async (payload: User) => {
+	try {
+		await userApi.registration(payload);
+	} catch (error) {
+		console.log(error);
+	}
+});
 
-export const fetchLogin = createAsyncThunk(
-	'user/loginStatus',
-	async (payload: { email: string; password: string }) => {
-		try {
-			const data: { user: User; token: string } = await userApi.login(payload);
-			localStorage.setItem('token', data.token);
-			return data;
-		} catch (error) {
-			console.log(error);
-		}
-	},
-);
+export const fetchLogin = createAsyncThunk('user/loginStatus', async (payload: { email: string; password: string }) => {
+	try {
+		const data: { user: User; token: string } = await userApi.login(payload);
+		localStorage.setItem('token', data.token);
+		return data;
+	} catch (error) {
+		console.log(error);
+	}
+});
 
 export const fetchAuth = createAsyncThunk('user/authStatus', async () => {
 	try {
@@ -43,30 +39,33 @@ export const fetchAuth = createAsyncThunk('user/authStatus', async () => {
 	}
 });
 
-export const fetchUpdateEmail = createAsyncThunk(
-	'user/updateEmailStatus',
-	async (payload: { email: string | undefined }) => {
-		try {
-			const data: { user: User } = await userApi.updateEmail(payload.email);
+export const fetchUpdateEmail = createAsyncThunk('user/updateEmailStatus', async (payload: { email: string | undefined }) => {
+	try {
+		const data: { user: User } = await userApi.updateEmail(payload.email);
 
-			return data;
-		} catch (error) {
-			console.log(error);
-		}
-	},
-);
+		return data;
+	} catch (error) {
+		console.log(error);
+	}
+});
 
-export const fetchUpdateFullName = createAsyncThunk(
-	'user/updateFullNameStatus',
-	async (payload: { fullname: string | undefined }) => {
-		try {
-			const data: { user: User } = await userApi.updateFullName(payload.fullname);
-			return data;
-		} catch (error) {
-			console.log(error);
-		}
-	},
-);
+export const fetchUpdateFullName = createAsyncThunk('user/updateFullNameStatus', async (payload: { fullname: string | undefined }) => {
+	try {
+		const data: { user: User } = await userApi.updateFullName(payload.fullname);
+		return data;
+	} catch (error) {
+		console.log(error);
+	}
+});
+
+export const fetchGetLikedSamples = createAsyncThunk('user/getLikedSamplesStatus', async () => {
+	try {
+		const data: Samples[] = await userApi.getLikedSamples();
+		return data;
+	} catch (error) {
+		console.log(error);
+	}
+});
 
 export const userSlice = createSlice({
 	name: 'user',
@@ -81,25 +80,19 @@ export const userSlice = createSlice({
 	},
 	extraReducers: (builder) =>
 		builder
-			.addCase(
-				fetchLogin.fulfilled.type,
-				(state, action: PayloadAction<{ user: User; token: string }>) => {
-					state.user = action.payload?.user;
-					state.token = action.payload?.token;
+			.addCase(fetchLogin.fulfilled.type, (state, action: PayloadAction<{ user: User; token: string }>) => {
+				state.user = action.payload?.user;
+				state.token = action.payload?.token;
+				state.isAuth = true;
+			})
+			.addCase(fetchAuth.fulfilled.type, (state, action: PayloadAction<{ user: User; token: string }>) => {
+				if (action.payload) {
+					const { user, token } = action.payload;
+					state.user = user;
+					state.token = token;
 					state.isAuth = true;
-				},
-			)
-			.addCase(
-				fetchAuth.fulfilled.type,
-				(state, action: PayloadAction<{ user: User; token: string }>) => {
-					if (action.payload) {
-						const { user, token } = action.payload;
-						state.user = user;
-						state.token = token;
-						state.isAuth = true;
-					}
-				},
-			)
+				}
+			})
 			.addCase(fetchUpdateEmail.fulfilled.type, (state, action: PayloadAction<User>) => {
 				if (action.payload) {
 					state.user = action.payload;
@@ -109,6 +102,9 @@ export const userSlice = createSlice({
 				if (action.payload) {
 					state.user = action.payload;
 				}
+			})
+			.addCase(fetchGetLikedSamples.fulfilled.type, (state, action: PayloadAction<Samples[]>) => {
+				state.samples = action.payload;
 			}),
 });
 

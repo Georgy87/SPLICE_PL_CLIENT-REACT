@@ -124,4 +124,29 @@
 		padding: 2px;
 		@extend %buttons;
 	}
+	.sequencer {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 60px;
+		height: 50px;
+		margin: 3px;
+		background-color: white;
+		border-radius: 5px;
+		border: 2px solid rgb(139, 173, 149);
+		svg {
+			height: 20px;
+			width: 20px;
+			color: rgb(139, 173, 149);
+		}
+	}
+	.sampleBox {
+		align-items: center;
+		width: 30px;
+		height: 50px;
+		margin: 3px;
+		background-color: white;
+		border: 2px solid black;
+		border-radius: 5px;
+	}
 }

@@ -26,4 +26,8 @@ export const userApi = {
 		const { data } = await instance.put('users/fullname', { fullname });
 		return data;
 	},
+	async getLikedSamples() {
+		const { data } = await instance.get('users/liked-samples');
+		return data;
+	},
 };

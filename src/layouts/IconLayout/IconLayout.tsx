@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+
 import {
 	BankOutlined,
 	LoginOutlined,
@@ -26,7 +27,7 @@ export const icons = {
 	likes: Icons.FaHeart,
 	like: Icons.FaHeart,
 	dislike: HeartOutlined,
-	drop: Icons.TiDropbox,
+	drop: Icons.BsUpload,
 };
 
 export type IconLayoutProps = {

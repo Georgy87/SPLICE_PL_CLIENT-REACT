@@ -26,7 +26,24 @@ type PropsType = {
 		fontSize: string;
 		cursor: string;
 	};
-	typeBtn: string;
+	typeBtn:
+		| 'footer'
+		| 'black'
+		| 'blue'
+		| 'auth'
+		| 'submit'
+		| 'blue-disabled'
+		| 'download'
+		| 'sample-player'
+		| 'sample-item'
+		| 'sign-in-out'
+		| 'update'
+		| 'pack-profile'
+		| 'sample-update'
+		| 'tags'
+		| 'sequencer'
+		| 'Play sample'
+		| 'pack';
 	trackId?: string | number;
 	currentTrackId?: string | boolean | number;
 	children?: React.ReactNode;
