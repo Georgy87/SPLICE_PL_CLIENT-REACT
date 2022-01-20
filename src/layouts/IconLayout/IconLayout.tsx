@@ -28,6 +28,7 @@ export const icons = {
 	like: Icons.FaHeart,
 	dislike: HeartOutlined,
 	drop: Icons.BsUpload,
+	sequencer: Icons.CgMusic,
 };
 
 export type IconLayoutProps = {

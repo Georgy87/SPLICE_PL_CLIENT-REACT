@@ -25,5 +25,6 @@ export type Samples = {
 	canvasImage: string;
 	bpm: number;
 	category: string;
+	packPicture: string;
 };
 

@@ -15,10 +15,15 @@ export const useDropzone = () => {
 		setDrag(false);
 	};
 
+	const dragStart = (e: React.DragEvent<HTMLUListElement>, src: string, setNewSampleSrc: (src: string) => void) => {
+		setNewSampleSrc(src);
+	};
+
 	return {
+		drag,
 		dragEnter,
 		dragLeave,
 		setDrag,
-		drag,
+		dragStart,
 	};
 };

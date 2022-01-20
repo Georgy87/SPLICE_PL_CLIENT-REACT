@@ -39,26 +39,16 @@ export const Navbar = () => {
 	return (
 		<>
 			<nav className={isAuth ? styles.navbar : `${styles.navbar} ${styles.notAuth}`}>
-				<Link
-					to='/'
-					className={styles.navbarLogo}
-					onClick={() => setSideBar(true)}
-				>
+				<Link to='/' className={styles.navbarLogo} onClick={() => setSideBar(true)}>
 					<IconLayout iconName={'music'} />
 					SampleCloud
 				</Link>
 				{mobile && (
 					<>
 						{sidebar ? (
-							<Icons.FaTimes
-								className={styles.sidebarToggleLogo}
-								onClick={() => setSideBar(!sidebar)}
-							/>
+							<Icons.FaTimes className={styles.sidebarToggleLogo} onClick={() => setSideBar(!sidebar)} />
 						) : (
-							<Icons.FaBars
-								className={styles.sidebarToggleLogo}
-								onClick={() => setSideBar(!sidebar)}
-							/>
+							<Icons.FaBars className={styles.sidebarToggleLogo} onClick={() => setSideBar(!sidebar)} />
 						)}
 					</>
 				)}
@@ -68,7 +58,7 @@ export const Navbar = () => {
 						{isAuth ? (
 							<ButtonLayout
 								typeStyle={'sign-in-out'}
-								onClicked={() => { 
+								onClicked={() => {
 									dispatch(logout());
 									dispatch(setDefaultPackState());
 								}}
@@ -85,9 +75,7 @@ export const Navbar = () => {
 					</Link>
 				)}
 			</nav>
-			{mobile && sidebar && (
-				<Sidebar sidebar={sidebar} setSideBar={setSideBar} />
-			)}
+			{mobile && sidebar && <Sidebar sidebar={sidebar} setSideBar={setSideBar} />}
 		</>
 	);
 };

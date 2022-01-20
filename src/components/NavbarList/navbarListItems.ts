@@ -14,4 +14,8 @@ export const navbarListItems: navbarListItemsType[] = [
 		pageName: 'PROFILE',
 		iconName: 'profile',
 	},
+	{
+		pageName: 'SEQUENCER',
+		iconName: 'sequencer',
+	},
 ];

@@ -1,15 +1,6 @@
 import { useState } from 'react';
 
-//@ts-ignore
-import clap from './7_Kick_Kit.wav';
-//@ts-ignore
-import hihat from './fg2_110_drum_loop_nuwave_full.wav';
-//@ts-ignore
-import snare from './Output 1-2.wav';
-//@ts-ignore
-import smpl from './Out.wav';
-
-let AUDIO: AudioContext = new window.AudioContext();
+let AUDIO: AudioContext = new window.AudioContext() || new window.webkitAudioContext();
 
 export type SequencerStateType = {
 	isPlaying: boolean;
@@ -31,7 +22,7 @@ export const useSequencer = () => {
 		noteTime: 0,
 		startTime: 0,
 		currentStep: 0,
-		tempo: 520,
+		tempo: 128,
 		tic: 60 / 180 / 4,
 		bank: [],
 		totalCount: 0,
@@ -54,7 +45,6 @@ export const useSequencer = () => {
 		tempo,
 		tic,
 		bank,
-		totalCount,
 		initialPattern,
 		currentInitialPattern,
 		requestId,
@@ -63,7 +53,7 @@ export const useSequencer = () => {
 	const [step, setStep] = useState<number>(1);
 
 	const setTempo = () => {
-		tic = 60 / 110 / 4;
+		tic = 60 / 128 / 4;
 	};
 
 	const scheduleNote = () => {
@@ -82,7 +72,7 @@ export const useSequencer = () => {
 			}
 
 			requestId = window.requestAnimationFrame(_scheduleNote);
-		
+
 			setSequencerState((state: SequencerStateType) => ({
 				...state,
 				requestId,
@@ -128,9 +118,9 @@ export const useSequencer = () => {
 		}
 	};
 
-	const loadSamples = (src: string[]) => {
-		src.forEach((src: string, index: number) => {
-			_loadSample(index, src);
+	const loadSamples = (url: string[]) => {
+		url.forEach((url: string, index: number) => {
+			_loadSample(index, url);
 		});
 	};
 
@@ -148,7 +138,7 @@ export const useSequencer = () => {
 		bank[key] = buffer;
 	};
 
-	const onPlay = () => {
+	const onPlay = (sampleList: string[]) => {
 		isPlaying = true;
 		noteTime = 0.0;
 		startTime = AUDIO.currentTime + 0.005;
@@ -156,9 +146,6 @@ export const useSequencer = () => {
 		scheduleNote();
 		setTempo();
 		_parsePattern();
-
-		let sampleList = [clap, 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav', hihat, snare, smpl];
-
 		loadSamples(sampleList);
 	};
 
@@ -176,5 +163,6 @@ export const useSequencer = () => {
 		isPlaying,
 		onPlay,
 		onStop,
+		loadSamples,
 	};
 };
