@@ -11,21 +11,22 @@ export const AvatarEditorPage = () => {
 	const previewCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
 	const [avatarState, setAvatarState] = useState<{
-		imgSrc: any;
-		imgSrcExt: string | ArrayBuffer | null | undefined;
+		imgSrc: string;
+		imgSrcExt: string;
 	}>({
-		imgSrc: null,
-		imgSrcExt: null,
+		imgSrc: '',
+		imgSrcExt: '',
 	});
 
-	const [crop, setCrop] = useState<any>({ unit: '%', width: 30, aspect: 1 / 1 });
-	const [completedCrop, setCompletedCrop] = useState(null);
+	const [crop, setCrop] = useState<Crop>({ unit: '%', width: 30, height: 0, aspect: 1 / 1, x: 0, y: 0 });
+	const [completedCrop, setCompletedCrop] = useState<Crop | null>(null);
 
 	const { dragEnter, dragLeave } = useDropzone();
 
 	const handleOnDrop = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
 		e.stopPropagation();
+		
 		const eventData = (e as React.DragEvent).dataTransfer;
 		const files = [eventData.files];
 
@@ -33,15 +34,18 @@ export const AvatarEditorPage = () => {
 			const currentFile = files[0];
 
 			const reader = new FileReader();
+
 			reader.addEventListener(
 				'load',
 				() => {
 					const myResult = reader.result;
-
-					setAvatarState({
-						imgSrc: myResult,
-						imgSrcExt: avatarService.extractImageFileExtensionFromBase64(myResult),
-					});
+					const resultAvatarImg = avatarService.extractImageFileExtensionFromBase64(myResult);
+					if (typeof myResult === 'string' && resultAvatarImg) {
+						setAvatarState({
+							imgSrc: myResult,
+							imgSrcExt: resultAvatarImg,
+						});
+					}
 				},
 				false,
 			);
@@ -61,14 +65,14 @@ export const AvatarEditorPage = () => {
 		const image: any = imgRef.current;
 
 		if (!image) return;
-		
+
 		const canvas = previewCanvasRef.current;
-		const crop: any = completedCrop;
+		const crop: Crop = completedCrop;
 
 		const scaleX = image.naturalWidth / image.width;
 		const scaleY = image.naturalHeight / image.height;
-		
-		const ctx: CanvasRenderingContext2D | null  = canvas.getContext('2d');
+
+		const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
 		const pixelRatio = window.devicePixelRatio;
 
 		canvas.width = crop.width * pixelRatio * scaleX;
@@ -101,8 +105,8 @@ export const AvatarEditorPage = () => {
 							src={avatarState.imgSrc}
 							crop={crop}
 							onImageLoaded={onLoad}
-							onChange={(c) => setCrop(c)}
-							onComplete={(c: any) => setCompletedCrop(c)}
+							onChange={(c: Crop) => setCrop(c)}
+							onComplete={(c: Crop) => setCompletedCrop(c)}
 						/>
 						<br />
 						<p
@@ -136,7 +140,6 @@ export const AvatarEditorPage = () => {
 							marginTop: '80px',
 							cursor: 'pointer',
 							boxShadow: 'inset 2px 3px 10px rgb(228, 241, 244)',
-							// backgroundColor: "rgb(243, 245, 244)"
 						}}
 						onDragEnter={dragEnter}
 						onDragLeave={dragLeave}

@@ -24,13 +24,14 @@ export const UserPacksPage = () => {
 			const { imageFile, audioFile, audioCoordinates, packId, fileId } = e.data;
 
 			const id = await createSamples(imageFile, audioFile, audioCoordinates, packId, fileId);
-			console.log(id);
+			
 			dispatch(deleteSampleFiles(id));
 		}
 
 		workerInstanceCreateSample.addEventListener('message', create);
 
 		dispatch(fetchGetUserPacks());
+		
 		return () => {
 			workerInstanceCreateSample.removeEventListener('message', create);
 		}

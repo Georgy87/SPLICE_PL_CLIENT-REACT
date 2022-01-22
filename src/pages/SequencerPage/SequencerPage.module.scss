@@ -2,6 +2,18 @@
 	margin-top: 50px;
 }
 
+.sequencerControls {
+	display: flex;
+	justify-content: center;
+	margin: 20px;
+	button {
+		font-weight: 700;
+		cursor: pointer;
+		border: none;
+		background-color: transparent;
+	}
+}
+
 .sequencerContainer {
 	display: flex;
 	justify-content: center;
@@ -29,8 +41,8 @@
 .samplesContainer {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	margin-top: 30px;
-	width: 900px;
 	.likesSample {
 		display: flex;
 		padding: 7px;

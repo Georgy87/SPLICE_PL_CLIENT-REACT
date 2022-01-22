@@ -31,7 +31,9 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	const [canvasOffsetLeft, setCanvasOffsetLeft] = useState<number>(0);
 
 	const { playTrack, isPlaying, currentSampleId, currentTime, percent } = useSound();
+
 	const dispatch = useDispatch();
+	
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	const canvas: HTMLCanvasElement | null = canvasRef.current;

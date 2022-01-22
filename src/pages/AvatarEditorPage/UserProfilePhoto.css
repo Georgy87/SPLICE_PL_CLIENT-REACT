@@ -1,3 +1,31 @@
+.root {
+	display: flex;
+	justify-content: center;
+}
+
+.downloadAvatar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    width: 500px;
+	height: 300px;
+    margin: 0 auto;
+	margin-top: 80px;
+    text-align: center;
+	border-style: none;
+	border-radius: 4px;
+	cursor: pointer;
+	box-shadow: inset 2px 3px 10px rgb(228, 241, 244);
+}
+
+.dropzone {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 200px;
+	height: 200px;
+}
+
 .ReactCrop {
 	position: relative;
 	display: flex;

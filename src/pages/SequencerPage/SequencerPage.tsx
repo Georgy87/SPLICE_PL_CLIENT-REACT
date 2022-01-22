@@ -63,8 +63,10 @@ export const SequencerPage = () => {
 
 	return (
 		<div className={styles.root}>
+			<div className={styles.sequencerControls}>
 			<button onClick={() => onPlay(sampleList)}>Play</button>
 			<button onClick={() => onStop()}>Stop</button>
+			</div>
 			<div className={styles.sequencerContainer}>
 				<div className={styles.dropBoxes}>
 					{samplesBoxs.map((src: string, index: number) => {
