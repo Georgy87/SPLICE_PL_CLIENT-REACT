@@ -26,7 +26,7 @@ export const AvatarEditorPage = () => {
 	const handleOnDrop = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
 		e.stopPropagation();
-		
+
 		const eventData = (e as React.DragEvent).dataTransfer;
 		const files = [eventData.files];
 
@@ -97,26 +97,18 @@ export const AvatarEditorPage = () => {
 	}, [completedCrop]);
 
 	return (
-		<div>
-			<div className='photo-add-container'>
-				{avatarState.imgSrc ? (
-					<>
-						<ReactCrop
-							src={avatarState.imgSrc}
-							crop={crop}
-							onImageLoaded={onLoad}
-							onChange={(c: Crop) => setCrop(c)}
-							onComplete={(c: Crop) => setCompletedCrop(c)}
-						/>
-						<br />
-						<p
-							style={{
-								textAlign: 'center',
-								fontFamily: 'var(--myFontFamily)',
-							}}
-						>
-							Предпросмотр аватара
-						</p>
+		<div className='root'>
+			{avatarState.imgSrc ? (
+				<>
+					<ReactCrop
+						src={avatarState.imgSrc}
+						crop={crop}
+						onImageLoaded={onLoad}
+						onChange={(c: Crop) => setCrop(c)}
+						onComplete={(c: Crop) => setCompletedCrop(c)}
+					/>
+					<div className="preview-avatar">
+						<p>Preview Avatar</p>
 						<canvas
 							ref={previewCanvasRef}
 							style={{
@@ -127,29 +119,13 @@ export const AvatarEditorPage = () => {
 								borderRadius: '100%',
 							}}
 						></canvas>
-					</>
-				) : (
-					<div
-						style={{
-							borderStyle: 'none',
-							width: '500px',
-							height: '300px',
-							borderRadius: '4px',
-							textAlign: 'center',
-							margin: '0 auto',
-							marginTop: '80px',
-							cursor: 'pointer',
-							boxShadow: 'inset 2px 3px 10px rgb(228, 241, 244)',
-						}}
-						onDragEnter={dragEnter}
-						onDragLeave={dragLeave}
-						onDragOver={dragEnter}
-						onDrop={handleOnDrop}
-					>
-						<p>Download Image</p>
 					</div>
-				)}
-			</div>
+				</>
+			) : (
+				<div className='download-image' onDragEnter={dragEnter} onDragLeave={dragLeave} onDragOver={dragEnter} onDrop={handleOnDrop}>
+					<p>Download Image</p>
+				</div>
+			)}
 		</div>
 	);
 };
