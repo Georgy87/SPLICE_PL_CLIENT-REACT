@@ -5,10 +5,15 @@ import { useDropzone } from '../../hooks/useDropzone';
 import { avatarService } from '../../services/avatarService';
 
 import './UserProfilePhoto.css';
+import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
+import { useDispatch } from 'react-redux';
+import { fetchUpdateAvatar } from '../../store/slices/user/userSlice';
 
 export const AvatarEditorPage = () => {
 	const imgRef = useRef<HTMLImageElement | HTMLCanvasElement | null>(null);
 	const previewCanvasRef = useRef<HTMLCanvasElement | null>(null);
+
+	const dispatch = useDispatch();
 
 	const [avatarState, setAvatarState] = useState<{
 		imgSrc: string;
@@ -17,9 +22,9 @@ export const AvatarEditorPage = () => {
 		imgSrc: '',
 		imgSrcExt: '',
 	});
-
 	const [crop, setCrop] = useState<Crop>({ unit: '%', width: 30, height: 0, aspect: 1 / 1, x: 0, y: 0 });
 	const [completedCrop, setCompletedCrop] = useState<Crop | null>(null);
+	const [avatar, setAvatar] = useState<File | null>(null);
 
 	const { dragEnter, dragLeave } = useDropzone();
 
@@ -53,7 +58,7 @@ export const AvatarEditorPage = () => {
 		}
 	};
 
-	const onLoad = useCallback((img) => {
+	const onLoad = useCallback((img: HTMLImageElement) => {
 		imgRef.current = img;
 	}, []);
 
@@ -67,33 +72,15 @@ export const AvatarEditorPage = () => {
 		if (!image) return;
 
 		const canvas = previewCanvasRef.current;
+
 		const crop: Crop = completedCrop;
 
-		const scaleX = image.naturalWidth / image.width;
-		const scaleY = image.naturalHeight / image.height;
+		const canvasResult = avatarService.avatarCreator(image, canvas, crop);
 
-		const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
-		const pixelRatio = window.devicePixelRatio;
-
-		canvas.width = crop.width * pixelRatio * scaleX;
-		canvas.height = crop.height * pixelRatio * scaleY;
-
-		if (!ctx) return;
-
-		ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-		ctx.imageSmoothingQuality = 'high';
-
-		ctx.drawImage(
-			image,
-			crop.x * scaleX,
-			crop.y * scaleY,
-			crop.width * scaleX,
-			crop.height * scaleY,
-			0,
-			0,
-			crop.width * scaleX,
-			crop.height * scaleY,
-		);
+		canvasResult?.toBlob(function(blob: Blob | null) {
+			if (!blob) return;
+			setAvatar(new File([blob], 'avatar', { type: blob.type }));
+		});
 	}, [completedCrop]);
 
 	return (
@@ -107,7 +94,7 @@ export const AvatarEditorPage = () => {
 						onChange={(c: Crop) => setCrop(c)}
 						onComplete={(c: Crop) => setCompletedCrop(c)}
 					/>
-					<div className="preview-avatar">
+					<div className='preview-avatar'>
 						<p>Preview Avatar</p>
 						<canvas
 							ref={previewCanvasRef}
@@ -117,8 +104,10 @@ export const AvatarEditorPage = () => {
 								display: 'block',
 								margin: '0 auto',
 								borderRadius: '100%',
+								marginBottom: '30px',
 							}}
 						></canvas>
+						<ButtonLayout onClicked={() => dispatch(fetchUpdateAvatar(avatar))} typeStyle="blue">Download</ButtonLayout>
 					</div>
 				</>
 			) : (

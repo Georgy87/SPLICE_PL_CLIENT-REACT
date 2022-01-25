@@ -9,6 +9,7 @@ const initialState: UserSliceState = {
 	token: null,
 	isAuth: false,
 	samples: null,
+	avatar: null,
 };
 
 export const fetchRegistration = createAsyncThunk('user/registrationStatus', async (payload: User) => {
@@ -67,6 +68,21 @@ export const fetchGetLikedSamples = createAsyncThunk('user/getLikedSamplesStatus
 	}
 });
 
+export const fetchUpdateAvatar = createAsyncThunk('user/updateAvatarSamplesStatus', async (file: File | null) => {
+	try {
+		if (!file) return;
+		
+		const formData = new FormData();
+
+		formData.append('file', file);
+
+		const data: string = await userApi.updateAvatar(formData);
+		return data;
+	} catch (error) {
+		console.log(error);
+	}
+});
+
 export const userSlice = createSlice({
 	name: 'user',
 	initialState,
@@ -105,6 +121,9 @@ export const userSlice = createSlice({
 			})
 			.addCase(fetchGetLikedSamples.fulfilled.type, (state, action: PayloadAction<Samples[]>) => {
 				state.samples = action.payload;
+			})
+			.addCase(fetchUpdateAvatar.fulfilled.type, (state, action: PayloadAction<string>) => {
+				state.avatar = action.payload;
 			}),
 });
 

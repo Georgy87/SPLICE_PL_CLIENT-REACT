@@ -7,30 +7,35 @@ class AvatarService {
 		}
 	}
 
-	// image64toCanvasRef(canvasRef: HTMLCanvasElement | null, image64: string, pixelCrop: Crop) {
-	// 	if (canvasRef === null) return;
+	avatarCreator(image: any, canvas: HTMLCanvasElement, crop: Crop) {
+		const scaleX = image.naturalWidth / image.width;
+		const scaleY = image.naturalHeight / image.height;
 
-	// 	const canvas = canvasRef;
-	// 	canvas.width = pixelCrop.width;
-	// 	canvas.height = pixelCrop.height;
-	
-	// 	const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
-	// 	const image = new Image();
-	// 	image.src = image64;
-	// 	image.onload = function() {
-	// 		ctx?.drawImage(
-	// 			image,
-	// 			pixelCrop.x,
-	// 			pixelCrop.y,
-	// 			pixelCrop.width,
-	// 			pixelCrop.height,
-	// 			0,
-	// 			0,
-	// 			pixelCrop.width,
-	// 			pixelCrop.height
-	// 		);
-	// 	};
-	// };
+		const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
+		const pixelRatio = window.devicePixelRatio;
+
+		canvas.width = crop.width * pixelRatio * scaleX;
+		canvas.height = crop.height * pixelRatio * scaleY;
+
+		if (!ctx) return;
+
+		ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+		ctx.imageSmoothingQuality = 'high';
+
+		ctx.drawImage(
+			image,
+			crop.x * scaleX,
+			crop.y * scaleY,
+			crop.width * scaleX,
+			crop.height * scaleY,
+			0,
+			0,
+			crop.width * scaleX,
+			crop.height * scaleY,
+		);
+
+		return canvas;
+	}
 }
 
 export const avatarService = new AvatarService();

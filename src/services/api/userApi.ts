@@ -30,4 +30,9 @@ export const userApi = {
 		const { data } = await instance.get('users/liked-samples');
 		return data;
 	},
+	async updateAvatar(formData: FormData) {
+		console.log(formData);
+		const { data } = await instance.put('users/avatar', formData);
+		return data;
+	},
 };
