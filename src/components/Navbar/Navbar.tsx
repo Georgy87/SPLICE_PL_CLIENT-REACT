@@ -22,18 +22,18 @@ export const Navbar = () => {
 	const isAuth = useSelector(selectAuth);
 
 	useEffect(() => {
-		const handleResize = () => {
-			if (window.innerWidth < 1065) {
-				setModile(true);
-			} else {
-				setModile(false);
-				setSideBar(false);
-			}
-		};
-		window.addEventListener('resize', handleResize);
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
+		// const handleResize = () => {
+		// 	if (windowWidth < 1065) {
+		// 		setModile(true);
+		// 	} else {
+		// 		setModile(false);
+		// 		setSideBar(false);
+		// 	}
+		// };
+		// window.addEventListener('resize', handleResize);
+		// return () => {
+		// 	window.removeEventListener('resize', handleResize);
+		// };
 	}, []);
 
 	return (
@@ -43,17 +43,15 @@ export const Navbar = () => {
 					<IconLayout iconName={'music'} />
 					SampleCloud
 				</Link>
-				{mobile && (
-					<>
-						{sidebar ? (
-							<Icons.FaTimes className={styles.sidebarToggleLogo} onClick={() => setSideBar(!sidebar)} />
-						) : (
-							<Icons.FaBars className={styles.sidebarToggleLogo} onClick={() => setSideBar(!sidebar)} />
-						)}
-					</>
+
+				{sidebar ? (
+					<Icons.FaTimes className={styles.sidebarToggleLogo} onClick={() => setSideBar(!sidebar)} />
+				) : (
+					<Icons.FaBars className={styles.sidebarToggleLogo} onClick={() => setSideBar(!sidebar)} />
 				)}
+
 				{!mobile && isAuth ? <NavbarList /> : null}
-				{!mobile && (
+				{
 					<Link to='/login'>
 						{isAuth ? (
 							<ButtonLayout
@@ -73,7 +71,7 @@ export const Navbar = () => {
 							</ButtonLayout>
 						)}
 					</Link>
-				)}
+				}
 			</nav>
 			{mobile && sidebar && <Sidebar sidebar={sidebar} setSideBar={setSideBar} />}
 		</>

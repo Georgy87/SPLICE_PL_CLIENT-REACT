@@ -64,8 +64,8 @@ export const SequencerPage = () => {
 	return (
 		<div className={styles.root}>
 			<div className={styles.sequencerControls}>
-			<button onClick={() => onPlay(sampleList)}>Play</button>
-			<button onClick={() => onStop()}>Stop</button>
+				<button onClick={() => onPlay(sampleList)}>Play</button>
+				<button onClick={() => onStop()}>Stop</button>
 			</div>
 			<div className={styles.sequencerContainer}>
 				<div className={styles.dropBoxes}>
@@ -93,6 +93,7 @@ export const SequencerPage = () => {
 					))}
 				</div>
 			</div>
+
 			<div className={styles.samplesContainer}>
 				{!likedSamples ? (
 					<Loader />

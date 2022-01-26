@@ -86,6 +86,9 @@
 			margin-right: 2px;
 		}
 		@extend %buttons;
+		@media screen and (max-width: 1060px) {
+			display: none;
+		}
 	}
 	.update {
 		display: flex;
@@ -138,6 +141,19 @@
 			height: 20px;
 			width: 20px;
 			color: rgb(139, 173, 149);
+		}
+		@media screen and (max-width: 1300px) {
+			align-items: center;
+			width: 30px;
+			height: 35px;
+		}
+		@media screen and (max-width: 900px) {
+			margin: 1px;
+			height: 25px;
+			svg {
+				height: 15px;
+				color: rgb(139, 173, 149);
+			}
 		}
 	}
 }
