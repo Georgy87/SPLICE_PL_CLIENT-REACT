@@ -9,7 +9,6 @@ type PropsType = {
 	trackId?: string | null;
 	currentSampleId?: string | false;
 	children: React.ReactNode;
-	width: string;
 };
 
 export const SampleSliderLayout: React.FC<PropsType> = ({

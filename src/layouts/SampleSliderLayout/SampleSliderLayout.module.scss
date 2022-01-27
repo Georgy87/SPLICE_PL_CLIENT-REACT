@@ -4,6 +4,9 @@
 	text-align: center;
 	height: 50px;
 	width: 550px;
+	@media screen and (max-width: 1060px) {
+		display: none;
+	}
 }
 
 .sliderWave {
