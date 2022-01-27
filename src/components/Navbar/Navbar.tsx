@@ -14,28 +14,11 @@ import { setDefaultPackState } from '../../store/slices/pack/packSlice';
 import styles from './Navbar.module.scss';
 
 export const Navbar = () => {
-	const [mobile, setModile] = useState(false);
 	const [sidebar, setSideBar] = useState(false);
 
 	const dispatch = useDispatch();
 
 	const isAuth = useSelector(selectAuth);
-
-	useEffect(() => {
-		// const handleResize = () => {
-		// 	if (windowWidth < 1065) {
-		// 		setModile(true);
-		// 	} else {
-		// 		setModile(false);
-		// 		setSideBar(false);
-		// 	}
-		// };
-		// window.addEventListener('resize', handleResize);
-		// return () => {
-		// 	window.removeEventListener('resize', handleResize);
-		// };
-	}, []);
-
 	return (
 		<>
 			<nav className={isAuth ? styles.navbar : `${styles.navbar} ${styles.notAuth}`}>
@@ -50,7 +33,7 @@ export const Navbar = () => {
 					<Icons.FaBars className={styles.sidebarToggleLogo} onClick={() => setSideBar(!sidebar)} />
 				)}
 
-				{!mobile && isAuth ? <NavbarList /> : null}
+				{isAuth ? <NavbarList /> : null}
 				{
 					<Link to='/login'>
 						{isAuth ? (
@@ -73,7 +56,7 @@ export const Navbar = () => {
 					</Link>
 				}
 			</nav>
-			{mobile && sidebar && <Sidebar sidebar={sidebar} setSideBar={setSideBar} />}
+			{sidebar && <Sidebar sidebar={sidebar} setSideBar={setSideBar} />}
 		</>
 	);
 };

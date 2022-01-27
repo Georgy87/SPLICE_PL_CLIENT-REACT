@@ -18,6 +18,7 @@ type PropsType = {
 
 export const Sidebar: React.FC<PropsType> = ({ sidebar, setSideBar }) => {
 	const isAuth = useSelector(selectAuth);
+
 	const dispatch = useDispatch();
 	return (
 		<>
@@ -32,14 +33,14 @@ export const Sidebar: React.FC<PropsType> = ({ sidebar, setSideBar }) => {
 				<Link to='/login' onClick={() => setSideBar(!sidebar)}>
 				{isAuth ? (
 							<ButtonLayout
-								typeStyle={'sign-in-out'}
+								typeStyle={'sign-in-out-sidebar'}
 								onClicked={() => dispatch(logout())}
 							>
 								<IconLayout iconName={'login'} />
 								<span>Log Out</span>
 							</ButtonLayout>
 						) : (
-							<ButtonLayout typeStyle={'sign-in-out'}>
+							<ButtonLayout typeStyle={'sign-in-out-sidebar'}>
 								<IconLayout iconName={'logout'} />
 								<span>Log In</span>
 							</ButtonLayout>

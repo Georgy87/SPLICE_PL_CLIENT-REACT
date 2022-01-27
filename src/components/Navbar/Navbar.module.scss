@@ -25,9 +25,12 @@
 }
 
 .sidebarToggleLogo {
-	display: flex;
+	display: none;
 	font-size: 2rem;
 	color: whitesmoke;
+	@media screen and (max-width: 1060px) {
+		display: flex;
+	}
 }
 
 @media screen and (max-width: 900px) {

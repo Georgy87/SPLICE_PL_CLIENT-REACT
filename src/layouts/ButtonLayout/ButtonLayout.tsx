@@ -18,6 +18,7 @@ type PropsType = {
 		| 'sample-item'
 		| 'auth'
 		| 'sign-in-out'
+		| 'sign-in-out-sidebar'
 		| 'update'
 		| 'pack-profile'
 		| 'sample-update'
@@ -52,6 +53,7 @@ export const ButtonLayout: React.FC<PropsType> = ({ children, typeStyle, onClick
 					[styles.sampleItem]: typeStyle === 'sample-item',
 					[styles.auth]: typeStyle === 'auth',
 					[styles.signInOut]: typeStyle === 'sign-in-out',
+					[styles.signInOutSidebar]: typeStyle === 'sign-in-out-sidebar',
 					[styles.update]: typeStyle === 'update',
 					[styles.packProfile]: typeStyle === 'pack-profile',
 					[styles.sampleUpdate]: typeStyle === 'sample-update',

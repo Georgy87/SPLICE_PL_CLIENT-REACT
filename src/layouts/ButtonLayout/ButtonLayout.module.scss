@@ -90,6 +90,23 @@
 			display: none;
 		}
 	}
+	.signInOutSidebar {
+		display: none;
+		width: 8rem;
+		align-items: center;
+		font-weight: 700;
+		font-size: 16px;
+		color: #fff;
+		background-color: transparent;
+		border: 2px solid rgb(232, 239, 241);
+		svg {
+			margin-right: 2px;
+		}
+		@extend %buttons;
+		@media screen and (max-width: 1060px) {
+			display: flex;
+		}
+	}
 	.update {
 		display: flex;
 		width: 6rem;
