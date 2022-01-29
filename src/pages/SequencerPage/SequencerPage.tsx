@@ -10,16 +10,16 @@ import { selectLikedSamples } from '../../store/selectors/userSelectors';
 import { Samples } from '../../store/slices/samples/types';
 import { Loader } from '../../components/Loader/Loader';
 import { useDropzone } from '../../hooks/useDropzone';
+import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 
 import styles from './SequencerPage.module.scss';
-import { NavLink } from 'react-router-dom';
 
 export const SequencerPage = () => {
 	const likedSamples = useSelector(selectLikedSamples);
 
 	const dispatch = useDispatch();
 
-	const { onPlay, onStop, initialPattern, step, loadSamples } = useSequencer();
+	const { initialPattern, step, loadSamples, setTempo, onPlay, onStop } = useSequencer();
 
 	const { dragEnter, dragStart } = useDropzone();
 
@@ -33,6 +33,8 @@ export const SequencerPage = () => {
 		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
 		'http://localhost:5000/audio/26f1c160-8818-458c-82fc-d417567b262c.wav',
 	]);
+	const [valueBpm, setValueBpm] = useState<number>(60);
+	const [isPlaying, setIsPlaying] = useState<boolean>(true);
 
 	function updatePattern({ x, y, value }: { x: number; y: number; value: number }) {
 		const patternCopy: number[][] = [...pattern];
@@ -44,6 +46,10 @@ export const SequencerPage = () => {
 	useEffect(() => {
 		dispatch(fetchGetLikedSamples());
 	}, []);
+
+	useEffect(() => {
+		loadSamples(sampleList);
+	}, [valueBpm]);
 
 	useEffect(() => {
 		loadSamples(sampleList);
@@ -61,11 +67,49 @@ export const SequencerPage = () => {
 		setNewSampleSrc(src);
 	};
 
+	const onChangeBpm = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setValueBpm(+e.target.value);
+	};
+
 	return (
 		<div className={styles.root}>
 			<div className={styles.sequencerControls}>
-				<button onClick={() => onPlay(sampleList)}>Play</button>
-				<button onClick={() => onStop()}>Stop</button>
+				<IconChangeLayout
+					onClicked={(e: Event) => {
+						e.stopPropagation();
+						setTempo(valueBpm);
+						setIsPlaying(!isPlaying);
+						if (isPlaying === true) {
+							onPlay(sampleList);
+						} else {
+							onStop();
+						}
+					}}
+					blockStyle={styles.playPauseCircle}
+					iconOneOrTwo={!isPlaying}
+					iconOne='play-sequencer'
+					iconTwo='pause-sequencer'
+					iconStyle={{
+						color: '#121214',
+						fontSize: '45px',
+						cursor: 'pointer',
+					}}
+					typeBtn='pack'
+				></IconChangeLayout>
+				<div className={styles.bpmControls}>
+					<IconLayout iconName='metronom' />
+					<input type='text' onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeBpm(e)} defaultValue={valueBpm} />
+					<ButtonLayout
+						typeStyle='update-bpm'
+						onClicked={() => {
+							onStop();
+							setTempo(valueBpm);
+							onPlay(sampleList);
+						}}
+					>
+						Update bpm
+					</ButtonLayout>
+				</div>
 			</div>
 			<div className={styles.sequencerContainer}>
 				<div className={styles.dropBoxes}>

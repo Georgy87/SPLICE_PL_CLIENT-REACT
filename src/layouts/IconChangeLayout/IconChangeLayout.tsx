@@ -3,16 +3,21 @@ import { PlayCircleFilled } from '@material-ui/icons';
 import { PauseCircleFilled } from '@material-ui/icons';
 import { PlayArrow } from '@material-ui/icons';
 import { Pause } from '@material-ui/icons';
+import { PlayCircleOutline } from '@material-ui/icons';
+import { PauseCircleOutline } from '@material-ui/icons';
 import { ButtonLayout } from '../ButtonLayout/ButtonLayout';
+import * as Icons from 'react-icons/all';
 
 const iconsPlay = {
 	play: PlayCircleFilled,
 	'play-footer': PlayArrow,
+	'play-sequencer': PlayCircleOutline,
 };
 
 const iconsPause = {
 	pause: PauseCircleFilled,
 	'pause-footer': Pause,
+	'pause-sequencer': PauseCircleOutline,
 };
 
 type PropsType = {

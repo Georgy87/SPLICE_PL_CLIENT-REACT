@@ -6,8 +6,7 @@ SAMPLE CLOUD - это платформа для использования и с
 
 
 ### `НАЧАЛО РАБОТЫ`
-
-![Регистрация]('https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT/blob/main/src/assets/images/danny-protas-1vUZkgw8xTI-unsplash.jpg')
+@import "Снимок экрана 2022-01-27 в 22.41.47.png"
 
 
 ### `npm test`

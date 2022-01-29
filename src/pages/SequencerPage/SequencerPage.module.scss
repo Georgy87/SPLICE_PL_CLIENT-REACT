@@ -4,13 +4,34 @@
 
 .sequencerControls {
 	display: flex;
-	justify-content: center;
-	margin: 20px;
+	align-items: center;
+	width: 100%;
+	margin: 20px 0 20px 0;
 	button {
 		font-weight: 700;
 		cursor: pointer;
 		border: none;
 		background-color: transparent;
+	}
+	.bpmControls {
+		display: flex;
+		align-items: center;
+		margin-left: auto;
+		input {
+			height: 20px; 
+			width: 35px;
+			padding: 4px;
+			text-decoration: center;
+			border-radius: 4px;
+			border: 1px solid gray;
+		}
+		svg {
+			display: flex;
+			width: 25px;
+			height: 25px;
+			margin: 5px;
+			margin-right: 15px;
+		}
 	}
 }
 
@@ -68,7 +89,7 @@
 				border-radius: 5px;
 			}
 		}
-	}	
+	}
 }
 
 @media screen and (max-width: 1300px) {

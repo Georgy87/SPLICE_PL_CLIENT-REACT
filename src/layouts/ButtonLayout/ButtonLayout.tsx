@@ -27,7 +27,8 @@ type PropsType = {
 		| 'sample-player'
 		| 'Play sample'
 		| 'pack'
-		| 'update-avatar';
+		| 'update-avatar'
+		| 'update-bpm';
 
 	onClicked?: () => void;
 	disabled?: boolean;
@@ -60,6 +61,7 @@ export const ButtonLayout: React.FC<PropsType> = ({ children, typeStyle, onClick
 					[styles.tags]: typeStyle === 'tags',
 					[styles.sequencer]: typeStyle === 'sequencer',
 					[styles.updateAvatar]: typeStyle === 'update-avatar',
+					[styles.updateBpm]: typeStyle === 'update-bpm',
 				})}
 			>
 				{children}

@@ -37,23 +37,12 @@ export const useSequencer = () => {
 		requestId: 0,
 	});
 
-	let {
-		isPlaying,
-		noteTime,
-		startTime,
-		currentStep,
-		tempo,
-		tic,
-		bank,
-		initialPattern,
-		currentInitialPattern,
-		requestId,
-	} = sequencerState;
+	let { isPlaying, noteTime, startTime, currentStep, tempo, tic, bank, initialPattern, currentInitialPattern, requestId } = sequencerState;
 
 	const [step, setStep] = useState<number>(1);
 
-	const setTempo = () => {
-		tic = 60 / 60 / 4;
+	const setTempo = (tempoValue: number) => {
+		tic = 60 / tempoValue / 4;
 	};
 
 	const scheduleNote = () => {
@@ -63,9 +52,8 @@ export const useSequencer = () => {
 			let ct: number = AUDIO.currentTime;
 
 			ct -= startTime;
-	
+
 			while (noteTime < ct + 0.2) {
-				
 				let pt: number = noteTime + startTime;
 
 				playPatternStepAtTime(pt);
@@ -102,7 +90,7 @@ export const useSequencer = () => {
 
 	const playPattern = (id: string, when: number) => {
 		const s: AudioBufferSourceNode = AUDIO.createBufferSource();
-		
+
 		//@ts-ignore
 		s.buffer = bank[id];
 
@@ -145,7 +133,7 @@ export const useSequencer = () => {
 		startTime = AUDIO.currentTime;
 
 		scheduleNote();
-		setTempo();
+
 		_parsePattern();
 		loadSamples(sampleList);
 	};
@@ -165,5 +153,6 @@ export const useSequencer = () => {
 		onPlay,
 		onStop,
 		loadSamples,
+		setTempo,
 	};
 };

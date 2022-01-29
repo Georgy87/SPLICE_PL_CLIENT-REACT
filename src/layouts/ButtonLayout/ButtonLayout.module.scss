@@ -173,4 +173,10 @@
 			}
 		}
 	}
+	.updateBpm {
+		margin-left: 4px;
+		height: 32px;
+		background-color: rgb(227, 230, 221);
+		@extend %buttons;
+	}
 }

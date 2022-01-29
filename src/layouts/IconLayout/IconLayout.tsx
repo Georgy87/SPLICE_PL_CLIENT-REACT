@@ -29,6 +29,7 @@ export const icons = {
 	dislike: HeartOutlined,
 	drop: Icons.BsUpload,
 	sequencer: Icons.CgMusic,
+	metronom: Icons.GiMetronome,
 };
 
 export type IconLayoutProps = {
