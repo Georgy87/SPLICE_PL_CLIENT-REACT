@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,24 +8,15 @@ import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { AuthorizationLayout } from '../../layouts/AuthorizationLayout/AuthorizationLayout';
 import { fetchLogin } from '../../store/slices/user/userSlice';
 import { selectAuth } from '../../store/selectors/userSelectors';
+import { LoginFormSchema } from '../../utils/useFormSchemas';
 
 import styles from './LoginPage.module.scss';
+
 
 export type FormProps = {
 	email: string;
 	password: string;
 };
-
-export const LoginFormSchema = yup.object().shape({
-	email: yup
-		.string()
-		.email('Неверная почта')
-		.required('Введите почту'),
-	password: yup
-		.string()
-		.min(6, '​Минимальная длина пароля 6 символов')
-		.required(),
-});
 
 export const LoginPage: React.FC = () => {
 	const [email, setEmail] = useState<string>('');

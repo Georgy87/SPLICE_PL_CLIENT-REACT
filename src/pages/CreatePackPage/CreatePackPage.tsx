@@ -1,31 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {  useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { fetchCreatePack, fetchGetUserPacks } from '../../store/slices/pack/packSlice';
-import { useAsyncAction } from '../../hooks/useAsyncAction';
+import { fetchCreatePack } from '../../store/slices/pack/packSlice';
 import { StepLayout } from '../../layouts/StepLayout/StepLayout';
 import { PackInfoUpload } from '../../components/PackInfoUpload/PackInfoUpload';
 import { FileUpload } from '../../components/FileUpload/FileUpload';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { PacksPage } from '../PacksPage/PacksPage';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-import { selectSamples } from '../../store/selectors/packsSelectors';
 
 import styles from './CreatePackPage.module.scss';
 
 export const CreatePackPage = () => {
 	const [activeStep, setActiveStep] = useState<number>(0);
 	const [info, setInfo] = useState<{
-		trackName: string;
+		genre: string;
 		authorName: string;
 		packInfo: string;
-	} | {}>({});
+	} | null>(null);
 	const [picture, setPicture] = useState<File | null>(null);
 	const [audio, setAudio] = useState<File | null>(null);
 
 	const history = useHistory();
-	const createTrack = useAsyncAction<any, any>(fetchCreatePack);
+	
+	const dispatch = useDispatch();
 
 	const next = () => {
 		if (activeStep != 3) {
@@ -34,7 +33,9 @@ export const CreatePackPage = () => {
 
 		if (activeStep === 2) {
 			history.push('/profile/packs');
-			createTrack({ info, picture, audio });
+			if (info && picture && audio) {
+				dispatch(fetchCreatePack({ info, picture, audio }));
+			}
 		}
 	};
 

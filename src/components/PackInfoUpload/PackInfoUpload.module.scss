@@ -12,6 +12,8 @@
     textarea {
         margin-top: 0.5rem;
         height: 3rem;
+        padding: 5px;
+        font-family: inherit;
         border: 1px solid $border-gray;
         border-radius: 4px;
     }
@@ -23,5 +25,9 @@
         width: 10rem;
         height: 30px;
         cursor: pointer;
+    }
+    p {
+        margin: 2px;
+        color: $error;
     }
 }

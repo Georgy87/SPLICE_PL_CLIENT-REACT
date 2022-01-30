@@ -22,6 +22,7 @@
 		@extend %buttons;
 	}
 	.black {
+		margin: 15px;
 		color: $white;
 		background-color: $black;
 		border: none;
@@ -81,7 +82,6 @@
 		font-size: 16px;
 		color: #fff;
 		background-color: transparent;
-		border: 2px solid rgb(232, 239, 241);
 		svg {
 			margin-right: 2px;
 		}

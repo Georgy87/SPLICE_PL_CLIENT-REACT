@@ -31,7 +31,6 @@ export const userApi = {
 		return data;
 	},
 	async updateAvatar(formData: FormData) {
-		console.log(formData);
 		const { data } = await instance.put('users/avatar', formData);
 		return data;
 	},

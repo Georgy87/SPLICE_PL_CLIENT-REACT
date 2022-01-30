@@ -12,7 +12,7 @@ const initialState: UserSliceState = {
 	avatar: null,
 };
 
-export const fetchRegistration = createAsyncThunk('user/registrationStatus', async (payload: User) => {
+export const fetchRegistration = createAsyncThunk('user/registrationStatus', async (payload: any) => {
 	try {
 		await userApi.registration(payload);
 	} catch (error) {

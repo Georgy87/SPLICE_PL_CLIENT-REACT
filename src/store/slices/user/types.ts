@@ -1,15 +1,20 @@
-import { Samples } from "../samples/types"
+import { Samples } from '../samples/types';
 
 export type User = {
-    email: string;
     password: string;
-    fullname: string;
-}
+	avatar: string;
+	confirm_hash: string;
+	createdAt: string;
+	email: string;
+	fullname: string;
+	updatedAt: string;
+	_id: string;
+};
 
 export type UserSliceState = {
-    user: User | null;
-    token: string | null;
-    isAuth: boolean;
-    samples: Samples[] | null;
-    avatar: null | string;
-}
+	user: User | null;
+	token: string | null;
+	isAuth: boolean;
+	samples: Samples[] | null;
+	avatar: null | string;
+};

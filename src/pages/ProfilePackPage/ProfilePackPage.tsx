@@ -5,7 +5,7 @@ import { Loader } from '../../components/Loader/Loader';
 
 import { SampleList } from '../../components/SampleList/SampleList';
 import { defaultState } from '../../context/PlayerContextProvider/PlayerContextProvider';
-import { useAsyncAction } from '../../hooks/useAsyncAction';
+// import { useAsyncAction } from '../../hooks/useAsyncAction';
 import { useSound } from '../../hooks/useSound';
 import {
 	selectLoading,
@@ -26,14 +26,14 @@ export const ProfilePackPage = () => {
 
 	const params: { packId: string } = useParams();
 	const { setPlayerState, playTrack, isPlaying } = useSound();
-	const getPack = useAsyncAction<any, any>(fetchGetPack);
+	// const getPack = useAsyncAction<any, any>(fetchGetPack);
 
 	useEffect(() => {
-		getPack({ packId: params?.packId, tag: null });
+		// getPack({ packId: params?.packId, tag: null });
 	}, []);
 
 	useEffect(() => {
-		getPack({ packId: params?.packId, tag });
+		// getPack({ packId: params?.packId, tag });
 	}, [tag]);
 
 	useEffect(() => {

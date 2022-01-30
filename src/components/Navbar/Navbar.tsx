@@ -7,14 +7,16 @@ import { NavbarList } from '../NavbarList/NavbarList';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
-import { selectAuth } from '../../store/selectors/userSelectors';
+import { selectAuth, selectUser } from '../../store/selectors/userSelectors';
 import { logout } from '../../store/slices/user/userSlice';
 import { setDefaultPackState } from '../../store/slices/pack/packSlice';
+import defaultAvatar from '../../assets/avatar/unnamed.jpg';
 
 import styles from './Navbar.module.scss';
 
 export const Navbar = () => {
 	const [sidebar, setSideBar] = useState(false);
+	const user = useSelector(selectUser);
 
 	const dispatch = useDispatch();
 
@@ -34,6 +36,11 @@ export const Navbar = () => {
 				)}
 
 				{isAuth ? <NavbarList /> : null}
+				{isAuth && (
+					<div className={styles.avatar}>
+						<img src={user?.avatar ? user.avatar : defaultAvatar} alt='user-avatar' />
+					</div>
+				)}
 				{
 					<Link to='/login'>
 						{isAuth ? (

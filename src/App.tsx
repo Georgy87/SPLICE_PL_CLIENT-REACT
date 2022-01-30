@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 

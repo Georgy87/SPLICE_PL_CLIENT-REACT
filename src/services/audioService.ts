@@ -1,7 +1,6 @@
 class AudioService {
 	private filterData(audioBuffer: AudioBuffer) {
 		const rawData = audioBuffer.getChannelData(0);
-
 		const samples: number = 550;
 		const blockSize: number = Math.floor(rawData.length / samples);
 		const filteredData: number[] = [];

@@ -3,11 +3,11 @@ import ReactCrop, { Crop } from 'react-image-crop';
 
 import { useDropzone } from '../../hooks/useDropzone';
 import { avatarService } from '../../services/avatarService';
-
-import './UserProfilePhoto.css';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { useDispatch } from 'react-redux';
 import { fetchUpdateAvatar } from '../../store/slices/user/userSlice';
+
+import './UserProfilePhoto.css';
 
 export const AvatarEditorPage = () => {
 	const imgRef = useRef<HTMLImageElement | HTMLCanvasElement | null>(null);
@@ -79,7 +79,7 @@ export const AvatarEditorPage = () => {
 
 		canvasResult?.toBlob(function(blob: Blob | null) {
 			if (!blob) return;
-			setAvatar(new File([blob], 'avatar', { type: blob.type }));
+			setAvatar(new File([blob], blob?.type.split('/')[1], { type: blob.type }));
 		});
 	}, [completedCrop]);
 

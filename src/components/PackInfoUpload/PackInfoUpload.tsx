@@ -1,5 +1,10 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
+import { PackInfoSchema } from '../../utils/useFormSchemas';
 
 import styles from './PackInfoUpload.module.scss';
 
@@ -7,44 +12,54 @@ type PropsType = {
 	setInfo: Function;
 };
 
-export const PackInfoUpload: React.FC<PropsType> = ({ setInfo }) => {
-	const [genre, setGenre] = useState<string>('');
-	const [authorName, setAuthorName] = useState<string>('');
-	const [packInfo, setPackInfo] = useState<string>('');
+export type FormProps = {
+	genre: string;
+	authorName: string;
+	description: string;
+};
 
-	const onSendInfo = () => {
+export const PackInfoUpload: React.FC<PropsType> = ({ setInfo }) => {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset,
+	} = useForm<FormProps>({
+		resolver: yupResolver(PackInfoSchema),
+	});
+
+	const onSubmit = (data: FormProps) => {
+		const { genre, authorName, description } = data;
+
 		setInfo({
 			genre,
 			authorName,
-			packInfo,
+			packInfo: description,
 		});
+
+		reset();
 	};
 
 	return (
-		<div className={styles.packUploadWrapper}>
-			<label>GENRE</label>
-			<input
-				onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-					setGenre(e.target.value)
-				}
-			/>
+		<>
+			<form className={styles.packUploadWrapper} onSubmit={handleSubmit(onSubmit)}>
+				<label>GENRE</label>
+				<input type='text' {...register('genre')} />
+				<p>{errors.genre?.message}</p>
 
-			<label>AUTHOR NAME</label>
-			<input
-				onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-					setAuthorName(e.target.value)
-				}
-			/>
+				<label>AUTHOR NAME</label>
+				<input type='text' {...register('authorName')} />
+				<p>{errors.authorName?.message}</p>
 
-			<label>DESCRIPTION</label>
-			<textarea
-				onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-					setPackInfo(e.target.value)
-				}
-			/>
-			<ButtonLayout typeStyle='black' onClicked={onSendInfo}>
-				SAVE INFO
-			</ButtonLayout>
-		</div>
+				<label>DESCRIPTION</label>
+				<textarea {...register('description')} />
+				
+				<p>{errors.description?.message}</p>
+				
+				<ButtonLayout typeStyle='black'>
+					SAVE INFO
+				</ButtonLayout>
+			</form>
+		</>
 	);
 };

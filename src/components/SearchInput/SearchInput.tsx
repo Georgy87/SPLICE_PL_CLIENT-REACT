@@ -14,7 +14,7 @@ const SearchInput: React.FC<PropsType> = ({
 	value,
 }) => {
 	const inputRef = useRef<HTMLInputElement>(null);
-	const [open, setOpen] = useState<boolean>(true);
+	const [open, setOpen] = useState<boolean>(false);
 	const [placeholder, setPlaceholder] = useState<string>(
 		'Search genres, author',
 	);
@@ -45,7 +45,7 @@ const SearchInput: React.FC<PropsType> = ({
 					className={styles.searchInput}
 					onChange={onChangeValue}
 					value={value}
-					placeholder={placeholder}
+					placeholder={open ? placeholder : ''}
 				/>
 				<svg
 					onClick={(e) => {

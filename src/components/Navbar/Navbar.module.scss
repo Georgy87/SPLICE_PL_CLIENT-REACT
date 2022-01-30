@@ -7,6 +7,9 @@
 	height: 55px;
 	width: 100vw;
 	background: #1b1919;
+	a {
+		text-decoration: none;
+	}
 }
 
 .navbar.notAuth {
@@ -30,6 +33,21 @@
 	color: whitesmoke;
 	@media screen and (max-width: 1060px) {
 		display: flex;
+	}
+}
+
+.avatar {
+	display: flex;
+	align-items: center;
+	margin-right: 10px;
+	img {
+		width: 38px;
+		height: 38px;
+		border-radius: 100%;
+	
+	}
+	@media screen and (max-width: 1060px) {
+		display: none;
 	}
 }
 

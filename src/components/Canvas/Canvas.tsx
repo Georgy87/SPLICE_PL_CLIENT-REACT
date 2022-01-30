@@ -29,6 +29,7 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 				const arrayBuffer: any = reader.result;
 				if (!arrayBuffer) return;
 				audioContext.decodeAudioData(arrayBuffer).then((buffer: AudioBuffer) => {
+					
 					const audioCoordinates = audioService.sampleAudioData(buffer);
 
 					workerInstanceCreateSample.postMessage(
