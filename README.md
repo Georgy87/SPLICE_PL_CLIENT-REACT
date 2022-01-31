@@ -36,7 +36,7 @@ SAMPLE CLOUD - это платформа для использования и с
 
 `Выбрав библиотеку на страннице main page открываем библиотеку с семплами.`
 
-![sample-page](https://s233vla.storage.yandex.net/rdisk/2f30208b3f8c82e672fe14b4faa77066033da5421a8eeb59901fd17c87fce982/61f83e43/84radWxDYTwZNdBUTS9GwrZo0itGhUMzSPJVMv6WROGLypyIAmIBvBsXtEdSfXRU0eg6pFsm6RBAfvDMqWEaGg==?uid=964945203&filename=sample-page.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=1488373&hid=4c0355fb66bb7e823e79ae7b87e5c9da&media_type=image&tknv=v2&etag=298c7cd1578e86fc9089f48344d3028c&rtoken=Q78HfDJjgd1j&force_default=yes&ycrid=na-e94e5a8db3dbaadf1c28e512f7cfaadc-downloader17e&ts=5d6e62409d6c0&s=fc544f7bbfea88f96d1b26a750d72825668878f3fe9880339855294d7a63f4b5&pb=U2FsdGVkX190p8J312x6IVU7aUqxRzxgecyrB1RKlg7usaRd6iTxZ_FuR3w9H7thAOwHzhjbhs4bqQfgyPHvqYu5e7Dz5CmkkBQxkd2aaA8)
+![sample-page](https://s233vla.storage.yandex.net/rdisk/9bc25638f38444d1da3e59ea1c0008d84f71a60a7133794912aae8bc39fe50e3/61f877f7/84radWxDYTwZNdBUTS9GwrZo0itGhUMzSPJVMv6WROGLypyIAmIBvBsXtEdSfXRU0eg6pFsm6RBAfvDMqWEaGg==?uid=964945203&filename=sample-page.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=1488373&hid=4c0355fb66bb7e823e79ae7b87e5c9da&media_type=image&tknv=v2&etag=298c7cd1578e86fc9089f48344d3028c&rtoken=1ueHa6kq9L0T&force_default=yes&ycrid=na-99e696eeff4494de1c0b64736266343c-downloader10f&ts=5d6e99484abc0&s=85f364993fdc7b571da42adfe7b9f830f43842febae6a94c4d02f92980303a0f&pb=U2FsdGVkX1-BoJUBY7xg0gqSnkhmuribC-3c_SVX9oASB4ENBsDFxVmxz6P5wHXBHpqmw1Btf72uj_k8G6H6Q8ESlYePaywy_PxcdPYNL_o)
 
 `Категорию семплов можно фильтровать по тегам`
 
@@ -111,14 +111,14 @@ SAMPLE CLOUD - это платформа для использования и с
 1. `Получение, фильтрация и нормализация данных из загруженных пользователем файлов.`
    Когда пользователь загружает семплы в пакет(библиотеку семплов),
 
-    @import "drop-samples.png"
+    ![drop-samples](https://s53iva.storage.yandex.net/rdisk/e897d423477f4b90e378d7c38d3ac94f71fd7bb1f9ef474ba7885e3716d96b89/61f87820/84radWxDYTwZNdBUTS9GwgHz7qhoP39-WwjBrNqeskcyaOPq-OykMy98P8Ftyfp6Gs5YogJ-406cbIU4LcKUxg==?uid=964945203&filename=%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202022-01-30%20%D0%B2%2016.24.31.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=49990&hid=6d77c536a817069769d88c1b0678130d&media_type=image&tknv=v2&etag=cad38ed2d6636d6f40d9cc051236fb37&rtoken=hONtlGrov0PI&force_default=yes&ycrid=na-cab4fc5db61b405291497c7a9232f72e-downloader10f&ts=5d6e996f64800&s=7160ec414be0e8be9cadea923a171b9349487b0c62da04d25c68d58820a37cc7&pb=U2FsdGVkX1-Ftb6RCaFcIzjGPL4zYu6SNQxseCC4BAP-WfFtvfY5odh7pCjJuYyWAAWpPtw_RgguedikS1qL0q0y4GY_FO7bS245y8XgD98)
     мы получаем массив аудио файлов. От каждого из этий файлов нам нужно получить массив координат, для отрисовки визуальной части аудио трека.
 
     <br/>
 
     К счастью браузер предоставляет возможность получить такие данные при помощи Web Audio API. Мы получаем так называемый AudioBuffer(массив данных аудио).
 
-    @import "audio-array.png"
+    ![array-buffer](https://s215vla.storage.yandex.net/rdisk/f3c411dea49c6110a5bb791f517105e1d12eec9d4732094a32c33ba15bf03840/61f87865/84radWxDYTwZNdBUTS9GwnpfUXWxEBhyl8vesRbrRxHpJAmYtJIRIOD_5HLeqkhYsMUvjhrtr8iaQBy6tcC5Pw==?uid=964945203&filename=%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202022-01-30%20%D0%B2%2017.31.18.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=299167&hid=873849b3e81603589d4bfd02ac1450db&media_type=image&tknv=v2&etag=cfad693d0755ad7cc1846d9240486f90&rtoken=36PVkOeNfHZT&force_default=yes&ycrid=na-0f16211d3586f72d4631f1872f2d1405-downloader10f&ts=5d6e99b132340&s=482bbc3b56d9a0a198f405b2411ad33ba32fb5c34161772f50e21e06760320d2&pb=U2FsdGVkX196Cgdc7E2Xoc-q-7e397YYRYy7UdGrUF_4DlQFEXFtbcrVfpDo-0b1iRV_iSVLso44viZkWRs7zb-KXppo1BxdEoUGgM6KHXo)
     Далее нам нужно оптимизировать этот большой миллионный массив чисел, перед отрисовкой визуализации наших аудио.
 
     <br/>
@@ -178,7 +178,7 @@ SAMPLE CLOUD - это платформа для использования и с
 
     `Итог:`
 
-   ![audio-wave](https://s157vla.storage.yandex.net/rdisk/5622934acea087411489b276800fbf0a2afcd5e44235c3ebfb125377427e636b/61f82906/84radWxDYTwZNdBUTS9GwiQM8dMvD5FJS3DE3cveVTBsmxMEIuknhgqut_1qS5i5ZfohRxZGjnqMvJXFzknQZQ==?uid=964945203&filename=audio-wave.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=8444&hid=56d04f2dd25cb382d6c2503e7b369f9b&media_type=image&tknv=v2&etag=5d68fd01d196152c7e66330450cbae51&rtoken=qvnIAG0qkCMk&force_default=yes&ycrid=na-8b4fdf7bb403bfb0f1031a645c95a345-downloader23e&ts=5d6e4dff7cd80&s=b4e27e9835b2add9a31a54aef79cf3925f5060d03461c2b374b7ea0cc7b6a8dc&pb=U2FsdGVkX1-6zu6vY-YerrT_d6_ETj_a63eOYgXNRow_OBjkNdsuitMaiT5iRtT0hUYc8QqTrVbOT0fkZmLdX3hJFfhb33p-asCjuLRbXDI)
+   ![audio-wave](https://s157vla.storage.yandex.net/rdisk/af019d99f9fe59c0baecda35ee862b0ddc4ea8c229e5bcb65c4980d8cf37d848/61f877c1/84radWxDYTwZNdBUTS9GwiQM8dMvD5FJS3DE3cveVTBsmxMEIuknhgqut_1qS5i5ZfohRxZGjnqMvJXFzknQZQ==?uid=964945203&filename=audio-wave.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=8444&hid=56d04f2dd25cb382d6c2503e7b369f9b&media_type=image&tknv=v2&etag=5d68fd01d196152c7e66330450cbae51&rtoken=35hVyLOfTwG3&force_default=yes&ycrid=na-719d303933ce76e25e50847980662268-downloader10f&ts=5d6e9914cb240&s=8bef14a5737f86cf03004d1e549dc0dafdf913eded339d70d966d16c97655054&pb=U2FsdGVkX18Xr9Rd_bo7a_aVQQGJRRAFF7azOPHqjnstU1LltDfEI7hbifO-9Avnn1ji3tnbSb-rZyxNe51gadv07tCWSKdR5Lzcz9j0Jeg)
 
     Мы получаем png изображения, заранее отрисованной аудио волны, по каждому семплу. При загрузке странницы с семплами, нам не придется каждый раз повторять процесс вычисления и отрисовки. Либо если все же понадобиться отрисовывать на canvas, эти изображения послужат маской, которая может ставиться перед реальной отрисовкой в real time.
 
