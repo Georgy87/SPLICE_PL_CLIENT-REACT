@@ -2,7 +2,7 @@
 
 ## Описание
 
-SAMPLE CLOUD - это платформа для использования и создания библиотек с сэмплами. Платформа является источником для творчества музыкантов, саундпродюссеров, битмейкеров, звукоинженеров, а также просто любителей музыки. Пакеты с семплами созданны в самый разнообразных жанрах от хип-хопа, хауса, техно, кинематографии и всех стилей между ними.
+SAMPLE CLOUD - это платформа для использования и создания библиотек с сэмплами. Платформа является источником для творчества музыкантов, саундпродюссеров, битмейкеров, звукоинженеров, а также просто любителей музыки. Пакеты с семплами созданы в самых разнообразных жанрах: от хип-хопа, хауса, техно, кинематографии до всех стилей между ними.
 
 ### `REGISTRATION`
 
@@ -31,7 +31,7 @@ test1234
 
 ![search](https://s616sas.storage.yandex.net/rdisk/146bffdb02bccbe9abcc58baed0b5ee169d1ac54ec3e1a489f654e06bfafa7c0/61f87537/84radWxDYTwZNdBUTS9GwnjLRxzkpf42AjXnz_AfuZ9RUp0JqnydEaoQZfSO2PQ79SYlHL3CPGNti2cwWnOrUw==?uid=964945203&filename=search.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=21118&hid=96b4f792381e1b194d9dc059a0f738e8&media_type=image&tknv=v2&etag=761da31a89622c27dee33902f9af607c&rtoken=E8rYQRN7QIIk&force_default=yes&ycrid=na-66df9bf46290db6e29aa675c45e5ed69-downloader21h&ts=5d6e96a8e7bc0&s=b6e126e11f94b26acc1437c100df0e069b05c733cb2fb9aa56fba988c818cfca&pb=U2FsdGVkX1-Qq_bytQB-bKueQ3aS8xcH5-GYnikduo48Tud5yHTlN9gc3EZ-3vdyLxpQ2RITC6-2vWW1lC2u7l0LBTOPZ2qsxsLsdVPVfcI)
 
-`При нажатии на иконку play, открывается плеер и включается проигрывание демо библиотеки.`
+`При нажатии на иконку play открывается плеер и включается проигрывание демо библиотеки.`
 
 ![player](https://s108vla.storage.yandex.net/rdisk/26f85c579965472c668305f1a8dd91b0efe410b95b9e39feb57304267184afde/61f87554/84radWxDYTwZNdBUTS9GwogcZw1LvVA5ENGp3jwbkPVaRNbmV4UQ_LMXJhffQOJ4cypVnSzuLpHCYEyWCM70rg==?uid=964945203&filename=player.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=3514253&hid=2773de6345b5e8d5d0f0d6989d4a63fa&media_type=image&tknv=v2&etag=8728f4fa04cbfe07d2c59098a758869d&rtoken=Pidgyc88PQvv&force_default=yes&ycrid=na-2fc57e2b8e4dc5d2e647c58ef8aebe72-downloader21h&ts=5d6e96c48fd00&s=a88abaa314b65e4f1eda7d972192f72c64156cacd15905be4e8ad40ec5e13083&pb=U2FsdGVkX19MShT7U7vmuIc-wveWNiMPpGkjRHE3EqnKCKbUyvprv3HSdLhvOLzyPX5n6EkulLQkDv37d7AIlaauGFbdpioFvrWrVB18i4k)
 
@@ -43,8 +43,11 @@ test1234
 
 `Категорию семплов можно фильтровать по тегам`
 
-`При наведении на семпл появляется возможность прослушать его, а также перемотать в нужное место, при проигровании.`
+`При наведении на семпл появляется возможность прослушать его, а также перемотать в нужное место при проигровании.`
 
+Добавить категорию семпла, а также его bpm можно в модальном окне, которое открывается при нажатии на крайний правый вертикальный эллипсис семпла:
+
+![category-bpm-modal](https://s399vla.storage.yandex.net/rdisk/d9dcc053e8a4c5ebdcc493d2741ac260334543c43f63aa05527692525b91a9b6/61f9695d/84radWxDYTwZNdBUTS9Gwi0tNRkakP7YCz4MqDtvPZNObImvkH-7N3MOWqplM4KfxMdw1jTHn9ziUq5OQXG3tQ==?uid=964945203&filename=category-bpm-modal.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=777306&hid=6b49cb4cd0260fc0d359ea4c78cbc33e&media_type=image&tknv=v2&etag=c7197f8f79d7d528e1559f9bc0919ae0&rtoken=G6LgFXbwiDxB&force_default=yes&ycrid=na-dd840cd591d0d1cc43ad19f191cefb7e-downloader19e&ts=5d6f7f7f75140&s=77bd6d8a7fb0238d766aa72cd954c1fbc5436a48fdcd4e27c1fc8ef90bd37ea1&pb=U2FsdGVkX1__pf13r5Ba8WoD6pW_HaefTbCsQHhV5Gu8j7ICjg2vQQeHhzet8pnreRfevNSFqWIDxI34Wi8k3-i5oIy36t6OWVBLoCkSQ1U)
 [Watch the video](https://disk.yandex.ru/i/OJFzGtyJR7_Pkw)
 ### `PROFILE`
 
@@ -61,7 +64,7 @@ test1234
 
 ![avatar-pointer](https://s255vla.storage.yandex.net/rdisk/690222a232b8e319615fd339946dbe9c884094ee7064a63464f761ae2e91553b/61f875b6/84radWxDYTwZNdBUTS9GwhifH0TEsarkheWfub1vfb9C9QULmSsRidN9Bt4aQPUGpEQXu4hXIL8a9mL1CeFtJQ==?uid=964945203&filename=avatar-pointer.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=143093&hid=732a5b3805ada6d91581d527a3b67081&media_type=image&tknv=v2&etag=d127059df35d6d8abc3eba282aec7bd6&rtoken=KM9N9rVwlOzS&force_default=yes&ycrid=na-0d6eb1641f0de82efdf72c9e1651d199-downloader10f&ts=5d6e972205980&s=9c9ddfd9f89968efb046d14109581432b362d2b8da7ecb1271d073fc69a387b0&pb=U2FsdGVkX19eYuAhOtSIIk3nhIw6I7UadH5SRkyKm_vKb72Z_KPcgG95trOwEdWpVszoy8bs6G9iC1HbsYE3OaI8RRO3aTkfN3gU4jD6c0E)
 
-`Все что нам нужно, это сделать дроп изображения. В результате получаем возможность вырезать нужный фрагмент из фото и сохранить результат.`
+`Все, что нам нужно, это сделать дроп изображения. В результате получаем возможность вырезать нужный фрагмент из фото и сохранить результат.`
 
 ![avatar-editor](https://s685man.storage.yandex.net/rdisk/0b8e284c7d90dd7f524b0f63ae62baf5d90a916d6f673e5949cafb94bde8f9fa/61f875eb/84radWxDYTwZNdBUTS9GwqJgEMcoztCFfUb4Bl8Z4lcUnQw2cNgNKMiwg9dSUuDP-6wO_q_9zrtnogU0XbA8aQ==?uid=964945203&filename=avatar-editor.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=1247252&hid=7ba905c36a5b1409ca288de308d6b6a5&media_type=image&tknv=v2&etag=a0cb49c39515585cfdbd200daac54035&rtoken=I8kmtUT0wiF8&force_default=yes&ycrid=na-262b2d5933f9a24c191a09bad19e5f73-downloader10f&ts=5d6e9754910c0&s=6fa512d80217fd6f4b140d012039a7c56c82578a68872688dac9211db59ca852&pb=U2FsdGVkX19c4gyQTCa6Fi3t-XflEduTislB876phKfjA_vfxVJaSdKgndoFo5dVM2CGadNZrFlDSu9CabFSYlhG6xlB4lc5qb8-Zk6MywQ)
 
@@ -115,18 +118,18 @@ test1234
    Когда пользователь загружает семплы в пакет(библиотеку семплов),
 
     ![drop-samples](https://s53iva.storage.yandex.net/rdisk/e897d423477f4b90e378d7c38d3ac94f71fd7bb1f9ef474ba7885e3716d96b89/61f87820/84radWxDYTwZNdBUTS9GwgHz7qhoP39-WwjBrNqeskcyaOPq-OykMy98P8Ftyfp6Gs5YogJ-406cbIU4LcKUxg==?uid=964945203&filename=%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202022-01-30%20%D0%B2%2016.24.31.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=49990&hid=6d77c536a817069769d88c1b0678130d&media_type=image&tknv=v2&etag=cad38ed2d6636d6f40d9cc051236fb37&rtoken=hONtlGrov0PI&force_default=yes&ycrid=na-cab4fc5db61b405291497c7a9232f72e-downloader10f&ts=5d6e996f64800&s=7160ec414be0e8be9cadea923a171b9349487b0c62da04d25c68d58820a37cc7&pb=U2FsdGVkX1-Ftb6RCaFcIzjGPL4zYu6SNQxseCC4BAP-WfFtvfY5odh7pCjJuYyWAAWpPtw_RgguedikS1qL0q0y4GY_FO7bS245y8XgD98)
-    мы получаем массив аудио файлов. От каждого из этий файлов нам нужно получить массив координат, для отрисовки визуальной части аудио трека.
+    мы получаем массив аудио файлов. От каждого из этий файлов нам нужно получить массив координат для отрисовки визуальной части аудио трека.
 
     <br/>
 
-    К счастью браузер предоставляет возможность получить такие данные при помощи Web Audio API. Мы получаем так называемый AudioBuffer(массив данных по аудио файлу).
+    К счастью, браузер предоставляет возможность получить такие данные при помощи Web Audio API. Мы получаем, так называемый, AudioBuffer(массив данных по аудио файлу).
 
     ![array-buffer](https://s215vla.storage.yandex.net/rdisk/f3c411dea49c6110a5bb791f517105e1d12eec9d4732094a32c33ba15bf03840/61f87865/84radWxDYTwZNdBUTS9GwnpfUXWxEBhyl8vesRbrRxHpJAmYtJIRIOD_5HLeqkhYsMUvjhrtr8iaQBy6tcC5Pw==?uid=964945203&filename=%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202022-01-30%20%D0%B2%2017.31.18.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=299167&hid=873849b3e81603589d4bfd02ac1450db&media_type=image&tknv=v2&etag=cfad693d0755ad7cc1846d9240486f90&rtoken=36PVkOeNfHZT&force_default=yes&ycrid=na-0f16211d3586f72d4631f1872f2d1405-downloader10f&ts=5d6e99b132340&s=482bbc3b56d9a0a198f405b2411ad33ba32fb5c34161772f50e21e06760320d2&pb=U2FsdGVkX196Cgdc7E2Xoc-q-7e397YYRYy7UdGrUF_4DlQFEXFtbcrVfpDo-0b1iRV_iSVLso44viZkWRs7zb-KXppo1BxdEoUGgM6KHXo)
-    Далее нам нужно оптимизировать этот большой миллионный массив чисел, перед отрисовкой визуализации наших аудио.
+    Далее нам нужно оптимизировать этот большой миллионный массив чисел перед отрисовкой визуализации наших аудио.
 
     <br/>
 
-    Алгоритм фильтрации разделяет данные на 550 равных частей и вычисляет среднее значение выборок, а также убирает отрицательные числа. В итоге вместо миллионого массива данных, мы получаем массив из 550 чисел.
+    Алгоритм фильтрации разделяет данные на 550 равных частей и вычисляет среднее значение выборок, а также убирает отрицательные числа. В итоге вместо миллионого массива данных мы получаем массив из 550 чисел.
 
     ```javascript
     private filterData(audioBuffer: AudioBuffer) {
@@ -156,14 +159,14 @@ test1234
 	}
     ```
 
-    Итог: Данная оптимизации позволяет во много раз уменьшить обьем массива, который будет храниться в базе данных по каждому семплу(аудио треку), а также подготовить целые числа для отрисовки(избегаем субпиксельного рендеринга на canvas).
+    Итог: Данная оптимизация позволяет во много раз уменьшить объем массива, который будет храниться в базе данных по каждому семплу(аудио треку), а также подготовить целые числа для отрисовки(избегаем субпиксельного рендеринга на canvas).
 
     ***
 
 2. `Webworker`.
-   Цель данного этапа, отрисовка и создание png изображений по каждому загруженному треку.
+   Цель данного этапа- отрисовка и создание png изображений по каждому загруженному треку.
 
-    Имея массив координат, полученный на первом этапе, создаем холст при помощи технологии OffscreenCanvas и вместе с координатами отправяем postMessage в webworker. Отрисовываем данные на холсте по каждому семплу и при помощи canvas.convertToBlob() создаем изображения для отправки на сервер.
+    Имея массив координат, полученный на первом этапе, создаем холст при помощи технологии OffscreenCanvas и вместе с координатами отправляем postMessage в webworker. Отрисовываем данные на холсте по каждому семплу и при помощи canvas.convertToBlob() создаем изображения для отправки на сервер.
 
     <br/>
 
@@ -183,7 +186,7 @@ test1234
 
    ![audio-wave](https://s157vla.storage.yandex.net/rdisk/af019d99f9fe59c0baecda35ee862b0ddc4ea8c229e5bcb65c4980d8cf37d848/61f877c1/84radWxDYTwZNdBUTS9GwiQM8dMvD5FJS3DE3cveVTBsmxMEIuknhgqut_1qS5i5ZfohRxZGjnqMvJXFzknQZQ==?uid=964945203&filename=audio-wave.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=8444&hid=56d04f2dd25cb382d6c2503e7b369f9b&media_type=image&tknv=v2&etag=5d68fd01d196152c7e66330450cbae51&rtoken=35hVyLOfTwG3&force_default=yes&ycrid=na-719d303933ce76e25e50847980662268-downloader10f&ts=5d6e9914cb240&s=8bef14a5737f86cf03004d1e549dc0dafdf913eded339d70d966d16c97655054&pb=U2FsdGVkX18Xr9Rd_bo7a_aVQQGJRRAFF7azOPHqjnstU1LltDfEI7hbifO-9Avnn1ji3tnbSb-rZyxNe51gadv07tCWSKdR5Lzcz9j0Jeg)
 
-    Мы получаем png изображения заранее отрисованной аудио волны по каждому семплу. При загрузке странницы с семплами, нам не придется каждый раз повторять процесс вычисления и отрисовки, либо если все же понадобиться отрисовывать на canvas, эти изображения послужат маской, которая может ставиться перед реальной отрисовкой в real time.
+    Мы получаем png изображения заранее отрисованной аудио волны по каждому семплу. При загрузке странницы с семплами, нам не придется каждый раз повторять процесс вычисления и отрисовки, либо, если все же понадобиться отрисовывать на canvas, эти изображения послужат маской, которая может ставиться перед реальной отрисовкой в real time.
 
 ### `SEQUENCER PAGE`
 
@@ -195,11 +198,11 @@ test1234
 
 ![bpm-controls](https://s403vla.storage.yandex.net/rdisk/afccffa006583bd1b10308990752d5726bcd7c9b19440d6907bdd27ce6de4f72/61f9511d/84radWxDYTwZNdBUTS9Gwkg9QAdO2iSgULPT5kPhnIkEE50i14ikCGzIPr9V6QnV-Z2bMxa9oQq5sFWqxROQlA==?uid=964945203&filename=bpm-controls.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=12293&hid=5bfc42f6a3fdd44ea47c6640d6630407&media_type=image&tknv=v2&etag=b3b83e274752e4a41b86885c1a3adeff&rtoken=DRlladJXL816&force_default=yes&ycrid=na-76fd7e04e2d7fa4ede1af14a777de892-downloader24f&ts=5d6f685f0c140&s=2759d1cb8cbbab2c4662c85ebc6d6e4c53a3a41eb1edf9b046d66623ad8ffc1d&pb=U2FsdGVkX1-DqW4Vcvx5bdNNVS5viIZukG65370ytMUnOSdSEFyuHbKQtSFvRVqKY34nvQWaiiTNE6Onn4SiEsmZsH79hyB3Q3UOuZs7Itk)
 
-`Пример изменения скорости проигрования секвенсора:`
+`Пример изменения скорости проигрывания секвенсора:`
 
 [demo](https://disk.yandex.ru/i/_dmonx9ha0gZ2A)
 
-Некоторые семплы представляют собой фрагмент музыки c определенной скоростью(bpm), поэтому загружая такие семплы, нужно выставлять bpm в секвенсоре.
+Некоторые семплы представляют собой фрагмент музыки c определенной скоростью(bpm), поэтому, загружая такие семплы, нужно выставлять bpm в секвенсоре.
 
 [demo](https://disk.yandex.ru/i/rosSYCfpDKq-Ug)
 
@@ -207,7 +210,7 @@ test1234
 
 ![drop-sequencer](https://s379vla.storage.yandex.net/rdisk/b28aceb649dfc3b03ce96599ecb5cabcac35fce242a30a3afb7b651ba8b3b9fe/61f95739/84radWxDYTwZNdBUTS9GwouGgPYGHjCpqy9VtHIh0TJBcaLme6suF3izr8MeTxw4CAT-tXMZzMRuahNyYiBXpA==?uid=964945203&filename=drop-sequencer.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=194817&hid=3a7e0e402986e864f409d63c88bfb845&media_type=image&tknv=v2&etag=033eec1414250f6a15890d786f58c18f&rtoken=uQoba8H3rFvM&force_default=yes&ycrid=na-490c2ac6721f6b593fd3cf8def16b37d-downloader20e&ts=5d6f6e3298040&s=701a9decafa76c61764794345ebd63bc84129bd9e74513497a912d4c75fc8c0a&pb=U2FsdGVkX1_Dp1aoXiTVnxbhkNn5Fnf27X4Xy0KD0C5AOqQ8LrbolNr4eYdv958-_fGBIS-am8YJJ-I4SHpb6d4hBgTSTIf-5Cj2-XKWIlk)
 
- и кликаем место, в котором семпл должен начинать свое проигрование. Оно выделяется синим цветом. 
+ и кликаем место, в котором семпл должен начинать свое проигрывание. Оно выделяется синим цветом. 
 
 ###### Секвенсор позволяет пользователю прослушать понравившиеся ему семплы в сочетании друг с другом в работе, приближенной к реальному музыкальному редактору.
 
