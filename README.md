@@ -12,9 +12,6 @@ SAMPLE CLOUD - это платформа для использования и с
 
 Вход в приложение по email и паролю:
 
-test@mail.ru
-test1234
-
 ![авторизация](https://s444man.storage.yandex.net/rdisk/77402d4c2a3bc1b1607584b4bd8a829d268fb7b6b3c4cc35d2852e777bc8e6cf/61f874f5/84radWxDYTwZNdBUTS9Gwo386p5AwN81cesNrjneiyFlweQtn2byrsTzwup8KG7IN-OQjseLOGjCx2rr5I3Dcw==?uid=964945203&filename=login.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=2642379&hid=134db666ecdd698903684ddadf9505ac&media_type=image&tknv=v2&etag=c3a22209a21b32803231c42fc0ad41d3&rtoken=nP7stOC8RLt9&force_default=yes&ycrid=na-a60593b1a2fbda1c1f9ef39769d64fc3-downloader10f&ts=5d6e9669f6740&s=b6c88cc77d14a48452c347a9a9290154bfd94c70b79c25909329ed769dc9d237&pb=U2FsdGVkX1_GXMRqk4kOvQopg7L2FhfU7GSTpNSCcuGj4gv80TK4S2_SqnmCEWAh475-83Ap7WhfW6v0EJYAoiIlXhl3FdJuFdrbqj1C_x4)
 
 ### `MAIN PAGE`
@@ -45,10 +42,12 @@ test1234
 
 `При наведении на семпл появляется возможность прослушать его, а также перемотать в нужное место при проигровании.`
 
+[demo](https://disk.yandex.ru/i/OJFzGtyJR7_Pkw)
+
 Добавить категорию семпла, а также его bpm можно в модальном окне, которое открывается при нажатии на крайний правый вертикальный эллипсис семпла:
 
 ![category-bpm-modal](https://s399vla.storage.yandex.net/rdisk/d9dcc053e8a4c5ebdcc493d2741ac260334543c43f63aa05527692525b91a9b6/61f9695d/84radWxDYTwZNdBUTS9Gwi0tNRkakP7YCz4MqDtvPZNObImvkH-7N3MOWqplM4KfxMdw1jTHn9ziUq5OQXG3tQ==?uid=964945203&filename=category-bpm-modal.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=777306&hid=6b49cb4cd0260fc0d359ea4c78cbc33e&media_type=image&tknv=v2&etag=c7197f8f79d7d528e1559f9bc0919ae0&rtoken=G6LgFXbwiDxB&force_default=yes&ycrid=na-dd840cd591d0d1cc43ad19f191cefb7e-downloader19e&ts=5d6f7f7f75140&s=77bd6d8a7fb0238d766aa72cd954c1fbc5436a48fdcd4e27c1fc8ef90bd37ea1&pb=U2FsdGVkX1__pf13r5Ba8WoD6pW_HaefTbCsQHhV5Gu8j7ICjg2vQQeHhzet8pnreRfevNSFqWIDxI34Wi8k3-i5oIy36t6OWVBLoCkSQ1U)
-[Watch the video](https://disk.yandex.ru/i/OJFzGtyJR7_Pkw)
+
 ### `PROFILE`
 
 Страница для редактирования профайла пользователя.
