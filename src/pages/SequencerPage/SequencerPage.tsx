@@ -105,6 +105,11 @@ export const SequencerPage = () => {
 							onStop();
 							setTempo(valueBpm);
 							onPlay(sampleList);
+							if (isPlaying === true) {
+								onStop();
+								setTempo(valueBpm);
+								
+							}
 						}}
 					>
 						Update bpm
