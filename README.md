@@ -19,6 +19,8 @@ SAMPLE CLOUD - это платформа для использования и с
 
 ![авторизация](src/assets//readme-images/login.png)
 
+![авторизация](https://s444man.storage.yandex.net/rdisk/77402d4c2a3bc1b1607584b4bd8a829d268fb7b6b3c4cc35d2852e777bc8e6cf/61f874f5/84radWxDYTwZNdBUTS9Gwo386p5AwN81cesNrjneiyFlweQtn2byrsTzwup8KG7IN-OQjseLOGjCx2rr5I3Dcw==?uid=964945203&filename=login.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=2642379&hid=134db666ecdd698903684ddadf9505ac&media_type=image&tknv=v2&etag=c3a22209a21b32803231c42fc0ad41d3&rtoken=nP7stOC8RLt9&force_default=yes&ycrid=na-a60593b1a2fbda1c1f9ef39769d64fc3-downloader10f&ts=5d6e9669f6740&s=b6c88cc77d14a48452c347a9a9290154bfd94c70b79c25909329ed769dc9d237&pb=U2FsdGVkX1_GXMRqk4kOvQopg7L2FhfU7GSTpNSCcuGj4gv80TK4S2_SqnmCEWAh475-83Ap7WhfW6v0EJYAoiIlXhl3FdJuFdrbqj1C_x4)
+
 ### `MAIN PAGE`
 
 При удачной авторизации мы попадаем на главную страницу платформы. Здесь можно найти и прослушать демо библиотек с семплами(Packs).
@@ -47,11 +49,17 @@ SAMPLE CLOUD - это платформа для использования и с
 
 `При наведении на семпл появляется возможность прослушать его, а также перемотать в нужное место при проигровании.`
 
+[demo](https://disk.yandex.ru/i/OJFzGtyJR7_Pkw)
+
 Добавить категорию семпла, а также его bpm можно в модальном окне, которое открывается при нажатии на крайний правый вертикальный эллипсис семпла:
+
 
 ![category-bpm-modal](src/assets//readme-images/category-bpm-modal.png)
 
 [Watch the video](https://disk.yandex.ru/i/OJFzGtyJR7_Pkw)
+
+![category-bpm-modal](https://s399vla.storage.yandex.net/rdisk/d9dcc053e8a4c5ebdcc493d2741ac260334543c43f63aa05527692525b91a9b6/61f9695d/84radWxDYTwZNdBUTS9Gwi0tNRkakP7YCz4MqDtvPZNObImvkH-7N3MOWqplM4KfxMdw1jTHn9ziUq5OQXG3tQ==?uid=964945203&filename=category-bpm-modal.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=777306&hid=6b49cb4cd0260fc0d359ea4c78cbc33e&media_type=image&tknv=v2&etag=c7197f8f79d7d528e1559f9bc0919ae0&rtoken=G6LgFXbwiDxB&force_default=yes&ycrid=na-dd840cd591d0d1cc43ad19f191cefb7e-downloader19e&ts=5d6f7f7f75140&s=77bd6d8a7fb0238d766aa72cd954c1fbc5436a48fdcd4e27c1fc8ef90bd37ea1&pb=U2FsdGVkX1__pf13r5Ba8WoD6pW_HaefTbCsQHhV5Gu8j7ICjg2vQQeHhzet8pnreRfevNSFqWIDxI34Wi8k3-i5oIy36t6OWVBLoCkSQ1U)
+
 ### `PROFILE`
 
 Страница для редактирования профайла пользователя.
@@ -121,8 +129,12 @@ SAMPLE CLOUD - это платформа для использования и с
 1. `Получение, фильтрация и нормализация данных из загруженных пользователем файлов.`
    Когда пользователь загружает семплы в пакет(библиотеку семплов),
 
+<<<<<<< HEAD
     ![drop-samples](src/assets//readme-images/drop-samples.png)
     мы получаем массив аудио файлов. От каждого из этий файлов нам нужно получить массив координат для отрисовки визуальной части аудио трека.
+
+    ![drop-samples](https://s53iva.storage.yandex.net/rdisk/e897d423477f4b90e378d7c38d3ac94f71fd7bb1f9ef474ba7885e3716d96b89/61f87820/84radWxDYTwZNdBUTS9GwgHz7qhoP39-WwjBrNqeskcyaOPq-OykMy98P8Ftyfp6Gs5YogJ-406cbIU4LcKUxg==?uid=964945203&filename=%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202022-01-30%20%D0%B2%2016.24.31.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=49990&hid=6d77c536a817069769d88c1b0678130d&media_type=image&tknv=v2&etag=cad38ed2d6636d6f40d9cc051236fb37&rtoken=hONtlGrov0PI&force_default=yes&ycrid=na-cab4fc5db61b405291497c7a9232f72e-downloader10f&ts=5d6e996f64800&s=7160ec414be0e8be9cadea923a171b9349487b0c62da04d25c68d58820a37cc7&pb=U2FsdGVkX1-Ftb6RCaFcIzjGPL4zYu6SNQxseCC4BAP-WfFtvfY5odh7pCjJuYyWAAWpPtw_RgguedikS1qL0q0y4GY_FO7bS245y8XgD98)
+    мы получаем массив аудио файлов. От каждого из этих файлов нам нужно получить массив координат для отрисовки визуальной части аудио трека.
 
     <br/>
 
