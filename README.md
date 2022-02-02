@@ -3,9 +3,7 @@
 ## Installation
 
 [client](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT): `npm run start`
-
 <br/>
-
 [server](https://github.com/Georgy87/SPLICE_PL_SERVER): `npm run start`
 
 ## Project Description
