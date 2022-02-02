@@ -20,8 +20,6 @@ SAMPLE CLOUD - это платформа для использования и с
 
 ![авторизация](src/assets//readme-images/login.png)
 
-![авторизация](https://s444man.storage.yandex.net/rdisk/77402d4c2a3bc1b1607584b4bd8a829d268fb7b6b3c4cc35d2852e777bc8e6cf/61f874f5/84radWxDYTwZNdBUTS9Gwo386p5AwN81cesNrjneiyFlweQtn2byrsTzwup8KG7IN-OQjseLOGjCx2rr5I3Dcw==?uid=964945203&filename=login.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=964945203&fsize=2642379&hid=134db666ecdd698903684ddadf9505ac&media_type=image&tknv=v2&etag=c3a22209a21b32803231c42fc0ad41d3&rtoken=nP7stOC8RLt9&force_default=yes&ycrid=na-a60593b1a2fbda1c1f9ef39769d64fc3-downloader10f&ts=5d6e9669f6740&s=b6c88cc77d14a48452c347a9a9290154bfd94c70b79c25909329ed769dc9d237&pb=U2FsdGVkX1_GXMRqk4kOvQopg7L2FhfU7GSTpNSCcuGj4gv80TK4S2_SqnmCEWAh475-83Ap7WhfW6v0EJYAoiIlXhl3FdJuFdrbqj1C_x4)
-
 ### `MAIN PAGE`
 
 При удачной авторизации мы попадаем на главную страницу платформы. Здесь можно найти и прослушать демо библиотек с семплами(Packs).
