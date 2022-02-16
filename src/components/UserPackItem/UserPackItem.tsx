@@ -42,7 +42,7 @@ export const UserPackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 				className={styles.packCard}
 				onClick={() => history.push(`/profile-pack/${pack?._id}`)}
 			>
-				<img src={`/${pack.picture}`} />
+				<img src={`${pack.picture}`} />
 
 				<div>
 					<div>{pack.genre}</div>

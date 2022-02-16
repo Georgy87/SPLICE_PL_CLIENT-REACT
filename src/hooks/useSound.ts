@@ -25,7 +25,7 @@ export const useSound = () => {
 	const playTrack = (index: number, typeElement: string) => {
 		if (index === currentTrackIndex) return play();
 
-		let url = typeElement === 'packs' ? `/${packs[index]?.audio}` : `/${samples[index]?.audio}`;
+		let url = typeElement === 'packs' ? `${packs[index]?.audio}` : `${samples[index]?.audio}`;
 
 		playerState.audioPlayer.pause();
 		playerState.audioPlayer = new Audio(url);

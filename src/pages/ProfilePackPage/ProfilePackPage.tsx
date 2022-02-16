@@ -48,10 +48,10 @@ export const ProfilePackPage = () => {
 			{loading ? (
 				<div className={styles.profilePackContainer}>
 					<div className={styles.infoBackground}>
-						<img src={`/${packProfile?.picture}`} alt={`${packProfile?.picture}`} />
+						<img src={`${packProfile?.picture}`} alt={`${packProfile?.picture}`} />
 					</div>
 					<div className={styles.playerInner}>
-						<img src={`/${packProfile?.picture}`} alt={packProfile?.picture} />
+						<img src={`${packProfile?.picture}`} alt={packProfile?.picture} />
 
 						<div className={styles.packInfo}>
 							<h1>{packProfile?.name}</h1>

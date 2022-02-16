@@ -57,7 +57,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		<>
 			<ul className={styles.listItem}>
 				<li>
-					<img src={`/${packProfile?.picture}`} alt={packProfile?.picture} />
+					<img src={`${packProfile?.picture}`} alt={packProfile?.picture} />
 					<div className={styles.iconChangeWrap}>
 						<p className={styles.sampleTime}>{formatTime(duration)}</p>
 						<IconChangeLayout
@@ -110,7 +110,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 						<div
 							className={styles.backgroundWave}
 							style={{
-								backgroundImage: `url(/${canvasImage})`,
+								backgroundImage: `url(${canvasImage})`,
 								width: '550px',
 							}}
 						/>
