@@ -32,6 +32,11 @@
 	box-shadow: inset 2px 3px 10px rgb(228, 241, 244);
 }
 
+.download-file-image {
+	margin: 0 auto;
+	margin-top: 200px;
+}
+
 .download-image p {
 	font-weight: 600;
 }
@@ -381,4 +386,16 @@
 	width: 300px;
 	border-radius: 0 5px 5px 0;
 	font-family: var(--myFontFamily);
+}
+
+@media (max-width: 900px), (pointer: coarse) {
+	.download-image {
+		display: none;
+	}
+}
+
+@media (max-width: 414px), (pointer: coarse) {
+	.download-image {
+		display: none;
+	}
 }

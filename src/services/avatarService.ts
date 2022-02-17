@@ -7,6 +7,31 @@ class AvatarService {
 		}
 	}
 
+	fileUpload(files: any, setAvatarState: any) {
+		if (files && files.length > 0) {
+			const currentFile = files;
+			console.log(currentFile);
+			const reader = new FileReader();
+
+			reader.addEventListener(
+				'load',
+				() => {
+					const myResult = reader.result;
+					const resultAvatarImg = this.extractImageFileExtensionFromBase64(myResult);
+
+					if (typeof myResult === 'string' && resultAvatarImg) {
+						setAvatarState({
+							imgSrc: myResult,
+							imgSrcExt: resultAvatarImg,
+						});
+					}
+				},
+				false,
+			);
+			reader.readAsDataURL(currentFile[0]);
+		}
+	}
+
 	avatarCreator(image: any, canvas: HTMLCanvasElement, crop: Crop) {
 		const scaleX = image.naturalWidth / image.width;
 		const scaleY = image.naturalHeight / image.height;

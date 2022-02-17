@@ -6,12 +6,14 @@ import { avatarService } from '../../services/avatarService';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { useDispatch } from 'react-redux';
 import { fetchUpdateAvatar } from '../../store/slices/user/userSlice';
+import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 
 import './UserProfilePhoto.css';
 
 export const AvatarEditorPage = () => {
 	const imgRef = useRef<HTMLImageElement | HTMLCanvasElement | null>(null);
 	const previewCanvasRef = useRef<HTMLCanvasElement | null>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const dispatch = useDispatch();
 
@@ -34,28 +36,7 @@ export const AvatarEditorPage = () => {
 
 		const eventData = (e as React.DragEvent).dataTransfer;
 		const files = [eventData.files];
-
-		if (files && files.length > 0) {
-			const currentFile = files[0];
-
-			const reader = new FileReader();
-
-			reader.addEventListener(
-				'load',
-				() => {
-					const myResult = reader.result;
-					const resultAvatarImg = avatarService.extractImageFileExtensionFromBase64(myResult);
-					if (typeof myResult === 'string' && resultAvatarImg) {
-						setAvatarState({
-							imgSrc: myResult,
-							imgSrcExt: resultAvatarImg,
-						});
-					}
-				},
-				false,
-			);
-			reader.readAsDataURL(currentFile[0]);
-		}
+		avatarService.fileUpload(files, setAvatarState);
 	};
 
 	const onLoad = useCallback((img: HTMLImageElement) => {
@@ -83,6 +64,13 @@ export const AvatarEditorPage = () => {
 		});
 	}, [completedCrop]);
 
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		e.preventDefault();
+		e.stopPropagation();
+
+		avatarService.fileUpload(e.target.files, setAvatarState);
+	};
+
 	return (
 		<div className='root'>
 			{avatarState.imgSrc ? (
@@ -107,13 +95,24 @@ export const AvatarEditorPage = () => {
 								marginBottom: '30px',
 							}}
 						></canvas>
-						<ButtonLayout onClicked={() => dispatch(fetchUpdateAvatar(avatar))} typeStyle="blue">Download</ButtonLayout>
+						<ButtonLayout onClicked={() => dispatch(fetchUpdateAvatar(avatar))} typeStyle='blue'>
+							Download
+						</ButtonLayout>
 					</div>
 				</>
 			) : (
-				<input className='download-image' onDragEnter={dragEnter} onDragLeave={dragLeave} onDragOver={dragEnter} onDrop={handleOnDrop}>
-					<p>Download Image</p>
-				</input>
+				<>
+					<div className='download-image' onDragEnter={dragEnter} onDragLeave={dragLeave} onDragOver={dragEnter} onDrop={handleOnDrop}>
+						<p>Download Image</p>
+					</div>
+					<div className='download-file-image' onClick={() => inputRef.current?.click()}>
+						<input type='file' ref={inputRef} onChange={onChange} style={{ display: 'none' }} />
+						<ButtonLayout typeStyle='download'>
+							<IconLayout iconName='upload' />
+							UPLOAD AVATAR
+						</ButtonLayout>
+					</div>
+				</>
 			)}
 		</div>
 	);
