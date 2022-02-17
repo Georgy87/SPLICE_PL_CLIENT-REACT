@@ -77,10 +77,20 @@
 	}
 	
 	@media screen and (max-width: 900px) {
+		width: 400px;
 		li {
 			.sampleName {
-				font-size: 0.8rem;
+				font-size: 0.7rem;
 			}
+			.sampleBpm {
+				font-weight: 500;
+				margin-right: 10px;
+				font-size: 13px;
+			}
+		}
+		&:hover {
+			box-shadow: 0 2px 15px #e6f7f1;
+			cursor: pointer;
 		}
 	}
 }

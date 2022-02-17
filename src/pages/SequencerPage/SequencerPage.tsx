@@ -31,7 +31,7 @@ export const SequencerPage = () => {
 		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
 		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
 		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
-		'http://localhost:5000/audio/26f1c160-8818-458c-82fc-d417567b262c.wav',
+		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
 	]);
 	const [valueBpm, setValueBpm] = useState<number>(60);
 	const [isPlaying, setIsPlaying] = useState<boolean>(true);
@@ -59,7 +59,7 @@ export const SequencerPage = () => {
 		e.preventDefault();
 
 		let sampleListCopy = [...sampleList];
-		sampleListCopy[index] = `http://localhost:5000/${newSampleSrc}`;
+		sampleListCopy[index] = `${newSampleSrc}`;
 		setSampleList(sampleListCopy);
 	};
 

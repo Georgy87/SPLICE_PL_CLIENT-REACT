@@ -111,9 +111,9 @@ export const AvatarEditorPage = () => {
 					</div>
 				</>
 			) : (
-				<div className='download-image' onDragEnter={dragEnter} onDragLeave={dragLeave} onDragOver={dragEnter} onDrop={handleOnDrop}>
+				<input className='download-image' onDragEnter={dragEnter} onDragLeave={dragLeave} onDragOver={dragEnter} onDrop={handleOnDrop}>
 					<p>Download Image</p>
-				</div>
+				</input>
 			)}
 		</div>
 	);

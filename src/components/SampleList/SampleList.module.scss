@@ -27,3 +27,13 @@
 	margin-top: 280px;
 	width: 100%;
 }
+
+@media screen and (max-width: 900px) {
+	.samplesLabel {
+		min-height: 50px;
+
+		.tags {
+			width: 200px;
+		}
+	}
+}
