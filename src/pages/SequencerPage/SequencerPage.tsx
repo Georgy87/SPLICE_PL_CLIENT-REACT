@@ -31,7 +31,7 @@ export const SequencerPage = () => {
 		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
 		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
 		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
-		'https://sample-cloud.storage.yandexcloud.net/SAMPLES-AUDIO/72ab829c-2f10-463f-bb47-b1',
+		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
 	]);
 	const [valueBpm, setValueBpm] = useState<number>(60);
 	const [isPlaying, setIsPlaying] = useState<boolean>(true);

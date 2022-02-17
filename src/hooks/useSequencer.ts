@@ -118,7 +118,11 @@ export const useSequencer = () => {
 		// const response = await axios(`${url}`);
 
 		// const arrayBuffer = await response.arrayBuffer();
-		axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
+		// axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
+		axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
+		axios.defaults.headers['Access-Control-Allow-Methods'] = 'GET, PUT, POST, DELETE';
+		axios.defaults.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
+		
 		axios
 			.request({
 				responseType: 'arraybuffer',
@@ -128,9 +132,9 @@ export const useSequencer = () => {
 				// }
 			})
 			.then(async (response: any) => {
-				console.log(response);
+				// console.log(response);
 				const data: AudioBuffer = await AUDIO.decodeAudioData(response.data);
-				console.log(data);
+				// console.log(data);
 				_handleSampleLoad(key, data);
 			});
 	};
