@@ -130,7 +130,7 @@ export const useSequencer = () => {
 			.then(async (response: any) => {
 				console.log(response);
 				const data: AudioBuffer = await AUDIO.decodeAudioData(response.data);
-			
+				console.log(data);
 				_handleSampleLoad(key, data);
 			});
 	};
