@@ -147,12 +147,21 @@
 			margin: 1px;
 			height: 15px;
 			width: 45px;
+			font-size: 10px;
 			svg {
 				height: 10px;
 				color: rgb(139, 173, 149);
 			}
 		}
-
+		@media screen and (max-width: 414px) {
+			margin: 1px;
+			height: 20px;
+			width: 30px;
+			svg {
+				height: 10px;
+				color: rgb(139, 173, 149);
+			}
+		}
 	}
 	.sequencer {
 		display: flex;

@@ -18,7 +18,7 @@
 		height: 100%;
 	}
 	.bpm {
-		width: 100px;
+		margin-right: 50px;
 		font-weight: 700;
 	}
 }
@@ -31,9 +31,17 @@
 @media screen and (max-width: 900px) {
 	.samplesLabel {
 		min-height: 50px;
-
 		.tags {
-			width: 200px;
+			margin: 8px;
+			width: 290px;
+		}
+	}
+}
+
+@media screen and (max-width: 414px) {
+	.samplesLabel {
+		.bpm {
+			width: 0;
 		}
 	}
 }

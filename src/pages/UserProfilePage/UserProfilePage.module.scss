@@ -1,5 +1,8 @@
 .root {
     width: 700px;
+    @media screen and (max-width: 414px) {
+        width: 360px;
+    }
 }
 
 .userInfoList {

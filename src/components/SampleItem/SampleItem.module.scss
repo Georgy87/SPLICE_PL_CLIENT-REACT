@@ -75,9 +75,8 @@
 			}
 		}
 	}
-	
+
 	@media screen and (max-width: 900px) {
-		width: 400px;
 		li {
 			.sampleName {
 				font-size: 0.7rem;
@@ -89,7 +88,24 @@
 			}
 		}
 		&:hover {
+			margin: 0;
 			box-shadow: 0 2px 15px #e6f7f1;
+			cursor: pointer;
+		}
+	}
+
+	@media screen and (max-width: 414px) {
+		width: 350px;
+		li {
+			.sampleName {
+				margin: 0;
+				font-size: 0.6rem;
+			}
+		}
+		&:hover {
+			width: 350px;
+
+			box-shadow: 0 2px 13px #e6f7f1;
 			cursor: pointer;
 		}
 	}
