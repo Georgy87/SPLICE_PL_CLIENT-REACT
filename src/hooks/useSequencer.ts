@@ -38,10 +38,11 @@ export const useSequencer = () => {
 		requestId: 0,
 	});
 
+
 	let { AUDIO, isPlaying, noteTime, startTime, currentStep, tempo, tic, bank, initialPattern, currentInitialPattern, requestId } = sequencerState;
 
 	const [step, setStep] = useState<number>(1);
-
+	console.log(requestId);
 	const setTempo = (tempoValue: number) => {
 		tic = 60 / tempoValue / 4;
 	};
@@ -167,6 +168,7 @@ export const useSequencer = () => {
 		initialPattern,
 		step,
 		isPlaying,
+		requestId,
 		onPlay,
 		onStop,
 		loadSamples,

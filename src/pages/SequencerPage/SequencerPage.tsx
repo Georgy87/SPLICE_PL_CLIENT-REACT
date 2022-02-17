@@ -19,7 +19,7 @@ export const SequencerPage = () => {
 
 	const dispatch = useDispatch();
 
-	const { initialPattern, step, loadSamples, setTempo, onPlay, onStop } = useSequencer();
+	const { initialPattern, step, requestId, loadSamples, setTempo, onPlay, onStop } = useSequencer();
 
 	const { dragEnter, dragStart } = useDropzone();
 
@@ -45,6 +45,7 @@ export const SequencerPage = () => {
 
 	useEffect(() => {
 		dispatch(fetchGetLikedSamples());
+		window.cancelAnimationFrame(requestId);
 	}, []);
 
 	useEffect(() => {
