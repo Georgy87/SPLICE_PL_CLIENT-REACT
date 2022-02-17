@@ -1,3 +1,4 @@
+import axios, { AxiosResponse } from 'axios';
 import { useState } from 'react';
 
 let AUDIO: AudioContext = new window.AudioContext() || new window.webkitAudioContext();
@@ -114,12 +115,22 @@ export const useSequencer = () => {
 	};
 
 	const _loadSample = async (key: number, url: string) => {
-		const response = await fetch(`${url}`);
-		const arrayBuffer = await response.arrayBuffer();
+		// const response = await axios(`${url}`);
 
-		const data: AudioBuffer = await AUDIO.decodeAudioData(arrayBuffer);
-
-		_handleSampleLoad(key, data);
+		// const arrayBuffer = await response.arrayBuffer();
+		axios
+			.request({
+				responseType: 'arraybuffer',
+				url: url,
+				// headers: {
+				// 	'Access-Control-Allow-Origin': '*',
+				// }
+			})
+			.then(async (response: any) => {
+				console.log(response);
+				const data: AudioBuffer = await AUDIO.decodeAudioData(response.data);
+				_handleSampleLoad(key, data);
+			});
 	};
 
 	const _handleSampleLoad = async (key: number, buffer: AudioBuffer) => {
