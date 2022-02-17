@@ -118,6 +118,7 @@ export const useSequencer = () => {
 		// const response = await axios(`${url}`);
 
 		// const arrayBuffer = await response.arrayBuffer();
+		axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
 		axios
 			.request({
 				responseType: 'arraybuffer',
@@ -129,6 +130,7 @@ export const useSequencer = () => {
 			.then(async (response: any) => {
 				console.log(response);
 				const data: AudioBuffer = await AUDIO.decodeAudioData(response.data);
+			
 				_handleSampleLoad(key, data);
 			});
 	};
