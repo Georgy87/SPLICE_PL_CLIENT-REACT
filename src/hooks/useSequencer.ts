@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { useState } from 'react';
 
 export type SequencerStateType = {
+	AUDIO: AudioContext;
 	isPlaying: boolean;
 	noteTime: number;
 	startTime: number;
@@ -16,8 +17,8 @@ export type SequencerStateType = {
 };
 
 export const useSequencer = () => {
-	let AUDIO: AudioContext = new window.AudioContext() || new window.webkitAudioContext();
-	const [sequencerState, setSequencerState] = useState<SequencerStateType>({
+	let [sequencerState, setSequencerState] = useState<SequencerStateType>({
+		AUDIO: new window.AudioContext() || new window.webkitAudioContext(),
 		isPlaying: false,
 		noteTime: 0,
 		startTime: 0,
@@ -37,7 +38,7 @@ export const useSequencer = () => {
 		requestId: 0,
 	});
 
-	let { isPlaying, noteTime, startTime, currentStep, tempo, tic, bank, initialPattern, currentInitialPattern, requestId } = sequencerState;
+	let { AUDIO, isPlaying, noteTime, startTime, currentStep, tempo, tic, bank, initialPattern, currentInitialPattern, requestId } = sequencerState;
 
 	const [step, setStep] = useState<number>(1);
 
