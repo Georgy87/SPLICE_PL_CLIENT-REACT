@@ -5,21 +5,6 @@
 	width: 900px;
 }
 
-.downloadAvatar {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 500px;
-	height: 300px;
-	margin: 0 auto;
-	margin-top: 80px;
-	text-align: center;
-	border-style: none;
-	border-radius: 4px;
-	cursor: pointer;
-	box-shadow: inset 2px 3px 10px rgb(228, 241, 244);
-}
-
 .download-image {
 	width: 500px;
 	height: 300px;
@@ -33,6 +18,7 @@
 }
 
 .download-file-image {
+	display: none;
 	margin: 0 auto;
 	margin-top: 200px;
 }
@@ -392,10 +378,7 @@
 	.download-image {
 		display: none;
 	}
-}
-
-@media (max-width: 414px), (pointer: coarse) {
-	.download-image {
-		display: none;
+	.download-file-image {
+		display: block;
 	}
 }

@@ -16,4 +16,11 @@
 	.stepBlue {
 		color: $blue;
 	}
+
+	@media screen and (max-width: 414px) {
+		font-weight: 400;
+		font-size: 15px;
+	}
 }
+
+

@@ -1,4 +1,4 @@
-import { Crop } from "react-image-crop";
+import { Crop } from 'react-image-crop';
 
 class AvatarService {
 	extractImageFileExtensionFromBase64(base64Data: string | ArrayBuffer | null) {
@@ -7,10 +7,16 @@ class AvatarService {
 		}
 	}
 
-	fileUpload(files: any, setAvatarState: any) {
+	fileUpload({ files, setAvatarState, onDrop }: { files: any; setAvatarState: any; onDrop: boolean }) {
 		if (files && files.length > 0) {
-			const currentFile = files;
-			console.log(currentFile);
+			let currentFile;
+
+			if (onDrop) {
+				currentFile = files[0];
+			} else {
+				currentFile = files;
+			}
+
 			const reader = new FileReader();
 
 			reader.addEventListener(

@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
+import { useDispatch } from 'react-redux';
 
 import { useDropzone } from '../../hooks/useDropzone';
 import { avatarService } from '../../services/avatarService';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-import { useDispatch } from 'react-redux';
 import { fetchUpdateAvatar } from '../../store/slices/user/userSlice';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 
@@ -24,6 +24,7 @@ export const AvatarEditorPage = () => {
 		imgSrc: '',
 		imgSrcExt: '',
 	});
+
 	const [crop, setCrop] = useState<Crop>({ unit: '%', width: 30, height: 0, aspect: 1 / 1, x: 0, y: 0 });
 	const [completedCrop, setCompletedCrop] = useState<Crop | null>(null);
 	const [avatar, setAvatar] = useState<File | null>(null);
@@ -36,7 +37,7 @@ export const AvatarEditorPage = () => {
 
 		const eventData = (e as React.DragEvent).dataTransfer;
 		const files = [eventData.files];
-		avatarService.fileUpload(files, setAvatarState);
+		avatarService.fileUpload({ files, setAvatarState, onDrop: true });
 	};
 
 	const onLoad = useCallback((img: HTMLImageElement) => {
@@ -68,7 +69,7 @@ export const AvatarEditorPage = () => {
 		e.preventDefault();
 		e.stopPropagation();
 
-		avatarService.fileUpload(e.target.files, setAvatarState);
+		avatarService.fileUpload({ files: e.target.files, setAvatarState, onDrop: false });
 	};
 
 	return (
