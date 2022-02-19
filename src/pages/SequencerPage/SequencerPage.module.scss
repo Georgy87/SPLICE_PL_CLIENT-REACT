@@ -18,7 +18,7 @@
 		align-items: center;
 		margin-left: auto;
 		input {
-			height: 20px; 
+			height: 20px;
 			width: 35px;
 			padding: 4px;
 			text-decoration: center;
@@ -47,7 +47,7 @@
 
 .sampleBox {
 	align-items: center;
-	width: 25px;
+	width: 30px;
 	height: 45px;
 	margin: 3px;
 	background-color: white;
@@ -93,7 +93,7 @@
 	}
 }
 
-.mobileModalContainer {
+.mobileModalWrapper {
 	width: 400px;
 	height: 400px;
 	padding: 10px;
@@ -114,6 +114,9 @@
 }
 
 @media screen and (max-width: 900px) {
+	.desktopModalWrapper {
+		display: none;
+	}
 	.sampleBox {
 		align-items: center;
 		padding: 2px;

@@ -37,6 +37,7 @@ export const SequencerPage = () => {
 	const [valueBpm, setValueBpm] = useState<number>(60);
 	const [isPlaying, setIsPlaying] = useState<boolean>(true);
 	const [activeModal, setActiveModal] = useState<boolean>(false);
+	const [indexBox, setIndexBox] = useState<number>(0);
 
 	function updatePattern({ x, y, value }: { x: number; y: number; value: number }) {
 		const patternCopy: number[][] = [...pattern];
@@ -62,13 +63,15 @@ export const SequencerPage = () => {
 		e.preventDefault();
 
 		let sampleListCopy = [...sampleList];
-		sampleListCopy[index] = `${newSampleSrc}`;
+		sampleListCopy[index] = newSampleSrc;
 		console.log(sampleListCopy);
 		setSampleList(sampleListCopy);
 	};
 
-	const onDragStart = (e: React.DragEvent<HTMLDivElement>, src: string) => {
-		setNewSampleSrc(src);
+	const setSampleHandler = (src: string) => {
+		let sampleListCopy = [...sampleList];
+		sampleListCopy[indexBox] = src;
+		setSampleList(sampleListCopy);
 	};
 
 	const onChangeBpm = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,11 +122,19 @@ export const SequencerPage = () => {
 					</ButtonLayout>
 				</div>
 			</div>
+
 			<div className={styles.sequencerContainer}>
 				<div className={styles.dropBoxes}>
 					{samplesBoxs.map((src: string, index: number) => {
 						return (
-							<div onDragOver={dragEnter} onDrop={(e: React.DragEvent<HTMLDivElement>) => onDropHandler(e, index)}>
+							<div
+								onDragOver={dragEnter}
+								onDrop={(e: React.DragEvent<HTMLDivElement>) => onDropHandler(e, index)}
+								onClick={() => {
+									setIndexBox(index);
+									setActiveModal(true);
+								}}
+							>
 								<ButtonLayout typeStyle='sequencer'>
 									<IconLayout iconName='drop'></IconLayout>
 								</ButtonLayout>
@@ -145,31 +156,32 @@ export const SequencerPage = () => {
 					))}
 				</div>
 			</div>
-			
-			<div className={styles.samplesContainer}>
-				{!likedSamples ? (
-					<Loader />
-				) : (
-					likedSamples?.map((samples: Samples) => {
-						return (
-							<ul
-								key={samples._id}
-								className={styles.likesSample}
-								draggable={true}
-								onDragStart={(e: React.DragEvent<HTMLUListElement>) => dragStart(e, samples.audio, setNewSampleSrc)}
-							>
-								<li>
-									<img src={samples.packPicture} alt='likes-sample' />
-									<p>{samples.sampleName}</p>
-								</li>
-							</ul>
-						);
-					})
-				)}
+			<div className={styles.desktopModalWrapper}>
+				<div className={styles.samplesContainer}>
+					{!likedSamples ? (
+						<Loader />
+					) : (
+						likedSamples?.map((samples: Samples) => {
+							return (
+								<ul
+									key={samples._id}
+									className={styles.likesSample}
+									draggable={true}
+									onDragStart={(e: React.DragEvent<HTMLUListElement>) => dragStart(e, samples.audio, setNewSampleSrc)}
+								>
+									<li>
+										<img src={samples.packPicture} alt='likes-sample' />
+										<p>{samples.sampleName}</p>
+									</li>
+								</ul>
+							);
+						})
+					)}
+				</div>
 			</div>
 
 			<Modal setActive={setActiveModal} active={activeModal}>
-				<div className={styles.mobileModalContainer}>
+				<div className={styles.mobileModalWrapper}>
 					<div className={styles.samplesContainer}>
 						{!likedSamples ? (
 							<Loader />
@@ -180,7 +192,7 @@ export const SequencerPage = () => {
 										key={samples._id}
 										className={styles.likesSample}
 										draggable={true}
-										onDragStart={(e: React.DragEvent<HTMLUListElement>) => dragStart(e, samples.audio, setNewSampleSrc)}
+										onClick={() => setSampleHandler(samples.audio)}
 									>
 										<li>
 											<img src={samples.packPicture} alt='likes-sample' />
@@ -193,8 +205,6 @@ export const SequencerPage = () => {
 					</div>
 				</div>
 			</Modal>
-
-			<button onClick={() => setActiveModal(true)}>Modal</button>
 		</div>
 	);
 };
