@@ -47,7 +47,7 @@
 
 .sampleBox {
 	align-items: center;
-	width: 30px;
+	width: 25px;
 	height: 45px;
 	margin: 3px;
 	background-color: white;
@@ -76,8 +76,9 @@
 		}
 		li {
 			display: flex;
-			width: 400px;
+			width: 320px;
 			list-style: none;
+			overflow: hidden;
 			p {
 				margin-left: 30px;
 				width: 100%;
@@ -90,6 +91,14 @@
 			}
 		}
 	}
+}
+
+.mobileModalContainer {
+	width: 400px;
+	height: 400px;
+	padding: 10px;
+	background-color: white;
+	overflow: scroll;
 }
 
 @media screen and (max-width: 1300px) {

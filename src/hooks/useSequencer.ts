@@ -18,7 +18,7 @@ export type SequencerStateType = {
 
 export const useSequencer = () => {
 	let [sequencerState, setSequencerState] = useState<SequencerStateType>({
-		AUDIO: new window.AudioContext() || new window.webkitAudioContext(),
+		AUDIO: new (window.AudioContext || window.webkitAudioContext)(),
 		isPlaying: false,
 		noteTime: 0,
 		startTime: 0,
@@ -38,15 +38,14 @@ export const useSequencer = () => {
 		requestId: 0,
 	});
 
-
 	let { AUDIO, isPlaying, noteTime, startTime, currentStep, tempo, tic, bank, initialPattern, currentInitialPattern, requestId } = sequencerState;
-
+	
 	const [step, setStep] = useState<number>(1);
 
 	const setTempo = (tempoValue: number) => {
 		tic = 60 / tempoValue / 4;
 	};
-
+	
 	const scheduleNote = () => {
 		if (!isPlaying) return false;
 
@@ -116,26 +115,14 @@ export const useSequencer = () => {
 	};
 
 	const _loadSample = async (key: number, url: string) => {
-		// const response = await axios(`${url}`);
-
-		// const arrayBuffer = await response.arrayBuffer();
-		// axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
-		axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
-		axios.defaults.headers['Access-Control-Allow-Methods'] = 'GET, PUT, POST, DELETE';
-		axios.defaults.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
-		
 		axios
 			.request({
 				responseType: 'arraybuffer',
 				url: url,
-				// headers: {
-				// 	'Access-Control-Allow-Origin': '*',
-				// }
+				method: 'GET',
 			})
-			.then(async (response: any) => {
-				// console.log(response);
+			.then(async (response: AxiosResponse) => {
 				const data: AudioBuffer = await AUDIO.decodeAudioData(response.data);
-				// console.log(data);
 				_handleSampleLoad(key, data);
 			});
 	};

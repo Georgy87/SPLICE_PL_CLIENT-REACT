@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
@@ -6,6 +6,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { Pack } from '../../store/slices/pack/types';
 import { setSampleFiles } from '../../store/slices/samples/samplesSlice';
 import { useDropzone } from '../../hooks/useDropzone';
+import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
+import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 
 import styles from './UserPackItem.module.scss';
 
@@ -18,6 +20,8 @@ type PackListProps = {
 
 export const UserPackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 	const { drag, setDrag, dragEnter, dragLeave } = useDropzone();
+
+	const ref = useRef<HTMLInputElement>(null);
 
 	const history = useHistory();
 
@@ -36,12 +40,17 @@ export const UserPackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 		});
 	};
 
+	const onFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files) {
+			Object.values(e.target.files).forEach((file: File) => {
+				dispatch(setSampleFiles({ id: uuidv4(), file, packId: id }));
+			});
+		}	
+	};
+
 	return (
 		<div className={`${styles.packCardWrapper} ${styles.changePage}`}>
-			<div
-				className={styles.packCard}
-				onClick={() => history.push(`/profile-pack/${pack?._id}`)}
-			>
+			<div className={styles.packCard} onClick={() => history.push(`/profile-pack/${pack?._id}`)}>
 				<img src={`${pack.picture}`} />
 
 				<div>
@@ -50,22 +59,23 @@ export const UserPackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 				</div>
 			</div>
 
-			<div className={styles.downloadSamples}>
+			<div className={styles.dropSamples}>
 				{!drag ? (
 					<div onDragEnter={dragEnter} onDragLeave={dragLeave} onDragOver={dragEnter}>
 						DOWNLOAD SAMPLES
 					</div>
 				) : (
-					<div
-						className={styles.drop}
-						onDragEnter={dragEnter}
-						onDragLeave={dragLeave}
-						onDragOver={dragEnter}
-						onDrop={onDrop}
-					>
+					<div className={styles.drop} onDragEnter={dragEnter} onDragLeave={dragLeave} onDragOver={dragEnter} onDrop={onDrop}>
 						DROP FILES
 					</div>
 				)}
+			</div>
+			<div onClick={() => ref.current?.click()} className={styles.uploadSamples}>
+				<input type='file' accept='audio/wav' style={{ display: 'none' }} ref={ref} multiple onChange={onFileUpload} />
+				<ButtonLayout typeStyle='download'>
+					<IconLayout iconName='upload' />
+					DOWNLOAD SAMPLES
+				</ButtonLayout>
 			</div>
 		</div>
 	);

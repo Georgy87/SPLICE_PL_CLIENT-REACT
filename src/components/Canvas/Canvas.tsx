@@ -19,7 +19,7 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 		if (canvasRef?.current) {
 			const offscreen = canvasRef?.current.transferControlToOffscreen();
 			
-			window.AudioContext = window.AudioContext || window.webkitAudioContext;
+			window.AudioContext = window.AudioContext || new window.webkitAudioContext();
 			const audioContext = new AudioContext();
 			const reader = new FileReader();
 
@@ -29,9 +29,8 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 				const arrayBuffer: any = reader.result;
 				if (!arrayBuffer) return;
 				audioContext.decodeAudioData(arrayBuffer).then((buffer: AudioBuffer) => {
-					
-					const audioCoordinates = audioService.sampleAudioData(buffer);
-
+					const audioCoordinates: string[] = audioService.sampleAudioData(buffer);
+					console.log(buffer.duration);
 					workerInstanceCreateSample.postMessage(
 						{
 							audioFile: file,

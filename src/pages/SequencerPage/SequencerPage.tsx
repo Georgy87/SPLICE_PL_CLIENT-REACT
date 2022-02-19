@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { SequencerStateType, useSequencer } from '../../hooks/useSequencer';
+import { useSequencer } from '../../hooks/useSequencer';
 import { getColumnColor } from '../../utils/getColumnColor';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
@@ -11,6 +11,7 @@ import { Samples } from '../../store/slices/samples/types';
 import { Loader } from '../../components/Loader/Loader';
 import { useDropzone } from '../../hooks/useDropzone';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
+import Modal from '../../layouts/ModalLayout/ModalLayout';
 
 import styles from './SequencerPage.module.scss';
 
@@ -35,6 +36,7 @@ export const SequencerPage = () => {
 	]);
 	const [valueBpm, setValueBpm] = useState<number>(60);
 	const [isPlaying, setIsPlaying] = useState<boolean>(true);
+	const [activeModal, setActiveModal] = useState<boolean>(false);
 
 	function updatePattern({ x, y, value }: { x: number; y: number; value: number }) {
 		const patternCopy: number[][] = [...pattern];
@@ -61,6 +63,7 @@ export const SequencerPage = () => {
 
 		let sampleListCopy = [...sampleList];
 		sampleListCopy[index] = `${newSampleSrc}`;
+		console.log(sampleListCopy);
 		setSampleList(sampleListCopy);
 	};
 
@@ -109,7 +112,6 @@ export const SequencerPage = () => {
 							if (isPlaying === true) {
 								onStop();
 								setTempo(valueBpm);
-								
 							}
 						}}
 					>
@@ -143,7 +145,7 @@ export const SequencerPage = () => {
 					))}
 				</div>
 			</div>
-
+			
 			<div className={styles.samplesContainer}>
 				{!likedSamples ? (
 					<Loader />
@@ -165,6 +167,34 @@ export const SequencerPage = () => {
 					})
 				)}
 			</div>
+
+			<Modal setActive={setActiveModal} active={activeModal}>
+				<div className={styles.mobileModalContainer}>
+					<div className={styles.samplesContainer}>
+						{!likedSamples ? (
+							<Loader />
+						) : (
+							likedSamples?.map((samples: Samples) => {
+								return (
+									<ul
+										key={samples._id}
+										className={styles.likesSample}
+										draggable={true}
+										onDragStart={(e: React.DragEvent<HTMLUListElement>) => dragStart(e, samples.audio, setNewSampleSrc)}
+									>
+										<li>
+											<img src={samples.packPicture} alt='likes-sample' />
+											<p>{samples.sampleName}</p>
+										</li>
+									</ul>
+								);
+							})
+						)}
+					</div>
+				</div>
+			</Modal>
+
+			<button onClick={() => setActiveModal(true)}>Modal</button>
 		</div>
 	);
 };

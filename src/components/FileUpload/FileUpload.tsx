@@ -20,7 +20,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
 		<div onClick={() => ref.current?.click()}>
 			<input
 				type='file'
-				accept='image/*'
+				accept={accept}
 				style={{ display: 'none' }}
 				ref={ref}
 				onChange={onChange}
