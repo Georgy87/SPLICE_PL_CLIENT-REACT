@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
@@ -6,7 +6,6 @@ import { selectTag } from '../../store/selectors/packsSelectors';
 import { setTag } from '../../store/slices/pack/packSlice';
 import { Samples } from '../../store/slices/samples/types';
 import { sampleCategories } from '../AddSampleInfoModal/sampleCategories';
-import { Loader } from '../Loader/Loader';
 import { SampleItem } from '../SampleItem/SampleItem';
 
 import styles from './SampleList.module.scss';
@@ -21,7 +20,7 @@ export const SampleList: React.FC<PropsType> = ({ samples }) => {
 	const dispatch = useDispatch();
 
 	const onSetTag = (tag: string) => {
-		if (tag != packTag) {
+		if (tag !== packTag) {
 			dispatch(setTag(tag));
 		} else {
 			dispatch(setTag(null));

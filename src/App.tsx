@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Route, Switch, useHistory } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import { Route, Switch } from 'react-router';
+import { useDispatch } from 'react-redux';
 
 import { PacksPage } from './pages/PacksPage/PacksPage';
 import { Navbar } from './components/Navbar/Navbar';
@@ -11,7 +11,6 @@ import { LoginPage } from './pages/LoginPage/LoginPage';
 import { PlayerContextProvider } from './context/PlayerContextProvider/PlayerContextProvider';
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 import { fetchAuth } from './store/slices/user/userSlice';
-import { selectUser } from './store/selectors/userSelectors';
 import { UserPacksPage } from './pages/UserPacksPage/UserPacksPage';
 import { AvatarEditorPage } from './pages/AvatarEditorPage/AvatarEditorPage';
 import { SequencerPage } from './pages/SequencerPage/SequencerPage';
@@ -19,16 +18,9 @@ import { SequencerPage } from './pages/SequencerPage/SequencerPage';
 import styles from './App.module.scss';
 
 export const App: React.FC = () => {
-	const user = useSelector(selectUser);
-
-	const history = useHistory();
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		// if (!user) {
-		// 	history.push('login');
-		// }
-
 		dispatch(fetchAuth());
 	}, []);
 

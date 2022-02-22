@@ -27,7 +27,7 @@ export const CreatePackPage = () => {
 	const dispatch = useDispatch();
 
 	const next = () => {
-		if (activeStep != 3) {
+		if (activeStep !== 3) {
 			setActiveStep((prev) => prev + 1);
 		}
 
@@ -77,7 +77,7 @@ export const CreatePackPage = () => {
 					</div>
 				)}
 			</StepLayout>
-			{activeStep != 3 && (
+			{activeStep !== 3 && (
 				<div className={styles.bottomPanel}>
 					<ButtonLayout
 						typeStyle={activeStep === 0 ? 'blue-disabled' : 'blue'}

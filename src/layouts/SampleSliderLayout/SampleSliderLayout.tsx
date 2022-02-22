@@ -14,10 +14,8 @@ type PropsType = {
 export const SampleSliderLayout: React.FC<PropsType> = ({
 	canvasOffSetLeft,
 	children,
-	trackId,
-	currentSampleId,
 }) => {
-	const { percent, changeCurrentTimeSample } = useSound();
+	const { changeCurrentTimeSample } = useSound();
 	
 	return (
 		<div className={styles.sliderContainer} onMouseUp={(e: React.MouseEvent) => changeCurrentTimeSample(e, canvasOffSetLeft)}>

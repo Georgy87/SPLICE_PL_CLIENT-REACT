@@ -1,16 +1,14 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-	fetchGetPacks,
-	fetchSearchPacks,
-	setDefaultPackState,
-} from '../../store/slices/pack/packSlice';
+import { fetchGetPacks, fetchSearchPacks } from '../../store/slices/pack/packSlice';
 import { Player } from '../../components/Player/Player';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import { PackItem } from '../../components/PackItem/PackItem';
 import { Pack } from '../../store/slices/pack/types';
 import { selectPacks } from '../../store/selectors/packsSelectors';
+
+import { Loader } from '../../components/Loader/Loader';
 
 import styles from './PacksPage.module.scss';
 
@@ -20,8 +18,6 @@ type PropsType = {
 
 export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 	const packs = useSelector(selectPacks);
-	// const userPacks = useSelector(selectUserPacks);
-	const [update, setUpdate] = useState(false);
 
 	const [value, setValue] = useState<string>('');
 
@@ -29,8 +25,6 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 
 	useEffect(() => {
 		dispatch(fetchGetPacks());
-		dispatch(setDefaultPackState());
-	
 	}, []);
 
 	const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -43,22 +37,11 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 		<>
 			<SearchInput onChangeValue={onChangeValue} setValue={setValue} value={value} />
 			<div className={styles.root}>
-				{pageName === 'main-packs' &&
-					packs.map((pack: Pack, index: number) => (
-						<>
-							{
-								<div className={styles.packCardContainer}>
-									<PackItem
-										key={pack._id}
-										pack={pack}
-										id={pack._id}
-										index={index}
-									/>
-								</div>
-							}
-						</>
-					))}
-
+				{packs ? packs.map((pack: Pack, index: number) => (
+					<div className={styles.packCardContainer} key={pack._id}>
+						<PackItem pack={pack} id={pack._id} index={index} />
+					</div>
+				)) : <Loader />}
 				<Player />
 			</div>
 		</>

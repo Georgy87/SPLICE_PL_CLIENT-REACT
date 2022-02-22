@@ -84,7 +84,7 @@ export const samplesSlice = createSlice({
 			state.packId = packId;
 		},
 		deleteSampleFiles: (state, action: PayloadAction<string>) => {
-			state.files = state.files.filter((el) => el.id != action.payload);
+			state.files = state.files.filter((el) => el.id !== action.payload);
 		},
 		setCurrentStep: (state, action: PayloadAction<number>) => {
 			state.currentStep = action.payload;

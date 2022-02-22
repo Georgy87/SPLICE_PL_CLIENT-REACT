@@ -9,6 +9,7 @@ export default function CreateSampleWebWorker() {
 			cssCanvasHeight,
 			dpr,
 			fileId,
+			duration,
 		} = e.data;
 		const ctx = e.data.canvas.getContext('2d');
 
@@ -36,8 +37,7 @@ export default function CreateSampleWebWorker() {
 
 		function fileCreator(blob) {
 			const imageFile = new File([blob], 'png', { type: 'png' });
-
-			postMessage({ imageFile, audioFile, audioCoordinates, packId, fileId });
+			postMessage({ imageFile, audioFile, audioCoordinates, packId, fileId, duration });
 		}
 	};
 

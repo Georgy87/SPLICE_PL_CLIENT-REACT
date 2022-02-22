@@ -17,6 +17,7 @@ import styles from './SequencerPage.module.scss';
 
 export const SequencerPage = () => {
 	const likedSamples = useSelector(selectLikedSamples);
+	const samplesBoxs: string[] = ['kick', 'snare', 'hihat', 'bass', 'smpl'];
 
 	const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ export const SequencerPage = () => {
 	const { dragEnter, dragStart } = useDropzone();
 
 	const [pattern, setPattern] = useState<number[][]>(initialPattern);
-	const [samplesBoxs, setSamplesBoxs] = useState<any>(['kick', 'snare', 'hihat', 'bass', 'smpl']);
+
 	const [newSampleSrc, setNewSampleSrc] = useState<string>('');
 	const [sampleList, setSampleList] = useState<string[]>([
 		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
@@ -34,6 +35,7 @@ export const SequencerPage = () => {
 		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
 		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
 	]);
+
 	const [valueBpm, setValueBpm] = useState<number>(60);
 	const [isPlaying, setIsPlaying] = useState<boolean>(true);
 	const [activeModal, setActiveModal] = useState<boolean>(false);
@@ -128,6 +130,7 @@ export const SequencerPage = () => {
 					{samplesBoxs.map((src: string, index: number) => {
 						return (
 							<div
+								key={index}
 								onDragOver={dragEnter}
 								onDrop={(e: React.DragEvent<HTMLDivElement>) => onDropHandler(e, index)}
 								onClick={() => {
@@ -144,9 +147,10 @@ export const SequencerPage = () => {
 				</div>
 				<div className={styles.sequencerSteps}>
 					{pattern.map((row: number[], y: number) => (
-						<div>
+						<div key={y}>
 							{row.map((value: number, x: number) => (
 								<button
+									key={x}
 									className={x === step - 1 ? `${styles.sampleBox} ${styles.active}` : `${styles.sampleBox}`}
 									style={{ backgroundColor: getColumnColor(x), background: value === 1 ? 'blue' : getColumnColor(x) }}
 									onClick={() => updatePattern({ x, y, value })}

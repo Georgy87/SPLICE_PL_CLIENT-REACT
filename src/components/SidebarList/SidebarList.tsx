@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import * as Icons from 'react-icons/fa';
-import { Link, useHistory } from 'react-router-dom';
+import React from 'react';
 
-import { IconLayout, icons } from '../../layouts/IconLayout/IconLayout';
+import { icons } from '../../layouts/IconLayout/IconLayout';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
 
 import styles from './SidebarList.module.scss';

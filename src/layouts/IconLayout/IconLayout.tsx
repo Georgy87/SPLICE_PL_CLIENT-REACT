@@ -2,9 +2,7 @@ import React from 'react';
 
 import {
 	BankOutlined,
-	LoginOutlined,
 	NotificationTwoTone,
-	HomeOutlined,
 	UploadOutlined,
 	CustomerServiceOutlined,
 	HeartOutlined,

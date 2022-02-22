@@ -1,6 +1,6 @@
 export default function SampleViewWebWorker() {
 	onmessage = (e) => {
-		const { audioCoordinates, cssCanvasWidth, cssCanvasHeight, dpr, currentTime } = e.data;
+		const { audioCoordinates, cssCanvasWidth, cssCanvasHeight, dpr } = e.data;
 
 		const ctx = e.data.canvas.getContext('2d');
 		const { canvas } = e.data;

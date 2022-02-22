@@ -40,7 +40,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 
 	useEffect(() => {
 		setLike(likes.length >= 1);
-	}, []);
+	}, [likes.length]);
 
 	useEffect(() => {
 		if (currentSampleId === _id) {
@@ -57,7 +57,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		<>
 			<ul className={styles.listItem}>
 				<li>
-					<img src={`${packProfile?.picture}`} alt={packProfile?.picture} />
+					<img src={`${packProfile?.picture}`} alt='pack-cover' />
 					<div className={styles.iconChangeWrap}>
 						<p className={styles.sampleTime}>{formatTime(duration)}</p>
 						<IconChangeLayout

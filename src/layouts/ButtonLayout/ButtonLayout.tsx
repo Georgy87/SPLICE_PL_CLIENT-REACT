@@ -1,7 +1,6 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import { IconLayout } from '../IconLayout/IconLayout';
 
 import styles from './ButtonLayout.module.scss';
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
@@ -51,7 +51,7 @@ export const UserPackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 	return (
 		<div className={`${styles.packCardWrapper} ${styles.changePage}`}>
 			<div className={styles.packCard} onClick={() => history.push(`/profile-pack/${pack?._id}`)}>
-				<img src={`${pack.picture}`} />
+				<img src={`${pack.picture}`} alt='pack-cover' />
 
 				<div>
 					<div>{pack.genre}</div>

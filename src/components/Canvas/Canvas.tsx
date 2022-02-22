@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectPackId } from '../../store/selectors/samplesSelectors';
@@ -21,6 +21,7 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 			
 			window.AudioContext = window.AudioContext || new window.webkitAudioContext();
 			const audioContext = new AudioContext();
+			
 			const reader = new FileReader();
 
 			reader.readAsArrayBuffer(file);
@@ -30,7 +31,6 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 				if (!arrayBuffer) return;
 				audioContext.decodeAudioData(arrayBuffer).then((buffer: AudioBuffer) => {
 					const audioCoordinates: string[] = audioService.sampleAudioData(buffer);
-					console.log(buffer.duration);
 					workerInstanceCreateSample.postMessage(
 						{
 							audioFile: file,
@@ -41,6 +41,7 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 							cssCanvasHeight: 50,
 							dpr: 2,
 							fileId,
+							duration: buffer.duration,
 						},
 						[offscreen],
 					);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as Icons from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';

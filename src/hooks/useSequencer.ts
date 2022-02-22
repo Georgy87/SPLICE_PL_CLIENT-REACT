@@ -38,7 +38,7 @@ export const useSequencer = () => {
 		requestId: 0,
 	});
 
-	let { AUDIO, isPlaying, noteTime, startTime, currentStep, tempo, tic, bank, initialPattern, currentInitialPattern, requestId } = sequencerState;
+	let { AUDIO, isPlaying, noteTime, startTime, currentStep, tic, bank, initialPattern, currentInitialPattern, requestId } = sequencerState;
 	
 	const [step, setStep] = useState<number>(1);
 
@@ -76,7 +76,7 @@ export const useSequencer = () => {
 		currentStep++;
 		setStep(currentStep);
 
-		if (currentStep == 32) currentStep = 0;
+		if (currentStep === 32) currentStep = 0;
 
 		noteTime += tic;
 	};

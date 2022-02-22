@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 import {
 	selectPacks,
-	selectSamples,
 } from '../../store/selectors/packsSelectors';
 import { PlayerContext, ContextProps, defaultPlayerStateType } from '../PlayerContext';
 

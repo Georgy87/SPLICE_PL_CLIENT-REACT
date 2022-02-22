@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router';
-import { useDispatch } from 'react-redux';
 
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 import { useSound } from '../../hooks/useSound';
@@ -18,13 +17,10 @@ type PackListProps = {
 export const PackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 	const { playTrack, isPlaying, currentPackId } = useSound();
 	const history = useHistory();
-	
+
 	return (
 		<div className={styles.packCardWrapper}>
-			<div
-				className={styles.packCard}
-				onClick={() => history.push(`/profile-pack/${pack?._id}`)}
-			>
+			<div className={styles.packCard} onClick={() => history.push(`/profile-pack/${pack?._id}`)}>
 				<IconChangeLayout
 					onClicked={(e: Event) => {
 						e.stopPropagation();
@@ -44,7 +40,7 @@ export const PackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 					typeBtn='pack'
 				></IconChangeLayout>
 
-				<img src={`${pack.picture}`} />
+				<img src={`${pack.picture}`} alt='pack-cover' />
 
 				<div>
 					<div>{pack.genre}</div>

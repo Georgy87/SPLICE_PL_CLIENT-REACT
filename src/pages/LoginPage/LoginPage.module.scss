@@ -14,7 +14,7 @@
 	text-align: center;
 	.authLabel {
 		display: flex;
-		justify-content: start;
+		justify-content: flex-start;
 		margin: 0 auto;
 		border-bottom: 2px solid rgb(101, 215, 243);
 		margin-bottom: 40px;
@@ -30,7 +30,7 @@
 
 .textbox {
 	display: flex;
-	justify-content: start;
+	justify-content: flex-start;
     flex-direction: column;
 	border: none;
 	background: none;

@@ -25,7 +25,7 @@ export const ProfilePackPage = () => {
 	const dispatch = useDispatch();
 
 	const params: { packId: string } = useParams();
-	const { setPlayerState, playTrack, isPlaying } = useSound();
+	const { setPlayerState } = useSound();
 
 	useEffect(() => {
 		dispatch(fetchGetPack({ packId: params?.packId, tag: null }));
@@ -56,24 +56,6 @@ export const ProfilePackPage = () => {
 						<div className={styles.packInfo}>
 							<h1>{packProfile?.name}</h1>
 							<p>{packProfile?.packInfo}</p>
-							{/* <IconChangeLayout
-								onClicked={(e: Event) => {
-									e.stopPropagation();
-									playTrack(0, 'packs');
-								}}
-								blockStyle={styles.playPausePack}
-								iconOneOrTwo={isPlaying}
-								iconOne='play-footer'
-								iconTwo='pause-footer'
-								typeBtn='pack-profile'
-								iconStyle={{
-									color: '#fff',
-									fontSize: '28px',
-									cursor: 'pointer',
-								}}
-							>
-								Play demo
-							</IconChangeLayout> */}
 						</div>
 					</div>
 					<SampleList samples={samples} />

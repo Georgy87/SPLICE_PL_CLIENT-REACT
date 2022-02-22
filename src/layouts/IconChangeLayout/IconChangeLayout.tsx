@@ -6,7 +6,6 @@ import { Pause } from '@material-ui/icons';
 import { PlayCircleOutline } from '@material-ui/icons';
 import { PauseCircleOutline } from '@material-ui/icons';
 import { ButtonLayout } from '../ButtonLayout/ButtonLayout';
-import * as Icons from 'react-icons/all';
 
 const iconsPlay = {
 	play: PlayCircleFilled,

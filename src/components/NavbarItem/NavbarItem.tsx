@@ -1,5 +1,4 @@
 import React from 'react';
-import { DownOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
 import { IconLayout, icons } from '../../layouts/IconLayout/IconLayout';
@@ -20,7 +19,7 @@ export const NavbarItem: React.FC<NavbarItemProps> = ({
 	return (
 		<>
 			<li className={styles.navItem}>
-				<a onClick={() => history.push(`/${iconName}`)}>
+				<a onClick={() => history.push(`/${iconName}`)} href={`/${iconName}`}>
 					<IconLayout iconName={iconName} />
 					<span className={styles.linkName}>{pageName}</span>
 				</a>

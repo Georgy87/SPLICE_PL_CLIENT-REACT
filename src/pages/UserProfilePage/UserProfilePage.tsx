@@ -28,11 +28,11 @@ export const UserProfilePage: React.FC = () => {
 	}, [user?.fullname]);
 
 	const onUpdateInfo = () => {
-		if (user?.email != email) {
+		if (user?.email !== email) {
 			dispatch(fetchUpdateEmail({ email }));
 		}
 
-		if (user?.fullname != fullname) {
+		if (user?.fullname !== fullname) {
 			dispatch(fetchUpdateFullName({ fullname }));
 		}
 	};
@@ -41,48 +41,29 @@ export const UserProfilePage: React.FC = () => {
 		<div className={styles.root}>
 			<ul className={styles.userInfoList}>
 				{ProfileItems.map((profileItems: UserInfoItems, idx: number) => {
-					return (
-						<UserProfileItem
-							key={idx}
-							profileItems={profileItems.itemName}
-							setFullName={setFullName}
-							setEmail={setEmail}
-						/>
-					);
+					return <UserProfileItem key={idx} profileItems={profileItems.itemName} setFullName={setFullName} setEmail={setEmail} />;
 				})}
 
-				{ProfileTriggerItems.map((profileTriggers: UserInfoTriggers) => {
+				{ProfileTriggerItems.map((profileTriggers: UserInfoTriggers, idx: number) => {
 					return (
-						<>
-							<div className={styles.downloadPack}>
-								<h1>{profileTriggers.itemName}</h1>
-								{profileTriggers.itemName === 'Update' && (
-									<ButtonLayout typeStyle='update' onClicked={onUpdateInfo}>
-										{profileTriggers.itemName}
-									</ButtonLayout>
-								)}
-								{profileTriggers.itemName === 'DownLoad' && (
-									<ButtonLayout typeStyle='update' onClicked={() => history.push('/profile/create')}>
-										{profileTriggers.itemName}
-									</ButtonLayout>
-								)}
-									{profileTriggers.itemName === 'Packs' && (
-									<ButtonLayout typeStyle='update' onClicked={() => history.push('/profile/packs')}>
-										{profileTriggers.itemName}
-									</ButtonLayout>
-								)}
-							</div>
-
-							{/* <div className={styles.downloadPack}>
-								<h1>DOWNLOAD PACK</h1>
-								<ButtonLayout
-									onClicked={() => history.push('/profile/create')}
-									typeStyle='update'
-								>
-									Download
+						<div className={styles.downloadPack} key={idx}>
+							<h1>{profileTriggers.itemName}</h1>
+							{profileTriggers.itemName === 'Update' && (
+								<ButtonLayout typeStyle='update' onClicked={onUpdateInfo}>
+									{profileTriggers.itemName}
 								</ButtonLayout>
-							</div> */}
-						</>
+							)}
+							{profileTriggers.itemName === 'DownLoad' && (
+								<ButtonLayout typeStyle='update' onClicked={() => history.push('/profile/create')}>
+									{profileTriggers.itemName}
+								</ButtonLayout>
+							)}
+							{profileTriggers.itemName === 'Packs' && (
+								<ButtonLayout typeStyle='update' onClicked={() => history.push('/profile/packs')}>
+									{profileTriggers.itemName}
+								</ButtonLayout>
+							)}
+						</div>
 					);
 				})}
 			</ul>
