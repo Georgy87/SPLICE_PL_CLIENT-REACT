@@ -41,10 +41,10 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	useEffect(() => {
 		setLike(likes.length >= 1);
 	}, [likes.length]);
-
+	
 	useEffect(() => {
 		if (currentSampleId === _id) {
-			canvasService.sampleCanvas(canvas, audioCoordinatesParse, percent);
+			canvasService.drawingSampleCanvas(canvas, audioCoordinatesParse, percent);
 		}
 	}, [canvas, currentTime]);
 

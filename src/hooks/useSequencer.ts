@@ -133,6 +133,7 @@ export const useSequencer = () => {
 	};
 
 	const onPlay = (sampleList: string[]) => {
+		AUDIO.resume();
 		isPlaying = true;
 		noteTime = 0.0;
 		startTime = AUDIO.currentTime;

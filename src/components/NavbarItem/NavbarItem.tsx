@@ -19,7 +19,7 @@ export const NavbarItem: React.FC<NavbarItemProps> = ({
 	return (
 		<>
 			<li className={styles.navItem}>
-				<a onClick={() => history.push(`/${iconName}`)} href={`/${iconName}`}>
+				<a onClick={() => history.push(`/${iconName}`)}>
 					<IconLayout iconName={iconName} />
 					<span className={styles.linkName}>{pageName}</span>
 				</a>

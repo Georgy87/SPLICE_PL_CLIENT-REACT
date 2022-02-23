@@ -19,7 +19,7 @@ class AudioService {
 
 	private normalizeData(filteredData: number[]) {
 		const multiplier = 50 / Math.max(...filteredData);
-		return filteredData.map((n: number) => ((n * multiplier) + 1).toFixed());
+		return filteredData.map((n: number) => +((n * multiplier) + 1).toFixed());
 	}
 
 	sampleAudioData(buffer: AudioBuffer) {

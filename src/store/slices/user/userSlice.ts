@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User, UserSliceState } from './types';
 import { userApi } from '../../../services/api/userApi';
 import { Samples } from '../samples/types';
+import { AsyncThunkRejectedActionCreator } from '@reduxjs/toolkit/dist/createAsyncThunk';
 
 const initialState: UserSliceState = {
 	user: null,
@@ -10,6 +11,7 @@ const initialState: UserSliceState = {
 	isAuth: false,
 	samples: null,
 	avatar: null,
+	message: null,
 };
 
 export const fetchRegistration = createAsyncThunk('user/registrationStatus', async (payload: any) => {
@@ -20,13 +22,14 @@ export const fetchRegistration = createAsyncThunk('user/registrationStatus', asy
 	}
 });
 
-export const fetchLogin = createAsyncThunk('user/loginStatus', async (payload: { email: string; password: string }) => {
+export const fetchLogin = createAsyncThunk('user/loginStatus', async (payload: { email: string; password: string }, { rejectWithValue }) => {
 	try {
-		const data: { user: User; token: string } = await userApi.login(payload);
+		const data: { user: User; token: string; message: string } = await userApi.login(payload);
 		localStorage.setItem('token', data.token);
 		return data;
-	} catch (error) {
-		console.log(error);
+	} catch (error: any) {
+		const { data } = error.response;
+		return rejectWithValue(data.message);
 	}
 });
 
@@ -52,7 +55,7 @@ export const fetchUpdateEmail = createAsyncThunk('user/updateEmailStatus', async
 
 export const fetchUpdateFullName = createAsyncThunk('user/updateFullNameStatus', async (payload: { fullname: string | undefined }) => {
 	try {
-		const data: { user: User } = await userApi.updateFullName(payload.fullname);
+		const data: { user: User; token: string; message: string } = await userApi.updateFullName(payload.fullname);
 		return data;
 	} catch (error) {
 		console.log(error);
@@ -71,7 +74,7 @@ export const fetchGetLikedSamples = createAsyncThunk('user/getLikedSamplesStatus
 export const fetchUpdateAvatar = createAsyncThunk('user/updateAvatarSamplesStatus', async (file: File | null) => {
 	try {
 		if (!file) return;
-		
+
 		const formData = new FormData();
 
 		formData.append('file', file);
@@ -96,10 +99,13 @@ export const userSlice = createSlice({
 	},
 	extraReducers: (builder) =>
 		builder
-			.addCase(fetchLogin.fulfilled.type, (state, action: PayloadAction<{ user: User; token: string }>) => {
+			.addCase(fetchLogin.fulfilled.type, (state, action: PayloadAction<{ user: User; token: string; message: string }>) => {
 				state.user = action.payload?.user;
 				state.token = action.payload?.token;
 				state.isAuth = true;
+			})
+			.addCase(fetchLogin.rejected.type, (state, action: PayloadAction<string>) => {
+				state.message = action.payload;
 			})
 			.addCase(fetchAuth.fulfilled.type, (state, action: PayloadAction<{ user: User; token: string }>) => {
 				if (action.payload) {

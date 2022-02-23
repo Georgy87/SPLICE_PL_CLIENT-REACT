@@ -17,4 +17,5 @@ export type UserSliceState = {
 	isAuth: boolean;
 	samples: Samples[] | null;
 	avatar: null | string;
+	message: null | string;
 };

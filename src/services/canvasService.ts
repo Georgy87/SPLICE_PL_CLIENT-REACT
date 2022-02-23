@@ -1,9 +1,7 @@
+import { base64StringtoFile } from "../utils/base64StringtoFile";
+
 class CanvasService {
-	sampleCanvas(
-		canvas: HTMLCanvasElement | null,
-		audioCoordinatesParse: number[],
-		percent: number,
-	) {
+	drawingSampleCanvas(canvas: HTMLCanvasElement | null, audioCoordinatesParse: number[], percent: number) {
 		const dpr = window.devicePixelRatio || 1;
 
 		const cssCanvasWidth: number = 550;
@@ -17,31 +15,69 @@ class CanvasService {
 		const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
 		if (ctx === null) return;
 
-		ctx?.scale(dpr, dpr);
-		ctx?.translate(0, cssCanvasHeight / dpr);
+		ctx.scale(dpr, dpr);
+		ctx.translate(0, cssCanvasHeight / dpr);
 
 		const barWidth = canvas.offsetWidth / audioCoordinatesParse.length;
 
 		ctx.beginPath();
 
-		const drawLineSegment = (
-			ctx: CanvasRenderingContext2D,
-			x: number,
-			barHeight: number,
-			barWidth: number,
-		) => {
+		const drawLineSegment = (ctx: CanvasRenderingContext2D, x: number, barHeight: number, barWidth: number) => {
 			ctx.fillStyle = '#03f';
 
 			ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 0.5, barHeight);
 			ctx.stroke();
 		};
-	
+
 		for (let i = 0; i < percent; i++) {
-			const x = barWidth * i;
-			let barHeight = audioCoordinatesParse[i];
+			const x: number = barWidth * i;
+			let barHeight: number = audioCoordinatesParse[i];
 
 			drawLineSegment(ctx, x, barHeight, barWidth);
 		}
+	}
+
+	drawingCanvasForSampleCreate(
+		audioCoordinates: number[],
+		canvas: HTMLCanvasElement | null,
+	): File | undefined {
+		const cssCanvasWidth: number = 550;
+		const cssCanvasHeight: number = 50;
+		const dpr: number = 2;
+
+		if (canvas === null) return;
+
+		const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
+
+		canvas.width = cssCanvasWidth * dpr;
+		canvas.height = cssCanvasHeight * dpr;
+
+		ctx?.scale(dpr, dpr);
+		ctx?.translate(0, cssCanvasHeight / 2);
+
+		const barWidth: number = cssCanvasWidth / audioCoordinates.length;
+
+		if (ctx === null) return;
+
+		ctx.strokeStyle = '#ADD8E6';
+		ctx.beginPath();
+
+		for (let i = 0; i < audioCoordinates.length; i++) {
+			const x: number = barWidth * i;
+			let barHeight: number = audioCoordinates[i];
+			drawLineSegment(ctx, x, barHeight, barWidth);
+		}
+
+		ctx.stroke();
+
+		const dataURL: string = canvas.toDataURL();
+
+		function drawLineSegment(ctx: CanvasRenderingContext2D, x: number, barHeight: number, barWidth: number) {
+			ctx.fillStyle = '#ADD8E6';
+			ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 0.6, barHeight);
+		}
+
+		return base64StringtoFile(dataURL, 'png');
 	}
 }
 

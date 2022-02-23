@@ -50,23 +50,17 @@ export const SequencerPage = () => {
 
 	useEffect(() => {
 		dispatch(fetchGetLikedSamples());
-		window.cancelAnimationFrame(requestId);
 	}, []);
 
 	useEffect(() => {
 		loadSamples(sampleList);
-	}, [valueBpm]);
-
-	useEffect(() => {
-		loadSamples(sampleList);
-	}, [sampleList]);
+	}, [sampleList, valueBpm]);
 
 	const onDropHandler = (e: React.DragEvent<HTMLDivElement>, index: number) => {
 		e.preventDefault();
 
 		let sampleListCopy = [...sampleList];
 		sampleListCopy[index] = newSampleSrc;
-		console.log(sampleListCopy);
 		setSampleList(sampleListCopy);
 	};
 
