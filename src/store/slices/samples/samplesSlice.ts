@@ -9,6 +9,7 @@ const initialState: SampleSliceState = {
 	files: [],
 	packId: null,
 	currentStep: 0,
+	samplesToSend: null,
 };
 
 export const fetchCreateSamples = createAsyncThunk(

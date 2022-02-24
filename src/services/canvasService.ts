@@ -1,4 +1,5 @@
-import { base64StringtoFile } from "../utils/base64StringtoFile";
+import { samplesToSendType } from '../store/slices/samples/types';
+import { base64StringtoFile } from '../utils/base64StringtoFile';
 
 class CanvasService {
 	drawingSampleCanvas(canvas: HTMLCanvasElement | null, audioCoordinatesParse: number[], percent: number) {
@@ -38,9 +39,13 @@ class CanvasService {
 	}
 
 	drawingCanvasForSampleCreate(
+		audioFile: File,
 		audioCoordinates: number[],
+		packId: string | null,
 		canvas: HTMLCanvasElement | null,
-	): File | undefined {
+		fileId: string,
+		duration: number,
+	) {
 		const cssCanvasWidth: number = 550;
 		const cssCanvasHeight: number = 50;
 		const dpr: number = 2;
@@ -76,8 +81,15 @@ class CanvasService {
 			ctx.fillStyle = '#ADD8E6';
 			ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 0.6, barHeight);
 		}
-
-		return base64StringtoFile(dataURL, 'png');
+		console.log('Not Worker!!!!!!!!!!!!');
+		return {
+			imageFile: base64StringtoFile(dataURL, 'png'),
+			audioFile,
+			audioCoordinates,
+			packId,
+			fileId,
+			duration,
+		};
 	}
 }
 

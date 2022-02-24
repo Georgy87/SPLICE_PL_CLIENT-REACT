@@ -21,8 +21,8 @@ export const UserPacksPage = () => {
 		async function create(e: any) {
 			const { imageFile, audioFile, audioCoordinates, packId, fileId, duration } = e.data;
 
-			const id = await createSamples(imageFile, audioFile, audioCoordinates, packId, fileId, duration);
-
+			const id = await createSamples({ imageFile, audioFile, audioCoordinates, packId, fileId, duration });
+			
 			dispatch(deleteSampleFiles(id));
 		}
 		

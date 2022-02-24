@@ -39,6 +39,7 @@ export default function CreateSampleWebWorker() {
 			const imageFile = new File([blob], 'png', { type: 'png' });
 			postMessage({ imageFile, audioFile, audioCoordinates, packId, fileId, duration });
 		}
+		console.log('Worker');
 	};
 
 	const drawLineSegment = (ctx, x, barHeight, barWidth) => {
