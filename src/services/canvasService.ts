@@ -2,43 +2,11 @@ import { samplesToSendType } from '../store/slices/samples/types';
 import { base64StringtoFile } from '../utils/base64StringtoFile';
 
 class CanvasService {
-	drawingSampleCanvas(canvas: HTMLCanvasElement | null, audioCoordinatesParse: number[], percent: number) {
-		const dpr = window.devicePixelRatio || 1;
-
-		const cssCanvasWidth: number = 550;
-		const cssCanvasHeight: number = 50;
-
-		if (!canvas) return;
-
-		canvas.width = cssCanvasWidth * dpr;
-		canvas.height = cssCanvasHeight * dpr;
-
-		const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
-		if (ctx === null) return;
-
-		ctx.scale(dpr, dpr);
-		ctx.translate(0, cssCanvasHeight / dpr);
-
-		const barWidth = canvas.offsetWidth / audioCoordinatesParse.length;
-
-		ctx.beginPath();
-
-		const drawLineSegment = (ctx: CanvasRenderingContext2D, x: number, barHeight: number, barWidth: number) => {
-			ctx.fillStyle = '#03f';
-
-			ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 0.5, barHeight);
-			ctx.stroke();
-		};
-
-		for (let i = 0; i < percent; i++) {
-			const x: number = barWidth * i;
-			let barHeight: number = audioCoordinatesParse[i];
-
-			drawLineSegment(ctx, x, barHeight, barWidth);
-		}
+	drawingSampleCanvas(canvas: HTMLCanvasElement | null, audioCoordinates: number[], percent: number) {
+		this.drawing({ canvas, audioCoordinates, percent, fillColor: '#03f', rectangleWidth: 0.5, drawingTarget: 'Drawing' });
 	}
 
-	drawingCanvasForSampleCreate(
+	drawingCanvasToImage(
 		audioFile: File,
 		audioCoordinates: number[],
 		packId: string | null,
@@ -46,6 +14,35 @@ class CanvasService {
 		fileId: string,
 		duration: number,
 	) {
+		const dataUrl = this.drawing({ canvas, audioCoordinates, percent: null, fillColor: '#ADD8E6', rectangleWidth: 0.6, drawingTarget: 'Image' });
+
+		if (!dataUrl) return;
+
+		return {
+			imageFile: base64StringtoFile(dataUrl, 'png'),
+			audioFile,
+			audioCoordinates,
+			packId,
+			fileId,
+			duration,
+		};
+	}
+
+	drawing({
+		canvas,
+		audioCoordinates,
+		percent,
+		fillColor,
+		rectangleWidth,
+		drawingTarget,
+	}: {
+		canvas: HTMLCanvasElement | null;
+		audioCoordinates: number[];
+		percent: number | null;
+		fillColor: string;
+		rectangleWidth: number;
+		drawingTarget: 'Image' | 'Drawing';
+	}) {
 		const cssCanvasWidth: number = 550;
 		const cssCanvasHeight: number = 50;
 		const dpr: number = 2;
@@ -67,29 +64,28 @@ class CanvasService {
 		ctx.strokeStyle = '#ADD8E6';
 		ctx.beginPath();
 
-		for (let i = 0; i < audioCoordinates.length; i++) {
+		// if (!percent) return null;
+
+		let cycleLimiter = 0;
+		//@ts-ignore
+		drawingTarget === 'Image' ? (cycleLimiter = audioCoordinates.length) : (cycleLimiter = percent);
+
+		for (let i = 0; i < cycleLimiter; i++) {
 			const x: number = barWidth * i;
 			let barHeight: number = audioCoordinates[i];
-			drawLineSegment(ctx, x, barHeight, barWidth);
+			drawLineSegment(ctx, x, barHeight, barWidth, rectangleWidth);
 		}
 
 		ctx.stroke();
 
-		const dataURL: string = canvas.toDataURL();
-
-		function drawLineSegment(ctx: CanvasRenderingContext2D, x: number, barHeight: number, barWidth: number) {
-			ctx.fillStyle = '#ADD8E6';
-			ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 0.6, barHeight);
+		function drawLineSegment(ctx: CanvasRenderingContext2D, x: number, barHeight: number, barWidth: number, rectangleWidth: number) {
+			ctx.fillStyle = fillColor;
+			ctx.fillRect(x + barWidth / 2, -(barHeight / 2), rectangleWidth, barHeight);
 		}
-		console.log('Not Worker!!!!!!!!!!!!');
-		return {
-			imageFile: base64StringtoFile(dataURL, 'png'),
-			audioFile,
-			audioCoordinates,
-			packId,
-			fileId,
-			duration,
-		};
+
+		const dataUrl = canvas.toDataURL();
+		
+		return dataUrl;
 	}
 }
 

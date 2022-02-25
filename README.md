@@ -170,7 +170,7 @@ SAMPLE CLOUD - это платформа для использования и с
 
     ***
 
-2. `Webworker`.
+2. [`Webworker`](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT#worker).
    Цель данного этапа- отрисовка и создание png изображений по каждому загруженному треку.
 
     Имея массив координат, полученный на первом этапе, создаем холст при помощи технологии OffscreenCanvas и вместе с координатами отправляем postMessage в webworker. Отрисовываем данные на холсте по каждому семплу и при помощи canvas.convertToBlob() создаем изображения для отправки на сервер.
@@ -221,6 +221,53 @@ SAMPLE CLOUD - это платформа для использования и с
 
 ###### Секвенсор позволяет пользователю прослушать понравившиеся ему семплы в сочетании друг с другом в работе, приближенной к реальному музыкальному редактору.
 
+<h1 class='crossHead'>КРОССБРАУЗЕРНОСТЬ</h1>
+<style>
+  .crossHead {
+    color: #d9544f;
+  }
+</style>
 
+Приложение является кроссбраузерным, но в процессе тектирования я столкнулся с некоторыми проблемами, которые хотел бы описать в этой главе.
 
+1. `Процесс загрузки семплов в библиотеку.`
+
+При загрузке файлов, описанной в главе [Webworker](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT#worker), технология [OffscreenCanvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas)
+на данный момент оказалась не совместима с Safari, Firefox и IE. При работе с данными браузерами была написана функциональность, которая при определении данных браузеров, осуществляет отрисовку canvas без применения технологии webworker.
+
+```javascript
+const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
+
+  canvas.width = cssCanvasWidth * dpr;
+  canvas.height = cssCanvasHeight * dpr;
+
+  ctx?.scale(dpr, dpr);
+  ctx?.translate(0, cssCanvasHeight / 2);
+
+  const barWidth: number = cssCanvasWidth / audioCoordinates.length;
+
+  if (ctx === null) return;
+
+  ctx.strokeStyle = '#ADD8E6';
+  ctx.beginPath();
+
+  let cycleLimiter: number = 0;
+  
+  drawingTarget === 'Image' ? (cycleLimiter = audioCoordinates.length) : (cycleLimiter = percent);
+
+  for (let i = 0; i < cycleLimiter; i++) {
+    const x: number = barWidth * i;
+    let barHeight: number = audioCoordinates[i];
+    drawLineSegment(ctx, x, barHeight, barWidth, rectangleWidth);
+  }
+
+  ctx.stroke();
+
+  function drawLineSegment(ctx: CanvasRenderingContext2D, x: number, barHeight: number, barWidth: number, rectangleWidth: number) {
+    ctx.fillStyle = fillColor;
+    ctx.fillRect(x + barWidth / 2, -(barHeight / 2), rectangleWidth, barHeight);
+  }
+```
+
+Также при получении изображения, содержащегося не холсте canvas вместо технологии [OffscreenCanvas.convertToBlob()](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/convertToBlob)
 

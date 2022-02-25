@@ -1,5 +1,5 @@
 export default function CreateSampleWebWorker() {
-	onmessage = (e) => {
+	onmessage = async (e) => {
 		const {
 			audioCoordinates,
 			audioFile,
@@ -11,6 +11,7 @@ export default function CreateSampleWebWorker() {
 			fileId,
 			duration,
 		} = e.data;
+		
 		const ctx = e.data.canvas.getContext('2d');
 
 		if (e.data.canvas === null) return;
@@ -33,13 +34,15 @@ export default function CreateSampleWebWorker() {
 		}
 
 		ctx.stroke();
-		canvas.convertToBlob({ type: 'image/png' }).then((blob) => fileCreator(blob));
+
+		const blob = await canvas.convertToBlob({ type: 'image/png' });
+
+		fileCreator(blob);
 
 		function fileCreator(blob) {
 			const imageFile = new File([blob], 'png', { type: 'png' });
 			postMessage({ imageFile, audioFile, audioCoordinates, packId, fileId, duration });
 		}
-		console.log('Worker');
 	};
 
 	const drawLineSegment = (ctx, x, barHeight, barWidth) => {
