@@ -195,11 +195,11 @@ SAMPLE CLOUD - это платформа для использования и с
 
     Мы получаем png изображения заранее отрисованной аудио волны по каждому семплу. При загрузке странницы с семплами, нам не придется каждый раз повторять процесс вычисления и отрисовки, либо, если все же понадобиться отрисовывать на canvas, эти изображения послужат маской, которая может ставиться перед реальной отрисовкой в real time.
 
-### `SEQUENCER PAGE`
+### `SEQUENCER PAGE`[](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT#sequencer)
 
 ![sequencer-page](src/assets//readme-images/sequencer-page.png)
 
-Секвенсор - это функционал для проигрывания семплов. Он включает семпл в определенный момент времени и работает c определенной скоростью bpm. 
+Секвенсор - это функционал для проигрывания семплов. Он включает семпл в определенный момент времени и работает c определенной скоростью bpm. Работа движка секвенсора осуществляется в хуке [useSequencer](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT/blob/main/src/hooks/useSequencer.ts)
 
 При включении секвенсора пользователь может переключить bpm на панели:
 
@@ -219,6 +219,9 @@ SAMPLE CLOUD - это платформа для использования и с
 
  и кликаем место, в котором семпл должен начинать свое проигрывание. Оно выделяется синим цветом. 
 
+!!!д при адаптации на мобильные устройства, так как мы не можем перетащить семплы в зеленый дроп бокс секвенсора, при нажатии на бокс появляется модальное окно, откуда можно загрузить соответствующий семпл выбрав его.
+
+![sample-modal-sequencer](src/assets//readme-images/MOBILE-SEQUENCER-SAMPLES.png)
 ###### Секвенсор позволяет пользователю прослушать понравившиеся ему семплы в сочетании друг с другом в работе, приближенной к реальному музыкальному редактору.
 
 <h1 class='crossHead'>КРОССБРАУЗЕРНОСТЬ</h1>
@@ -228,12 +231,12 @@ SAMPLE CLOUD - это платформа для использования и с
   }
 </style>
 
-Приложение является кроссбраузерным, но в процессе тектирования я столкнулся с некоторыми проблемами, которые хотел бы описать в этой главе.
+Приложение является кроссбраузерным, но в процессе теcтирования я столкнулся с некоторыми проблемами, которые хотел бы описать в этой главе.
 
 1. `Процесс загрузки семплов в библиотеку.`
 
 При загрузке файлов, описанной в главе [Webworker](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT#worker), технология [OffscreenCanvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas)
-на данный момент оказалась не совместима с Safari, Firefox и IE. При работе с данными браузерами была написана функциональность, которая при определении данных браузеров, осуществляет отрисовку canvas без применения технологии webworker.
+на данный момент оказалась не совместима с Safari, Firefox и IE. Была написана функциональность, которая при определении данных браузеров, осуществляет отрисовку canvas без применения технологии OffscreenCanvas и webworker.
 
 ```javascript
 const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
@@ -269,5 +272,22 @@ const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
   }
 ```
 
-Также при получении изображения, содержащегося не холсте canvas вместо технологии [OffscreenCanvas.convertToBlob()](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/convertToBlob)
+Также при получении изображения, содержащегося не холсте canvas вместо технологии [OffscreenCanvas.convertToBlob()](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/convertToBlob) применяется [HTMLCanvasElement.toDataURL()](https://developer.mozilla.org/ru/docs/Web/API/HTMLCanvasElement/toDataURL) и затем уже утилитой:
+```javascript
+export const base64StringtoFile = (base64String: string, filename: string) => {
+  let arr = base64String.split(','),
+  
+  mime = arr[0].match(/:(.*?);/)[1],
+  bstr = atob(arr[1]),
+  n = bstr.length,
+  u8arr = new Uint8Array(n);
+while (n--) {
+  u8arr[n] = bstr.charCodeAt(n);
+}
+return new File([u8arr], mime, { type: 'png' });
+};
+```
+создаем файл изображения для отправки на сервер.
 
+2. `Движок секвенсора.`
+При тестировании работы секвенсора, описанного в главе [SEQUENCER PAGE](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT#sequencer), в Safari работа c [Web Audio API](https://developer.mozilla.org/ru/docs/Web/API/Web_Audio_API) дала сбой при запуске движка. Проблема была решена использованием [AudioContext.resume()](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/resume)
