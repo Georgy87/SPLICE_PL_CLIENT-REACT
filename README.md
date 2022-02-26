@@ -71,7 +71,7 @@ SAMPLE CLOUD - это платформа для использования и с
 
 <br/>
 
-#### 1. Редактирование аватара
+#### Редактирование аватара
 
 ![avatar](src/assets//readme-images/avatar.png)
 
