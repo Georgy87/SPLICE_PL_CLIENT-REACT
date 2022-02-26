@@ -215,7 +215,7 @@ private normalizeData(filteredData: number[]) {
 
   Мы получаем png изображения заранее отрисованной аудио волны по каждому семплу. При загрузке странницы с семплами, нам не придется каждый раз повторять процесс вычисления и отрисовки, либо, если все же понадобиться отрисовывать на canvas, эти изображения послужат маской, которая может ставиться перед реальной отрисовкой в real time.
 
-### `Секвенсор`
+## `Секвенсор`
 
 ![sequencer-page](src/assets//readme-images/sequencer-page.png)
 
@@ -250,7 +250,7 @@ private normalizeData(filteredData: number[]) {
 
 1. `Процесс загрузки семплов в библиотеку.`
 
-При загрузке файлов, описанной в главе [Webworker](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT#worker), технология [OffscreenCanvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas)
+При загрузке файлов, описанной в главе [Webworker](#Webworker), технология [OffscreenCanvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas)
 на данный момент оказалась не совместима с Safari, Firefox и IE. Была написана функциональность, которая при определении данных браузеров, осуществляет отрисовку canvas без применения технологии OffscreenCanvas и webworker.
 
 ```javascript
@@ -305,7 +305,7 @@ return new File([u8arr], mime, { type: 'png' });
 создаем файл изображения для отправки на сервер.
 
 2. `Движок секвенсора.`
-При тестировании работы секвенсора, описанного в главе [SEQUENCER PAGE](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT#sequencer), в Safari работа c [Web Audio API](https://developer.mozilla.org/ru/docs/Web/API/Web_Audio_API) дала сбой при запуске движка. Проблема была решена использованием [AudioContext.resume()](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/resume)
+При тестировании работы секвенсора, описанного в главе [Секвенсор](#Cеквенсор), в Safari работа c [Web Audio API](https://developer.mozilla.org/ru/docs/Web/API/Web_Audio_API) дала сбой при запуске движка. Проблема была решена использованием [AudioContext.resume()](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/resume)
 
 ***
 [:arrow_up: Оглавление](#Оглавление)

@@ -16,7 +16,7 @@ type PropsType = {
 	pageName?: 'main-packs' | 'user-packs';
 };
 
-export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
+export const PacksPage: React.FC<PropsType> = () => {
 	const packs = useSelector(selectPacks);
 
 	const [value, setValue] = useState<string>('');
@@ -29,8 +29,9 @@ export const PacksPage: React.FC<PropsType> = ({ pageName }) => {
 
 	const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
 		e.stopPropagation();
+		console.log(e.target.value);
 		setValue(e.target.value);
-		dispatch(fetchSearchPacks(value));
+		dispatch(fetchSearchPacks(e.target.value));
 	};
 
 	return (

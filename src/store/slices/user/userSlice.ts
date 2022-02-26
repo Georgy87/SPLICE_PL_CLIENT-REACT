@@ -3,7 +3,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User, UserSliceState } from './types';
 import { userApi } from '../../../services/api/userApi';
 import { Samples } from '../samples/types';
-import { AsyncThunkRejectedActionCreator } from '@reduxjs/toolkit/dist/createAsyncThunk';
 
 const initialState: UserSliceState = {
 	user: null,

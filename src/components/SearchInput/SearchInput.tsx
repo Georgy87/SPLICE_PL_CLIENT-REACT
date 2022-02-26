@@ -44,7 +44,7 @@ const SearchInput: React.FC<PropsType> = ({
 					type='text'
 					className={styles.searchInput}
 					onChange={onChangeValue}
-					value={value}
+					defaultValue={value}
 					placeholder={open ? placeholder : ''}
 				/>
 				<svg
