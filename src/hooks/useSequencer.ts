@@ -23,8 +23,8 @@ export const useSequencer = () => {
 		noteTime: 0,
 		startTime: 0,
 		currentStep: 0,
-		tempo: 128,
-		tic: 60 / 128 / 4,
+		tempo: 60,
+		tic: 60 / 60 / 4,
 		bank: [],
 		totalCount: 0,
 		initialPattern: [
@@ -43,7 +43,7 @@ export const useSequencer = () => {
 	const [step, setStep] = useState<number>(1);
 
 	const setTempo = (tempoValue: number) => {
-		tic = 60 / tempoValue / 4;
+		tic = 120 / tempoValue / 4;
 	};
 	
 	const scheduleNote = () => {
@@ -56,7 +56,7 @@ export const useSequencer = () => {
 
 			while (noteTime < ct + 0.2) {
 				let pt: number = noteTime + startTime;
-
+				console.log(noteTime)
 				playPatternStepAtTime(pt);
 				nextNote();
 			}
