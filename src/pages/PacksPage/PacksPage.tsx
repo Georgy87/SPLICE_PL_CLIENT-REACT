@@ -38,7 +38,7 @@ export const PacksPage: React.FC<PropsType> = () => {
 		<>
 			<SearchInput onChangeValue={onChangeValue} setValue={setValue} value={value} />
 			<div className={styles.root}>
-				{packs ? packs.map((pack: Pack, index: number) => (
+				{packs.length ? packs.map((pack: Pack, index: number) => (
 					<div className={styles.packCardContainer} key={pack._id}>
 						<PackItem pack={pack} id={pack._id} index={index} />
 					</div>
