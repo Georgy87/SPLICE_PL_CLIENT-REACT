@@ -7,6 +7,7 @@ import { avatarService } from '../../services/avatarService';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { fetchUpdateAvatar } from '../../store/slices/user/userSlice';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
+import { canvasService } from '../../services/canvasService';
 
 import './UserProfilePhoto.css';
 
@@ -57,7 +58,7 @@ export const AvatarEditorPage = () => {
 
 		const crop: Crop = completedCrop;
 
-		const canvasResult = avatarService.avatarCreator(image, canvas, crop);
+		const canvasResult = canvasService.drawingAvatar(image, canvas, crop);
 
 		canvasResult?.toBlob(function(blob: Blob | null) {
 			if (!blob) return;

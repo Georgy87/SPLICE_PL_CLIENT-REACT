@@ -27,9 +27,9 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 		const canvas = canvasRef?.current;
 
 		window.AudioContext = window.AudioContext || new window.webkitAudioContext();
-		const audioContext = new AudioContext();
+		const audioContext: AudioContext = new AudioContext();
 
-		const reader = new FileReader();
+		const reader: FileReader = new FileReader();
 
 		reader.readAsArrayBuffer(file);
 

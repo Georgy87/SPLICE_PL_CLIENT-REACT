@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User, UserSliceState } from './types';
 import { userApi } from '../../../services/api/userApi';
 import { Samples } from '../samples/types';
+import { ErrorInfo } from 'react';
 
 const initialState: UserSliceState = {
 	user: null,
@@ -10,7 +11,7 @@ const initialState: UserSliceState = {
 	isAuth: false,
 	samples: null,
 	avatar: null,
-	message: null,
+	errorMessage: null,
 };
 
 export const fetchRegistration = createAsyncThunk('user/registrationStatus', async (payload: any) => {
@@ -28,7 +29,7 @@ export const fetchLogin = createAsyncThunk('user/loginStatus', async (payload: {
 		return data;
 	} catch (error: any) {
 		const { data } = error.response;
-		return rejectWithValue(data.message);
+		return rejectWithValue(data.error);
 	}
 });
 
@@ -104,7 +105,7 @@ export const userSlice = createSlice({
 				state.isAuth = true;
 			})
 			.addCase(fetchLogin.rejected.type, (state, action: PayloadAction<string>) => {
-				state.message = action.payload;
+				state.errorMessage = action.payload;
 			})
 			.addCase(fetchAuth.fulfilled.type, (state, action: PayloadAction<{ user: User; token: string }>) => {
 				if (action.payload) {

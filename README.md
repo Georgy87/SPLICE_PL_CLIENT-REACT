@@ -177,15 +177,27 @@ SAMPLE CLOUD - это платформа для использования и с
  
 мы получаем массив аудио файлов. От каждого из этих файлов нам нужно получить массив координат для отрисовки визуальной части аудио трека.
 
-<br/>
 
-К счастью, браузер предоставляет возможность получить такие данные при помощи Web Audio API. Мы получаем, так называемый, AudioBuffer(массив данных по аудио файлу).
+К счастью, браузер предоставляет возможность получить такие данные при помощи Web Audio API. Мы преобразовываем файл в arrayBuffer(он представляет собой ссылку на поток "сырых" двоичных данных), затем обрабатываем результат в audioContext.decodeAudioData(arrayBuffer). Он используется для асинхронного декодирования данных аудиофайла. Декодированный AudioBuffer передискретизируется до частоты дискретизации AudioContext, а затем передается в промис.
 
+```javascript
+	const audioContext: AudioContext = new AudioContext();
+
+	const reader: FileReader = new FileReader();
+
+	reader.readAsArrayBuffer(file);
+
+	reader.onload = async function() {
+		const arrayBuffer: ArrayBuffer | null = reader.result;
+		if (!arrayBuffer) return;
+
+		const buffer: AudioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+```
 ![array-buffer](src/assets//readme-images/array-buffer.png)
-Далее нам нужно оптимизировать этот большой миллионный массив чисел перед отрисовкой визуализации наших аудио.
 
-<br/>
+`Суть этой оптимизации заключается в том, что это большой миллионный массив чисел.` Плюс числа являются дробными. Так как по этим данным мы будем рисовать визуализацию аудио треков и далее хранить в базе, было решено сделать несколько этапов оптимизаций.
 
+1. `Фильтрация.`
 Алгоритм фильтрации разделяет данные на 550 равных частей и вычисляет среднее значение выборок, а также убирает отрицательные числа. В итоге вместо миллионого массива данных мы получаем массив из 550 чисел.
 
 ```javascript
@@ -207,7 +219,8 @@ private filterData(audioBuffer: AudioBuffer) {
 	return filteredData;
 }
 ```
-`Остается сделать нормализацию данных`. В массиве 550 дробных чисел от 0 до 1. Наш canvas имеет высоту 50 пикселей. Соответственно изменияем масштаб данных в промежутке от 1 до 50ти и округляем дробные числа. В результате мы имеем массив из 550ти целых чисел от 1 до 50ти.
+2. `Нормализация.`
+Остается сделать нормализацию данных. В массиве 550 дробных чисел от 0 до 1. Наш canvas имеет высоту 50 пикселей. Соответственно изменияем масштаб данных в промежутке от 1 до 50ти и округляем дробные числа. В результате мы имеем массив из 550ти целых чисел от 1 до 50ти.
 
 ```javascript
 private normalizeData(filteredData: number[]) {
@@ -216,85 +229,35 @@ private normalizeData(filteredData: number[]) {
 }
 ```
 
-Итог: Данная оптимизация позволяет во много раз уменьшить объем массива, который будет храниться в базе данных по каждому семплу(аудио треку), а также подготовить целые числа для отрисовки(избегаем субпиксельного рендеринга на canvas).
+Итог: Данная оптимизация позволяет во много раз уменьшить объем массива данных, который будет храниться в базе данных по каждому семплу(аудио треку), а также подготовить целые числа для отрисовки(избегаем субпиксельного рендеринга на canvas).
 
 ***
 
 #### Webworker 
-  Цель данного этапа - отрисовка и создание png изображений по каждому загруженному треку.
 
-  Имея массив координат, полученный на первом этапе, создаем холст при помощи технологии OffscreenCanvas и вместе с координатами отправляем postMessage в webworker. Отрисовываем данные на холсте по каждому семплу и при помощи canvas.convertToBlob() создаем изображения для отправки на сервер.
+  После получения оптимизированных данных см.[Загрузка файлов](#Загрузка-файлов), следуя принципу 'don’t repeat yourself', мы отрисовываем визуализацию аудио на canvas по каждому загруженному файлу один раз и отправляем данные на сервер. 
 
-  <br/>
 
-  ```javascript
-  canvas.convertToBlob({ type: 'image/png' }).then((blob) => fileCreator(blob));
 
-  function fileCreator(blob) {
-    const imageFile = new File([blob], 'png', { type: 'png' });
+ ![audio-wave](src/assets//readme-images/audio-wave.png)
 
-    postMessage({ imageFile, audioFile, audioCoordinates, packId, fileId });
-  }
-  ```
+  Делается это, чтобы не нагружать большим количеством рендорингов страницу с семплами, а просто загружать уже готовые png изображения плюс делаем кеширование данных. Если мы будем просто отрисовывать несколько сотен семплов на canvas и повторять это каждый раз при перезагрузке страницы, данный процесс будет сильно тормозить основной поток. 
 
-    <br/>
-
-  `Итог:`
-
-  ![audio-wave](src/assets//readme-images/audio-wave.png)
-
-  Мы получаем png изображения заранее отрисованной аудио волны по каждому семплу. При загрузке странницы с семплами, нам не придется каждый раз повторять процесс вычисления и отрисовки, либо, если все же понадобиться отрисовывать на canvas, эти изображения послужат маской, которая может ставиться перед реальной отрисовкой в real time.
+  Так как пользователь может загрузить разом большое количество файлов, используем Webworker, что позволяет отрисовать графики и создать png изображения в параллельном потоке.
 
 #### Audio player
 
-1. Для проигрования библиотек и семплов было решено использовать универсальный hook [useSound()](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT/blob/main/src/hooks/useSound.ts). Эта функциональность воспроизводит аудио и предоставляет данные либо для плеера, проигрывающего библиотеки, либо для для проигрования семплов. Для этих целей оптимальнее было использовать Context Api. Так как обьект new Audio() нерекомендуется использовать в redux state.
-
-```javascript
-export const defaultState = {
-	audioPlayer: new Audio(),
-	currentTrackIndex: null,
-	isPlaying: false,
-	currentTrackId: null,
-	active: null,
-	duration: 0,
-	currentTime: 0,
-	packCurrentTime: 0,
-	volume: 2,
-	percent: 0,
-	packPercent: 0,
-};
-
-export const PlayerContextProvider: React.FC<PropsType> = ({ children }) => {
-	const packs = useSelector(selectPacks);
-
-	const [playerState, setPlayerState] = useState<ContextProps[0]>(defaultPlayerStateType);
-	
-	useEffect(() => {
-		if (packs) {
-			setPlayerState({
-				...defaultState,
-				packs: packs,
-				samples: [],
-			});
-		}
-	}, [packs]);
-
-	return (
-		<PlayerContext.Provider value={[playerState, setPlayerState]}>
-			{children}
-		</PlayerContext.Provider>
-	);
-};
-```
+1. Для проигрования библиотек и семплов было решено разработать универсальный кастомный hook [useSound()](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT/blob/main/src/hooks/useSound.ts). Эта функциональность воспроизводит аудио и предоставляет данные либо для плеера, проигрывающего библиотеки, либо для для проигрования семплов. Для этих целей оптимальнее было использовать Context Api. Так как обьект new Audio() не рекомендуется использовать в redux state. 
 
 2. `Работа со временем и анимацией.`
-
 В процессе разработки функционала работы прогресс бара плеера
 ![progress-bar](src/assets//readme-images/footer-player.png)
 
 а также прогресса проигрывания семплов:
 ![progress-bar](src/assets//readme-images/progress-samples.png)
-  Cтояла задача во первых использовать время в миллисекундах, во вторых чтобы это время было максимально стабильно, а также анимация не выходила за пределы 60 кадров в секунду. Вместо setTimeout и setIntervel, испольпользуется requestAnimationFrame. Он работает максимально быстро и плавно в текущих условиях. Браузер также не тратит время на запуск, если по какой-то причине анимация выходит за пределы экрана и т.д.
+
+Так как Обьект Audio Api предоставляет current time аудио только в секундах,
+  стояла задача во первых использовать время в миллисекундах, чтобы обеспечить большее количество кадров в секунду, а во вторых чтобы анимация не выходила за пределы 60 кадров в секунду. Вместо setTimeout и setIntervel, испольпользуется requestAnimationFrame. Он работает максимально быстро и плавно в текущих условиях. Браузер также не тратит время на запуск, если по какой-то причине анимация выходит за пределы экрана и т.д.
   При нажатии на play плеера или семпла запускается данный механизм. Далее из контекста получаем данные для отрисовки.
 
   ```javascript
@@ -310,7 +273,7 @@ export const PlayerContextProvider: React.FC<PropsType> = ({ children }) => {
 		}));
 	};
 
-	const onTimeUpdate = () => {
+	const onTimeUpdate = (): PlayerStateType => {
 		setPlayerState((state: PlayerStateType) => {
 			const { audioPlayer } = state;
 			return {
@@ -357,17 +320,17 @@ initialPattern: [
 
 window.setTimeout() или window.setInterval) может легко искажаться на десятки миллисекунд и более из-за компоновки, рендеринга, сборки мусора, XMLHTTPRequest и других обратных вызовов — короче говоря, из-за любого количества вещей, происходящих в основном потоке выполнения. 
 
-Я решил использовать requestAnimationFrame как функционал, запускающий мой движок. В него поместил функцию scheduleNote, которая является планировщиком аудио событий. 
+Было решено использовать requestAnimationFrame как функционал, запускающий движок. В него поместил функцию scheduleNote, которая является планировщиком аудио событий. 
 ```javascript
 const _scheduleNote = () => {
-	let ct: number = AUDIO.currentTime;
+	let currentTime: number = AUDIO.currentTime;
 
-	ct -= startTime;
+	currentTime -= startTime;
 
 	while (noteTime < ct + 0.2) {
-		let pt: number = noteTime + startTime;
+		let pattern: number = noteTime + startTime;
 
-		playPatternStepAtTime(pt);
+		playPatternStepAtTime(pattern);
 		nextNote();
 	}
 
@@ -385,14 +348,14 @@ const _scheduleNote = () => {
 Скорость секвенсора измеряется в BPM (количество ударов в минуту). Отметка темпа в 60 BPM равна одному удару в секунду. В соответствии с формулой расчета bpm( 1 секунда / bpm / 4, определяется noteTime планировщика. Цикл while(тело планировщика) работает согласно этому расчету и создает скорость движения шагов секвенсора. 
 
 ```javascript
-	while (noteTime < ct + 0.2) {
-		let pt: number = noteTime + startTime;
+	while (noteTime < currentTime + 0.2) {
+		let pattern: number = noteTime + startTime;
 	
 		playPatternStepAtTime(pt);
 		nextNote();
 	}
 ```
-Таким образом получилось воспроизвести равномерную работу секвенсора согласно bpm. Во всяком случает насколько это возможно с requestAnimationFrame и java script.
+Таким образом получилось воспроизвести равномерную работу секвенсора согласно bpm. Во всяком случает насколько это возможно с requestAnimationFrame и javascript.
 
 #### Кроссбраузерность
 

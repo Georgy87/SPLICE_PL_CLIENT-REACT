@@ -7,11 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { AuthorizationLayout } from '../../layouts/AuthorizationLayout/AuthorizationLayout';
 import { fetchLogin } from '../../store/slices/user/userSlice';
-import { selectAuth } from '../../store/selectors/userSelectors';
+import { selectAuth, selectErrorMessage } from '../../store/selectors/userSelectors';
 import { LoginFormSchema } from '../../utils/useFormSchemas';
 
 import styles from './LoginPage.module.scss';
-
 
 export type FormProps = {
 	email: string;
@@ -19,10 +18,11 @@ export type FormProps = {
 };
 
 export const LoginPage: React.FC = () => {
+	const auth = useSelector(selectAuth);
+	const errorMessage = useSelector(selectErrorMessage);
+
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
-
-	const auth = useSelector(selectAuth);
 
 	const history = useHistory();
 
