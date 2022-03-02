@@ -17,6 +17,7 @@
 		flex-direction: row;
 		align-items: center;
 		width: 100%;
+		margin-top: 15px;
 		justify-content: space-between;
 		.play {
 			display: flex;
@@ -31,12 +32,21 @@
 			}
 			.trackInfo {
 				margin-left: 20px;
+				@media screen and (max-width: 414px) {
+					margin-left: 4px;
+				}
 			}
 		}
 		.volumeAndTimer {
 			display: flex;
+			justify-content: center;
 			width: 24%;
 			padding-right: 10px;
+			.timer {
+				span {
+					font-size: 16px;
+				}
+			}
 		}
 	}
 }
@@ -44,7 +54,7 @@
 @media screen and (max-width: 900px) {
 	.player {
 		.playerControls {
-			width: 70%;
+			justify-content: space-between;
 			.trackActive {
 				display: flex;
 				align-items: center;
@@ -55,13 +65,38 @@
 			}
 			.volumeAndTimer {
 				display: flex;
-				width: 15%;
-				padding-right: 40px;
 				.timer {
-					p {
-						span {
-							font-size: 13px;
-						}
+					display: flex;
+					span {
+						display: block;
+						font-size: 13px;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.player {
+		.playerControls {
+			justify-content: flex-start;
+			.trackActive {
+				display: flex;
+				align-items: center;
+				.trackInfo {
+					padding-left: 10px;
+					font-size: 14px;
+				}
+			}
+			.volumeAndTimer {
+				display: flex;
+				width: 240px;
+				.timer {
+					display: flex;
+					span {
+						display: block;
+						font-size: 13px;
 					}
 				}
 			}

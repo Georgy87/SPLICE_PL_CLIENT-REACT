@@ -46,12 +46,11 @@ export const Player: React.FC = () => {
 
 				<div className={styles.volumeAndTimer}>
 					<div className={styles.timer}>
-						<p>
-							<span>{formatTime(currentTime)}/</span>
-							<span>{formatTime(duration)}</span>
-						</p>
+						<span>{formatTime(currentTime)}</span>
+						<span> / </span>
+						<span>{formatTime(duration)}</span>
 					</div>
-					<SliderProgress width='10rem' sliderType='volume' />
+					<SliderProgress width='100px' sliderType='volume' />
 				</div>
 			</div>
 		</div>

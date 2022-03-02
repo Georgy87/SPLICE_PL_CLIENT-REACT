@@ -19,7 +19,7 @@ export const defaultState = {
 	duration: 0,
 	currentTime: 0,
 	packCurrentTime: 0,
-	volume: 2,
+	volume: 4,
 	percent: 0,
 	packPercent: 0,
 };

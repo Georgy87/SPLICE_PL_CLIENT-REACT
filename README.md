@@ -247,17 +247,17 @@ private normalizeData(filteredData: number[]) {
 
 #### Audio player
 
-1. Для проигрования библиотек и семплов было решено разработать универсальный кастомный hook [useSound](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT/blob/main/src/hooks/useSound.ts). Эта функциональность воспроизводит аудио и предоставляет данные либо для плеера, проигрывающего библиотеки, либо для для проигрования семплов. Для этих целей оптимальнее было использовать Context Api. Так как обьект new Audio() не рекомендуется использовать в redux state. 
+1. Для проигрывания библиотек и семплов было решено разработать универсальный кастомный hook [useSound](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT/blob/main/src/hooks/useSound.ts). Эта функциональность воспроизводит аудио и предоставляет данные либо для плеера, проигрывающего библиотеки, либо для для проигрывания семплов. Для этих целей оптимальнее было использовать Context Api. Так как обьект new Audio() не рекомендуется использовать в redux state. 
 
 2. `Работа со временем и анимацией.`
-В процессе разработки функционала работы прогресс бара плеера
+В процессе разработки функционала работы прогресс бара плеера,
 ![progress-bar](src/assets//readme-images/footer-player.png)
 
 а также прогресса проигрывания семплов:
 ![progress-bar](src/assets//readme-images/progress-samples.png)
 
 Так как Обьект Audio Api предоставляет current time аудио только в секундах,
-  стояла задача во первых использовать время в миллисекундах, чтобы обеспечить большее количество кадров в секунду, а во вторых чтобы анимация не выходила за пределы 60 кадров в секунду. Вместо setTimeout и setIntervel, испольпользуется requestAnimationFrame. Он работает максимально быстро и плавно в текущих условиях. Браузер также не тратит время на запуск, если по какой-то причине анимация выходит за пределы экрана и т.д.
+  стояла задача , во-первых использовать время в миллисекундах, чтобы обеспечить большее количество кадров в секунду, а во-вторых, чтобы анимация не выходила за пределы 60 кадров в секунду. Вместо setTimeout и setIntervel используется requestAnimationFrame. Он работает максимально быстро и плавно в текущих условиях. Браузер также не тратит время на запуск, если по какой-то причине анимация выходит за пределы экрана и т.д.
   При нажатии на play плеера или семпла запускается данный механизм. Далее из контекста получаем данные для отрисовки.
 
   ```javascript
@@ -294,7 +294,7 @@ private normalizeData(filteredData: number[]) {
 
 Статическая визуализация семпла приходит из сервера в виде png изображения, отрисованного при загрузке семпла на платформу. Это сильно ускоряет процесс загрузки страницы библиотеки, так как таких семплов может быть большое количество. 
 
-Когда начинается проигрование семпла, [сервис](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT/blob/main/src/services/canvasService.ts) отрисовывающий canvas, работает с хуком [useSound](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT/blob/main/src/hooks/useSound.ts). Мы получаем процент прогресса проигрования аудио, а также готовые координаты для отрисовки. Холст отрисовывет прогресс по тем же координатам, которые использовались при загрузки семпла. 
+Когда начинается проигрывание семпла, [сервис](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT/blob/main/src/services/canvasService.ts) отрисовывающий canvas, работает с хуком [useSound](https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT/blob/main/src/hooks/useSound.ts). Мы получаем процент прогресса проигрывания аудио, а также готовые координаты для отрисовки. Холст отрисовывет прогресс по тем же координатам, которые использовались при загрузки семпла. 
 
 Оптимизации, по работе со временем, работающие в хуке useSound помогают более оптимально и производительно рисовать холст по также нормализованным заранее координатам.
 
@@ -355,7 +355,7 @@ const _scheduleNote = () => {
 		nextNote();
 	}
 ```
-Таким образом получилось воспроизвести равномерную работу секвенсора согласно bpm. Во всяком случает насколько это возможно с requestAnimationFrame и javascript.
+Таким образом, получилось воспроизвести равномерную работу секвенсора согласно bpm. Во всяком случае, насколько это возможно с requestAnimationFrame и javascript.
 
 #### Кроссбраузерность
 
@@ -400,7 +400,7 @@ const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
   }
 ```
 
-Также при получении изображения, содержащегося не холсте canvas вместо технологии [OffscreenCanvas.convertToBlob()](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/convertToBlob) применяется [HTMLCanvasElement.toDataURL()](https://developer.mozilla.org/ru/docs/Web/API/HTMLCanvasElement/toDataURL) и затем уже утилитой:
+Также при получении изображения, содержащегося на холсте canvas вместо технологии [OffscreenCanvas.convertToBlob()](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas/convertToBlob) применяется [HTMLCanvasElement.toDataURL()](https://developer.mozilla.org/ru/docs/Web/API/HTMLCanvasElement/toDataURL) и затем уже утилитой:
 ```javascript
 export const base64StringtoFile = (base64String: string, filename: string) => {
   let arr = base64String.split(','),
