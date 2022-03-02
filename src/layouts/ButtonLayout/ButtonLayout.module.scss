@@ -5,6 +5,10 @@
 	border: none;
 	cursor: pointer;
 	border-radius: 4px;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
 }
 
 .platformBtn {
@@ -27,12 +31,18 @@
 		background-color: $black;
 		border: none;
 		@extend %buttons;
+		&:hover {
+			background-color: #38383d;
+		}
 	}
 	.blue {
 		width: 80px;
 		color: $white;
 		background-color: $blue;
 		@extend %buttons;
+		&:hover {
+			background-color: rgb(0, 41, 204);
+		}
 	}
 	.blueDisabled {
 		width: 80px;
@@ -73,6 +83,9 @@
 		background-color: transparent;
 		border: 2px solid rgb(61, 181, 228);
 		@extend %buttons;
+		&:hover {
+			background-color: rgb(61, 181, 228);
+		}
 	}
 	.signInOut {
 		display: flex;
@@ -116,6 +129,9 @@
 		font-size: 1rem;
 		background-color: $blue;
 		@extend %buttons;
+		&:hover {
+			background-color: $hover-btns;
+		}
 	}
 	.packProfile {
 		display: inline-flex;
@@ -143,6 +159,10 @@
 		width: 55px;
 		padding: 2px;
 		@extend %buttons;
+		&:hover {
+			background-color: rgb(0, 41, 204);
+			color: $white;
+		}
 		@media screen and (max-width: 900px) {
 			margin: 1px;
 			height: 15px;
@@ -200,5 +220,9 @@
 		height: 32px;
 		background-color: rgb(227, 230, 221);
 		@extend %buttons;
+		&:hover {
+			background-color: rgb(0, 41, 204);
+			color: $white;
+		}
 	}
 }

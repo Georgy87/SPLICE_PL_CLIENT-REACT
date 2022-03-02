@@ -3,24 +3,25 @@
 .profilePackContainer {
 	width: 90vw;
 	position: relative;
+	margin-top: 55px;
 	.infoBackground {
 		position: fixed;
 		left: 0;
 		right: 0;
-		height: 270px;
-		top: 30;
+		height: 370px;
+		top: -55px;
 		width: 100%;
 		overflow: hidden;
 		border-radius: 0px 0px 10px 10px;
 		z-index: 1;
 		@media screen and (max-width: 900px) {
-			height: 200px;
+			height: 370px;
 		}
 		img {
+			top: -55px;
 			z-index: 100;
-			filter: blur(50px);
-			-webkit-filter: blur(80px);
-			transform: scale(1.1);
+			filter: blur(60px);
+			transform: scale(3.1);
 			border-radius: 5px;
 			width: 100%;
 		}
@@ -35,7 +36,6 @@
 	align-items: center;
 	border-radius: 6px;
 	background-position: center;
-	// background-color: $background;
 	z-index: 2000;
 	img {
 		display: flex;

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchGetPacks, fetchSearchPacks } from '../../store/slices/pack/packSlice';
@@ -7,6 +7,7 @@ import SearchInput from '../../components/SearchInput/SearchInput';
 import { PackItem } from '../../components/PackItem/PackItem';
 import { Pack } from '../../store/slices/pack/types';
 import { selectPacks } from '../../store/selectors/packsSelectors';
+import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 
 import { Loader } from '../../components/Loader/Loader';
 
@@ -19,6 +20,8 @@ type PropsType = {
 export const PacksPage: React.FC<PropsType> = () => {
 	const packs = useSelector(selectPacks);
 
+	const videoRef = useRef();
+
 	const [value, setValue] = useState<string>('');
 
 	const dispatch = useDispatch();
@@ -29,13 +32,13 @@ export const PacksPage: React.FC<PropsType> = () => {
 
 	const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
 		e.stopPropagation();
-		console.log(e.target.value);
 		setValue(e.target.value);
 		dispatch(fetchSearchPacks(e.target.value));
 	};
 
 	return (
-		<>
+		<div className={styles.root}>
+			<VideoPlayer />
 			<SearchInput onChangeValue={onChangeValue} setValue={setValue} value={value} />
 			<div className={styles.root}>
 				{packs.length ? packs.map((pack: Pack, index: number) => (
@@ -45,6 +48,6 @@ export const PacksPage: React.FC<PropsType> = () => {
 				)) : <Loader />}
 				<Player />
 			</div>
-		</>
+		</div>
 	);
 };

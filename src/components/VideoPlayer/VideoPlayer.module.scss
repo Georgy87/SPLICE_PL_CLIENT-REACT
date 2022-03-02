@@ -1,0 +1,37 @@
+@import '../../styles/variables.scss';
+
+.player {
+	position: relative;
+	width: 100vw;
+	margin: 0;
+	padding: 0;
+	top: 0;
+	&:fullscreen {
+		max-width: none;
+		width: 100%;
+	}
+	&:-webkit-full-screen {
+		max-width: none;
+		width: 100%;
+	}
+}
+
+.initialInformation {
+	position: absolute;
+	top: 160px;
+	left: 120px;
+	width: 400px;
+	height: 300px;
+	h1 {
+		color: $white;
+		font-size: 2vw;
+	}
+	p {
+		color: $white;
+		font-size: 1.5vw;
+	}
+}
+
+.playerVideo {
+	width: 100%;
+}
