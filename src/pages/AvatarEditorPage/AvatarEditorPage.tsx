@@ -3,11 +3,11 @@ import ReactCrop, { Crop } from 'react-image-crop';
 import { useDispatch } from 'react-redux';
 
 import { useDropzone } from '../../hooks/useDropzone';
-import { avatarService } from '../../services/avatarService';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { fetchUpdateAvatar } from '../../store/slices/user/userSlice';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { canvasService } from '../../services/canvasService';
+import { fileService } from '../../services/fileService';
 
 import './UserProfilePhoto.css';
 
@@ -38,7 +38,8 @@ export const AvatarEditorPage = () => {
 
 		const eventData = (e as React.DragEvent).dataTransfer;
 		const files = [eventData.files];
-		avatarService.fileUpload({ files, setAvatarState, onDrop: true });
+		
+		fileService.fileUpload({ files, setAvatarState, onDrop: true });
 	};
 
 	const onLoad = useCallback((img: HTMLImageElement) => {
@@ -70,7 +71,7 @@ export const AvatarEditorPage = () => {
 		e.preventDefault();
 		e.stopPropagation();
 
-		avatarService.fileUpload({ files: e.target.files, setAvatarState, onDrop: false });
+		fileService.fileUpload({ files: e.target.files, setAvatarState, onDrop: false });
 	};
 
 	return (

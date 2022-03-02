@@ -10,3 +10,4 @@ export const base64StringtoFile = (base64String: string, filename: string) => {
 	}
 	return new File([u8arr], mime, { type: 'png' });
 };
+

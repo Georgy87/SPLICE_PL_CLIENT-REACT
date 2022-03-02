@@ -29,7 +29,8 @@ export const fetchLogin = createAsyncThunk('user/loginStatus', async (payload: {
 		return data;
 	} catch (error: any) {
 		const { data } = error.response;
-		return rejectWithValue(data.error);
+		console.log(data);
+		return rejectWithValue(data.message);
 	}
 });
 
@@ -105,6 +106,7 @@ export const userSlice = createSlice({
 				state.isAuth = true;
 			})
 			.addCase(fetchLogin.rejected.type, (state, action: PayloadAction<string>) => {
+			
 				state.errorMessage = action.payload;
 			})
 			.addCase(fetchAuth.fulfilled.type, (state, action: PayloadAction<{ user: User; token: string }>) => {

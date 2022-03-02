@@ -1,4 +1,4 @@
-class AvatarService {
+class FileService {
 	extractImageFileExtensionFromBase64(base64Data: string | ArrayBuffer | null) {
 		if (base64Data && typeof base64Data === 'string' && base64Data) {
 			return base64Data.substring('data:image/'.length, base64Data.indexOf(';base64'));
@@ -37,4 +37,4 @@ class AvatarService {
 	}
 }
 
-export const avatarService = new AvatarService();
+export const fileService = new FileService();

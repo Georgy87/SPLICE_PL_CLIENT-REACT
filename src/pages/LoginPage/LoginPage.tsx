@@ -54,15 +54,12 @@ export const LoginPage: React.FC = () => {
 		if (auth) {
 			history.push('/');
 		}
-	}, [auth])
+	}, [auth]);
 
 	return (
 		<>
 			<AuthorizationLayout>
-				<form
-					className={styles.authBox}
-					onSubmit={handleSubmit(onSubmit)}
-				>
+				<form className={styles.authBox} onSubmit={handleSubmit(onSubmit)}>
 					<div className={styles.authLabel}>
 						<h1>Log In to Your Splice Account!</h1>
 					</div>
@@ -72,9 +69,7 @@ export const LoginPage: React.FC = () => {
 							placeholder='Email'
 							{...register('email')}
 							value={email}
-							onChange={(
-								e: React.ChangeEvent<HTMLInputElement>,
-							) => onChangeEmail(e)}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeEmail(e)}
 						/>
 						<p>{errors.email?.message}</p>
 					</div>
@@ -84,11 +79,9 @@ export const LoginPage: React.FC = () => {
 							placeholder='Password'
 							{...register('password')}
 							value={password}
-							onChange={(
-								e: React.ChangeEvent<HTMLInputElement>,
-							) => onChangePassword(e)}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangePassword(e)}
 						/>
-						<p>{errors.password?.message}</p>
+						<p>{errorMessage ? errorMessage : errors.password?.message}</p>
 					</div>
 					<ButtonLayout typeStyle='auth'>Log In</ButtonLayout>
 					<div className={styles.formFooter}>
