@@ -16,6 +16,7 @@ export const fetchCreatePack = createAsyncThunk(
 	async (payload: createPackType) => {
 		try {
 			const { picture, audio } = payload;
+			
 			const { genre, authorName, packInfo } = payload.info;
 
 			const formData = new FormData();

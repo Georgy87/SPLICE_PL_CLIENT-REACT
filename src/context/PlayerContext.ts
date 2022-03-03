@@ -15,7 +15,7 @@ export const defaultPlayerStateType = {
 	duration: 0,
 	currentTime: 0,
 	packCurrentTime: 0,
-	volume: 70,
+	volume: 2,
 	percent: 0,
 	packPercent: 0,
 };

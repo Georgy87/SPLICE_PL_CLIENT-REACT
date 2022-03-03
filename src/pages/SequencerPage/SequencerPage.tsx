@@ -44,17 +44,21 @@ export const SequencerPage = () => {
 	function updatePattern({ x, y, value }: { x: number; y: number; value: number }) {
 		const patternCopy: number[][] = [...pattern];
 		patternCopy[y][x] = +!value;
-
 		setPattern(patternCopy);
 	}
 
 	useEffect(() => {
 		dispatch(fetchGetLikedSamples());
+		window.cancelAnimationFrame(requestId);
 	}, []);
 
 	useEffect(() => {
 		loadSamples(sampleList);
-	}, [sampleList, valueBpm]);
+	}, [sampleList]);
+
+	useEffect(() => {
+		loadSamples(sampleList);
+	}, [valueBpm]);
 
 	const onDropHandler = (e: React.DragEvent<HTMLDivElement>, index: number) => {
 		e.preventDefault();

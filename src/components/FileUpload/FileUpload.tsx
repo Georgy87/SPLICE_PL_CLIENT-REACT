@@ -13,6 +13,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
 	const ref = useRef<HTMLInputElement>(null);
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		
 		setFile(e.target.files?.[0]);
 	};
 

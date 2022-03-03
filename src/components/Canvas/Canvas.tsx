@@ -47,6 +47,7 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 				if (!dataToSampleCreate) return;
 
 				const id = await createSamples(dataToSampleCreate);
+	
 				dispatch(deleteSampleFiles(id));
 			} else {
 				if (!canvasRef?.current) return;
