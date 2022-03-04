@@ -1,0 +1,46 @@
+.sequencerContainer {
+	display: flex;
+	justify-content: center;
+}
+
+.sampleBox {
+	align-items: center;
+	width: 30px;
+	height: 45px;
+	margin: 3px;
+	background-color: white;
+	border: 2px solid black;
+	border-radius: 5px;
+}
+
+.sampleBox.active {
+	background-color: red;
+}
+
+@media screen and (max-width: 1300px) {
+	.sampleBox {
+		align-items: center;
+		width: 20px;
+		height: 35px;
+		margin: 3px;
+		background-color: white;
+		border: 2px solid black;
+		border-radius: 5px;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.desktopModalWrapper {
+		display: none;
+	}
+	.sampleBox {
+		align-items: center;
+		padding: 2px;
+		width: 1px;
+		height: 25px;
+		margin: 1px;
+		background-color: white;
+		border: 2px solid black;
+		border-radius: 5px;
+	}
+}

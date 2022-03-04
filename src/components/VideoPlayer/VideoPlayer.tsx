@@ -4,7 +4,7 @@ import styles from './VideoPlayer.module.scss';
 
 import './VideoPlayer.module.scss';
 
-export const VideoPlayer = () => {
+export const VideoPlayer: React.FC = () => {
 	return (
 		<div className={styles.player}>
 			<video

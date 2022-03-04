@@ -12,18 +12,18 @@ import { Loader } from '../../components/Loader/Loader';
 import { useDropzone } from '../../hooks/useDropzone';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 import Modal from '../../layouts/ModalLayout/ModalLayout';
+import { Sequencer } from '../../components/Sequencer/Sequencer';
 
 import styles from './SequencerPage.module.scss';
 
 export const SequencerPage = () => {
 	const likedSamples = useSelector(selectLikedSamples);
-	const samplesBoxs: string[] = ['kick', 'snare', 'hihat', 'bass', 'smpl'];
 
 	const dispatch = useDispatch();
 
 	const { initialPattern, step, requestId, loadSamples, setTempo, onPlay, onStop } = useSequencer();
 
-	const { dragEnter, dragStart } = useDropzone();
+	const { dragStart } = useDropzone();
 
 	const [pattern, setPattern] = useState<number[][]>(initialPattern);
 
@@ -123,41 +123,15 @@ export const SequencerPage = () => {
 				</div>
 			</div>
 
-			<div className={styles.sequencerContainer}>
-				<div className={styles.dropBoxes}>
-					{samplesBoxs.map((src: string, index: number) => {
-						return (
-							<div
-								key={index}
-								onDragOver={dragEnter}
-								onDrop={(e: React.DragEvent<HTMLDivElement>) => onDropHandler(e, index)}
-								onClick={() => {
-									setIndexBox(index);
-									setActiveModal(true);
-								}}
-							>
-								<ButtonLayout typeStyle='sequencer'>
-									<IconLayout iconName='drop'></IconLayout>
-								</ButtonLayout>
-							</div>
-						);
-					})}
-				</div>
-				<div className={styles.sequencerSteps}>
-					{pattern.map((row: number[], y: number) => (
-						<div key={y}>
-							{row.map((value: number, x: number) => (
-								<button
-									key={x}
-									className={x === step - 1 ? `${styles.sampleBox} ${styles.active}` : `${styles.sampleBox}`}
-									style={{ backgroundColor: getColumnColor(x), background: value === 1 ? 'blue' : getColumnColor(x) }}
-									onClick={() => updatePattern({ x, y, value })}
-								></button>
-							))}
-						</div>
-					))}
-				</div>
-			</div>
+			<Sequencer
+				setIndexBox={setIndexBox}
+				setActiveModal={setActiveModal}
+				step={step}
+				pattern={pattern}
+				updatePattern={updatePattern}
+				onDropHandler={onDropHandler}
+			/>
+
 			<div className={styles.desktopModalWrapper}>
 				<div className={styles.samplesContainer}>
 					{!likedSamples ? (
