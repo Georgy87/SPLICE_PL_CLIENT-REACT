@@ -6,12 +6,7 @@ import { Loader } from '../../components/Loader/Loader';
 import { SampleList } from '../../components/SampleList/SampleList';
 import { defaultState } from '../../context/PlayerContextProvider/PlayerContextProvider';
 import { useSound } from '../../hooks/useSound';
-import {
-	selectLoading,
-	selectPackProfile,
-	selectSamples,
-	selectTag,
-} from '../../store/selectors/packsSelectors';
+import { selectLoading, selectPackProfile, selectSamples, selectTag } from '../../store/selectors/packsSelectors';
 import { fetchGetPack } from '../../store/slices/pack/packSlice';
 
 import styles from './ProfilePackPage.module.scss';
@@ -58,7 +53,9 @@ export const ProfilePackPage = () => {
 							<p>{packProfile?.packInfo}</p>
 						</div>
 					</div>
-					<SampleList samples={samples} />
+					<div className={styles.sampleList}>
+						<SampleList samples={samples} />
+					</div>
 				</div>
 			) : (
 				<Loader />

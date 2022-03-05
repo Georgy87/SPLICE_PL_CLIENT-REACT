@@ -22,8 +22,6 @@ type PropsType = {
 export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	const { _id, audioCoordinates, duration, likes, canvasImage, bpm, sampleName } = sample;
 
-	const packProfile = useSelector(selectPackProfile);
-
 	const [like, setLike] = useState<boolean>(false);
 	const [activeModal, setActiveModal] = useState<boolean>(false);
 	const [canvasOffsetLeft, setCanvasOffsetLeft] = useState<number>(0);
@@ -57,7 +55,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 		<>
 			<ul className={styles.listItem}>
 				<li>
-					<img src={`${packProfile?.picture}`} alt='pack-cover' />
+					<img src={`${sample.packPicture}`} alt='pack-cover' />
 					<div className={styles.iconChangeWrap}>
 						<p className={styles.sampleTime}>{formatTime(duration)}</p>
 						<IconChangeLayout

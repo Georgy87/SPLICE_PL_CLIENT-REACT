@@ -29,7 +29,6 @@ export type Samples = {
 	packId: string;
 	sampleName: string;
 	audioCoordinates: string;
-	// audioCoordinatesParse: number[];
 	duration: number;
 	likes: User[];
 	canvasImage: string;

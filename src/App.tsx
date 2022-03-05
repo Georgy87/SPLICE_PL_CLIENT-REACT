@@ -16,6 +16,7 @@ import { AvatarEditorPage } from './pages/AvatarEditorPage/AvatarEditorPage';
 import { SequencerPage } from './pages/SequencerPage/SequencerPage';
 
 import styles from './App.module.scss';
+import { LikedSamplesPage } from './pages/LikedSamplesPage/LikedSamplesPage';
 
 export const App: React.FC = () => {
 	const dispatch = useDispatch();
@@ -45,6 +46,7 @@ export const App: React.FC = () => {
 						<Route path='/profile/packs' component={UserPacksPage} exact />
 						<Route path='/profile/avatar' component={AvatarEditorPage} exact />
 						<Route path='/sequencer' component={SequencerPage} exact />
+						<Route path='/likes' component={LikedSamplesPage} exact />
 					</Switch>
 				</div>
 			</div>

@@ -12,9 +12,10 @@ import styles from './SampleList.module.scss';
 
 type PropsType = {
 	samples?: Samples[];
+	pageName?: string;
 };
 
-export const SampleList: React.FC<PropsType> = ({ samples }) => {
+export const SampleList: React.FC<PropsType> = ({ samples, pageName }) => {
 	const packTag = useSelector(selectTag);
 
 	const dispatch = useDispatch();
@@ -29,28 +30,22 @@ export const SampleList: React.FC<PropsType> = ({ samples }) => {
 
 	return (
 		<>
-			<div className={styles.sampleList}>
-				<div className={styles.samplesLabel}>
-					<div className={styles.sample}>Sample</div>
-					<div className={styles.tags}>
-						{sampleCategories.map((tag: string, index: number) => {
-							return (
-								<ButtonLayout
-									key={index}
-									typeStyle='tags'
-									onClicked={() => onSetTag(tag)}
-								>
-									{tag}
-								</ButtonLayout>
-							);
-						})}
-					</div>
-					<div className={styles.bpm}>Bpm</div>
-				</div>
-				{samples?.map((sample: Samples, index: number) => {
-					return <SampleItem key={sample._id} sample={sample} idx={index} />;
-				})}
+			<div className={styles.samplesLabel}>
+				<div className={styles.sample}>Sample</div>
+				{pageName != 'liked-samples-page' && <div className={styles.tags}>
+					{sampleCategories.map((tag: string, index: number) => {
+						return (
+							<ButtonLayout key={index} typeStyle='tags' onClicked={() => onSetTag(tag)}>
+								{tag}
+							</ButtonLayout>
+						);
+					})}
+				</div>}
+				<div className={styles.bpm}>Bpm</div>
 			</div>
+			{samples?.map((sample: Samples, index: number) => {
+				return <SampleItem key={sample._id} sample={sample} idx={index} />;
+			})}
 		</>
 	);
 };
