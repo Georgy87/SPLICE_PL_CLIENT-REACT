@@ -24,10 +24,10 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
-		const canvas = canvasRef?.current;
+		// const canvas = canvasRef?.current;
 
-		window.AudioContext = window.AudioContext || new window.webkitAudioContext();
-		const audioContext: AudioContext = new AudioContext();
+		// window.AudioContext = window.AudioContext || new window.webkitAudioContext();
+		// const audioContext: AudioContext = new AudioContext();
 
 		const reader: FileReader = new FileReader();
 
@@ -37,36 +37,69 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 			const arrayBuffer: any = reader.result;
 			if (!arrayBuffer) return;
 
-			const buffer: AudioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+			// const buffer: AudioBuffer = await audioContext.decodeAudioData(arrayBuffer);
 
-			const audioCoordinates: number[] = audioService.sampleAudioData(buffer);
+			// const audioCoordinates: number[] = audioService.sampleAudioData(buffer);
 
-			if (browser === 'Safari') {
-				const dataToSampleCreate = canvasService.drawingCanvasToImage(file, audioCoordinates, packId, canvas, fileId, buffer.duration);
+			// if (browser === 'Safari') {
+			// 	const dataToSampleCreate = canvasService.drawingCanvasToImage(file, audioCoordinates, packId, canvas, fileId, buffer.duration);
 
-				if (!dataToSampleCreate) return;
+			// 	if (!dataToSampleCreate) return;
 
-				const id = await createSamples(dataToSampleCreate);
+			// 	const id = await createSamples(dataToSampleCreate);
 	
-				dispatch(deleteSampleFiles(id));
-			} else {
-				if (!canvasRef?.current) return;
+			// 	dispatch(deleteSampleFiles(id));
+			// } else {
+			// 	if (!canvasRef?.current) return;
 
-				const canvasToWorker = canvasRef?.current.transferControlToOffscreen();
-				workerInstanceCreateSample.postMessage(
-					{
-						audioCoordinates,
-						audioFile: file,
-						canvas: canvasToWorker,
-						packId,
-						cssCanvasWidth: 550,
-						cssCanvasHeight: 50,
-						dpr: 2,
-						fileId,
-						duration: buffer.duration,
-					},
-					[canvasToWorker],
-				);
+			// 	const canvasToWorker = canvasRef?.current.transferControlToOffscreen();
+				
+			// 	workerInstanceCreateSample.postMessage(
+			// 		{
+			// 			audioCoordinates,
+			// 			audioFile: file,
+			// 			canvas: canvasToWorker,
+			// 			packId,
+			// 			cssCanvasWidth: 550,
+			// 			cssCanvasHeight: 50,
+			// 			dpr: 2,
+			// 			fileId,
+			// 			duration: buffer.duration,
+			// 		},
+			// 		[canvasToWorker],
+			// 	);
+			// }
+			if (canvasRef?.current) {
+				const offscreen = canvasRef?.current.transferControlToOffscreen();
+				
+				window.AudioContext = window.AudioContext || new window.webkitAudioContext();
+				const audioContext = new AudioContext();
+				const reader = new FileReader();
+	
+				reader.readAsArrayBuffer(file);
+	
+				reader.onload = function() {
+					const arrayBuffer: any = reader.result;
+					if (!arrayBuffer) return;
+					audioContext.decodeAudioData(arrayBuffer).then((buffer: AudioBuffer) => {
+						const audioCoordinates: any = audioService.sampleAudioData(buffer);
+						console.log(buffer.duration);
+						workerInstanceCreateSample.postMessage(
+							{
+								audioFile: file,
+								audioCoordinates,
+								packId,
+								canvas: offscreen,
+								cssCanvasWidth: 550,
+								cssCanvasHeight: 50,
+								dpr: 2,
+								fileId,
+								duration: buffer.duration,
+							},
+							[offscreen],
+						);
+					});
+				};
 			}
 		};
 	}, []);

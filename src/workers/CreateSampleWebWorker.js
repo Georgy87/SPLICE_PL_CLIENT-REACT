@@ -1,21 +1,11 @@
 export default function CreateSampleWebWorker() {
-	onmessage = async (e) => {
-		const {
-			audioCoordinates,
-			audioFile,
-			canvas,
-			packId,
-			cssCanvasWidth,
-			cssCanvasHeight,
-			dpr,
-			fileId,
-			duration,
-		} = e.data;
-		
+	onmessage = (e) => {
+		const { audioCoordinates, audioFile, canvas, packId, cssCanvasWidth, cssCanvasHeight, dpr, fileId, duration } = e.data;
+
 		const ctx = e.data.canvas.getContext('2d');
 
 		if (e.data.canvas === null) return;
-
+		console.log(ctx, 'test');
 		canvas.width = cssCanvasWidth * dpr;
 		canvas.height = cssCanvasHeight * dpr;
 
@@ -35,12 +25,11 @@ export default function CreateSampleWebWorker() {
 
 		ctx.stroke();
 
-		const blob = await canvas.convertToBlob({ type: 'image/png' });
-
-		fileCreator(blob);
+		canvas.convertToBlob({ type: 'image/png' }).then((blob) => fileCreator(blob));
 
 		function fileCreator(blob) {
 			const imageFile = new File([blob], 'png', { type: 'png' });
+
 			postMessage({ imageFile, audioFile, audioCoordinates, packId, fileId, duration });
 		}
 	};
