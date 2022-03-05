@@ -61,7 +61,6 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 					} else {
 						if (!canvasRef?.current) return;
 						const offscreen = canvasRef?.current.transferControlToOffscreen();
-						console.log(offscreen);
 						workerInstanceCreateSample.postMessage(
 							{
 								audioFile: file,
