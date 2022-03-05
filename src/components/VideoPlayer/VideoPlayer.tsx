@@ -18,7 +18,7 @@ export const VideoPlayer: React.FC = () => {
 				<h1>
 					More than a sample library 
 				</h1>
-				<p>Samples are a source of inspiration. It’s what you do with them that matters. Loopcloud allows you to
+				<p>Samples are a source of inspiration. It’s what you do with them that matters. SampleCloud allows you to
 					shape millions of royalty-free samples to your sound.</p>
 			</div>
 		</div>

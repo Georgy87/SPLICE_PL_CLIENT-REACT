@@ -66,7 +66,7 @@ export const useSound = () => {
 				duration: 0,
 				currentTime: 0,
 				packCurrentTime: 0,
-				volume: 2,
+				volume: 90,
 				percent: 0,
 			}));
 			cancelAnimationFrame(requestID);

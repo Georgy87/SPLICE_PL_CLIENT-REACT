@@ -15,9 +15,10 @@ export const defaultPlayerStateType = {
 	duration: 0,
 	currentTime: 0,
 	packCurrentTime: 0,
-	volume: 40,
+	volume: 90,
 	percent: 0,
 	packPercent: 0,
+	onload: false,
 };
 
 export const PlayerContext = createContext<ContextProps>([

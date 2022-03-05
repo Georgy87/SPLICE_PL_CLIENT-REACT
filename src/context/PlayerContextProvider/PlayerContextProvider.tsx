@@ -19,9 +19,10 @@ export const defaultState = {
 	duration: 0,
 	currentTime: 0,
 	packCurrentTime: 0,
-	volume: 4,
+	volume: 80,
 	percent: 0,
 	packPercent: 0,
+	onload: false,
 };
 
 export const PlayerContextProvider: React.FC<PropsType> = ({ children }) => {

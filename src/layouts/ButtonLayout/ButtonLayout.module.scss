@@ -58,6 +58,9 @@
 			font-size: 20px;
 		}
 		@extend %buttons;
+		&:hover {
+			background-color: $hover-btns;
+		}
 	}
 	.samplePlayer {
 		justify-content: space-around;
@@ -156,7 +159,7 @@
 	.tags {
 		margin: 4px;
 		height: 20px;
-		width: 55px;
+		min-width: 55px;
 		padding: 2px;
 		@extend %buttons;
 		&:hover {

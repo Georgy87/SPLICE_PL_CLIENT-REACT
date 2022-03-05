@@ -15,4 +15,5 @@ export type PlayerStateType = {
     volume: number;
     percent: number;
     packPercent: number;
+    onload: boolean;
 }
