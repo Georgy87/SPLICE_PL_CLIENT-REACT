@@ -5,7 +5,7 @@ export default function CreateSampleWebWorker() {
 		const ctx = e.data.canvas.getContext('2d');
 
 		if (e.data.canvas === null) return;
-		console.log(ctx, 'test');
+	
 		canvas.width = cssCanvasWidth * dpr;
 		canvas.height = cssCanvasHeight * dpr;
 

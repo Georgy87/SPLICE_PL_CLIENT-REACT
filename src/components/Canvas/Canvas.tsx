@@ -24,10 +24,7 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
-		// const canvas = canvasRef?.current;
-
-		// window.AudioContext = window.AudioContext || new window.webkitAudioContext();
-		// const audioContext: AudioContext = new AudioContext();
+		const canvas = canvasRef?.current;
 
 		const reader: FileReader = new FileReader();
 
@@ -37,53 +34,38 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 			const arrayBuffer: any = reader.result;
 			if (!arrayBuffer) return;
 
-			// const buffer: AudioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-
-			// const audioCoordinates: number[] = audioService.sampleAudioData(buffer);
-
-			// if (browser === 'Safari') {
-			// 	const dataToSampleCreate = canvasService.drawingCanvasToImage(file, audioCoordinates, packId, canvas, fileId, buffer.duration);
-
-			// 	if (!dataToSampleCreate) return;
-
-			// 	const id = await createSamples(dataToSampleCreate);
-	
-			// 	dispatch(deleteSampleFiles(id));
-			// } else {
-			// 	if (!canvasRef?.current) return;
-
-			// 	const canvasToWorker = canvasRef?.current.transferControlToOffscreen();
-				
-			// 	workerInstanceCreateSample.postMessage(
-			// 		{
-			// 			audioCoordinates,
-			// 			audioFile: file,
-			// 			canvas: canvasToWorker,
-			// 			packId,
-			// 			cssCanvasWidth: 550,
-			// 			cssCanvasHeight: 50,
-			// 			dpr: 2,
-			// 			fileId,
-			// 			duration: buffer.duration,
-			// 		},
-			// 		[canvasToWorker],
-			// 	);
-			// }
 			if (canvasRef?.current) {
 				const offscreen = canvasRef?.current.transferControlToOffscreen();
-				
+
 				window.AudioContext = window.AudioContext || new window.webkitAudioContext();
 				const audioContext = new AudioContext();
 				const reader = new FileReader();
-	
+
 				reader.readAsArrayBuffer(file);
-	
+
 				reader.onload = function() {
 					const arrayBuffer: any = reader.result;
 					if (!arrayBuffer) return;
-					audioContext.decodeAudioData(arrayBuffer).then((buffer: AudioBuffer) => {
+					audioContext.decodeAudioData(arrayBuffer).then(async (buffer: AudioBuffer) => {
 						const audioCoordinates: any = audioService.sampleAudioData(buffer);
-						console.log(buffer.duration);
+
+						if (browser === 'Safari') {
+							const dataToSampleCreate = canvasService.drawingCanvasToImage(
+								file,
+								audioCoordinates,
+								packId,
+								canvas,
+								fileId,
+								buffer.duration,
+							);
+
+							if (!dataToSampleCreate) return;
+
+							const id = await createSamples(dataToSampleCreate);
+
+							dispatch(deleteSampleFiles(id));
+						}
+
 						workerInstanceCreateSample.postMessage(
 							{
 								audioFile: file,
