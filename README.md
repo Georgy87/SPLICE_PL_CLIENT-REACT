@@ -38,7 +38,7 @@ SAMPLE CLOUD - это платформа для использования и с
 
 Вход в приложение по email и паролю:
 email: test@gmail.com
-пароль: 1987toyuiui
+пароль: 12345678
 
 ![авторизация](src/assets//readme-images/login.png)
 
