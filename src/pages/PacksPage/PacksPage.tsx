@@ -1,15 +1,14 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchGetPacks, fetchSearchPacks } from '../../store/slices/pack/packSlice';
 import { Player } from '../../components/Player/Player';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import { PackItem } from '../../components/PackItem/PackItem';
 import { Pack } from '../../store/slices/pack/types';
 import { selectPacks } from '../../store/selectors/packsSelectors';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
-
 import { Loader } from '../../components/Loader/Loader';
+import { fetchGetPacks, fetchSearchPacks } from '../../store/slices/pack/actions';
 
 import styles from './PacksPage.module.scss';
 
@@ -19,8 +18,6 @@ type PropsType = {
 
 export const PacksPage: React.FC<PropsType> = () => {
 	const packs = useSelector(selectPacks);
-
-	const videoRef = useRef();
 
 	const [value, setValue] = useState<string>('');
 

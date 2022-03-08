@@ -10,13 +10,13 @@ import { ProfilePackPage } from './pages/ProfilePackPage/ProfilePackPage';
 import { LoginPage } from './pages/LoginPage/LoginPage';
 import { PlayerContextProvider } from './context/PlayerContextProvider/PlayerContextProvider';
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
-import { fetchAuth } from './store/slices/user/userSlice';
 import { UserPacksPage } from './pages/UserPacksPage/UserPacksPage';
 import { AvatarEditorPage } from './pages/AvatarEditorPage/AvatarEditorPage';
 import { SequencerPage } from './pages/SequencerPage/SequencerPage';
+import { LikedSamplesPage } from './pages/LikedSamplesPage/LikedSamplesPage';
+import { fetchAuth } from './store/slices/user/actions';
 
 import styles from './App.module.scss';
-import { LikedSamplesPage } from './pages/LikedSamplesPage/LikedSamplesPage';
 
 export const App: React.FC = () => {
 	const dispatch = useDispatch();

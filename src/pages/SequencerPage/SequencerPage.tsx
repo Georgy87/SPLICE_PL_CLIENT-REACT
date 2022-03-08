@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useSequencer } from '../../hooks/useSequencer';
-import { getColumnColor } from '../../utils/getColumnColor';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-import { fetchGetLikedSamples } from '../../store/slices/user/userSlice';
+
 import { selectLikedSamples } from '../../store/selectors/userSelectors';
 import { Samples } from '../../store/slices/samples/types';
 import { Loader } from '../../components/Loader/Loader';
@@ -13,6 +12,7 @@ import { useDropzone } from '../../hooks/useDropzone';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
 import Modal from '../../layouts/ModalLayout/ModalLayout';
 import { Sequencer } from '../../components/Sequencer/Sequencer';
+import { fetchGetLikedSamples } from '../../store/slices/user/actions';
 
 import styles from './SequencerPage.module.scss';
 

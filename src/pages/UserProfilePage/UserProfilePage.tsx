@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { UserProfileItem } from '../../components/UserProfileItem/UserProfileItem';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { selectUser } from '../../store/selectors/userSelectors';
-import { fetchUpdateEmail, fetchUpdateFullName } from '../../store/slices/user/userSlice';
+import { fetchUpdateEmail, fetchUpdateFullName } from '../../store/slices/user/actions';
 import { ProfileItems, ProfileTriggerItems, UserInfoItems, UserInfoTriggers } from './ProfileItems';
 
 import styles from './UserProfilePage.module.scss';

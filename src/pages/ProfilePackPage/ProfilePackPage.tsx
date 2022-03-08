@@ -7,7 +7,7 @@ import { SampleList } from '../../components/SampleList/SampleList';
 import { defaultState } from '../../context/PlayerContextProvider/PlayerContextProvider';
 import { useSound } from '../../hooks/useSound';
 import { selectLoading, selectPackProfile, selectSamples, selectTag } from '../../store/selectors/packsSelectors';
-import { fetchGetPack } from '../../store/slices/pack/packSlice';
+import { fetchGetPack } from '../../store/slices/pack/actions';
 
 import styles from './ProfilePackPage.module.scss';
 

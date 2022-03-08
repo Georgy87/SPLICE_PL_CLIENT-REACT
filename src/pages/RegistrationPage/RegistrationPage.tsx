@@ -6,10 +6,11 @@ import { useDispatch } from 'react-redux';
 
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { AuthorizationLayout } from '../../layouts/AuthorizationLayout/AuthorizationLayout';
-import { fetchRegistration } from '../../store/slices/user/userSlice';
+
 import { RegisterFormSchema } from '../../utils/useFormSchemas';
 
 import styles from './RegistrationPage.module.scss';
+import { fetchRegistration } from '../../store/slices/user/actions';
 
 export type FormProps = {
 	fullname: string;

@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { useSound } from '../../hooks/useSound';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
-import { selectPackProfile } from '../../store/selectors/packsSelectors';
 import { SampleSliderLayout } from '../../layouts/SampleSliderLayout/SampleSliderLayout';
 import { formatTime } from '../../utils/formatTime';
 import { Samples } from '../../store/slices/samples/types';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
-import { fetchSetLike, fetchDeleteLike } from '../../store/slices/samples/samplesSlice';
+
 import { canvasService } from '../../services/canvasService';
 import { AddSampleInfoModal } from '../AddSampleInfoModal/AddSampleInfoModal';
+import { fetchDeleteLike, fetchSetLike } from '../../store/slices/samples/actions';
 
 import styles from './SampleItem.module.scss';
 

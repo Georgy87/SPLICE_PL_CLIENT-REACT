@@ -2,13 +2,13 @@ import React, {  useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { fetchCreatePack } from '../../store/slices/pack/packSlice';
 import { StepLayout } from '../../layouts/StepLayout/StepLayout';
 import { PackInfoUpload } from '../../components/PackInfoUpload/PackInfoUpload';
 import { FileUpload } from '../../components/FileUpload/FileUpload';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { PacksPage } from '../PacksPage/PacksPage';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
+import { fetchCreatePack } from '../../store/slices/pack/actions';
 
 import styles from './CreatePackPage.module.scss';
 

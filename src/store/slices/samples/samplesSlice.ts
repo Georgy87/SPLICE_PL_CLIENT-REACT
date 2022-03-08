@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-import { samplesApi } from '../../../services/api/samplesApi';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { fetchCreateSamples } from './actions';
 import { SampleSliceState } from './types';
 
 const initialState: SampleSliceState = {
@@ -11,65 +10,6 @@ const initialState: SampleSliceState = {
 	currentStep: 0,
 	samplesToSend: null,
 };
-
-export const fetchCreateSamples = createAsyncThunk(
-	'sample/createSamplesStatus',
-	async (payload: { file: File; packId: string; audioCoordinates: number[] }) => {
-		try {
-			const { file } = payload;
-
-			const formData = new FormData();
-
-			formData.append('file', file);
-		} catch (error) {
-			console.log(error);
-		}
-	},
-);
-
-export const fetchSetLike = createAsyncThunk(
-	'sample/setLikeSampleStatus',
-	async (payload: { sampleId: string }) => {
-		try {
-			await samplesApi.setLike(payload.sampleId);
-		} catch (error) {
-			console.log(error);
-		}
-	},
-);
-
-export const fetchDeleteLike = createAsyncThunk(
-	'sample/deleteLikeSampleStatus',
-	async (payload: { sampleId: string }) => {
-		try {
-			await samplesApi.deleteLike(payload.sampleId);
-		} catch (error) {
-			console.log(error);
-		}
-	},
-);
-
-export const fetchSetSampleCategory = createAsyncThunk(
-	'sample/setSampleCategoryStatus',
-	async (payload: { sampleId: string; category: string }) => {
-		try {
-			await samplesApi.setSampleCategory(payload);
-		} catch (error) {
-			console.log(error);
-		}
-	},
-);
-
-export const fetchSetSampleBpm = createAsyncThunk(
-	'sample/setSampleBpmStatus',
-	async (payload: { sampleId: string; bpm: number }) => {
-		try {
-			await samplesApi.setSampleBpm(payload);
-		} catch (error) {
-			console.log(error);
-		}
-	},
-);
 
 export const samplesSlice = createSlice({
 	name: 'sample',

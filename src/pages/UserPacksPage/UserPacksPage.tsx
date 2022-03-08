@@ -5,16 +5,16 @@ import { CanvasList } from '../../components/CanvasList/CanvasList';
 import { UserPackItem } from '../../components/UserPackItem/UserPackItem';
 import { selectUserPacks } from '../../store/selectors/packsSelectors';
 import { selectFiles } from '../../store/selectors/samplesSelectors';
-import { fetchGetUserPacks } from '../../store/slices/pack/packSlice';
+
 import { Pack } from '../../store/slices/pack/types';
 import { deleteSampleFiles } from '../../store/slices/samples/samplesSlice';
 import { createSamples } from '../../utils/createSamples';
 import { workerInstanceCreateSample } from '../../workers/WebWorkerEnabler';
-
-import styles from './UserPacksPage.module.scss';
-
 import { Loader } from '../../components/Loader/Loader';
 import Modal from '../../layouts/ModalLayout/ModalLayout';
+import { fetchGetUserPacks } from '../../store/slices/pack/actions';
+
+import styles from './UserPacksPage.module.scss';
 
 export const UserPacksPage = () => {
 	const userPacks = useSelector(selectUserPacks);

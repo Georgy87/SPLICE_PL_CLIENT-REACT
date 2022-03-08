@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Modal } from '../../layouts/ModalLayout/ModalLayout';
 import { sampleCategories } from './sampleCategories';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-import { fetchSetSampleBpm, fetchSetSampleCategory } from '../../store/slices/samples/samplesSlice';
+import { fetchSetSampleBpm, fetchSetSampleCategory } from '../../store/slices/samples/actions';
 
 import styles from './AddSampleInfoModal.module.scss';
 

@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { AuthorizationLayout } from '../../layouts/AuthorizationLayout/AuthorizationLayout';
-import { fetchLogin } from '../../store/slices/user/userSlice';
 import { selectAuth, selectErrorMessage } from '../../store/selectors/userSelectors';
 import { LoginFormSchema } from '../../utils/useFormSchemas';
+import { fetchLogin } from '../../store/slices/user/actions';
 
 import styles from './LoginPage.module.scss';
 

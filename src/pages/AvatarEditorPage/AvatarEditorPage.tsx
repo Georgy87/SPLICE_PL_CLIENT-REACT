@@ -4,10 +4,11 @@ import { useDispatch } from 'react-redux';
 
 import { useDropzone } from '../../hooks/useDropzone';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-import { fetchUpdateAvatar } from '../../store/slices/user/userSlice';
+
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { canvasService } from '../../services/canvasService';
 import { fileService } from '../../services/fileService';
+import { fetchUpdateAvatar } from '../../store/slices/user/actions';
 
 import './UserProfilePhoto.css';
 
