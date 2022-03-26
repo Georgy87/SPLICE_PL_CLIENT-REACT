@@ -5,6 +5,7 @@ import { PlayArrow } from '@material-ui/icons';
 import { Pause } from '@material-ui/icons';
 import { PlayCircleOutline } from '@material-ui/icons';
 import { PauseCircleOutline } from '@material-ui/icons';
+
 import { ButtonLayout } from '../ButtonLayout/ButtonLayout';
 
 const iconsPlay = {

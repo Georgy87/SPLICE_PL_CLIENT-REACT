@@ -24,13 +24,13 @@ export const UserPacksPage = () => {
 
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		if (files?.length) {
-			setActiveModal(true);
-		} else {
-			setActiveModal(false);
-		}
-	}, [files]);
+	// useEffect(() => {
+	// 	if (files?.length) {
+	// 		setActiveModal(true);
+	// 	} else {
+	// 		setActiveModal(false);
+	// 	}
+	// }, [files]);
 
 	useEffect(() => {
 		async function create(e: any) {

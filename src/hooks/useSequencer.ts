@@ -66,7 +66,7 @@ export const useSequencer = () => {
 			}
 
 			requestId = window.requestAnimationFrame(_scheduleNote);
-
+			console.log(requestId);
 			setSequencerState((state: SequencerStateType) => ({
 				...state,
 				requestId,
