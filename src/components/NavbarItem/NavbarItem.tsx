@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { IconLayout, icons } from '../../layouts/IconLayout/IconLayout';
 
@@ -8,21 +8,22 @@ import styles from './NavbarItem.module.scss';
 type NavbarItemProps = {
 	pageName: string;
 	iconName: keyof typeof icons;
+	link: string;
 };
 
 export const NavbarItem: React.FC<NavbarItemProps> = ({
 	pageName,
 	iconName,
+	link,
 }) => {
-	const history = useHistory();
 
 	return (
 		<>
 			<li className={styles.navItem}>
-				<a onClick={() => history.push(`/${iconName}`)}>
+				<Link to={`/${iconName}`} data-testid={link}>
 					<IconLayout iconName={iconName} />
 					<span className={styles.linkName}>{pageName}</span>
-				</a>
+				</Link>
 			</li>
 		</>
 	);

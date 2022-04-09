@@ -79,7 +79,7 @@ export const SequencerPage = () => {
 	};
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.root} data-testid='sequencer-page'>
 			<div className={styles.sequencerControls}>
 				<IconChangeLayout
 					onClicked={(e: Event) => {

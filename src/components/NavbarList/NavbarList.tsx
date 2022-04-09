@@ -9,8 +9,8 @@ export const NavbarList: React.FC = () => {
 	return (
 		<>
 			<ul className={styles.navItems}>
-				{navbarListItems.map(({ pageName, iconName }, i: number) => (
-					<NavbarItem key={i} pageName={pageName} iconName={iconName} />
+				{navbarListItems.map(({ pageName, iconName, link }, i: number) => (
+					<NavbarItem key={i} pageName={pageName} iconName={iconName} link={link} />
 				))}
 			</ul>
 		</>

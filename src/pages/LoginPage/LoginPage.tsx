@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
@@ -24,7 +24,7 @@ export const LoginPage: React.FC = () => {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	const dispatch = useDispatch();
 
@@ -52,12 +52,12 @@ export const LoginPage: React.FC = () => {
 
 	useEffect(() => {
 		if (auth) {
-			history.push('/');
+			navigate('/');
 		}
 	}, [auth]);
 
 	return (
-		<>
+		<div data-testid='login-page'>
 			<AuthorizationLayout>
 				<form className={styles.authBox} onSubmit={handleSubmit(onSubmit)}>
 					<div className={styles.authLabel}>
@@ -86,10 +86,10 @@ export const LoginPage: React.FC = () => {
 					<ButtonLayout typeStyle='auth'>Log In</ButtonLayout>
 					<div className={styles.formFooter}>
 						<p>Don't have an account?</p>
-						<NavLink to='/registration'>Sign up?</NavLink>
+						<NavLink to='/registration' data-testid='registration-link'>Sign up?</NavLink>
 					</div>
 				</form>
 			</AuthorizationLayout>
-		</>
+		</div>
 	);
 };

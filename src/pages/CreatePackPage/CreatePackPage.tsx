@@ -1,6 +1,6 @@
 import React, {  useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useNavigate} from 'react-router';
 
 import { StepLayout } from '../../layouts/StepLayout/StepLayout';
 import { PackInfoUpload } from '../../components/PackInfoUpload/PackInfoUpload';
@@ -22,7 +22,7 @@ export const CreatePackPage = () => {
 	const [picture, setPicture] = useState<File | null>(null);
 	const [audio, setAudio] = useState<File | null>(null);
 
-	const history = useHistory();
+	const navigate = useNavigate();
 	
 	const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ export const CreatePackPage = () => {
 		}
 
 		if (activeStep === 2) {
-			history.push('/profile/packs');
+			navigate('/profile/packs');
 			if (info && picture && audio) {
 				dispatch(fetchCreatePack({ info, picture, audio }));
 			}
@@ -44,7 +44,7 @@ export const CreatePackPage = () => {
 	};
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.root} data-testid='create-pack-page'>
 			<StepLayout activeStep={activeStep}>
 				{activeStep === 0 && (
 					<div className={styles.stepOne}>

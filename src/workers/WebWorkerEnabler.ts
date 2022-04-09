@@ -1,3 +1,4 @@
+
 import CreateSampleWebWorker from "./CreateSampleWebWorker";
 import SampleViewWebWorker from "./SampleViewWebWorker";
 
@@ -7,6 +8,7 @@ export default class WebWorkerEnabler {
 		code = code.substring(code.indexOf('{') + 1, code.lastIndexOf('}'));
 
 		const blob = new Blob([code], { type: 'application/javascript' });
+	
 		return new Worker(URL.createObjectURL(blob));
 	}
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Navbar } from './components/Navbar/Navbar';
@@ -8,7 +8,7 @@ import { AppRouter } from './router/AppRouter';
 
 import styles from './App.module.scss';
 
-export const App: React.FC = () => {
+export const App = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {

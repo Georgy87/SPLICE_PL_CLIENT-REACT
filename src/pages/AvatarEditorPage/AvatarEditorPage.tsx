@@ -27,7 +27,14 @@ export const AvatarEditorPage = () => {
 		imgSrcExt: '',
 	});
 
-	const [crop, setCrop] = useState<Crop>({ unit: '%', width: 30, height: 0, aspect: 1 / 1, x: 0, y: 0 });
+	const [crop, setCrop] = useState<Crop>({
+		unit: '%',
+		width: 30,
+		height: 0,
+		aspect: 1 / 1,
+		x: 0,
+		y: 0,
+	});
 	const [completedCrop, setCompletedCrop] = useState<Crop | null>(null);
 	const [avatar, setAvatar] = useState<File | null>(null);
 
@@ -39,7 +46,7 @@ export const AvatarEditorPage = () => {
 
 		const eventData = (e as React.DragEvent).dataTransfer;
 		const files = [eventData.files];
-		
+
 		fileService.fileUpload({ files, setAvatarState, onDrop: true });
 	};
 
@@ -76,7 +83,7 @@ export const AvatarEditorPage = () => {
 	};
 
 	return (
-		<div className='root'>
+		<div className='root' data-testid='avatar-editor-page'>
 			{avatarState.imgSrc ? (
 				<>
 					<ReactCrop
@@ -99,18 +106,32 @@ export const AvatarEditorPage = () => {
 								marginBottom: '30px',
 							}}
 						></canvas>
-						<ButtonLayout onClicked={() => dispatch(fetchUpdateAvatar(avatar))} typeStyle='blue'>
+						<ButtonLayout
+							onClicked={() => dispatch(fetchUpdateAvatar(avatar))}
+							typeStyle='blue'
+						>
 							Download
 						</ButtonLayout>
 					</div>
 				</>
 			) : (
 				<>
-					<div className='download-image' onDragEnter={dragEnter} onDragLeave={dragLeave} onDragOver={dragEnter} onDrop={handleOnDrop}>
+					<div
+						className='download-image'
+						onDragEnter={dragEnter}
+						onDragLeave={dragLeave}
+						onDragOver={dragEnter}
+						onDrop={handleOnDrop}
+					>
 						<p>Download Image</p>
 					</div>
 					<div className='download-file-image' onClick={() => inputRef.current?.click()}>
-						<input type='file' ref={inputRef} onChange={onChange} style={{ display: 'none' }} />
+						<input
+							type='file'
+							ref={inputRef}
+							onChange={onChange}
+							style={{ display: 'none' }}
+						/>
 						<ButtonLayout typeStyle='download'>
 							<IconLayout iconName='upload' />
 							UPLOAD AVATAR

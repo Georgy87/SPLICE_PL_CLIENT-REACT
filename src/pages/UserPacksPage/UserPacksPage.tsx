@@ -24,13 +24,13 @@ export const UserPacksPage = () => {
 
 	const dispatch = useDispatch();
 
-	// useEffect(() => {
-	// 	if (files?.length) {
-	// 		setActiveModal(true);
-	// 	} else {
-	// 		setActiveModal(false);
-	// 	}
-	// }, [files]);
+	useEffect(() => {
+		if (files?.length) {
+			setActiveModal(true);
+		} else {
+			setActiveModal(false);
+		}
+	}, [files]);
 
 	useEffect(() => {
 		async function create(e: any) {
@@ -51,7 +51,7 @@ export const UserPacksPage = () => {
 	}, []);
 
 	return (
-		<>
+		<div data-testid='user-packs-page'>
 			<div className={styles.root}>
 				<Modal setActive={setActiveModal} active={activeModal}>
 					<Loader customColor='secondary' />
@@ -66,6 +66,6 @@ export const UserPacksPage = () => {
 				<div></div>
 				<CanvasList />
 			</div>
-		</>
+		</div>
 	);
 };

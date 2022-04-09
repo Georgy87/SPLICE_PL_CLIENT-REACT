@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router';
+import { Routes, Route } from 'react-router-dom';
 
 import { AvatarEditorPage } from '../pages/AvatarEditorPage/AvatarEditorPage';
 import { CreatePackPage } from '../pages/CreatePackPage/CreatePackPage';
@@ -14,18 +14,18 @@ import { UserProfilePage } from '../pages/UserProfilePage/UserProfilePage';
 export const AppRouter: React.FC = () => {
 	return (
 		<>
-			<Switch>
-				<Route path='/login' component={LoginPage} exact />
-				<Route path='/registration' component={RegistrationPage} exact />
-				<Route path={'/'} component={() => <PacksPage pageName={'main-packs'} />} exact />
-				<Route path='/profile-pack/:packId?' component={ProfilePackPage} exact />
-				<Route path='/profile' component={UserProfilePage} exact />
-				<Route path='/profile/create' component={CreatePackPage} exact />
-				<Route path='/profile/packs' component={UserPacksPage} exact />
-				<Route path='/profile/avatar' component={AvatarEditorPage} exact />
-				<Route path='/sequencer' component={SequencerPage} exact />
-				<Route path='/likes' component={LikedSamplesPage} exact />
-			</Switch>
+			<Routes>
+				<Route path='/login' element={<LoginPage />} />
+				<Route path='/registration' element={<RegistrationPage />} />
+				<Route path='/' element={<PacksPage />} />
+				<Route path='/profile-pack/:packId' element={<ProfilePackPage />} />
+				<Route path='/profile' element={<UserProfilePage />} />
+				<Route path='/profile/create' element={<CreatePackPage />} />
+				<Route path='/profile/packs' element={<UserPacksPage />} />
+				<Route path='/profile/avatar' element={<AvatarEditorPage />} />
+				<Route path='/sequencer' element={<SequencerPage />} />
+				<Route path='/likes' element={<LikedSamplesPage />} />
+			</Routes>
 		</>
 	);
 };

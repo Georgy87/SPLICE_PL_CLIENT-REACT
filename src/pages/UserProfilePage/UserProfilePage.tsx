@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { UserProfileItem } from '../../components/UserProfileItem/UserProfileItem';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { selectUser } from '../../store/selectors/userSelectors';
 import { fetchUpdateEmail, fetchUpdateFullName } from '../../store/slices/user/actions';
 import { ProfileItems, ProfileTriggerItems, UserInfoItems, UserInfoTriggers } from './ProfileItems';
+import avatar from '../../assets/avatar/unnamed.jpg';
 
 import styles from './UserProfilePage.module.scss';
 
 export const UserProfilePage: React.FC = () => {
-	const history = useHistory();
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const user = useSelector(selectUser);
@@ -38,10 +39,18 @@ export const UserProfilePage: React.FC = () => {
 	};
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.root} data-testid='user-profile-page'>
 			<ul className={styles.userInfoList}>
 				{ProfileItems.map((profileItems: UserInfoItems, idx: number) => {
-					return <UserProfileItem key={idx} profileItems={profileItems.itemName} setFullName={setFullName} setEmail={setEmail} />;
+					return (
+						<UserProfileItem
+							key={idx}
+							profileItems={profileItems.itemName}
+							setFullName={setFullName}
+							setEmail={setEmail}
+							avatar={avatar}
+						/>
+					);
 				})}
 
 				{ProfileTriggerItems.map((profileTriggers: UserInfoTriggers, idx: number) => {
@@ -54,14 +63,18 @@ export const UserProfilePage: React.FC = () => {
 								</ButtonLayout>
 							)}
 							{profileTriggers.itemName === 'DownLoad' && (
-								<ButtonLayout typeStyle='update' onClicked={() => history.push('/profile/create')}>
-									{profileTriggers.itemName}
-								</ButtonLayout>
+								<Link to={'/profile/create'} data-testid='create-pack-link'>
+									<ButtonLayout typeStyle='update'>
+										{profileTriggers.itemName}
+									</ButtonLayout>
+								</Link>
 							)}
 							{profileTriggers.itemName === 'Packs' && (
-								<ButtonLayout typeStyle='update' onClicked={() => history.push('/profile/packs')}>
-									{profileTriggers.itemName}
-								</ButtonLayout>
+								<Link to={'/profile/packs'} data-testid='user-packs-link'>
+									<ButtonLayout typeStyle='update'>
+										{profileTriggers.itemName}
+									</ButtonLayout>
+								</Link>
 							)}
 						</div>
 					);

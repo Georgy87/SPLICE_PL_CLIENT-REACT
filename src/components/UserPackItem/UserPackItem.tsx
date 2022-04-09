@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -23,7 +23,7 @@ export const UserPackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 
 	const ref = useRef<HTMLInputElement>(null);
 
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	const dispatch = useDispatch();
 
@@ -50,7 +50,7 @@ export const UserPackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 
 	return (
 		<div className={`${styles.packCardWrapper} ${styles.changePage}`}>
-			<div className={styles.packCard} onClick={() => history.push(`/profile-pack/${pack?._id}`)}>
+			<div className={styles.packCard} onClick={() => navigate(`/profile-pack/${pack?._id}`)}>
 				<img src={`${pack.picture}`} alt='pack-cover' />
 
 				<div>

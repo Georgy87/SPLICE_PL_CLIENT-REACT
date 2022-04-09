@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { IconLayout, icons } from '../../layouts/IconLayout/IconLayout';
 
@@ -16,14 +16,14 @@ export const SidebarItem: React.FC<SidebarItemProps> = ({
 	iconName,
 	setSideBar,
 }) => {
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	return (
 		<>
 			<li className={styles.sidebarItem}>
 				<a
 					onClick={() => {
-						history.push(`/${iconName}`);
+						navigate(`/${iconName}`);
 						setSideBar(false);
 					}}
 				>

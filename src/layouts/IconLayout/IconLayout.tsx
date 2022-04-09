@@ -1,33 +1,31 @@
-import React from 'react';
+import { BankOutlined, NotificationTwoTone, UploadOutlined, CustomerServiceOutlined, HeartOutlined } from '@ant-design/icons';
+import { FaHome, FaUserPlus, FaHeart } from 'react-icons/fa';
+import { BiLogOutCircle } from 'react-icons/bi';
+import { IoMdLogOut } from 'react-icons/io';
+import { BsUpload } from 'react-icons/bs';
+import { CgMusic } from 'react-icons/cg';
+import { GiMetronome } from 'react-icons/gi';
 
-import {
-	BankOutlined,
-	NotificationTwoTone,
-	UploadOutlined,
-	CustomerServiceOutlined,
-	HeartOutlined,
-} from '@ant-design/icons';
-import * as Icons from 'react-icons/all';
 import { AccountCircleOutlined } from '@material-ui/icons';
 
 import styles from './IconLayout.module.scss';
 
 export const icons = {
-	home: Icons.FaHome,
-	login: Icons.BiLogOutCircle,
-	logout: Icons.IoMdLogOut,
+	home: FaHome,
+	login: BiLogOutCircle,
+	logout: IoMdLogOut,
 	packs: NotificationTwoTone,
 	genres: BankOutlined,
 	profile: AccountCircleOutlined,
 	upload: UploadOutlined,
-	user: Icons.FaUserPlus,
+	user: FaUserPlus,
 	music: CustomerServiceOutlined,
-	likes: Icons.FaHeart,
-	like: Icons.FaHeart,
+	likes: FaHeart,
+	like: FaHeart,
 	dislike: HeartOutlined,
-	drop: Icons.BsUpload,
-	sequencer: Icons.CgMusic,
-	metronom: Icons.GiMetronome,
+	drop: BsUpload,
+	sequencer: CgMusic,
+	metronom: GiMetronome,
 };
 
 export type IconLayoutProps = {

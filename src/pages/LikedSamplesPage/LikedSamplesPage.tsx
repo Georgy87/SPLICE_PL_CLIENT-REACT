@@ -14,7 +14,7 @@ export const LikedSamplesPage: React.FC = () => {
 	const likedSamples = useSelector(selectLikedSamples);
 	const user = useSelector(selectUserMain);
 
-    const { setPlayerState } = useSound();
+	const { setPlayerState } = useSound();
 
 	const dispatch = useDispatch();
 
@@ -23,13 +23,16 @@ export const LikedSamplesPage: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
-        setPlayerState({
+		setPlayerState({
 			...defaultState,
 			samples: likedSamples,
 			packs: null,
 		});
-		console.log(likedSamples);
 	}, [user]);
 
-	return <div className={styles.root}>{!likedSamples ? <Loader /> : <SampleList samples={likedSamples} pageName="liked-samples-page" />}</div>;
+	return (
+		<div className={styles.root} data-testid='liked-samples-page'>
+			{!likedSamples ? <Loader /> : <SampleList samples={likedSamples} pageName='liked-samples-page' />}
+		</div>
+	);
 };

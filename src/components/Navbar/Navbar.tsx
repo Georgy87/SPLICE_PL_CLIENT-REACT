@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as Icons from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,7 +24,7 @@ export const Navbar = () => {
 	return (
 		<>
 			<nav className={isAuth ? styles.navbar : `${styles.navbar} ${styles.notAuth}`}>
-				<Link to='/' className={styles.navbarLogo} onClick={() => setSideBar(true)}>
+				<Link to='/' data-testid='packs-link' className={styles.navbarLogo} onClick={() => setSideBar(true)}>
 					<IconLayout iconName={'music'} />
 					SampleCloud
 				</Link>
@@ -42,7 +42,7 @@ export const Navbar = () => {
 					</div>
 				)}
 				{
-					<Link to='/login'>
+					<Link to='/login' data-testid='login-link'>
 						{isAuth ? (
 							<ButtonLayout
 								typeStyle={'sign-in-out'}

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
@@ -7,6 +6,7 @@ import { useSound } from '../../hooks/useSound';
 import { Pack } from '../../store/slices/pack/types';
 import { Loader } from '../Loader/Loader';
 import { selectAuth } from '../../store/selectors/userSelectors';
+import { Link } from 'react-router-dom';
 
 import styles from './PackItem.module.scss';
 
@@ -21,15 +21,22 @@ export const PackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 	const auth = useSelector(selectAuth);
 
 	const { playTrack, isPlaying, currentPackId } = useSound();
-	const history = useHistory();
 
 	return (
 		<div className={styles.packCardWrapper}>
-			<div className={styles.packCard} onClick={() => auth && history.push(`/profile-pack/${pack?._id}`)}>
+			<Link
+				className={styles.packCard}
+				to={`/profile-pack/${pack?._id}`}
+				data-testid='profile-pack-link'
+				onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+					e.stopPropagation();
+				}}
+			>
 				{pack ? (
 					<IconChangeLayout
 						onClicked={(e: Event) => {
 							e.stopPropagation();
+							e.preventDefault();
 							playTrack(index, 'packs');
 						}}
 						blockStyle={styles.playPauseCircle}
@@ -55,7 +62,7 @@ export const PackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 					<div>{pack.genre}</div>
 					<div style={{ fontSize: 12, color: 'gray' }}>{pack.name}</div>
 				</div>
-			</div>
+			</Link>
 		</div>
 	);
 };

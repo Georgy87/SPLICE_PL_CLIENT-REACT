@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Player } from '../../components/Player/Player';
@@ -34,15 +34,19 @@ export const PacksPage: React.FC<PropsType> = () => {
 	};
 
 	return (
-		<div className={styles.root}>
+		<div className={styles.root} data-testid='packs-page'>
 			<VideoPlayer />
 			<SearchInput onChangeValue={onChangeValue} setValue={setValue} value={value} />
 			<div className={styles.root}>
-				{packs?.length ? packs.map((pack: Pack, index: number) => (
-					<div className={styles.packCardContainer} key={pack._id}>
-						<PackItem pack={pack} id={pack._id} index={index} />
-					</div>
-				)) : <Loader />}
+				{packs?.length ? (
+					packs.map((pack: Pack, index: number) => (
+						<div className={styles.packCardContainer} key={pack._id}>
+							<PackItem pack={pack} id={pack._id} index={index} />
+						</div>
+					))
+				) : (
+					<Loader />
+				)}
 				<Player />
 			</div>
 		</div>

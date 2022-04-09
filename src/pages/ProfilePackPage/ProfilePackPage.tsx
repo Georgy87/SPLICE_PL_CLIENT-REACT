@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Loader } from '../../components/Loader/Loader';
@@ -6,7 +6,12 @@ import { Loader } from '../../components/Loader/Loader';
 import { SampleList } from '../../components/SampleList/SampleList';
 import { defaultState } from '../../context/PlayerContextProvider/PlayerContextProvider';
 import { useSound } from '../../hooks/useSound';
-import { selectLoading, selectPackProfile, selectSamples, selectTag } from '../../store/selectors/packsSelectors';
+import {
+	selectLoading,
+	selectPackProfile,
+	selectSamples,
+	selectTag,
+} from '../../store/selectors/packsSelectors';
 import { fetchGetPack } from '../../store/slices/pack/actions';
 
 import styles from './ProfilePackPage.module.scss';
@@ -18,7 +23,7 @@ export const ProfilePackPage = () => {
 	const tag = useSelector(selectTag);
 
 	const dispatch = useDispatch();
-
+	//@ts-ignore
 	const params: { packId: string } = useParams();
 	const { setPlayerState } = useSound();
 
@@ -39,7 +44,7 @@ export const ProfilePackPage = () => {
 	}, [packProfile]);
 
 	return (
-		<>
+		<div data-testid='profile-pack-page'>
 			{loading ? (
 				<div className={styles.profilePackContainer}>
 					<div className={styles.infoBackground}>
@@ -60,6 +65,6 @@ export const ProfilePackPage = () => {
 			) : (
 				<Loader />
 			)}
-		</>
+		</div>
 	);
 };

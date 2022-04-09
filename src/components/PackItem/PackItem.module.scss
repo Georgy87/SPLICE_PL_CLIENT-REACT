@@ -11,6 +11,10 @@
 .packCardWrapper {
 	display: flex;
 	width: 99%;
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
 	.packCard {
 		position: relative;
 		display: flex;

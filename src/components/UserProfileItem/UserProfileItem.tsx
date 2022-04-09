@@ -1,32 +1,32 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
-import avatar from '../../assets/avatar/unnamed.jpg';
 import { userInfoItems } from '../../pages/UserProfilePage/ProfileItems';
 import { selectUser } from '../../store/selectors/userSelectors';
 
 import styles from './UserProfileItem.module.scss';
 
 type PropsType = {
-	profileItems: keyof typeof userInfoItems;
+	profileItems: string;
 	setEmail: (value: string | undefined) => void;
 	setFullName: (value: string) => void;
+	avatar: string;
 };
 
-export const UserProfileItem: React.FC<PropsType> = ({ profileItems, setEmail, setFullName }) => {
+export const UserProfileItem: React.FC<PropsType> = ({ profileItems, setEmail, setFullName, avatar }) => {
 	const user = useSelector(selectUser);
 
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	return (
 		<>
 			<li className={styles.profileListItem}>
 				<label>{profileItems}</label>
 				{profileItems === 'Photo' && (
-					<div className={styles.avatar} onClick={() => history.push('profile/avatar')}>
-						<img src={avatar} alt={avatar} />
-					</div>
+					<div className={styles.avatar} onClick={() => navigate('avatar')}>
+					<img src={avatar} alt={avatar} />
+				</div>
 				)}
 				{profileItems === 'Username' && <p>{user?.fullname}</p>}
 				{profileItems === 'Email' && (
@@ -40,7 +40,9 @@ export const UserProfileItem: React.FC<PropsType> = ({ profileItems, setEmail, s
 				{profileItems === 'Name' && (
 					<input
 						defaultValue={user?.fullname}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFullName(e.target.value)}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+							setFullName(e.target.value)
+						}
 					/>
 				)}
 			</li>

@@ -59,7 +59,7 @@ export const RegistrationPage: React.FC = () => {
 	};
 
 	return (
-		<>
+		<div data-testid='registration-page'>
 			<AuthorizationLayout>
 				<form
 					className={styles.authBox}
@@ -123,6 +123,6 @@ export const RegistrationPage: React.FC = () => {
 					</div>
 				</form>
 			</AuthorizationLayout>
-		</>
+		</div>
 	);
 };

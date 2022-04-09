@@ -3,7 +3,7 @@
 .profilePackContainer {
 	width: 90vw;
 	position: relative;
-	margin-top: 55px;
+	top: 55px;
 	.infoBackground {
 		position: fixed;
 		left: 0;
@@ -36,6 +36,7 @@
 .playerInner {
 	display: flex;
 	position: fixed;
+	top: 55px;
 	width: 85vw;
 	height: 250px;
 	align-items: center;
