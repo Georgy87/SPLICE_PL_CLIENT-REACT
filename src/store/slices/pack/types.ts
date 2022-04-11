@@ -6,6 +6,7 @@ export type PacksSliceState = {
     userPacks: Pack[] | [];
     tag: string | null;
     loading: boolean;
+    totalPages: number;
 }
 
 export type createPackType = {

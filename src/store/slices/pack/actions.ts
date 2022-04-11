@@ -26,9 +26,9 @@ export const fetchCreatePack = createAsyncThunk(
 	},
 );
 
-export const fetchGetPacks = createAsyncThunk('packs/getPacksStatus', async () => {
+export const fetchGetPacks = createAsyncThunk('packs/getPacksStatus', async (payload: number) => {
 	try {
-		const packs = await packsApi.getPacks();
+		const packs = await packsApi.getPacks(payload);
 		return packs;
 	} catch (error) {
 		console.log(error);

@@ -7,4 +7,5 @@ export const selectSamples = (state: RootState) => selectPackMain(state).packPro
 export const selectPackProfile = (state: RootState) => selectPackMain(state).packProfile;
 export const selectUserPacks = (state: RootState) => selectPackMain(state).userPacks;
 export const selectLoading = (state: RootState) => selectPackMain(state).loading;
+export const selectTotalPages = (state: RootState) => selectPackMain(state).totalPages;
 export const selectTag = (state: RootState) => selectPackMain(state).tag;

@@ -6,8 +6,8 @@ export const packsApi = {
 		return data;
 	},
 
-	async getPacks() {
-		const { data } = await instance.get('packs');
+	async getPacks(payload: number) {
+		const { data } = await instance.get(`packs?page=${payload}`);
 		return data;
 	},
 
