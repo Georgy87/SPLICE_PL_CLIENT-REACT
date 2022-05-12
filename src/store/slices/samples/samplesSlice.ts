@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { fetchCreateSamples } from './actions';
 import { SampleSliceState } from './types';
 
-const initialState: SampleSliceState = {
+export const initialState: SampleSliceState = {
 	samples: [],
 	loading: false,
 	files: [],
@@ -17,11 +18,10 @@ export const samplesSlice = createSlice({
 	reducers: {
 		setSampleFiles: (
 			state,
-			action: PayloadAction<{ id: string; file: File; packId: string }>,
+			action: PayloadAction<{ id: string; file: any; packId: string }>,
 		) => {
 			const { id, file, packId } = action.payload;
 			state.files = [...state.files, { id, file }];
-
 			state.packId = packId;
 		},
 		deleteSampleFiles: (state, action: PayloadAction<string>) => {

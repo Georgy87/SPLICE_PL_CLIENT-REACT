@@ -4,7 +4,7 @@ import { User, UserSliceState } from './types';
 import { Samples } from '../samples/types';
 import { fetchAuth, fetchGetLikedSamples, fetchLogin, fetchUpdateAvatar, fetchUpdateEmail, fetchUpdateFullName } from './actions';
 
-const initialState: UserSliceState = {
+export const initialState: UserSliceState = {
 	user: null,
 	token: null,
 	isAuth: false,

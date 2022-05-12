@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchCreatePack, fetchGetPack, fetchGetPacks, fetchGetUserPacks, fetchSearchPacks } from './actions';
 import { Pack, PacksSliceState } from './types';
 
-const initialState: PacksSliceState = {
+export const initialState: PacksSliceState = {
 	packs: [],
 	packProfile: null,
 	userPacks: [],

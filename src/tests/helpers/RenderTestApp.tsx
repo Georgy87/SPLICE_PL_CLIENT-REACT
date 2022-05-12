@@ -6,10 +6,9 @@ import { store } from '../../store';
 
 type PropsType = {
 	children: React.ReactNode;
-	initialRoute: string;
 };
 
-export const RenderTestApp: React.FC = ({ children }) => {
+export const RenderTestApp: React.FC<PropsType> = ({ children }) => {
 	return (
 		<Provider store={store}>
 			<MemoryRouter>

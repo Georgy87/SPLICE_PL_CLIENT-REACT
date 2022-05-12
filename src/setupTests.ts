@@ -1,3 +1,4 @@
+// Setup Worker
 
 class Worker {
 	url: string;
@@ -23,6 +24,8 @@ if (typeof window.URL.createObjectURL === 'undefined') {
 //@ts-ignore
 window.Worker = Worker;
 
+// Setup AudioContext
+
 Object.defineProperty(HTMLMediaElement.prototype, 'muted', {
 	set: () => { },
 });
@@ -30,5 +33,19 @@ Object.defineProperty(HTMLMediaElement.prototype, 'muted', {
 window.AudioContext = jest.fn().mockImplementation(() => {
 	return {}
 });
+
+// Setup IntersectionObserver
+
+class IntersectionObserver {
+	observe = jest.fn()
+	disconnect = jest.fn()
+	unobserve = jest.fn()
+}
+
+Object.defineProperty(window, 'IntersectionObserver', {
+	writable: true,
+	configurable: true,
+	value: IntersectionObserver,
+})
 
 import '@testing-library/jest-dom';
