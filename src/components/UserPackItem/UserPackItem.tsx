@@ -32,7 +32,7 @@ export const UserPackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 		e.stopPropagation();
 		const eventData = (e as React.DragEvent).dataTransfer;
 		let file = [eventData.files];
-
+		console.log(file)
 		setDrag(false);
 
 		Object.values(file[0]).forEach((file: File) => {

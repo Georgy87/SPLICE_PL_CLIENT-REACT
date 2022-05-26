@@ -8,7 +8,7 @@ import { formatTime } from '../../utils/formatTime';
 import { Samples } from '../../store/slices/samples/types';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 
-import { canvasService } from '../../services/canvasService';
+import { canvasSampleService } from '../../services/canvasSampleService';
 import { AddSampleInfoModal } from '../AddSampleInfoModal/AddSampleInfoModal';
 import { fetchDeleteLike, fetchSetLike } from '../../store/slices/samples/actions';
 
@@ -42,7 +42,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 	
 	useEffect(() => {
 		if (currentSampleId === _id) {
-			canvasService.drawingSampleCanvas(canvas, audioCoordinatesParse, percent);
+			canvasSampleService.drawingSampleCanvas(canvas, audioCoordinatesParse, percent);
 		}
 	}, [canvas, currentTime]);
 

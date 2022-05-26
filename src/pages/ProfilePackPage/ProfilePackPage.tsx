@@ -1,16 +1,19 @@
-import { useEffect } from 'react';
+import { useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Loader } from '../../components/Loader/Loader';
 
+import { Loader } from '../../components/Loader/Loader';
 import { SampleList } from '../../components/SampleList/SampleList';
 import { defaultState } from '../../context/PlayerContextProvider/PlayerContextProvider';
 import { useSound } from '../../hooks/useSound';
+import Modal from '../../layouts/ModalLayout/ModalLayout';
 import {
 	selectLoading,
 	selectPackProfile,
 	selectSamples,
 	selectTag,
+	selectViewsData,
 } from '../../store/selectors/packsSelectors';
 import { fetchGetPack } from '../../store/slices/pack/actions';
 
@@ -21,6 +24,11 @@ export const ProfilePackPage = () => {
 	const samples = useSelector(selectSamples);
 	const loading = useSelector(selectLoading);
 	const tag = useSelector(selectTag);
+	const packViews = useSelector(selectViewsData);
+
+	const [activeModal, setActiveModal] = useState<boolean>(true);
+
+	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	const dispatch = useDispatch();
 	//@ts-ignore
@@ -41,6 +49,7 @@ export const ProfilePackPage = () => {
 			samples: samples,
 			packs: [packProfile],
 		});
+		// console.log(packViews?.[2022]);
 	}, [packProfile]);
 
 	return (
@@ -65,6 +74,17 @@ export const ProfilePackPage = () => {
 			) : (
 				<Loader />
 			)}
+			<Modal setActive={setActiveModal} active={activeModal}>
+				<div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+					<canvas
+						ref={canvasRef}
+						style={{
+							width: '550px',
+							height: '35px',
+						}}
+					/>
+				</div>
+			</Modal>
 		</div>
 	);
 };

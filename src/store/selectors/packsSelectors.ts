@@ -9,3 +9,4 @@ export const selectUserPacks = (state: RootState) => selectPackMain(state).userP
 export const selectLoading = (state: RootState) => selectPackMain(state).loading;
 export const selectTotalPages = (state: RootState) => selectPackMain(state).totalPages;
 export const selectTag = (state: RootState) => selectPackMain(state).tag;
+export const selectViewsData = (state: RootState) => selectPackMain(state).packProfile?.viewsData;

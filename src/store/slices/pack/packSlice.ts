@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { fetchCreatePack, fetchGetPack, fetchGetPacks, fetchGetUserPacks, fetchSearchPacks } from './actions';
-import { Pack, PacksSliceState } from './types';
+import { Pack, PackProfile, PacksSliceState } from './types';
 
 export const initialState: PacksSliceState = {
 	packs: [],
@@ -30,8 +30,9 @@ export const packSlice = createSlice({
 	},
 	extraReducers: (builder) =>
 		builder
-			.addCase(fetchGetPacks.fulfilled.type, (state, action: PayloadAction<{ packs: Pack[], totalPages: number }>) => {
-				const { packs, totalPages } = action.payload;
+			.addCase(fetchGetPacks.fulfilled.type, (state, action: PayloadAction<{ data: { packs: Pack[], totalPages: number } }>) => {
+				const { data } = action.payload;
+				const { packs, totalPages } = data;
 				state.packs = [...state.packs, ...packs];
 				state.totalPages = totalPages;
 				state.loading = false;
@@ -39,12 +40,14 @@ export const packSlice = createSlice({
 			.addCase(fetchCreatePack.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
 				state.packs = action.payload;
 			})
-			.addCase(fetchGetPack.fulfilled.type, (state, action: PayloadAction<Pack>) => {
+			.addCase(fetchGetPack.fulfilled.type, (state, action: PayloadAction<PackProfile>) => {
 				state.packProfile = action.payload;
 				state.loading = true;
 			})
-			.addCase(fetchGetUserPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
-				state.userPacks = action.payload;
+			.addCase(fetchGetUserPacks.fulfilled.type, (state, action: PayloadAction<{ data: Pack[]}>) => {
+				const { data } = action.payload;
+				console.log(data);
+				state.userPacks = data;
 			})
 			.addCase(fetchSearchPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
 				state.packs = action.payload;

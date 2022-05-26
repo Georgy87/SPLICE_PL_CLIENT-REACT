@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectPackId } from '../../store/selectors/samplesSelectors';
 import { audioService } from '../../services/audioService';
 import { workerInstanceCreateSample } from '../../workers/WebWorkerEnabler';
-import { canvasService } from '../../services/canvasService';
+import { canvasSampleService } from '../../services/canvasSampleService';
 import { deleteSampleFiles } from '../../store/slices/samples/samplesSlice';
 import { createSamples } from '../../utils/createSamples';
 import { detectBrowser } from '../../utils/detectBrowser';
@@ -44,7 +44,7 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 
 					if (browser === 'Safari') {
 						const canvas = canvasRef?.current;
-						const dataToSampleCreate = canvasService.drawingCanvasToImage(
+						const dataToSampleCreate = canvasSampleService.drawingCanvasToImage(
 							file,
 							audioCoordinates,
 							packId,

@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { packsApi } from "../../../services/api/packsApi";
-import { createPackType } from "./types";
+import { createPackType, Pack } from "./types";
 
 export const fetchCreatePack = createAsyncThunk(
 	'packs/createPackStatus',
 	async (payload: createPackType) => {
 		try {
 			const { picture, audio } = payload;
-			
+
 			const { genre, authorName, packInfo } = payload.info;
 
 			const formData = new FormData();
@@ -28,8 +28,8 @@ export const fetchCreatePack = createAsyncThunk(
 
 export const fetchGetPacks = createAsyncThunk('packs/getPacksStatus', async (payload: number) => {
 	try {
-		const packs = await packsApi.getPacks(payload);
-		return packs;
+		const data = await packsApi.getPacks(payload);
+		return data;
 	} catch (error) {
 		console.log(error);
 	}
@@ -50,8 +50,8 @@ export const fetchGetPack = createAsyncThunk(
 
 export const fetchGetUserPacks = createAsyncThunk('packs/getUserPacksStatus', async () => {
 	try {
-		const packs = await packsApi.getUserPacks();
-		return packs;
+		const data = await packsApi.getUserPacks();
+		return data;
 	} catch (error) {
 		console.log(error);
 	}

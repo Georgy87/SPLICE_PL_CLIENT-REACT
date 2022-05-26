@@ -1,22 +1,22 @@
-import { Samples } from "../samples/types";
+import { Samples } from '../samples/types';
 
 export type PacksSliceState = {
     packs: Pack[] | [];
-    packProfile: null | Pack;
+    packProfile: null | PackProfile;
     userPacks: Pack[] | [];
     tag: string | null;
     loading: boolean;
     totalPages: number;
-}
+};
 
 export type createPackType = {
-	info: {
-		genre: string;
-		authorName: string;
-		packInfo: string;
-	};
-	picture: File;
-	audio: File;
+    info: {
+        genre: string;
+        authorName: string;
+        packInfo: string;
+    };
+    picture: File;
+    audio: File;
 };
 
 export type Pack = {
@@ -24,14 +24,44 @@ export type Pack = {
     genre: string;
     name: string;
     packInfo: string;
-    text: string;
     listens: number;
     picture: string;
     audio: string;
-    pause: boolean;
+    userId: string;
+};
+
+export type PackProfile = {
+    _id: string;
+    genre: string;
+    name: string;
+    packInfo: string;
+    listens: number;
+    picture: string;
+    audio: string;
     samples: Samples[];
     userId: string;
-    update: boolean;
+    viewsData: ChartDataType;
+};
+
+type MountType = {
+    January: { x: number, y: number },
+    February: { x: number, y: number },
+    March: { x: number, y: number },
+    April: { x: number, y: number },
+    May: { x: number, y: number },
+    June: { x: number, y: number },
+    July: { x: number, y: number },
+    August: { x: number, y: number },
+    September: { x: number, y: number },
+    October: { x: number, y: number },
+    November: { x: number, y: number },
+    December: { x: number, y: number },
 }
 
-
+export type ChartDataType = {
+    2018: MountType;
+    2019: MountType;
+    2020: MountType;
+    2021: MountType;
+    2022: MountType;
+}

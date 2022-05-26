@@ -4,14 +4,15 @@ import { deleteSampleFiles, initialState, samplesReducer, setCurrentStep, setSam
 
 describe('SAMPLE REDUCER TEST', () => {
     test('setSampleFiles', () => {
-        expect(samplesReducer(initialState, setSampleFiles({ id: '3', file: 'file', packId: '12' }))).toEqual({
+        expect(samplesReducer(initialState, setSampleFiles({ id: '3', file: {}, packId: '12' }))).toEqual({
             ...initialState,
             packId: '12',
-            files: [{ id: '3', file: 'file' }],
+            files: [{ id: '3', file: {} }],
         })
     })
     test('deleteSampleFiles', () => {
-        expect(samplesReducer({ ...initialState, files: [{ id: '2', file: 'file' }] }, deleteSampleFiles('2'))).toEqual({
+        //@ts-ignore
+        expect(samplesReducer({ ...initialState, files: [{ id: '2', file: [] }] }, deleteSampleFiles('2'))).toEqual({
             ...initialState,
             files: [],
         })

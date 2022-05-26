@@ -2,7 +2,7 @@ import { User } from '../user/types';
 
 type FileListType = {
 	id: string;
-	file: any;
+	file: File;
 };
 
 export type samplesToSendType = {

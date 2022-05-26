@@ -4,9 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import { useDropzone } from '../../hooks/useDropzone';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
-import { canvasService } from '../../services/canvasService';
+import { canvasAvatarService } from '../../services/canvasAvatarService';
 import { fileService } from '../../services/fileService';
 import { fetchUpdateAvatar } from '../../store/slices/user/actions';
 
@@ -67,7 +66,7 @@ export const AvatarEditorPage = () => {
 
 		const crop: Crop = completedCrop;
 
-		const canvasResult = canvasService.drawingAvatar(image, canvas, crop);
+		const canvasResult = canvasAvatarService.drawingAvatar(image, canvas, crop);
 
 		canvasResult?.toBlob(function(blob: Blob | null) {
 			if (!blob) return;
