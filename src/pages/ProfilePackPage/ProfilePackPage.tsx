@@ -1,23 +1,24 @@
-import { useRef } from 'react';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useRef } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-import { Loader } from '../../components/Loader/Loader';
-import { SampleList } from '../../components/SampleList/SampleList';
-import { defaultState } from '../../context/PlayerContextProvider/PlayerContextProvider';
-import { useSound } from '../../hooks/useSound';
-import Modal from '../../layouts/ModalLayout/ModalLayout';
+import { Loader } from "../../components/Loader/Loader";
+import { SampleList } from "../../components/SampleList/SampleList";
+import { defaultState } from "../../context/PlayerContextProvider/PlayerContextProvider";
+import { useSound } from "../../hooks/useSound";
+import Modal from "../../layouts/ModalLayout/ModalLayout";
+import { canvasChartService } from "../../services/canvasChartService";
 import {
 	selectLoading,
 	selectPackProfile,
 	selectSamples,
 	selectTag,
-	selectViewsData,
-} from '../../store/selectors/packsSelectors';
-import { fetchGetPack } from '../../store/slices/pack/actions';
+	selectViewsData
+} from "../../store/selectors/packsSelectors";
+import { fetchGetPack } from "../../store/slices/pack/actions";
 
-import styles from './ProfilePackPage.module.scss';
+import styles from "./ProfilePackPage.module.scss";
 
 export const ProfilePackPage = () => {
 	const packProfile = useSelector(selectPackProfile);
@@ -28,7 +29,7 @@ export const ProfilePackPage = () => {
 
 	const [activeModal, setActiveModal] = useState<boolean>(true);
 
-	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
 	const dispatch = useDispatch();
 	//@ts-ignore
@@ -47,20 +48,28 @@ export const ProfilePackPage = () => {
 		setPlayerState({
 			...defaultState,
 			samples: samples,
-			packs: [packProfile],
+			packs: [packProfile]
 		});
 		// console.log(packViews?.[2022]);
+		if (!packViews) return;
+		canvasChartService.drawingChart(canvasRef.current, packViews[2022]);
 	}, [packProfile]);
 
 	return (
-		<div data-testid='profile-pack-page'>
+		<div data-testid="profile-pack-page">
 			{loading ? (
 				<div className={styles.profilePackContainer}>
 					<div className={styles.infoBackground}>
-						<img src={`${packProfile?.picture}`} alt={`${packProfile?.picture}`} />
+						<img
+							src={`${packProfile?.picture}`}
+							alt={`${packProfile?.picture}`}
+						/>
 					</div>
 					<div className={styles.playerInner}>
-						<img src={`${packProfile?.picture}`} alt={packProfile?.picture} />
+						<img
+							src={`${packProfile?.picture}`}
+							alt={packProfile?.picture}
+						/>
 
 						<div className={styles.packInfo}>
 							<h1>{packProfile?.name}</h1>
@@ -75,12 +84,15 @@ export const ProfilePackPage = () => {
 				<Loader />
 			)}
 			<Modal setActive={setActiveModal} active={activeModal}>
-				<div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+				<div
+					className={styles.modal}
+					onClick={e => e.stopPropagation()}
+				>
 					<canvas
 						ref={canvasRef}
 						style={{
-							width: '550px',
-							height: '35px',
+							width: "550px",
+							height: "35px"
 						}}
 					/>
 				</div>

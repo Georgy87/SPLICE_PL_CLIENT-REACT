@@ -43,7 +43,7 @@ export type PackProfile = {
     viewsData: ChartDataType;
 };
 
-type MountType = {
+export type MountType = {
     January: { x: number, y: number },
     February: { x: number, y: number },
     March: { x: number, y: number },
