@@ -2,7 +2,7 @@ import { instance } from '../../core/axios';
 
 export const packsApi = {
 	async createPack(formData: FormData) {
-		const { data } = await instance.post('packs/pack', formData);
+		const data = await instance.post('packs/pack', formData);
 		return data;
 	},
 
@@ -12,7 +12,7 @@ export const packsApi = {
 	},
 
 	async getPack(packId: string, tag: string | null) {
-		const { data } = await instance.get(
+		const data = await instance.get(
 			`packs/pack?packId=${packId}&tag=${tag}`,
 		);
 		return data;
@@ -24,7 +24,7 @@ export const packsApi = {
 	},
 
 	async searchPacks(search: string) {
-		const { data } = await instance.get(`packs/search-packs?search=${search}`);
+		const data = await instance.get(`packs/search-packs?search=${search}`);
 		return data;
 	},
 

@@ -1,7 +1,13 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { fetchCreatePack, fetchGetPack, fetchGetPacks, fetchGetUserPacks, fetchSearchPacks } from './actions';
-import { Pack, PackProfile, PacksSliceState } from './types';
+import {
+	fetchCreatePack,
+	fetchGetPack,
+	fetchGetPacks,
+	fetchGetUserPacks,
+	fetchSearchPacks
+} from "./actions";
+import { Pack, PackProfile, PacksSliceState } from "./types";
 
 export const initialState: PacksSliceState = {
 	packs: [],
@@ -9,14 +15,14 @@ export const initialState: PacksSliceState = {
 	userPacks: [],
 	tag: null,
 	loading: false,
-	totalPages: 0,
+	totalPages: 0
 };
 
 export const packSlice = createSlice({
-	name: 'packs',
+	name: "packs",
 	initialState,
 	reducers: {
-		setDefaultPackState: (state) => {
+		setDefaultPackState: state => {
 			state.packs = [];
 			state.packProfile = null;
 			state.userPacks = [];
@@ -26,32 +32,54 @@ export const packSlice = createSlice({
 		},
 		setLoading: (state, action: PayloadAction<boolean>) => {
 			state.loading = action.payload;
-		},
+		}
 	},
-	extraReducers: (builder) =>
+	extraReducers: builder =>
 		builder
-			.addCase(fetchGetPacks.fulfilled.type, (state, action: PayloadAction<{ data: { packs: Pack[], totalPages: number } }>) => {
-				const { data } = action.payload;
-				const { packs, totalPages } = data;
-				state.packs = [...state.packs, ...packs];
-				state.totalPages = totalPages;
-				state.loading = false;
-			})
-			.addCase(fetchCreatePack.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
-				state.packs = action.payload;
-			})
-			.addCase(fetchGetPack.fulfilled.type, (state, action: PayloadAction<PackProfile>) => {
-				state.packProfile = action.payload;
-				state.loading = true;
-			})
-			.addCase(fetchGetUserPacks.fulfilled.type, (state, action: PayloadAction<{ data: Pack[]}>) => {
-				const { data } = action.payload;
-				console.log(data);
-				state.userPacks = data;
-			})
-			.addCase(fetchSearchPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
-				state.packs = action.payload;
-			}),
+			.addCase(
+				fetchGetPacks.fulfilled.type,
+				(
+					state,
+					action: PayloadAction<{
+						data: { packs: Pack[]; totalPages: number };
+					}>
+				) => {
+					const { data } = action.payload;
+					const { packs, totalPages } = data;
+					state.packs = [...state.packs, ...packs];
+					state.totalPages = totalPages;
+					state.loading = false;
+				}
+			)
+			.addCase(
+				fetchCreatePack.fulfilled.type,
+				(state, action: PayloadAction<{ data: Pack[] }>) => {
+					const { data } = action.payload;
+					state.packs = data;
+				}
+			)
+			.addCase(
+				fetchGetPack.fulfilled.type,
+				(state, action: PayloadAction<{data: PackProfile}>) => {
+					const { data } =  action.payload;
+					state.packProfile = data;
+					state.loading = true;
+				}
+			)
+			.addCase(
+				fetchGetUserPacks.fulfilled.type,
+				(state, action: PayloadAction<{ data: Pack[] }>) => {
+					const { data } = action.payload;
+					state.userPacks = data;
+				}
+			)
+			.addCase(
+				fetchSearchPacks.fulfilled.type,
+				(state, action: PayloadAction<{ data: Pack[] }>) => {
+					const { data } = action.payload;
+					state.packs = data;
+				}
+			)
 });
 
 export const { setDefaultPackState, setTag, setLoading } = packSlice.actions;

@@ -7,6 +7,7 @@ import { Navbar } from '../components/Navbar/Navbar';
 import { NavbarItem } from '../components/NavbarItem/NavbarItem';
 import { LoginPage } from '../pages/LoginPage/LoginPage';
 import { UserProfilePage } from '../pages/UserProfilePage/UserProfilePage';
+import { pack } from '../store/slices/pack/testData';
 
 describe('ROUTER TEST', () => {
 	test('LOGIN TEST', async () => {
@@ -31,21 +32,6 @@ describe('ROUTER TEST', () => {
 	});
 
 	test('PROFILE-PACK-PAGE', async () => {
-		const pack = {
-			_id: '0',
-			genre: '',
-			name: '',
-			packInfo: '',
-			text: '',
-			listens: 0,
-			picture: '',
-			audio: '',
-			pause: false,
-			samples: [],
-			userId: '',
-			update: false,
-		};
-
 		render(renderWithRouter(<PackItem pack={pack} id={pack._id} index={0} />));
 		const link = screen.getByTestId('profile-pack-link');
 		userEvent.click(link);
@@ -53,21 +39,37 @@ describe('ROUTER TEST', () => {
 	});
 
 	test('USER-PROFILE-PAGE TEST', async () => {
-		render(renderWithRouter(<NavbarItem pageName={'PROFILE'} iconName={'profile'} link={'profile-link'}/>));
+		render(
+			renderWithRouter(
+				<NavbarItem pageName={'PROFILE'} iconName={'profile'} link={'profile-link'} />,
+			),
+		);
 		const link = screen.getByTestId('profile-link');
 		userEvent.click(link);
 		expect(screen.getByTestId('user-profile-page')).toBeInTheDocument();
 	});
 
 	test('LIKES-PAGE TEST', async () => {
-		render(renderWithRouter(<NavbarItem pageName={'LIKES'} iconName={'likes'} link={'likes-link'}/>));
+		render(
+			renderWithRouter(
+				<NavbarItem pageName={'LIKES'} iconName={'likes'} link={'likes-link'} />,
+			),
+		);
 		const link = screen.getByTestId('likes-link');
 		userEvent.click(link);
 		expect(screen.getByTestId('liked-samples-page')).toBeInTheDocument();
 	});
 
 	test('SEQUENCER-PAGE TEST', async () => {
-		render(renderWithRouter(<NavbarItem pageName={'SEQUENCER'} iconName={'sequencer'} link={'sequencer-link'}/>));
+		render(
+			renderWithRouter(
+				<NavbarItem
+					pageName={'SEQUENCER'}
+					iconName={'sequencer'}
+					link={'sequencer-link'}
+				/>,
+			),
+		);
 		const link = screen.getByTestId('sequencer-link');
 		userEvent.click(link);
 		expect(screen.getByTestId('sequencer-page')).toBeInTheDocument();

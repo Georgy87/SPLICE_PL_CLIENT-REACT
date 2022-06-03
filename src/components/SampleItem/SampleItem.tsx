@@ -57,7 +57,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
 				<li>
 					<img src={`${sample.packPicture}`} alt='pack-cover' />
 					<div className={styles.iconChangeWrap}>
-						<p className={styles.sampleTime}>{formatTime(duration)}</p>
+						<p className={styles.sampleTime}>{formatTime(+duration)}</p>
 						<IconChangeLayout
 							onClicked={(e: Event) => {
 								e.stopPropagation();

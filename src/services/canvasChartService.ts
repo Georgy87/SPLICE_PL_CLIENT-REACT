@@ -70,12 +70,12 @@ class CanvasChartService implements ICanvasChart {
 		const ctx: CanvasRenderingContext2D | null = canvas.getContext("2d");
 		if (!ctx) return;
 
-		canvas.style.width = WIDTH + "px";
-		canvas.style.height = HEIGHT + "px";
+		// canvas.style.width = WIDTH + "px";
+		// canvas.style.height = HEIGHT + "px";
 		canvas.width = DPI_WIDTH;
 		canvas.height = DPI_HEIGHT;
 
-		this.xLine(ctx, ROWS_COUNT, step, yMax, textStep);
+		this.xLine(ctx, step, yMax, textStep);
 
 		let coords = coordsXY.map(({ x, y }, i) => {
 			return [
@@ -102,7 +102,7 @@ class CanvasChartService implements ICanvasChart {
 		if (min == undefined || max == undefined) {
 			return [0, 0];
 		} else {
-			return [min, max];
+			return [min, 1000];
 		}
 	}
 
@@ -123,12 +123,11 @@ class CanvasChartService implements ICanvasChart {
 
 	xLine(
 		ctx: CanvasRenderingContext2D | null,
-		ROWS_COUNT: number,
 		step: number,
 		yMax: number,
 		textStep: number
 	) {
-		const { PADDING, DPI_WIDTH } = this;
+		const { PADDING, DPI_WIDTH, ROWS_COUNT } = this;
 		if (!ctx) return;
 
 		ctx.beginPath();

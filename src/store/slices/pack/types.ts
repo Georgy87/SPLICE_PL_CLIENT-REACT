@@ -28,6 +28,7 @@ export type Pack = {
     picture: string;
     audio: string;
     userId: string;
+    viewsData: ChartDataType;
 };
 
 export type PackProfile = {
@@ -59,9 +60,9 @@ export type MountType = {
 }
 
 export type ChartDataType = {
-    2018: MountType;
-    2019: MountType;
-    2020: MountType;
-    2021: MountType;
-    2022: MountType;
+    '2018': MountType;
+    '2019': MountType;
+    '2020': MountType;
+    '2021': MountType;
+    '2022': MountType;
 }

@@ -29,7 +29,7 @@ export type Samples = {
 	packId: string;
 	sampleName: string;
 	audioCoordinates: string;
-	duration: number;
+	duration: string;
 	likes: User[];
 	canvasImage: string;
 	bpm: number;

@@ -17,6 +17,7 @@ import {
 	selectViewsData
 } from "../../store/selectors/packsSelectors";
 import { fetchGetPack } from "../../store/slices/pack/actions";
+import { ButtonLayout } from "../../layouts/ButtonLayout/ButtonLayout";
 
 import styles from "./ProfilePackPage.module.scss";
 
@@ -28,6 +29,7 @@ export const ProfilePackPage = () => {
 	const packViews = useSelector(selectViewsData);
 
 	const [activeModal, setActiveModal] = useState<boolean>(true);
+	const [year, setYear] = useState<any>(new Date().getFullYear());
 
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -50,10 +52,12 @@ export const ProfilePackPage = () => {
 			samples: samples,
 			packs: [packProfile]
 		});
-		// console.log(packViews?.[2022]);
 		if (!packViews) return;
-		canvasChartService.drawingChart(canvasRef.current, packViews[2022]);
-	}, [packProfile]);
+
+		//@ts-ignore
+		canvasChartService.drawingChart(canvasRef.current, packViews[year]);
+	}, [packProfile, year]);
+
 
 	return (
 		<div data-testid="profile-pack-page">
@@ -88,13 +92,21 @@ export const ProfilePackPage = () => {
 					className={styles.modal}
 					onClick={e => e.stopPropagation()}
 				>
-					<canvas
-						ref={canvasRef}
-						style={{
-							width: "550px",
-							height: "35px"
-						}}
-					/>
+					<div>
+						<canvas ref={canvasRef} />
+					</div>
+					<div className={styles.changeYears}>
+						{packViews &&
+							Object.keys(packViews).map((year: string) => (
+								<ButtonLayout
+									key={year}
+									typeStyle={"auth"}
+									onClicked={() => setYear(year)}
+								>
+									{year}
+								</ButtonLayout>
+							))}
+					</div>
 				</div>
 			</Modal>
 		</div>

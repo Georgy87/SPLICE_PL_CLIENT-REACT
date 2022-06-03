@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables.scss";
 
 .profilePackContainer {
 	width: 90vw;
@@ -58,8 +58,8 @@
 }
 
 .packInfo {
-	margin-right: auto;	
-	margin-left: 10px;	
+	margin-right: auto;
+	margin-left: 10px;
 	z-index: 1000;
 	max-height: 250px;
 }
@@ -86,7 +86,7 @@
 	justify-content: center;
 	flex-direction: column;
 	padding-left: 45px;
-	width: 950px;
+	width: 1050px;
 	min-height: 500px;
 	border-radius: 10px;
 	background-color: rgba(37, 34, 34, 0.7);
@@ -94,17 +94,49 @@
 		display: flex;
 		color: $white;
 	}
+	canvas {
+		width: 1000px;
+		height: 300px;
+		@media screen and (max-width: 900px) {
+			width: 600px;
+		}
+		@media screen and (max-width: 600px) {
+			width: 400px;
+			height: 200px;
+		}
+	}
 
 	@media screen and (max-width: 900px) {
-		width: 250px;
-		margin: 0;
+		width: 600px;
+	}
+
+	@media screen and (max-width: 600px) {
+		width: 400px;
+	}
+	.changeYears {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-left: -45px;
+		button {
+			margin: 10px;
+			width: 70px;
+			height: 25px;
+			font-weight: 300;
+			font-size: 13px;
+			border-width: 1px;
+			@media screen and (max-width: 600px) {
+				width: 40px;
+				margin: 5px;
+			}
+		}
 	}
 }
 
 @media screen and (max-width: 1060px) {
 	.packInfo {
 		overflow-y: scroll;
-	}	
+	}
 }
 
 @media screen and (max-width: 900px) {
@@ -130,4 +162,3 @@
 		}
 	}
 }
-

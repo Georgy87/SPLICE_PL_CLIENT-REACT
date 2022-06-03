@@ -1,6 +1,6 @@
 import '@testing-library/react';
 
-import { packsReducer, initialState, setDefaultPackState, setTag, setLoading } from '../packSlice';
+import { packsReducer, initialState, setDefaultPackState, setTag, setLoading } from './packSlice';
 
 describe('PACK REDUCER TEST', () => {
     test('setDefaultPackState', () => {
