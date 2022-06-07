@@ -60,9 +60,5 @@ export type MountType = {
 }
 
 export type ChartDataType = {
-    '2018': MountType;
-    '2019': MountType;
-    '2020': MountType;
-    '2021': MountType;
-    '2022': MountType;
+    [year: string]: MountType;
 }
