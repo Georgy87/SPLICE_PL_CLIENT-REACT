@@ -30,6 +30,7 @@ export const ProfilePackPage = () => {
 
 	const [activeModal, setActiveModal] = useState<boolean>(true);
 	const [year, setYear] = useState<string>(new Date().getFullYear().toString());
+	const [value, setValue] = useState<number>(0);
 
 	const { width } = useWindowSize();
 
@@ -47,7 +48,7 @@ export const ProfilePackPage = () => {
 	useEffect(() => {
 		if (!packViews) return;
 
-		if (width < 900 && width > 600 ) {
+		if (width < 900 && width > 600) {
 			canvasChartService.drawingChart(canvasRef.current, packViews[year], 600, 50);
 		} 
 
@@ -58,7 +59,6 @@ export const ProfilePackPage = () => {
 		if (width < 600) {
 			canvasChartService.drawingChart(canvasRef.current, packViews[year], 350, 25);
 		}
-	
 	}, [width, packProfile, year]);
 
 	useEffect(() => {

@@ -17,14 +17,19 @@ interface ICanvasChart {
 	): void;
 	computeBoundaries(coordsData: MountType): number[];
 	chartLine(ctx: CanvasRenderingContext2D | null, coords: number[][]): void;
-	xLine(
+	yLine(
 		ctx: CanvasRenderingContext2D | null,
 		ROWS_COUNT: number,
 		step: number,
 		yMax: number,
 		textStep: number,
 	): void;
-	yLine(ctx: CanvasRenderingContext2D | null, xRatio: number, mountNames: string[]): void;
+	xLine(
+		ctx: CanvasRenderingContext2D | null,
+		xRatio: number,
+		mountNames: string[],
+		proxy: any,
+	): void;
 }
 
 class CanvasChartService implements ICanvasChart {
@@ -40,8 +45,8 @@ class CanvasChartService implements ICanvasChart {
 	drawingChart(
 		canvas: HTMLCanvasElement | null,
 		coordsData: MountType,
-		width: number = 1000,
-		padding: number = 80,
+		width: number,
+		padding: number,
 	) {
 		let { DPI_WIDTH, DPI_HEIGHT, PADDING, WIDTH, VIEW_HEIGHT, VIEW_WIDTH } = this;
 
@@ -71,13 +76,11 @@ class CanvasChartService implements ICanvasChart {
 		);
 
 		const pointTest = () => {
-			// this.paint(ctx, coordsData, mountNames, coordsXY, proxy);
-			console.log(proxy.mouse);
-			// return {
-			// 	destroy() {
-			// 		cancelAnimationFrame(REQUEST_ID);
-			// 		canvas.removeEventListener('mousemove', mousemove);
-			// 	},
+			this.paint(ctx, coordsData, mountNames, coordsXY, proxy);
+			console.log(proxy.mouse, WIDTH);
+			// return () => {
+			// 	cancelAnimationFrame(REQUEST_ID);
+			// 	canvas.removeEventListener('mousemove', mousemove);
 			// };
 		};
 
@@ -111,7 +114,12 @@ class CanvasChartService implements ICanvasChart {
 		ctx.closePath();
 	}
 
-	xLine(ctx: CanvasRenderingContext2D | null, yMax: number, yMin: number, proxy: {} | { mouse: { x: number } }) {
+	yLine(
+		ctx: CanvasRenderingContext2D | null,
+		yMax: number,
+		yMin: number,
+		proxy: {} | { mouse: { x: number } },
+	) {
 		const { PADDING, DPI_WIDTH, ROWS_COUNT, VIEW_HEIGHT } = this;
 		if (!ctx) return;
 
@@ -136,7 +144,7 @@ class CanvasChartService implements ICanvasChart {
 		ctx.closePath();
 	}
 
-	yLine(ctx: CanvasRenderingContext2D | null, xRatio: number, mountNames: string[]) {
+	xLine(ctx: CanvasRenderingContext2D | null, xRatio: number, mountNames: string[], proxy: any) {
 		const { PADDING, DPI_HEIGHT } = this;
 		if (!ctx) return;
 
@@ -153,6 +161,27 @@ class CanvasChartService implements ICanvasChart {
 		}
 		ctx.stroke();
 		ctx.closePath();
+
+		let idx1: number = -1;
+		ctx.beginPath();
+		ctx.strokeStyle = 'yellow';
+		ctx.lineWidth = 2;
+		for (let key of mountNames) {
+			idx1++;
+			const x: number = idx1 * xRatio;
+
+			if (this.isOver(proxy, x, mountNames.length)) {
+			
+				// ctx.save();
+				ctx.moveTo(x + PADDING, PADDING * 2);
+				ctx.lineTo(x + PADDING, DPI_HEIGHT - PADDING);
+				// ctx.restore();
+				// ctx.stroke();
+				// ctx.closePath();
+			}
+		}
+		ctx.stroke();
+		ctx.closePath();
 	}
 
 	paint(
@@ -166,15 +195,15 @@ class CanvasChartService implements ICanvasChart {
 
 		this.clear(ctx);
 		//@ts-ignore
-	
 
 		const [yMin, yMax] = this.computeBoundaries(coordsData);
 
 		const yRatio = VIEW_HEIGHT / (yMax - yMin);
 		const xRatio = VIEW_WIDTH / mountNames.length - 1;
+
 		if (!proxy) return;
-		this.xLine(ctx, yMax, yMin, proxy);
-		this.yLine(ctx, xRatio, mountNames);
+		this.yLine(ctx, yMax, yMin, proxy);
+		this.xLine(ctx, xRatio, mountNames, proxy);
 
 		let coords = coordsXY.map(({ x, y }, i) => {
 			return [Math.floor(i * xRatio), Math.floor(DPI_HEIGHT - PADDING - y * yRatio)];
@@ -188,16 +217,17 @@ class CanvasChartService implements ICanvasChart {
 		ctx?.clearRect(0, 0, DPI_WIDTH, DPI_HEIGHT);
 	}
 
-	// isOver(proxy: { mouse: { x: number } } , x: number, length: number) {
-	// 	if (!proxy.mouse) {
-	// 		return false;
-	// 	}
-	// 	const width = this.DPI_WIDTH / length;
-	// 	// console.log(width, 'width');
-	// 	console.log(x, 'x', proxy.mouse.x, 'mouse x', Math.abs(x - proxy.mouse.x) < width / 2);
-	// 	//@ts-ignore
-	// 	return Math.abs(x - mouse.x) < width / 2;
-	// }
+	isOver(proxy: any, x: number, length: number) {
+		const { DPI_HEIGHT, DPI_WIDTH } = this;
+		if (!proxy.mouse) {
+			return false;
+		}
+		const width = DPI_WIDTH / length;
+		// console.log( this.DPI_WIDTH , 'width');
+		// console.log(x, 'x', proxy.mouse.x, 'mouse x', Math.abs(x - proxy.mouse.x) < width / 2);
+		//@ts-ignore
+		return Math.abs(x - proxy.mouse.x) < width / 2;
+	}
 
 	init(
 		ctx: CanvasRenderingContext2D | null,
