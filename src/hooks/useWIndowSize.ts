@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 type SizeData = {
 	width: number;
 	height: number;
