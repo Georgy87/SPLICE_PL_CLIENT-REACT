@@ -1,46 +1,15 @@
 import { MountType } from '../store/slices/pack/types';
-
-interface ICanvasChart {
-	WIDTH: number;
-	HEIGHT: number;
-	PADDING: number;
-	DPI_WIDTH: number;
-	DPI_HEIGHT: number;
-	ROWS_COUNT: number;
-	VIEW_HEIGHT: number;
-	VIEW_WIDTH: number;
-	drawingChart(
-		canvas: HTMLCanvasElement | null,
-		coordsData: MountType | undefined,
-		width: number,
-		padding: number,
-	): void;
-	computeBoundaries(coordsData: MountType): number[];
-	chartLine(ctx: CanvasRenderingContext2D | null, coords: number[][]): void;
-	yLine(
-		ctx: CanvasRenderingContext2D | null,
-		ROWS_COUNT: number,
-		step: number,
-		yMax: number,
-		textStep: number,
-	): void;
-	xLine(
-		ctx: CanvasRenderingContext2D | null,
-		xRatio: number,
-		mountNames: string[],
-		proxy: any,
-	): void;
-}
+import { ICanvasChart } from './types';
 
 export class CanvasChartService implements ICanvasChart {
-	WIDTH = 1000;
 	HEIGHT = 300;
-	PADDING = 80;
+	width = 1000;
+	padding = 80;
+	dpiWidth = this.width * 2;
+	dpiHeight = this.HEIGHT * 2;
+	viewHeight = this.dpiHeight - this.padding * 2;
+	viewWidth = this.dpiWidth;
 	ROWS_COUNT = 5;
-	DPI_WIDTH = this.WIDTH * 2;
-	DPI_HEIGHT = this.HEIGHT * 2;
-	VIEW_HEIGHT = this.DPI_HEIGHT - this.PADDING * 2;
-	VIEW_WIDTH = this.DPI_WIDTH;
 
 	drawingChart(
 		canvas: HTMLCanvasElement | null,
@@ -48,33 +17,26 @@ export class CanvasChartService implements ICanvasChart {
 		width: number,
 		padding: number,
 	) {
-		let { DPI_WIDTH, PADDING } = this;
+		let { dpiWidth, dpiHeight } = this;
 
-		this.WIDTH = width;
-		this.PADDING = padding;
-		this.DPI_WIDTH = this.WIDTH * 2;
-		this.DPI_HEIGHT = this.HEIGHT * 2;
-		this.VIEW_WIDTH = DPI_WIDTH;
-		this.VIEW_HEIGHT = this.DPI_HEIGHT - this.PADDING * 2;
+		this.width = width;
+		this.padding = padding;
+		this.dpiWidth = this.width * 2;
+		this.dpiHeight = this.HEIGHT * 2;
+		this.viewWidth = dpiWidth;
+		this.viewHeight = this.dpiHeight - this.padding * 2;
 
 		if (!canvas) return;
 
 		const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
 		if (!ctx) return;
 
-		canvas.width = this.DPI_WIDTH;
-		canvas.height = this.DPI_HEIGHT;
+		canvas.width = dpiWidth;
+		canvas.height = dpiHeight;
 		const mountNames: string[] = Object.keys(coordsData);
 		const coordsXY: { x: number; y: number }[] = Object.values(coordsData);
 
-		this.drawingDottedLines(
-			ctx,
-			coordsData,
-			mountNames,
-			coordsXY,
-			canvas,
-			PADDING,
-		) 
+		this.drawingDottedLines(ctx, coordsData, mountNames, coordsXY, canvas, padding);
 	}
 
 	computeBoundaries(coordsData: MountType) {
@@ -88,22 +50,17 @@ export class CanvasChartService implements ICanvasChart {
 		ctx.lineWidth = 4;
 		ctx.strokeStyle = 'red';
 		for (const [x, y] of coords) {
-			ctx.lineTo(x + this.PADDING, y);
+			ctx.lineTo(x + this.padding, y);
 		}
 		ctx.stroke();
 		ctx.closePath();
 	}
 
-	yLine(
-		ctx: CanvasRenderingContext2D | null,
-		yMax: number,
-		yMin: number,
-		proxy: {} | { mouse: { x: number } },
-	) {
-		const { PADDING, DPI_WIDTH, ROWS_COUNT, VIEW_HEIGHT } = this;
+	yLine(ctx: CanvasRenderingContext2D | null, yMax: number, yMin: number) {
+		const { padding, dpiWidth, ROWS_COUNT, viewHeight } = this;
 		if (!ctx) return;
 
-		const step = VIEW_HEIGHT / ROWS_COUNT;
+		const step = viewHeight / ROWS_COUNT;
 		const textStep = (yMax - yMin) / ROWS_COUNT;
 		ctx.beginPath();
 		ctx.strokeStyle = '#bbb';
@@ -113,11 +70,11 @@ export class CanvasChartService implements ICanvasChart {
 		for (let i = 0; i <= ROWS_COUNT; i++) {
 			const y = step * i;
 			const text = Math.round(yMax - textStep * i);
-			ctx.fillText(text.toString(), PADDING / 5, y + PADDING);
+			ctx.fillText(text.toString(), padding / 5, y + padding);
 			ctx.lineWidth = 1;
 
-			ctx.moveTo(PADDING - 5, y + PADDING);
-			ctx.lineTo(DPI_WIDTH - PADDING, y + PADDING);
+			ctx.moveTo(padding - 5, y + padding);
+			ctx.lineTo(dpiWidth - padding, y + padding);
 		}
 
 		ctx.stroke();
@@ -125,7 +82,7 @@ export class CanvasChartService implements ICanvasChart {
 	}
 
 	xLine(ctx: CanvasRenderingContext2D | null, xRatio: number, mountNames: string[], proxy: any) {
-		const { PADDING, DPI_HEIGHT } = this;
+		const { padding, dpiHeight, viewHeight } = this;
 		if (!ctx) return;
 
 		ctx.beginPath();
@@ -134,10 +91,10 @@ export class CanvasChartService implements ICanvasChart {
 		for (let key of mountNames) {
 			idx++;
 			const x: number = idx * xRatio;
-			ctx.fillText(key, x + PADDING, DPI_HEIGHT - 20, 80);
+			if (this.width) ctx.fillText(key, x + padding, dpiHeight - 20, 80);
 			ctx.lineWidth = 1;
-			ctx.moveTo(x + PADDING, PADDING);
-			ctx.lineTo(x + PADDING, DPI_HEIGHT - PADDING + 25);
+			ctx.moveTo(x + padding, padding);
+			ctx.lineTo(x + padding, dpiHeight - padding + 25);
 		}
 
 		ctx.stroke();
@@ -153,11 +110,9 @@ export class CanvasChartService implements ICanvasChart {
 
 			if (this.isOver(proxy, x, mountNames.length)) {
 				// ctx.save();
-				ctx.moveTo(x + PADDING, PADDING * 2);
-				ctx.lineTo(x + PADDING, DPI_HEIGHT - PADDING);
+				ctx.moveTo(x + padding, padding * 2);
+				ctx.lineTo(x + padding, viewHeight - padding);
 				// ctx.restore();
-				// ctx.stroke();
-				// ctx.closePath();
 			}
 		}
 		ctx.stroke();
@@ -196,7 +151,7 @@ export class CanvasChartService implements ICanvasChart {
 		};
 
 		canvas?.addEventListener('mousemove', mousemove);
-	
+
 		function mousemove(event: MouseEvent) {
 			if (!canvas) return;
 			const { left } = canvas.getBoundingClientRect();
@@ -214,37 +169,37 @@ export class CanvasChartService implements ICanvasChart {
 		coordsXY: { x: number; y: number }[],
 		proxy: any,
 	) {
-		const { DPI_HEIGHT, VIEW_HEIGHT, VIEW_WIDTH, PADDING } = this;
+		const { dpiHeight, viewHeight, viewWidth, padding } = this;
 
 		this.clear(ctx);
 
 		const [yMin, yMax]: number[] = this.computeBoundaries(coordsData);
 
-		const yRatio: number = VIEW_HEIGHT / (yMax - yMin);
-		const xRatio: number = VIEW_WIDTH / mountNames.length - 1;
+		const yRatio: number = viewHeight / (yMax - yMin);
+		const xRatio: number = viewWidth / mountNames.length - 1;
 
 		if (!proxy) return;
-		this.yLine(ctx, yMax, yMin, proxy);
+		this.yLine(ctx, yMax, yMin);
 		this.xLine(ctx, xRatio, mountNames, proxy);
 
 		let coords: number[][] = coordsXY.map(({ x, y }, i) => {
-			return [Math.floor(i * xRatio), Math.floor(DPI_HEIGHT - PADDING - y * yRatio)];
+			return [Math.floor(i * xRatio), Math.floor(dpiHeight - padding - y * yRatio)];
 		});
 
 		this.chartLine(ctx, coords);
 	}
 
 	clear(ctx: CanvasRenderingContext2D | null) {
-		const { DPI_HEIGHT, DPI_WIDTH } = this;
-		ctx?.clearRect(0, 0, DPI_WIDTH, DPI_HEIGHT);
+		const { dpiHeight, dpiWidth } = this;
+		ctx?.clearRect(0, 0, dpiWidth, dpiHeight);
 	}
 
 	isOver(proxy: any, x: number, length: number) {
-		const { DPI_HEIGHT, DPI_WIDTH } = this;
+		const { dpiWidth } = this;
 		if (!proxy.mouse) {
 			return false;
 		}
-		const width: number = DPI_WIDTH / length;
+		const width: number = dpiWidth / length;
 		return Math.abs(x - proxy.mouse.x) < width / 2;
 	}
 }

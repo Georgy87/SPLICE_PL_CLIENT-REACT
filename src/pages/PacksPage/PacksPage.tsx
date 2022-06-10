@@ -22,7 +22,7 @@ export const PacksPage: React.FC<PropsType> = () => {
 	const packs = useSelector(selectPacks);
 	const loading = useSelector(selectLoading);
 	const totalPages = useSelector(selectTotalPages);
-	
+
 	let pagesCounter: number = 1;
 
 	const pageEnd = useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -84,7 +84,9 @@ export const PacksPage: React.FC<PropsType> = () => {
 						</div>
 					))
 				) : (
-					<Loader />
+					<div className={styles.loaderWrapper} >
+						<Loader />
+					</div>
 				)}
 				<div className={styles.loaderPagination} ref={pageEnd}>
 					{''}
