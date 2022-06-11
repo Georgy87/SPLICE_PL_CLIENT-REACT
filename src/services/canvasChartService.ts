@@ -10,20 +10,21 @@ export class CanvasChartService implements ICanvasChart {
 	viewHeight = this.dpiHeight - this.padding * 2;
 	viewWidth = this.dpiWidth;
 	ROWS_COUNT = 5;
-
+	textXWidth = 70;
+	textXHeight = 20;
+	textYWidth = 50;
 	drawingChart(
 		canvas: HTMLCanvasElement | null,
 		coordsData: MountType,
 		width: number,
 		padding: number,
 	) {
-		let { dpiWidth, dpiHeight } = this;
 
 		this.width = width;
 		this.padding = padding;
 		this.dpiWidth = this.width * 2;
 		this.dpiHeight = this.HEIGHT * 2;
-		this.viewWidth = dpiWidth;
+		this.viewWidth = this.dpiWidth;
 		this.viewHeight = this.dpiHeight - this.padding * 2;
 
 		if (!canvas) return;
@@ -31,8 +32,8 @@ export class CanvasChartService implements ICanvasChart {
 		const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
 		if (!ctx) return;
 
-		canvas.width = dpiWidth;
-		canvas.height = dpiHeight;
+		canvas.width = this.dpiWidth;
+		canvas.height = this.dpiHeight;
 		const mountNames: string[] = Object.keys(coordsData);
 		const coordsXY: { x: number; y: number }[] = Object.values(coordsData);
 
@@ -57,7 +58,7 @@ export class CanvasChartService implements ICanvasChart {
 	}
 
 	yLine(ctx: CanvasRenderingContext2D | null, yMax: number, yMin: number) {
-		const { padding, dpiWidth, ROWS_COUNT, viewHeight } = this;
+		let { padding, dpiWidth, ROWS_COUNT, viewHeight, width, textYWidth } = this;
 		if (!ctx) return;
 
 		const step = viewHeight / ROWS_COUNT;
@@ -70,7 +71,15 @@ export class CanvasChartService implements ICanvasChart {
 		for (let i = 0; i <= ROWS_COUNT; i++) {
 			const y = step * i;
 			const text = Math.round(yMax - textStep * i);
-			ctx.fillText(text.toString(), padding / 5, y + padding);
+
+			if (width < 900) {
+				textYWidth = 30;
+			}
+
+			if (width < 600) {
+				textYWidth = 20;
+			}
+			ctx.fillText(text.toString(), 0, y + padding, textYWidth);
 			ctx.lineWidth = 1;
 
 			ctx.moveTo(padding - 5, y + padding);
@@ -82,8 +91,9 @@ export class CanvasChartService implements ICanvasChart {
 	}
 
 	xLine(ctx: CanvasRenderingContext2D | null, xRatio: number, mountNames: string[], proxy: any) {
-		const { padding, dpiHeight, viewHeight } = this;
+		let { padding, dpiHeight, viewHeight, width, textXWidth, textXHeight } = this;
 		if (!ctx) return;
+	
 
 		ctx.beginPath();
 		ctx.strokeStyle = '#bbb';
@@ -91,7 +101,17 @@ export class CanvasChartService implements ICanvasChart {
 		for (let key of mountNames) {
 			idx++;
 			const x: number = idx * xRatio;
-			if (this.width) ctx.fillText(key, x + padding, dpiHeight - 20, 80);
+
+			if (width < 900) {
+				key = key.slice(0, 3);
+				textXWidth = 30;
+			}
+
+			if (width < 600) {
+				textXHeight = 0;
+				textXWidth = 22;
+			}
+			ctx.fillText(key, x + padding + 5, dpiHeight - textXHeight, textXWidth);
 			ctx.lineWidth = 1;
 			ctx.moveTo(x + padding, padding);
 			ctx.lineTo(x + padding, dpiHeight - padding + 25);
@@ -110,8 +130,8 @@ export class CanvasChartService implements ICanvasChart {
 
 			if (this.isOver(proxy, x, mountNames.length)) {
 				// ctx.save();
-				ctx.moveTo(x + padding, padding * 2);
-				ctx.lineTo(x + padding, viewHeight - padding);
+				ctx.moveTo(x + padding, padding);
+				ctx.lineTo(x + padding, viewHeight + padding);
 				// ctx.restore();
 			}
 		}
@@ -128,6 +148,7 @@ export class CanvasChartService implements ICanvasChart {
 		PADDING: number,
 	) {
 		let request_id: number = 0;
+		this.clear(ctx);
 		const proxy: any = new Proxy(
 			{},
 			{
@@ -169,7 +190,7 @@ export class CanvasChartService implements ICanvasChart {
 		coordsXY: { x: number; y: number }[],
 		proxy: any,
 	) {
-		const { dpiHeight, viewHeight, viewWidth, padding } = this;
+		const { dpiHeight, viewHeight, viewWidth, padding, width } = this;
 
 		this.clear(ctx);
 

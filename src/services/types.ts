@@ -9,6 +9,9 @@ export interface ICanvasChart {
 	ROWS_COUNT: number;
 	viewHeight: number;
 	viewWidth: number;
+	textXWidth: number; 
+	textXHeight: number;
+	textYWidth: number;
 	drawingChart(
 		canvas: HTMLCanvasElement | null,
 		coordsData: MountType | undefined,
