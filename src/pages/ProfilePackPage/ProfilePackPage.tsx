@@ -28,7 +28,7 @@ export const ProfilePackPage = () => {
 	const tag = useSelector(selectTag);
 	const packViews = useSelector(selectViewsData);
 
-	const [activeModal, setActiveModal] = useState<boolean>(true);
+	const [activeModal, setActiveModal] = useState<boolean>(false);
 	const [year, setYear] = useState<string>(new Date().getFullYear().toString());
 
 	const { width } = useWindowSize();
@@ -49,9 +49,9 @@ export const ProfilePackPage = () => {
 
 		if (width < 900 && width > 600) {
 			canvasChartService.drawingChart(canvasRef.current, packViews[year], 600, 55);
-		} 
+		}
 
-		if (width > 900){
+		if (width > 900) {
 			canvasChartService.drawingChart(canvasRef.current, packViews[year], 1000, 80);
 		}
 
@@ -70,7 +70,6 @@ export const ProfilePackPage = () => {
 			samples: samples,
 			packs: [packProfile],
 		});
-
 	}, [packProfile]);
 
 	return (
@@ -87,8 +86,17 @@ export const ProfilePackPage = () => {
 							<h1>{packProfile?.name}</h1>
 							<p>{packProfile?.packInfo}</p>
 						</div>
+						<div className={styles.openChart}>
+							<ButtonLayout
+								key={year}
+								typeStyle={'auth'}
+								onClicked={() => setActiveModal(true)}
+							>Views</ButtonLayout>
+						</div>
 					</div>
+
 					<div className={styles.sampleList}>
+					
 						<SampleList samples={samples} />
 					</div>
 				</div>

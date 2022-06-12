@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 
 .profilePackContainer {
 	width: 90vw;
@@ -36,7 +36,7 @@
 	display: flex;
 	position: fixed;
 	top: 55px;
-	width: 85vw;
+	width: 90%;
 	height: 250px;
 	align-items: center;
 	border-radius: 6px;
@@ -54,6 +54,16 @@
 	}
 	p {
 		color: #fff;
+	}
+	.openChart {
+		button {
+			width: 70px;
+			border: 1px solid $white;
+			&:hover {
+				border: 1px solid rgb(189, 189, 189);
+				background-color: transparent;
+			}
+		}
 	}
 }
 

@@ -93,7 +93,6 @@ export class CanvasChartService implements ICanvasChart {
 	xLine(ctx: CanvasRenderingContext2D | null, xRatio: number, mountNames: string[], proxy: any) {
 		let { padding, dpiHeight, viewHeight, width, textXWidth, textXHeight } = this;
 		if (!ctx) return;
-	
 
 		ctx.beginPath();
 		ctx.strokeStyle = '#bbb';
