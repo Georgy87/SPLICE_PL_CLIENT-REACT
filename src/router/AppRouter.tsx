@@ -12,6 +12,7 @@ import { UserPacksPage } from '../pages/UserPacksPage/UserPacksPage';
 import { UserProfilePage } from '../pages/UserProfilePage/UserProfilePage';
 
 export const AppRouter: React.FC = () => {
+
 	return (
 		<>
 			<Routes>

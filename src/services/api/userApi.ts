@@ -9,7 +9,7 @@ export const userApi = {
 	async login(payload: { email: string; password: string }) {
 		const { email, password } = payload;
 
-		const { data } = await instance.post('login', {
+		const data = await instance.post('login', {
 			email,
 			password,
 		});

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App component App snapshot 1`] = `
+exports[`LoginPage component LikedSamplesPage snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -33,7 +33,9 @@ Object {
                 type="email"
                 value=""
               />
-              <p />
+              <p
+                data-testid="error-valid-message"
+              />
             </div>
             <div
               class="textbox"
@@ -46,84 +48,11 @@ Object {
               />
               <p />
             </div>
-            <div
-              class="platformBtn"
+            <button
+              type="submit"
             >
-              <button
-                class="platformBtn auth"
-                type="submit"
-              >
-                Log In
-              </button>
-            </div>
-            <div
-              class="formFooter"
-            >
-              <p>
-                Don't have an account?
-              </p>
-              <a
-                class=""
-                data-testid="registration-link"
-                href="/registration"
-              >
-                Sign up?
-              </a>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div
-        data-testid="login-page"
-      >
-        <div
-          class="root"
-        >
-          <div
-            class="bgAuthImage"
-          />
-          <form
-            class="authBox"
-          >
-            <div
-              class="authLabel"
-            >
-              <h1>
-                Log In to Your Splice Account!
-              </h1>
-            </div>
-            <div
-              class="textbox"
-            >
-              <input
-                name="email"
-                placeholder="Email"
-                type="email"
-                value=""
-              />
-              <p />
-            </div>
-            <div
-              class="textbox"
-            >
-              <input
-                name="password"
-                placeholder="Password"
-                type="password"
-                value=""
-              />
-              <p />
-            </div>
-            <div
-              class="platformBtn"
-            >
-              <button
-                class="platformBtn auth"
-                type="submit"
-              >
-                Log In
-              </button>
-            </div>
+              Log In
+            </button>
             <div
               class="formFooter"
             >
@@ -172,7 +101,9 @@ Object {
               type="email"
               value=""
             />
-            <p />
+            <p
+              data-testid="error-valid-message"
+            />
           </div>
           <div
             class="textbox"
@@ -185,84 +116,11 @@ Object {
             />
             <p />
           </div>
-          <div
-            class="platformBtn"
+          <button
+            type="submit"
           >
-            <button
-              class="platformBtn auth"
-              type="submit"
-            >
-              Log In
-            </button>
-          </div>
-          <div
-            class="formFooter"
-          >
-            <p>
-              Don't have an account?
-            </p>
-            <a
-              class=""
-              data-testid="registration-link"
-              href="/registration"
-            >
-              Sign up?
-            </a>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div
-      data-testid="login-page"
-    >
-      <div
-        class="root"
-      >
-        <div
-          class="bgAuthImage"
-        />
-        <form
-          class="authBox"
-        >
-          <div
-            class="authLabel"
-          >
-            <h1>
-              Log In to Your Splice Account!
-            </h1>
-          </div>
-          <div
-            class="textbox"
-          >
-            <input
-              name="email"
-              placeholder="Email"
-              type="email"
-              value=""
-            />
-            <p />
-          </div>
-          <div
-            class="textbox"
-          >
-            <input
-              name="password"
-              placeholder="Password"
-              type="password"
-              value=""
-            />
-            <p />
-          </div>
-          <div
-            class="platformBtn"
-          >
-            <button
-              class="platformBtn auth"
-              type="submit"
-            >
-              Log In
-            </button>
-          </div>
+            Log In
+          </button>
           <div
             class="formFooter"
           >
@@ -335,7 +193,7 @@ Object {
 }
 `;
 
-exports[`LoginPage component LoginPage snapshot 1`] = `
+exports[`LoginPage component loginPage snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
@@ -368,7 +226,9 @@ Object {
                 type="email"
                 value=""
               />
-              <p />
+              <p
+                data-testid="error-valid-message"
+              />
             </div>
             <div
               class="textbox"
@@ -381,84 +241,11 @@ Object {
               />
               <p />
             </div>
-            <div
-              class="platformBtn"
+            <button
+              type="submit"
             >
-              <button
-                class="platformBtn auth"
-                type="submit"
-              >
-                Log In
-              </button>
-            </div>
-            <div
-              class="formFooter"
-            >
-              <p>
-                Don't have an account?
-              </p>
-              <a
-                class=""
-                data-testid="registration-link"
-                href="/registration"
-              >
-                Sign up?
-              </a>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div
-        data-testid="login-page"
-      >
-        <div
-          class="root"
-        >
-          <div
-            class="bgAuthImage"
-          />
-          <form
-            class="authBox"
-          >
-            <div
-              class="authLabel"
-            >
-              <h1>
-                Log In to Your Splice Account!
-              </h1>
-            </div>
-            <div
-              class="textbox"
-            >
-              <input
-                name="email"
-                placeholder="Email"
-                type="email"
-                value=""
-              />
-              <p />
-            </div>
-            <div
-              class="textbox"
-            >
-              <input
-                name="password"
-                placeholder="Password"
-                type="password"
-                value=""
-              />
-              <p />
-            </div>
-            <div
-              class="platformBtn"
-            >
-              <button
-                class="platformBtn auth"
-                type="submit"
-              >
-                Log In
-              </button>
-            </div>
+              Log In
+            </button>
             <div
               class="formFooter"
             >
@@ -507,7 +294,9 @@ Object {
               type="email"
               value=""
             />
-            <p />
+            <p
+              data-testid="error-valid-message"
+            />
           </div>
           <div
             class="textbox"
@@ -520,84 +309,11 @@ Object {
             />
             <p />
           </div>
-          <div
-            class="platformBtn"
+          <button
+            type="submit"
           >
-            <button
-              class="platformBtn auth"
-              type="submit"
-            >
-              Log In
-            </button>
-          </div>
-          <div
-            class="formFooter"
-          >
-            <p>
-              Don't have an account?
-            </p>
-            <a
-              class=""
-              data-testid="registration-link"
-              href="/registration"
-            >
-              Sign up?
-            </a>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div
-      data-testid="login-page"
-    >
-      <div
-        class="root"
-      >
-        <div
-          class="bgAuthImage"
-        />
-        <form
-          class="authBox"
-        >
-          <div
-            class="authLabel"
-          >
-            <h1>
-              Log In to Your Splice Account!
-            </h1>
-          </div>
-          <div
-            class="textbox"
-          >
-            <input
-              name="email"
-              placeholder="Email"
-              type="email"
-              value=""
-            />
-            <p />
-          </div>
-          <div
-            class="textbox"
-          >
-            <input
-              name="password"
-              placeholder="Password"
-              type="password"
-              value=""
-            />
-            <p />
-          </div>
-          <div
-            class="platformBtn"
-          >
-            <button
-              class="platformBtn auth"
-              type="submit"
-            >
-              Log In
-            </button>
-          </div>
+            Log In
+          </button>
           <div
             class="formFooter"
           >

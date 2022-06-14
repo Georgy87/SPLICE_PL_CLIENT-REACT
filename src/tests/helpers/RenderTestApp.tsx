@@ -1,19 +1,13 @@
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import { AppRouter } from '../../router/AppRouter';
 import { store } from '../../store';
 
-type PropsType = {
-	children: React.ReactNode;
-};
-
-export const RenderTestApp: React.FC<PropsType> = ({ children }) => {
+export const renderTest = (component: React.ReactChild) => {
 	return (
 		<Provider store={store}>
 			<MemoryRouter>
-				<AppRouter />
-				{children}
+				{component}
 			</MemoryRouter>
 		</Provider>
 	);

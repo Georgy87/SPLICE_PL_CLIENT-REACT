@@ -2,7 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { User, UserSliceState } from './types';
 import { Samples } from '../samples/types';
-import { fetchAuth, fetchGetLikedSamples, fetchLogin, fetchUpdateAvatar, fetchUpdateEmail, fetchUpdateFullName } from './actions';
+import {
+	fetchAuth,
+	fetchGetLikedSamples,
+	fetchLogin,
+	fetchUpdateAvatar,
+	fetchUpdateEmail,
+	fetchUpdateFullName,
+} from './actions';
 
 export const initialState: UserSliceState = {
 	user: null,
@@ -26,22 +33,36 @@ export const userSlice = createSlice({
 	},
 	extraReducers: (builder) =>
 		builder
-			.addCase(fetchLogin.fulfilled.type, (state, action: PayloadAction<{ user: User; token: string; message: string }>) => {
-				state.user = action.payload?.user;
-				state.token = action.payload?.token;
-				state.isAuth = true;
-			})
+			.addCase(
+				fetchLogin.fulfilled.type,
+				(
+					state,
+					action: PayloadAction<{ data: { user: User; token: string; message: string } }>,
+				) => {
+					if (action.payload) {
+						const { data } = action.payload;
+						const { user, token, message } = data;
+
+						state.user = user;
+						state.token = token;
+						state.isAuth = true;
+					}
+				},
+			)
 			.addCase(fetchLogin.rejected.type, (state, action: PayloadAction<string>) => {
 				state.errorMessage = action.payload;
 			})
-			.addCase(fetchAuth.fulfilled.type, (state, action: PayloadAction<{ user: User; token: string }>) => {
-				if (action.payload) {
-					const { user, token } = action.payload;
-					state.user = user;
-					state.token = token;
-					state.isAuth = true;
-				}
-			})
+			.addCase(
+				fetchAuth.fulfilled.type,
+				(state, action: PayloadAction<{ user: User; token: string }>) => {
+					if (action.payload) {
+						const { user, token } = action.payload;
+						state.user = user;
+						state.token = token;
+						state.isAuth = true;
+					}
+				},
+			)
 			.addCase(fetchUpdateEmail.fulfilled.type, (state, action: PayloadAction<User>) => {
 				if (action.payload) {
 					state.user = action.payload;
@@ -52,9 +73,12 @@ export const userSlice = createSlice({
 					state.user = action.payload;
 				}
 			})
-			.addCase(fetchGetLikedSamples.fulfilled.type, (state, action: PayloadAction<Samples[]>) => {
-				state.samples = action.payload;
-			})
+			.addCase(
+				fetchGetLikedSamples.fulfilled.type,
+				(state, action: PayloadAction<Samples[]>) => {
+					state.samples = action.payload;
+				},
+			)
 			.addCase(fetchUpdateAvatar.fulfilled.type, (state, action: PayloadAction<string>) => {
 				state.avatar = action.payload;
 			}),

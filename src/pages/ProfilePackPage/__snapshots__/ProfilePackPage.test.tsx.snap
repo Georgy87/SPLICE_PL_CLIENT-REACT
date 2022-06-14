@@ -1,13 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LikedSamplesPage component LikedSamplesPage snapshot 1`] = `
+exports[`ProfilePackPage component profilePackPage snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
-        class="root"
-        data-testid="liked-samples-page"
+        data-testid="profile-pack-page"
       >
         <div
           class="loader"
@@ -32,13 +31,26 @@ Object {
             </svg>
           </div>
         </div>
+        <div
+          class="modalCourse"
+        >
+          <div
+            class="modal"
+          >
+            <div>
+              <canvas />
+            </div>
+            <div
+              class="changeYears"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="root"
-      data-testid="liked-samples-page"
+      data-testid="profile-pack-page"
     >
       <div
         class="loader"
@@ -61,6 +73,20 @@ Object {
               stroke-width="3.6"
             />
           </svg>
+        </div>
+      </div>
+      <div
+        class="modalCourse"
+      >
+        <div
+          class="modal"
+        >
+          <div>
+            <canvas />
+          </div>
+          <div
+            class="changeYears"
+          />
         </div>
       </div>
     </div>

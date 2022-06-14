@@ -17,7 +17,7 @@ export type FormProps = {
 	password: string;
 };
 
-export const LoginPage: React.FC = () => {
+export const LoginPage = () => {
 	const auth = useSelector(selectAuth);
 	const errorMessage = useSelector(selectErrorMessage);
 
@@ -45,7 +45,7 @@ export const LoginPage: React.FC = () => {
 		resolver: yupResolver(LoginFormSchema),
 	});
 
-	const onSubmit = (data: FormProps) => {
+	const onSubmit = async (data: FormProps) => {
 		dispatch(fetchLogin(data));
 		reset();
 	};
@@ -71,7 +71,7 @@ export const LoginPage: React.FC = () => {
 							value={email}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeEmail(e)}
 						/>
-						<p>{errors.email?.message}</p>
+						<p data-testid='error-valid-message'>{errors.email?.message}</p>
 					</div>
 					<div className={styles.textbox}>
 						<input
@@ -83,7 +83,7 @@ export const LoginPage: React.FC = () => {
 						/>
 						<p>{errorMessage ? errorMessage : errors.password?.message}</p>
 					</div>
-					<ButtonLayout typeStyle='auth'>Log In</ButtonLayout>
+					<button type='submit'>Log In</button>
 					<div className={styles.formFooter}>
 						<p>Don't have an account?</p>
 						<NavLink to='/registration' data-testid='registration-link'>Sign up?</NavLink>
