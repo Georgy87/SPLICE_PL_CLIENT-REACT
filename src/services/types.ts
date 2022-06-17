@@ -2,16 +2,17 @@ import { MountType } from '../store/slices/pack/types';
 
 export interface ICanvasChart {
 	width: number;
-	HEIGHT: number;
+	height: number;
 	padding: number;
 	dpiWidth: number;
 	dpiHeight: number;
-	ROWS_COUNT: number;
+	rowsCount: number;
 	viewHeight: number;
 	viewWidth: number;
 	textXWidth: number; 
 	textXHeight: number;
 	textYWidth: number;
+	circleRadius: number;
 	drawingChart(
 		canvas: HTMLCanvasElement | null,
 		coordsData: MountType | undefined,
@@ -19,10 +20,10 @@ export interface ICanvasChart {
 		padding: number,
 	): void;
 	computeBoundaries(coordsData: MountType): number[];
-	chartLine(ctx: CanvasRenderingContext2D | null, coords: number[][]): void;
+	chartLine(ctx: CanvasRenderingContext2D | null, coords: number[][], proxy: any): void;
 	yLine(
 		ctx: CanvasRenderingContext2D | null,
-		ROWS_COUNT: number,
+		rowsCount: number,
 		step: number,
 		yMax: number,
 		textStep: number,
@@ -33,7 +34,7 @@ export interface ICanvasChart {
 		mountNames: string[],
 		proxy: any,
 	): void;
-	drawingDottedLines(
+	drawingElements(
 		ctx: CanvasRenderingContext2D | null,
 		coordsData: MountType,
 		mountNames: string[],
@@ -47,6 +48,10 @@ export interface ICanvasChart {
 		mountNames: string[],
 		coordsXY: { x: number; y: number }[],
 		proxy: any,
+		canvas: HTMLCanvasElement | null,
+		requestId: number,
+		mousemove: (e: MouseEvent) => void,
+		mouseleave: (e: MouseEvent) => void,
 	): void;
 	clear(ctx: CanvasRenderingContext2D | null): void;
     isOver(proxy: any, x: number, length: number): boolean;
