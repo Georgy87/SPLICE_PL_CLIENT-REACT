@@ -11,6 +11,7 @@ import { LoginFormSchema } from '../../utils/useFormSchemas';
 import { fetchLogin } from '../../store/slices/user/actions';
 
 import styles from './LoginPage.module.scss';
+import { Button } from 'antd';
 
 export type FormProps = {
 	email: string;
@@ -83,7 +84,7 @@ export const LoginPage = () => {
 						/>
 						<p>{errorMessage ? errorMessage : errors.password?.message}</p>
 					</div>
-					<button type='submit'>Log In</button>
+					<ButtonLayout typeStyle='auth'>Log In</ButtonLayout>
 					<div className={styles.formFooter}>
 						<p>Don't have an account?</p>
 						<NavLink to='/registration' data-testid='registration-link'>Sign up?</NavLink>

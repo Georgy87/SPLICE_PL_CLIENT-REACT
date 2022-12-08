@@ -19,7 +19,7 @@ export const AddSampleInfoModal: React.FC<AddSampleInfoModalType> = (props) => {
 
 	const [value, setValue] = useState<number>(0);
 	const [bpmValue, setBpmValue] = useState<number>(0);
-	const [category, setCategory] = useState<string>('Choose One');
+	const [category, setCategory] = useState<string>(sampleCategories[0]);
 	const [isActive, setIsActive] = useState<boolean>(false);
 
 	const dispatch = useDispatch();
