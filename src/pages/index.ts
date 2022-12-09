@@ -1,0 +1,10 @@
+export { AvatarEditorPage } from './AvatarEditorPage';
+export { CreatePackPage } from './CreatePackPage';
+export { LikedSamplesPage } from './LikedSamplesPage';
+export { LoginPage } from './LoginPage';
+export { PacksPage } from './PacksPage/PacksPage';
+export { ProfilePackPage } from './ProfilePackPage';
+export { RegistrationPage } from './RegistrationPage';
+export { SequencerPage } from './SequencerPage';
+export { UserPacksPage } from './UserPacksPage';
+export { UserProfilePage } from './UserProfilePage';

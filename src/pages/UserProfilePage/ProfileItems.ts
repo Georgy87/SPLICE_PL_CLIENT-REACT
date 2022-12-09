@@ -17,7 +17,6 @@ export const ProfileItems: UserInfoItems[] = [
 ];
 
 
-
 export const userInfoTriggers = {
 	Update: 'Update',
 	DownLoad: 'DownLoad',
