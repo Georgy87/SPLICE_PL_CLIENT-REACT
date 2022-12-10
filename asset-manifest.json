@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/css/main.ebf2dbfe.css",
-    "main.js": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/js/main.e8d9c6d2.js",
-    "static/js/787.bd5a8236.chunk.js": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/js/787.bd5a8236.chunk.js",
-    "static/media/auth-background-image.jpeg": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/media/auth-background-image.e0ce920509a52f3b5a74.jpeg",
-    "static/media/Kick.wav": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/media/Kick.88d07023eda0dab11b65.wav",
-    "static/media/Clap.wav": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/media/Clap.1b886df419951c4bb580.wav",
-    "static/media/Hat.wav": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/media/Hat.f4f08b10afb697fd5a0f.wav",
-    "static/media/unnamed.jpg": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/media/unnamed.ce48ced2f652d62f8a22.jpg",
-    "index.html": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/index.html",
-    "main.ebf2dbfe.css.map": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/css/main.ebf2dbfe.css.map",
-    "main.e8d9c6d2.js.map": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/js/main.e8d9c6d2.js.map",
-    "787.bd5a8236.chunk.js.map": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/js/787.bd5a8236.chunk.js.map"
+    "main.css": "/SPLICE_PL_CLIENT-REACT/static/css/main.f65dae58.css",
+    "main.js": "/SPLICE_PL_CLIENT-REACT/static/js/main.dc9792e7.js",
+    "static/js/787.bd5a8236.chunk.js": "/SPLICE_PL_CLIENT-REACT/static/js/787.bd5a8236.chunk.js",
+    "static/media/auth-background-image.jpeg": "/SPLICE_PL_CLIENT-REACT/static/media/auth-background-image.e0ce920509a52f3b5a74.jpeg",
+    "static/media/Kick.wav": "/SPLICE_PL_CLIENT-REACT/static/media/Kick.88d07023eda0dab11b65.wav",
+    "static/media/Clap.wav": "/SPLICE_PL_CLIENT-REACT/static/media/Clap.1b886df419951c4bb580.wav",
+    "static/media/Hat.wav": "/SPLICE_PL_CLIENT-REACT/static/media/Hat.f4f08b10afb697fd5a0f.wav",
+    "static/media/unnamed.jpg": "/SPLICE_PL_CLIENT-REACT/static/media/unnamed.ce48ced2f652d62f8a22.jpg",
+    "index.html": "/SPLICE_PL_CLIENT-REACT/index.html",
+    "main.f65dae58.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/main.f65dae58.css.map",
+    "main.dc9792e7.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/main.dc9792e7.js.map",
+    "787.bd5a8236.chunk.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/787.bd5a8236.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ebf2dbfe.css",
-    "static/js/main.e8d9c6d2.js"
+    "static/css/main.f65dae58.css",
+    "static/js/main.dc9792e7.js"
   ]
 }
