@@ -13,6 +13,14 @@ import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayou
 import Modal from '../../layouts/ModalLayout/ModalLayout';
 import { Sequencer } from '../../components/Sequencer/Sequencer';
 import { fetchGetLikedSamples } from '../../store/slices/user/actions';
+//@ts-ignore
+import Kick from '../../assets/samples-sequenser/Kick.wav';
+//@ts-ignore
+import Clap from '../../assets/samples-sequenser/Clap.wav';
+//@ts-ignore
+import Hat from '../../assets/samples-sequenser/Hat.wav';
+//@ts-ignore
+import Open_Hat from '../../assets/samples-sequenser/Open-Hat.wav';
 
 import styles from './SequencerPage.module.scss';
 
@@ -29,9 +37,9 @@ export const SequencerPage = () => {
 
 	const [newSampleSrc, setNewSampleSrc] = useState<string>('');
 	const [sampleList, setSampleList] = useState<string[]>([
-		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
-		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
-		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
+		Kick,
+		Clap,
+		Hat,
 		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
 		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
 	]);
@@ -132,7 +140,7 @@ export const SequencerPage = () => {
 				onDropHandler={onDropHandler}
 			/>
 
-			<div className={styles.desktopModalWrapper}>
+			{/* <div className={styles.desktopModalWrapper}>
 				<div className={styles.samplesContainer}>
 					{!likedSamples ? (
 						<Loader />
@@ -154,7 +162,7 @@ export const SequencerPage = () => {
 						})
 					)}
 				</div>
-			</div>
+			</div> */}
 
 			<Modal setActive={setActiveModal} active={activeModal}>
 				<div className={styles.mobileModalWrapper}>
