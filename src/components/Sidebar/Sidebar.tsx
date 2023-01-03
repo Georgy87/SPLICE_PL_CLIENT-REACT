@@ -1,12 +1,12 @@
 import React from 'react';
-
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { selectAuth } from '../../store/selectors/userSelectors';
 import { logout } from '../../store/slices/user/userSlice';
+import { useAppDispatch } from '../../store/types';
 import { SidebarList } from '../SidebarList/SidebarList';
 
 import styles from './Sidebar.module.scss';
@@ -19,7 +19,7 @@ type PropsType = {
 export const Sidebar: React.FC<PropsType> = ({ sidebar, setSideBar }) => {
 	const isAuth = useSelector(selectAuth);
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	return (
 		<>
 			<div

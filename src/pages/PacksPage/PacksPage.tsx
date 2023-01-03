@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { Player } from '../../components/Player/Player';
 import SearchInput from '../../components/SearchInput/SearchInput';
@@ -11,6 +11,7 @@ import { Loader } from '../../components/Loader/Loader';
 import { fetchGetPacks, fetchSearchPacks } from '../../store/slices/pack/actions';
 import { selectLoading } from '../../store/selectors/packsSelectors';
 import { setDefaultPackState, setLoading } from '../../store/slices/pack/packSlice';
+import { useAppDispatch } from '../../store/types';
 
 import styles from './PacksPage.module.scss';
 
@@ -30,7 +31,7 @@ export const PacksPage: React.FC<PropsType> = () => {
 	const [pageNumber, setPageNumber] = useState<number>(0);
 	const [value, setValue] = useState<string>('');
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const onLongMore = () => {
 		setPageNumber((prevPageNumber) => prevPageNumber + 1);
@@ -39,6 +40,7 @@ export const PacksPage: React.FC<PropsType> = () => {
 	useEffect(() => {
 		dispatch(fetchGetPacks(pageNumber));
 		dispatch(setLoading(true));
+		console.log('hello')
 	}, [pageNumber]);
 
 	useEffect(() => {

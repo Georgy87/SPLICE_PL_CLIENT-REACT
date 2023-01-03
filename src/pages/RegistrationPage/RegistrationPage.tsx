@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../store/types';
 
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { AuthorizationLayout } from '../../layouts/AuthorizationLayout/AuthorizationLayout';
-
 import { RegisterFormSchema } from '../../utils/useFormSchemas';
+import { fetchRegistration } from '../../store/slices/user/actions';
 
 import styles from './RegistrationPage.module.scss';
-import { fetchRegistration } from '../../store/slices/user/actions';
 
 export type FormProps = {
 	fullname: string;
@@ -25,7 +24,7 @@ export const RegistrationPage: React.FC = () => {
 	const [password2, setPassword2] = useState<string>('');
 	const [fullName, setFullName] = useState<string>('');
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setFullName(e.target.value);

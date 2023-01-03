@@ -1,10 +1,11 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { selectTag } from '../../store/selectors/packsSelectors';
 import { setTag } from '../../store/slices/pack/packSlice';
 import { Samples } from '../../store/slices/samples/types';
+import { useAppDispatch } from '../../store/types';
 import { sampleCategories } from '../AddSampleInfoModal/sampleCategories';
 import { SampleItem } from '../SampleItem/SampleItem';
 
@@ -18,7 +19,7 @@ type PropsType = {
 export const SampleList: React.FC<PropsType> = ({ samples, pageName }) => {
 	const packTag = useSelector(selectTag);
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const onSetTag = (tag: string) => {
 		if (tag !== packTag) {

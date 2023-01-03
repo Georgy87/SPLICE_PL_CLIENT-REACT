@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { UserProfileItem } from '../../components/UserProfileItem/UserProfileItem';
@@ -8,12 +8,13 @@ import { selectUser } from '../../store/selectors/userSelectors';
 import { fetchUpdateEmail, fetchUpdateFullName } from '../../store/slices/user/actions';
 import { ProfileItems, ProfileTriggerItems, UserInfoItems, UserInfoTriggers } from './ProfileItems';
 import avatar from '../../assets/avatar/unnamed.jpg';
+import { useAppDispatch } from '../../store/types';
 
 import styles from './UserProfilePage.module.scss';
 
 export const UserProfilePage: React.FC = () => {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const user = useSelector(selectUser);
 

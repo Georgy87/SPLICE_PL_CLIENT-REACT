@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
-import { useDispatch } from 'react-redux';
 
+import { useAppDispatch } from '../../store/types';
 import { useDropzone } from '../../hooks/useDropzone';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
@@ -16,7 +16,7 @@ export const AvatarEditorPage = () => {
 	const previewCanvasRef = useRef<HTMLCanvasElement | null>(null);
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const [avatarState, setAvatarState] = useState<{
 		imgSrc: string;

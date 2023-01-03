@@ -40,13 +40,14 @@ export const packSlice = createSlice({
 				fetchGetPacks.fulfilled.type,
 				(
 					state,
-					action: PayloadAction<{
-						data: { packs: Pack[]; totalPages: number };
-					}>
+					action: PayloadAction<
+						{ packs: Pack[]; totalPages: number }
+					>
 				) => {
-					const { data } = action.payload;
-					const { packs, totalPages } = data;
-					state.packs = [...state.packs, ...packs];
+					const { packs, totalPages } = action.payload;
+					const arr = [...Array.from(new Set([...state.packs])), ...packs]
+					console.log(arr);
+					state.packs = arr;
 					state.totalPages = totalPages;
 					state.loading = false;
 				}

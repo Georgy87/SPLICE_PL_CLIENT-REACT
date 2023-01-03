@@ -53,7 +53,7 @@ export const PackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 						typeBtn='pack'
 					></IconChangeLayout>
 				) : (
-					<Loader />
+					<></>
 				)}
 
 				<img src={`${pack.picture}`} alt='pack-cover' />

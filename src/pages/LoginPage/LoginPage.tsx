@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { AuthorizationLayout } from '../../layouts/AuthorizationLayout/AuthorizationLayout';
 import { selectAuth, selectErrorMessage } from '../../store/selectors/userSelectors';
 import { LoginFormSchema } from '../../utils/useFormSchemas';
 import { fetchLogin } from '../../store/slices/user/actions';
+import { useAppDispatch } from '../../store/types';
 
 import styles from './LoginPage.module.scss';
-import { Button } from 'antd';
 
 export type FormProps = {
 	email: string;
@@ -27,7 +27,7 @@ export const LoginPage = () => {
 
 	const navigate = useNavigate();
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { CanvasList } from '../../components/CanvasList/CanvasList';
 import { UserPackItem } from '../../components/UserPackItem/UserPackItem';
@@ -13,6 +13,7 @@ import { workerInstanceCreateSample } from '../../workers/WebWorkerEnabler';
 import { Loader } from '../../components/Loader/Loader';
 import Modal from '../../layouts/ModalLayout/ModalLayout';
 import { fetchGetUserPacks } from '../../store/slices/pack/actions';
+import { useAppDispatch } from '../../store/types';
 
 import styles from './UserPacksPage.module.scss';
 
@@ -22,7 +23,7 @@ export const UserPacksPage = () => {
 
 	const [activeModal, setActiveModal] = useState<boolean>(false);
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		if (files?.length) {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { Loader } from '../../components/Loader/Loader';
 import { SampleList } from '../../components/SampleList/SampleList';
@@ -7,6 +7,7 @@ import { defaultState } from '../../context/PlayerContextProvider/PlayerContextP
 import { useSound } from '../../hooks/useSound';
 import { selectLikedSamples, selectUserMain } from '../../store/selectors/userSelectors';
 import { fetchGetLikedSamples } from '../../store/slices/user/actions';
+import { useAppDispatch } from '../../store/types';
 
 import styles from './LikedSamplesPage.module.scss';
 
@@ -16,7 +17,7 @@ export const LikedSamplesPage: React.FC = () => {
 
 	const { setPlayerState } = useSound();
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		dispatch(fetchGetLikedSamples());

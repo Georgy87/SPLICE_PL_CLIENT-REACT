@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { selectPackId } from '../../store/selectors/samplesSelectors';
 import { audioService } from '../../services/audioService';
@@ -8,6 +8,7 @@ import { canvasSampleService } from '../../services/canvasSampleService';
 import { deleteSampleFiles } from '../../store/slices/samples/samplesSlice';
 import { createSamples } from '../../utils/createSamples';
 import { detectBrowser } from '../../utils/detectBrowser';
+import { useAppDispatch } from '../../store/types';
 
 type PropsType = {
 	file: File;
@@ -19,7 +20,7 @@ export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
 
 	const browser = detectBrowser();
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 

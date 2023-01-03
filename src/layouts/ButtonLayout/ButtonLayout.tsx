@@ -40,6 +40,7 @@ export const ButtonLayout: React.FC<PropsType> = ({ children, typeStyle, onClick
 	return (
 		<div className={styles.platformBtn}>
 			<button
+			 	data-testid='submit_button'
 				disabled={disabled}
 				onClick={onClicked}
 				type={typeStyle === 'auth' ? 'submit' : undefined}

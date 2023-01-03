@@ -1,31 +1,50 @@
 import { BankOutlined, NotificationTwoTone, UploadOutlined, CustomerServiceOutlined, HeartOutlined } from '@ant-design/icons';
-import { FaHome, FaUserPlus, FaHeart } from 'react-icons/fa';
-import { BiLogOutCircle } from 'react-icons/bi';
-import { IoMdLogOut } from 'react-icons/io';
-import { BsUpload } from 'react-icons/bs';
-import { CgMusic } from 'react-icons/cg';
-import { GiMetronome } from 'react-icons/gi';
+// import { FaHome, FaUserPlus, FaHeart } from 'react-icons/fa';
+// import { BiLogOutCircle } from 'react-icons/bi';
+// import { IoMdLogOut } from 'react-icons/io';
+// import { BsUpload } from 'react-icons/bs';
+// import { CgMusic } from 'react-icons/cg';
+// import { GiMetronome } from 'react-icons/gi';
 
-import { AccountCircleOutlined } from '@material-ui/icons';
+// import { AccountCircleOutlined } from '@material-ui/icons';
 
 import styles from './IconLayout.module.scss';
 
+// export const icons = {
+// 	// home: FaHome,
+// 	// login: BiLogOutCircle,
+// 	// logout: IoMdLogOut,
+// 	// packs: NotificationTwoTone,
+// 	// genres: BankOutlined,
+// 	// profile: AccountCircleOutlined,
+// 	// upload: UploadOutlined,
+// 	// user: FaUserPlus,
+// 	// music: CustomerServiceOutlined,
+// 	// likes: FaHeart,
+// 	// like: FaHeart,
+// 	// dislike: HeartOutlined,
+// 	// drop: BsUpload,
+// 	// sequencer: CgMusic,
+// 	// metronom: GiMetronome,
+// };
+
+
 export const icons = {
-	home: FaHome,
-	login: BiLogOutCircle,
-	logout: IoMdLogOut,
-	packs: NotificationTwoTone,
-	genres: BankOutlined,
-	profile: AccountCircleOutlined,
+	home: CustomerServiceOutlined,
+	login: CustomerServiceOutlined,
+	logout: CustomerServiceOutlined,
+	packs: CustomerServiceOutlined,
+	genres: CustomerServiceOutlined,
+	profile: CustomerServiceOutlined,
 	upload: UploadOutlined,
-	user: FaUserPlus,
+	user: CustomerServiceOutlined,
 	music: CustomerServiceOutlined,
-	likes: FaHeart,
-	like: FaHeart,
+	likes: CustomerServiceOutlined,
+	like: CustomerServiceOutlined,
 	dislike: HeartOutlined,
-	drop: BsUpload,
-	sequencer: CgMusic,
-	metronom: GiMetronome,
+	drop: CustomerServiceOutlined,
+	sequencer: CustomerServiceOutlined,
+	metronom: CustomerServiceOutlined,
 };
 
 export type IconLayoutProps = {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 
+import { useAppDispatch } from '../../store/types';
 import { Modal } from '../../layouts/ModalLayout/ModalLayout';
 import { sampleCategories } from './sampleCategories';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
@@ -22,7 +22,7 @@ export const AddSampleInfoModal: React.FC<AddSampleInfoModalType> = (props) => {
 	const [category, setCategory] = useState<string>(sampleCategories[0]);
 	const [isActive, setIsActive] = useState<boolean>(false);
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(+e.target.value);

@@ -1,4 +1,5 @@
 import { instance } from '../../core/axios';
+import { Pack } from '../../store/slices/pack/types';
 
 export const packsApi = {
 	async createPack(formData: FormData) {
@@ -7,7 +8,7 @@ export const packsApi = {
 	},
 
 	async getPacks(payload: number) {
-		const data = await instance.get(`packs?page=${payload}`);
+		const { data } = await instance.get(`packs?page=${payload}`);
 		return data;
 	},
 

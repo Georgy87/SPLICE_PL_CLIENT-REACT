@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { useSequencer } from '../../hooks/useSequencer';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
@@ -21,15 +21,16 @@ import Clap from '../../assets/samples-sequenser/Clap.wav';
 import Hat from '../../assets/samples-sequenser/Hat.wav';
 //@ts-ignore
 import Open_Hat from '../../assets/samples-sequenser/Open-Hat.wav';
+import { useAppDispatch } from '../../store/types';
 
 import styles from './SequencerPage.module.scss';
 
 export const SequencerPage = () => {
 	const likedSamples = useSelector(selectLikedSamples);
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
-	const { initialPattern, step, requestId, loadSamples, setTempo, onPlay, onStop } = useSequencer();
+	const { initialPattern, step, requestId, gain, loadSamples, setTempo, onPlay, onStop, setGain } = useSequencer();
 
 	const { dragStart } = useDropzone();
 
@@ -40,11 +41,11 @@ export const SequencerPage = () => {
 		Kick,
 		Clap,
 		Hat,
-		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
-		'https://s3-us-west-2.amazonaws.com/s.cdpn.io/101507/openHat.wav',
+		Open_Hat,
 	]);
 
-	const [valueBpm, setValueBpm] = useState<number>(60);
+	const [valueGain, setValueGain] = useState<number>(1);
+	const [valueBpm, setValueBpm] = useState<number>(120);
 	const [isPlaying, setIsPlaying] = useState<boolean>(true);
 	const [activeModal, setActiveModal] = useState<boolean>(false);
 	const [indexBox, setIndexBox] = useState<number>(0);
@@ -63,10 +64,6 @@ export const SequencerPage = () => {
 	useEffect(() => {
 		loadSamples(sampleList);
 	}, [sampleList]);
-
-	useEffect(() => {
-		loadSamples(sampleList);
-	}, [valueBpm]);
 
 	const onDropHandler = (e: React.DragEvent<HTMLDivElement>, index: number) => {
 		e.preventDefault();
@@ -88,6 +85,11 @@ export const SequencerPage = () => {
 
 	return (
 		<div className={styles.root} data-testid='sequencer-page'>
+			<input type="range" min={1} max={30} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+				// onStop();
+				setGain(+e.target.value / 10)
+				// onPlay(sampleList);
+			}}/>
 			<div className={styles.sequencerControls}>
 				<IconChangeLayout
 					onClicked={(e: Event) => {

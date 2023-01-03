@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router';
-import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
+import { useAppDispatch } from '../../store/types';
 import { Pack } from '../../store/slices/pack/types';
 import { setSampleFiles } from '../../store/slices/samples/samplesSlice';
 import { useDropzone } from '../../hooks/useDropzone';
@@ -25,7 +25,7 @@ export const UserPackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 
 	const navigate = useNavigate();
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();

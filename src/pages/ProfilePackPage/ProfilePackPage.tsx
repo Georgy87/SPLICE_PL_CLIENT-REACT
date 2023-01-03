@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { Loader } from '../../components/Loader/Loader';
@@ -18,6 +18,7 @@ import {
 import { fetchGetPack } from '../../store/slices/pack/actions';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { useWindowSize } from '../../hooks/useWIndowSize';
+import { useAppDispatch } from '../../store/types';
 
 import styles from './ProfilePackPage.module.scss';
 
@@ -35,7 +36,7 @@ export const ProfilePackPage = () => {
 
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	//@ts-ignore
 	const params: { packId: string } = useParams();
 	const { setPlayerState } = useSound();

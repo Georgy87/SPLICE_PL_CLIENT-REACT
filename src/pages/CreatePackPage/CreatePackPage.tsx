@@ -1,5 +1,5 @@
 import React, {  useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../store/types';
 import { useNavigate} from 'react-router';
 
 import { StepLayout } from '../../layouts/StepLayout/StepLayout';
@@ -24,7 +24,7 @@ export const CreatePackPage = () => {
 
 	const navigate = useNavigate();
 	
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const next = () => {
 		if (activeStep !== 3) {

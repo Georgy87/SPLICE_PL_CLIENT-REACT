@@ -1,5 +1,5 @@
-// Setup Worker
 
+// Setup Worker
 class Worker {
 	url: string;
 	onmessage: (msg: string) => void;
@@ -47,5 +47,5 @@ Object.defineProperty(window, 'IntersectionObserver', {
 	configurable: true,
 	value: IntersectionObserver,
 })
-
+import '@testing-library/jest-dom/extend-expect';
 import '@testing-library/jest-dom';
