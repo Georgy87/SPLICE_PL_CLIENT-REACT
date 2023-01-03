@@ -14,83 +14,87 @@ import { useAppDispatch } from '../../store/types';
 import styles from './LoginPage.module.scss';
 
 export type FormProps = {
-	email: string;
-	password: string;
+    email: string;
+    password: string;
 };
 
 export const LoginPage = () => {
-	const auth = useSelector(selectAuth);
-	const errorMessage = useSelector(selectErrorMessage);
+    const auth = useSelector(selectAuth);
+    const errorMessage = useSelector(selectErrorMessage);
 
-	const [email, setEmail] = useState<string>('');
-	const [password, setPassword] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
-	const navigate = useNavigate();
+    const navigate = useNavigate();
 
-	const dispatch = useAppDispatch();
+    const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
+    };
 
-	const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setEmail(e.target.value);
-	};
+    const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.target.value);
+    };
 
-	const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setPassword(e.target.value);
-	};
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset,
+    } = useForm<FormProps>({
+        resolver: yupResolver(LoginFormSchema),
+    });
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-		reset,
-	} = useForm<FormProps>({
-		resolver: yupResolver(LoginFormSchema),
-	});
+    useEffect(() => {
+        if (auth) {
+            navigate('/');
+        }
+    }, [auth]);
 
-	const onSubmit = async (data: FormProps) => {
-		dispatch(fetchLogin(data));
-		reset();
-	};
+    const dispatch = useAppDispatch();
 
-	useEffect(() => {
-		if (auth) {
-			navigate('/');
-		}
-	}, [auth]);
+    const onSubmit = (data: any) => {
+        dispatch(fetchLogin(data));
+        reset();
+    };
 
-	return (
-		<div data-testid='login-page'>
-			<AuthorizationLayout>
-				<form className={styles.authBox} onSubmit={handleSubmit(onSubmit)}>
-					<div className={styles.authLabel}>
-						<h1>Log In to Your Splice Account!</h1>
-					</div>
-					<div className={styles.textbox}>
-						<input
-							type='email'
-							placeholder='Email'
-							{...register('email')}
-							value={email}
-							onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeEmail(e)}
-						/>
-						<p data-testid='error-valid-message'>{errors.email?.message}</p>
-					</div>
-					<div className={styles.textbox}>
-						<input
-							type='password'
-							placeholder='Password'
-							{...register('password')}
-							value={password}
-							onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangePassword(e)}
-						/>
-						<p>{errorMessage ? errorMessage : errors.password?.message}</p>
-					</div>
-					<ButtonLayout typeStyle='auth'>Log In</ButtonLayout>
-					<div className={styles.formFooter}>
-						<p>Don't have an account?</p>
-						<NavLink to='/registration' data-testid='registration-link'>Sign up?</NavLink>
-					</div>
-				</form>
-			</AuthorizationLayout>
-		</div>
-	);
+    return (
+        <div data-testid="login-page">
+            <AuthorizationLayout>
+                <form className={styles.authBox} onSubmit={handleSubmit(onSubmit)}>
+                    <div className={styles.authLabel}>
+                        <h1>Log In to Your Splice Account!</h1>
+                    </div>
+                    <div className={styles.textbox}>
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            {...register('email')}
+                            value={email}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeEmail(e)}
+                            data-testid="login_input"
+                        />
+                        <p data-testid="error-valid-message">{errors.email?.message}</p>
+                    </div>
+                    <div className={styles.textbox}>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            {...register('password')}
+                            value={password}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangePassword(e)}
+                            data-testid="password_input"
+                        />
+                        <p>{errorMessage ? errorMessage : errors.password?.message}</p>
+                    </div>
+                    <ButtonLayout typeStyle='auth'>Log In</ButtonLayout>
+                    <div className={styles.formFooter}>
+                        <p>Don't have an account?</p>
+                        <NavLink to="/registration" data-testid="registration-link">
+                            Sign up?
+                        </NavLink>
+                    </div>
+                </form>
+            </AuthorizationLayout>
+        </div>
+    );
 };

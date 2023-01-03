@@ -28,7 +28,7 @@ export const ProfilePackPage = () => {
 	const loading = useSelector(selectLoading);
 	const tag = useSelector(selectTag);
 	const packViews = useSelector(selectViewsData);
-
+	
 	const [activeModal, setActiveModal] = useState<boolean>(false);
 	const [year, setYear] = useState<string>(new Date().getFullYear().toString());
 

@@ -19,12 +19,16 @@ export const MOCK_INITIAL_STATE = {
     samples: initialSamplesState,
 };
 
-export const renderWithStore = (component: ReactNode, initialState: Partial<typeof MOCK_INITIAL_STATE> = {}, param?: string) => {
+export const renderWithStore = (
+    component: ReactNode,
+    initialState: Partial<typeof MOCK_INITIAL_STATE> = {},
+    param: string
+) => {
     const store = mockStore({ ...MOCK_INITIAL_STATE, ...initialState });
     return {
         result: render(
             <Provider store={store}>
-                <MemoryRouter initialEntries={['/login']}>{component}</MemoryRouter>
+                <MemoryRouter initialEntries={[param]}>{component}</MemoryRouter>
             </Provider>
         ),
         store,
@@ -35,7 +39,7 @@ export const renderWithRouter = (component: React.ReactChild, initialRoute = '/l
 	return (
 		<Provider store={store}>
 			<MemoryRouter initialEntries={[initialRoute]}>
-				{/* <AppRouter /> */}
+				<AppRouter />
 				{component}
 			</MemoryRouter>
 		</Provider>
