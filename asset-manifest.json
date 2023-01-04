@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.2d73c883.css",
-    "main.js": "/static/js/main.1aba9364.js",
-    "static/js/787.bd5a8236.chunk.js": "/static/js/787.bd5a8236.chunk.js",
-    "static/media/auth-background-image.jpeg": "/static/media/auth-background-image.e0ce920509a52f3b5a74.jpeg",
-    "static/media/Open-Hat.wav": "/static/media/Open-Hat.63d5fc99d28b8f619771.wav",
-    "static/media/Kick.wav": "/static/media/Kick.88d07023eda0dab11b65.wav",
-    "static/media/Clap.wav": "/static/media/Clap.1b886df419951c4bb580.wav",
-    "static/media/Hat.wav": "/static/media/Hat.f4f08b10afb697fd5a0f.wav",
-    "static/media/unnamed.jpg": "/static/media/unnamed.ce48ced2f652d62f8a22.jpg",
-    "index.html": "/index.html",
-    "main.2d73c883.css.map": "/static/css/main.2d73c883.css.map",
-    "main.1aba9364.js.map": "/static/js/main.1aba9364.js.map",
-    "787.bd5a8236.chunk.js.map": "/static/js/787.bd5a8236.chunk.js.map"
+    "main.css": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/css/main.234e3717.css",
+    "main.js": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/js/main.fe4bfd67.js",
+    "static/js/787.bd5a8236.chunk.js": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/js/787.bd5a8236.chunk.js",
+    "static/media/auth-background-image.jpeg": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/media/auth-background-image.e0ce920509a52f3b5a74.jpeg",
+    "static/media/Open-Hat.wav": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/media/Open-Hat.63d5fc99d28b8f619771.wav",
+    "static/media/Kick.wav": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/media/Kick.88d07023eda0dab11b65.wav",
+    "static/media/Clap.wav": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/media/Clap.1b886df419951c4bb580.wav",
+    "static/media/Hat.wav": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/media/Hat.f4f08b10afb697fd5a0f.wav",
+    "static/media/unnamed.jpg": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/media/unnamed.ce48ced2f652d62f8a22.jpg",
+    "index.html": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/index.html",
+    "main.234e3717.css.map": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/css/main.234e3717.css.map",
+    "main.fe4bfd67.js.map": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/js/main.fe4bfd67.js.map",
+    "787.bd5a8236.chunk.js.map": "/Georgy87/SPLICE_PL_CLIENT-REACT.git/static/js/787.bd5a8236.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2d73c883.css",
-    "static/js/main.1aba9364.js"
+    "static/css/main.234e3717.css",
+    "static/js/main.fe4bfd67.js"
   ]
 }
