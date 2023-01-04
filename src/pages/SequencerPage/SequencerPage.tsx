@@ -85,11 +85,11 @@ export const SequencerPage = () => {
 
 	return (
 		<div className={styles.root} data-testid='sequencer-page'>
-			<input type="range" min={1} max={30} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+			{/* <input type="range" min={1} max={30} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
 				// onStop();
 				setGain(+e.target.value / 10)
 				// onPlay(sampleList);
-			}}/>
+			}}/> */}
 			<div className={styles.sequencerControls}>
 				<IconChangeLayout
 					onClicked={(e: Event) => {

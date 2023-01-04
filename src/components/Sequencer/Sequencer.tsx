@@ -17,7 +17,7 @@ type PropsType = {
 }
 
 export const Sequencer: React.FC<PropsType> = ({ setIndexBox, setActiveModal, step, pattern, updatePattern, onDropHandler }) => {
-	const samplesBoxs: string[] = ['kick', 'snare', 'hihat', 'bass', 'smpl', 'voc', 'pad', 'arp', 'string'];
+	const samplesBoxs: string[] = ['kick', 'snare', 'hihat', 'bass', 'smpl'];
 	
 	const { dragEnter } = useDropzone();
 
