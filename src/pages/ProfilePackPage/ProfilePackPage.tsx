@@ -76,7 +76,7 @@ export const ProfilePackPage = () => {
 	return (
 		<div data-testid='profile-pack-page'>
 			{loading ? (
-				<div className={styles.profilePackContainer}>
+				<div className={styles.profilePackContainer} data-testid='profile-pack'>
 					<div className={styles.infoBackground}>
 						<img src={`${packProfile?.picture}`} alt={`${packProfile?.picture}`} />
 					</div>
@@ -97,7 +97,6 @@ export const ProfilePackPage = () => {
 					</div>
 
 					<div className={styles.sampleList}>
-					
 						<SampleList samples={samples} />
 					</div>
 				</div>

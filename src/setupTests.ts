@@ -47,5 +47,8 @@ Object.defineProperty(window, 'IntersectionObserver', {
 	configurable: true,
 	value: IntersectionObserver,
 })
+
+import "jest-canvas-mock";
 import '@testing-library/jest-dom/extend-expect';
 import '@testing-library/jest-dom';
+

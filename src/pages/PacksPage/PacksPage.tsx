@@ -40,7 +40,6 @@ export const PacksPage: React.FC<PropsType> = () => {
 	useEffect(() => {
 		dispatch(fetchGetPacks(pageNumber));
 		dispatch(setLoading(true));
-		console.log('hello')
 	}, [pageNumber]);
 
 	useEffect(() => {
