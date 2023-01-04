@@ -2,7 +2,7 @@
   "name": "react-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT.git",
+  "homepage": "https://github.com/Georgy87/SPLICE_PL_CLIENT-REACT",
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
     "@hookform/resolvers": "^2.9.10",
