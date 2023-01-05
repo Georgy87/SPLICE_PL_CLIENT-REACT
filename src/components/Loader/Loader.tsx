@@ -8,7 +8,7 @@ type PropsType = {
 
 export const Loader: React.FC<PropsType> = ({ customColor }) => {
     return (
-        <div className={styles.loader}>
+        <div className={styles.loader} data-testid="loader">
             {/* <CircularProgress color={customColor} /> */}
             {/* <Spin tip="Loading..."></Spin> */}
         </div>

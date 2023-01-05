@@ -1,3 +1,4 @@
+import React from 'react';
 import { act, fireEvent, screen } from '@testing-library/react';
 import { ProfilePackPage } from '../../pages';
 import { renderWithStore } from '../../utils/tests';
@@ -10,15 +11,15 @@ jest.mock('react-redux', () => ({
 
 const mockedDispatch = jest.spyOn(reduxHooks, 'useDispatch');
 
-describe('PROFILE', () => {
-    it('useSelector test false', async () => {
+describe('PROFILE PACK', () => {
+    it('Loader', async () => {
         jest.spyOn(reduxHooks, 'useSelector').mockReturnValue(false);
         mockedDispatch.mockReturnValue(jest.fn());
-        const result = renderWithStore(<ProfilePackPage />, {}, '');
-        // expect(result).toMatchSnapshot();
+        const { result } = renderWithStore(<ProfilePackPage />, {}, '');
+        expect(result.getAllByTestId('loader')).toBeTruthy();
     });
 
-    it('useSelector test true', async () => {
+    it('Profile pack', async () => {
         jest.spyOn(reduxHooks, 'useSelector').mockReturnValue([
             {
                 _id: 'd',
@@ -37,17 +38,47 @@ describe('PROFILE', () => {
         ]);
 
         mockedDispatch.mockReturnValue(jest.fn());
-      
-        const result = renderWithStore(<ProfilePackPage />, {}, '');
-        // expect(result).toMatchSnapshot();
+
+        renderWithStore(<ProfilePackPage />, {}, '');
+        const button = screen.getByRole('button', { name: 'Views' });
+
+        await act(async () => {
+            fireEvent.click(button);
+        });
+
+        expect(button).toBeTruthy();
+        expect(screen.getByTestId('modal')).toHaveClass('modalCourse active');
     });
 
-    it('useEffect test', async () => {
+    it('fetchGetPack', async () => {
         const dispatch = jest.fn();
         mockedDispatch.mockReturnValue(dispatch);
 
-        const mockedFetchLogin = jest.spyOn(actions, 'fetchGetPack');
+        const mockedFetchGetPack = jest.spyOn(actions, 'fetchGetPack');
         await act(async () => renderWithStore(<ProfilePackPage />, {}, ''));
-        expect(mockedFetchLogin).toHaveBeenCalledTimes(2);
+        expect(mockedFetchGetPack).toHaveBeenCalledTimes(2);
+    });
+
+    it('set years', async () => {
+        jest.spyOn(reduxHooks, 'useSelector').mockReturnValue([
+            {
+                _id: 'd',
+                audio: 'a',
+                packId: 'h',
+                sampleName: '',
+                audioCoordinates: ['[1, 2]'],
+                likes: [],
+                duration: '3.4285714285714284',
+                canvasImage: 'ht',
+                packPicture: 'ht',
+                bpm: 140,
+                category: 'drums',
+                id: '622002b7ad53bf0526655f19',
+            },
+        ]);
+        const dispatch = jest.fn();
+        mockedDispatch.mockReturnValue(dispatch);
+        await act(async () => renderWithStore(<ProfilePackPage />, {}, ''));
+        const button = screen.getByRole('button', { name: 'View' });
     });
 });

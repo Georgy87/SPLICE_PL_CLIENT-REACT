@@ -19,7 +19,7 @@ describe('login', () => {
         const mockOnSubmit = jest.fn();
 
         const { result } = renderWithStore(<LoginPage />, {}, '/login');
-
+        
         await act(async () => {
             fireEvent.change(result.getByTestId('login_input'), {
                 target: { value: 'test@gmail.com' },
