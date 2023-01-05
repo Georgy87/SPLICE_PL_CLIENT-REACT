@@ -65,19 +65,6 @@ export const useSequencer = () => {
         tic = 60 / tempoValue / 4;
     };
 
-    useEffect(() => {
-        setSequencerState((state) => {
-            return {
-                ...state,
-                tic: 60 / 400 / 4
-            };
-        });
-
-        scheduleNote()
-     
-        console.log(tic, 'dfg');
-    }, [gain])
-
     const setGain = (gainValue: number) => {
         setSequencerState((state) => {
             return {
@@ -146,7 +133,6 @@ export const useSequencer = () => {
         s.connect(AUDIO.destination);
         s.start(when);
     };
-  
    
     const _parsePattern = () => {
         currentInitialPattern = [];

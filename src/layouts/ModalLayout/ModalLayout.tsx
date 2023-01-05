@@ -11,6 +11,7 @@ export type PropsModalType = {
 export const Modal: React.FC<PropsModalType> = ({ active, setActive, children }) => {
 	return (
 		<div
+			data-testid="modal"
 			className={active ? `${styles.modalCourse} ${styles.active}` : `${styles.modalCourse}`}
 			onClick={() => setActive(false)}
 		>
