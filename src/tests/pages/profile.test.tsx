@@ -1,84 +1,67 @@
-import React from 'react';
-import { act, fireEvent, screen } from '@testing-library/react';
-import { ProfilePackPage } from '../../pages';
-import { renderWithStore } from '../../utils/tests';
-import * as reduxHooks from 'react-redux';
-import * as actions from '../../store/slices/pack/actions';
+import React from "react";
+import { act, fireEvent, screen } from "@testing-library/react";
 
-jest.mock('react-redux', () => ({
-    ...jest.requireActual('react-redux'),
+import { ProfilePackPage } from "../../pages";
+import { renderWithStore } from "../../utils/tests";
+import * as reduxHooks from "react-redux";
+import * as actions from "../../store/slices/pack/actions";
+import { chartData } from "../mocks/packActions";
+import Modal from "../../layouts/ModalLayout/ModalLayout";
+import { ButtonLayout } from "../../layouts/ButtonLayout/ButtonLayout";
+import { samples } from "../mocks/packPage";
+
+jest.mock("react-redux", () => ({
+	...jest.requireActual("react-redux"),
 }));
 
-const mockedDispatch = jest.spyOn(reduxHooks, 'useDispatch');
+const mockedDispatch = jest.spyOn(reduxHooks, "useDispatch");
 
-describe('PROFILE PACK', () => {
-    it('Loader', async () => {
-        jest.spyOn(reduxHooks, 'useSelector').mockReturnValue(false);
-        mockedDispatch.mockReturnValue(jest.fn());
-        const { result } = renderWithStore(<ProfilePackPage />, {}, '');
-        expect(result.getAllByTestId('loader')).toBeTruthy();
-    });
+describe("PROFILE PACK", () => {
+	it("render loader", async () => {
+		jest.spyOn(reduxHooks, "useSelector").mockReturnValue(false);
+		mockedDispatch.mockReturnValue(jest.fn());
+		const { result } = renderWithStore(<ProfilePackPage />, {}, "");
+		expect(result.getAllByTestId("loader")).toBeTruthy();
+	});
 
-    it('Profile pack', async () => {
-        jest.spyOn(reduxHooks, 'useSelector').mockReturnValue([
-            {
-                _id: 'd',
-                audio: 'a',
-                packId: 'h',
-                sampleName: '',
-                audioCoordinates: ['[1, 2]'],
-                likes: [],
-                duration: '3.4285714285714284',
-                canvasImage: 'ht',
-                packPicture: 'ht',
-                bpm: 140,
-                category: 'drums',
-                id: '622002b7ad53bf0526655f19',
-            },
-        ]);
+	it("render profile pack", async () => {
+		jest.spyOn(reduxHooks, "useSelector").mockReturnValue(samples);
+		mockedDispatch.mockReturnValue(jest.fn());
 
-        mockedDispatch.mockReturnValue(jest.fn());
+		const { result } = await act(async () =>
+			renderWithStore(<ProfilePackPage />, {}, "")
+		);
+		const packContainer = result.getByTestId("profile-pack");
+		expect(packContainer).toBeInTheDocument();
+	});
 
-        renderWithStore(<ProfilePackPage />, {}, '');
-        const button = screen.getByRole('button', { name: 'Views' });
+	it("fetch get pack", async () => {
+		const dispatch = jest.fn();
+		mockedDispatch.mockReturnValue(dispatch);
+		jest.spyOn(reduxHooks, "useSelector").mockReturnValue(samples);
 
-        await act(async () => {
-            fireEvent.click(button);
-        });
+		const mockedFetchGetPack = jest.spyOn(actions, "fetchGetPack");
+		await act(async () =>
+			renderWithStore(<ProfilePackPage />, {}, "")
+		);
+		expect(mockedFetchGetPack).toHaveBeenCalledTimes(2);
+	});
 
-        expect(button).toBeTruthy();
-        expect(screen.getByTestId('modal')).toHaveClass('modalCourse active');
-    });
+	it("canvas modal", () => {
+		const { result } = renderWithStore(
+			<Modal active={true} setActive={jest.fn()}>
+				{Object.keys(chartData).map((year) => {
+					return (
+						<ButtonLayout key={year} typeStyle={"auth"} onClicked={jest.fn()}>
+							{year}
+						</ButtonLayout>
+					);
+				})}
+			</Modal>,
+			{}
+		);
 
-    it('fetchGetPack', async () => {
-        const dispatch = jest.fn();
-        mockedDispatch.mockReturnValue(dispatch);
-
-        const mockedFetchGetPack = jest.spyOn(actions, 'fetchGetPack');
-        await act(async () => renderWithStore(<ProfilePackPage />, {}, ''));
-        expect(mockedFetchGetPack).toHaveBeenCalledTimes(2);
-    });
-
-    it('set years', async () => {
-        jest.spyOn(reduxHooks, 'useSelector').mockReturnValue([
-            {
-                _id: 'd',
-                audio: 'a',
-                packId: 'h',
-                sampleName: '',
-                audioCoordinates: ['[1, 2]'],
-                likes: [],
-                duration: '3.4285714285714284',
-                canvasImage: 'ht',
-                packPicture: 'ht',
-                bpm: 140,
-                category: 'drums',
-                id: '622002b7ad53bf0526655f19',
-            },
-        ]);
-        const dispatch = jest.fn();
-        mockedDispatch.mockReturnValue(dispatch);
-        await act(async () => renderWithStore(<ProfilePackPage />, {}, ''));
-        const button = screen.getByRole('button', { name: 'View' });
-    });
+		const buttonYear = result.getByRole("button", { name: "2022" });
+		expect(buttonYear).toBeTruthy();
+	});
 });

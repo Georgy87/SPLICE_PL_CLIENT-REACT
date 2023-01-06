@@ -22,13 +22,13 @@ export const MOCK_INITIAL_STATE = {
 export const renderWithStore = (
     component: ReactNode,
     initialState: Partial<typeof MOCK_INITIAL_STATE> = {},
-    param: string
+    param?: string
 ) => {
     const store = mockStore({ ...MOCK_INITIAL_STATE, ...initialState });
     return {
         result: render(
             <Provider store={store}>
-                <MemoryRouter initialEntries={[param]}>{component}</MemoryRouter>
+                <MemoryRouter initialEntries={[param ? param : '/']}>{component}</MemoryRouter>
             </Provider>
         ),
         store,

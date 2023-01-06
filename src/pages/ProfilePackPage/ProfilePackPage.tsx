@@ -50,7 +50,7 @@ export const ProfilePackPage = () => {
 
     useEffect(() => {
         if (!packViews) return;
-
+	
         if (width < 900 && width > 600) {
             canvasChartService.drawingChart(canvasRef.current, packViews[year], 600, 55);
         }
@@ -62,7 +62,7 @@ export const ProfilePackPage = () => {
         if (width < 600) {
             canvasChartService.drawingChart(canvasRef.current, packViews[year], 350, 35);
         }
-        console.log(year);
+        
     }, [width, packProfile, year]);
 
     useEffect(() => {
@@ -108,7 +108,7 @@ export const ProfilePackPage = () => {
             <Modal setActive={setActiveModal} active={activeModal}>
                 <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                     <div>
-                        <canvas ref={canvasRef} />
+                        <canvas ref={canvasRef} data-testid="canvas" />
                     </div>
                     <div className={styles.changeYears}>
                         {packViews &&

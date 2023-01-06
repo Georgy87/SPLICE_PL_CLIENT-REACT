@@ -124,7 +124,7 @@ export class CanvasChartService implements ICanvasChart {
 		mousemove: (e: MouseEvent) => void,
 		mouseleave: (e: MouseEvent) => void,
 	) {
-		const { dpiHeight, viewHeight, viewWidth, padding, width } = this;
+		const { dpiHeight, viewHeight, viewWidth, padding } = this;
 
 		this.clear(ctx);
 
