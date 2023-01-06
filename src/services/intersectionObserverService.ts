@@ -1,6 +1,7 @@
 import { MutableRefObject } from "react";
+import { IIntersectionObserver } from "./types";
 
-class IntersectionObserverService {
+class IntersectionObserverService implements IIntersectionObserver {
 	public isObserver(
 		totalPages: number,
 		pageEnd: MutableRefObject<HTMLInputElement>,
