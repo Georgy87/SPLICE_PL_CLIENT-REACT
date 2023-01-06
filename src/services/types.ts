@@ -1,3 +1,4 @@
+import { MutableRefObject } from 'react';
 import { MountType } from '../store/slices/pack/types';
 
 export interface ICanvasChart {
@@ -55,4 +56,13 @@ export interface ICanvasChart {
 	): void;
 	clear(ctx: CanvasRenderingContext2D | null): void;
     isOver(proxy: any, x: number, length: number): boolean;
+}
+
+export interface IIntersectionObserver { 
+	isObserver(
+		totalPages: number,
+		pageEnd: MutableRefObject<HTMLInputElement>,
+		pagesCounter: number,
+        onLongMore: () => void,
+	) : void;
 }

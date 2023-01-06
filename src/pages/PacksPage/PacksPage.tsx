@@ -14,6 +14,7 @@ import { setDefaultPackState, setLoading } from '../../store/slices/pack/packSli
 import { useAppDispatch } from '../../store/types';
 
 import styles from './PacksPage.module.scss';
+import { intersectionObserverService } from '../../services/intersectionObserverService';
 
 type PropsType = {
 	pageName?: 'main-packs' | 'user-packs';
@@ -54,22 +55,7 @@ export const PacksPage: React.FC<PropsType> = () => {
 
 	useEffect(() => {
 		if (loading) {
-			const observer = new IntersectionObserver(
-				(entries) => {
-					if (entries[0].isIntersecting) {
-						pagesCounter++;
-						onLongMore();
-						if (pagesCounter >= totalPages) {
-							observer.unobserve(pageEnd.current);
-						}
-					}
-				},
-				{ threshold: 1 },
-			);
-
-			if (pageEnd.current) {
-				observer.observe(pageEnd.current);
-			}
+			intersectionObserverService.isObserver(totalPages, pageEnd, pagesCounter, onLongMore);
 		}
 	}, [loading]);
 
