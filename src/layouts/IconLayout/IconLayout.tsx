@@ -1,50 +1,30 @@
-import { BankOutlined, NotificationTwoTone, UploadOutlined, CustomerServiceOutlined, HeartOutlined } from '@ant-design/icons';
-// import { FaHome, FaUserPlus, FaHeart } from 'react-icons/fa';
-// import { BiLogOutCircle } from 'react-icons/bi';
-// import { IoMdLogOut } from 'react-icons/io';
-// import { BsUpload } from 'react-icons/bs';
-// import { CgMusic } from 'react-icons/cg';
-// import { GiMetronome } from 'react-icons/gi';
-
-// import { AccountCircleOutlined } from '@material-ui/icons';
+import { Dislike } from '../../components/Icons/Dislike';
+import { Home } from '../../components/Icons/Home';
+import { Like } from '../../components/Icons/Like';
+import { Likes } from '../../components/Icons/Likes';
+import { Login } from '../../components/Icons/Login';
+import { Logout } from '../../components/Icons/Logout';
+import { Metronom } from '../../components/Icons/Metronom';
+import { Profile } from '../../components/Icons/Profile';
+import { Sequencer } from '../../components/Icons/Sequencer';
+import { Upload } from '../../components/Icons/Upload';
 
 import styles from './IconLayout.module.scss';
 
-// export const icons = {
-// 	// home: FaHome,
-// 	// login: BiLogOutCircle,
-// 	// logout: IoMdLogOut,
-// 	// packs: NotificationTwoTone,
-// 	// genres: BankOutlined,
-// 	// profile: AccountCircleOutlined,
-// 	// upload: UploadOutlined,
-// 	// user: FaUserPlus,
-// 	// music: CustomerServiceOutlined,
-// 	// likes: FaHeart,
-// 	// like: FaHeart,
-// 	// dislike: HeartOutlined,
-// 	// drop: BsUpload,
-// 	// sequencer: CgMusic,
-// 	// metronom: GiMetronome,
-// };
-
-
 export const icons = {
-	home: CustomerServiceOutlined,
-	login: CustomerServiceOutlined,
-	logout: CustomerServiceOutlined,
-	packs: CustomerServiceOutlined,
-	genres: CustomerServiceOutlined,
-	profile: CustomerServiceOutlined,
-	upload: UploadOutlined,
-	user: CustomerServiceOutlined,
-	music: CustomerServiceOutlined,
-	likes: CustomerServiceOutlined,
-	like: CustomerServiceOutlined,
-	dislike: HeartOutlined,
-	drop: CustomerServiceOutlined,
-	sequencer: CustomerServiceOutlined,
-	metronom: CustomerServiceOutlined,
+	home: Home,
+	login: Login,
+	logout: Logout,
+	packs:  Home,
+	profile: Profile,
+	upload: Upload,
+	music: Home,
+	likes: Likes,
+	like: Dislike,
+	dislike: Like,
+	drop: Upload,
+	sequencer: Sequencer,
+	metronom: Metronom,
 };
 
 export type IconLayoutProps = {

@@ -18,8 +18,6 @@ type PackListProps = {
 };
 
 export const PackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
-	const auth = useSelector(selectAuth);
-
 	const { playTrack, isPlaying, currentPackId } = useSound();
 
 	return (
@@ -42,16 +40,10 @@ export const PackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
 						blockStyle={styles.playPauseCircle}
 						iconOneOrTwo={isPlaying}
 						trackId={id}
+						size="100px"
+						color="#fff"
 						currentTrackId={currentPackId}
-						iconOne='play'
-						iconTwo='pause'
-						iconStyle={{
-							color: '#fff',
-							fontSize: '60px',
-							cursor: 'pointer',
-						}}
-						typeBtn='pack'
-					></IconChangeLayout>
+					/>
 				) : (
 					<></>
 				)}

@@ -11,7 +11,7 @@ import { deleteSampleFiles } from '../../store/slices/samples/samplesSlice';
 import { createSamples } from '../../utils/createSamples';
 import { workerInstanceCreateSample } from '../../workers/WebWorkerEnabler';
 import { Loader } from '../../components/Loader/Loader';
-import Modal from '../../layouts/ModalLayout/ModalLayout';
+import { Modal } from '../../layouts/ModalLayout/ModalLayout';
 import { fetchGetUserPacks } from '../../store/slices/pack/actions';
 import { useAppDispatch } from '../../store/types';
 

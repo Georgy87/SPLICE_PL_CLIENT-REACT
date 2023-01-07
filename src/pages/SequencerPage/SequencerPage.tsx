@@ -10,7 +10,7 @@ import { Samples } from '../../store/slices/samples/types';
 import { Loader } from '../../components/Loader/Loader';
 import { useDropzone } from '../../hooks/useDropzone';
 import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
-import Modal from '../../layouts/ModalLayout/ModalLayout';
+import { Modal } from '../../layouts/ModalLayout/ModalLayout';
 import { Sequencer } from '../../components/Sequencer/Sequencer';
 import { fetchGetLikedSamples } from '../../store/slices/user/actions';
 //@ts-ignore
@@ -104,14 +104,8 @@ export const SequencerPage = () => {
 					}}
 					blockStyle={styles.playPauseCircle}
 					iconOneOrTwo={!isPlaying}
-					iconOne='play-sequencer'
-					iconTwo='pause-sequencer'
-					iconStyle={{
-						color: '#121214',
-						fontSize: '45px',
-						cursor: 'pointer',
-					}}
-					typeBtn='pack'
+					size="70px"
+					color="#000000"
 				></IconChangeLayout>
 				<div className={styles.bpmControls}>
 					<IconLayout iconName='metronom' />

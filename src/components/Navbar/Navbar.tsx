@@ -27,7 +27,7 @@ export const Navbar = () => {
             <nav className={isAuth ? styles.navbar : `${styles.navbar} ${styles.notAuth}`}>
                 <Link to="/" data-testid="packs-link" className={styles.navbarLogo} onClick={() => setSideBar(true)}>
                     <IconLayout iconName={'music'} />
-                    SampleCloud
+                    <span className={styles.logo}>SampleCloud</span>
                 </Link>
 
                 {sidebar ? (

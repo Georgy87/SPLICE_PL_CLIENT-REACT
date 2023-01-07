@@ -5,10 +5,10 @@
 	border: none;
 	cursor: pointer;
 	border-radius: 4px;
-	-webkit-transition: all 0.3s ease;
-	-moz-transition: all 0.3s ease;
-	-o-transition: all 0.3s ease;
-	transition: all 0.3s ease;
+	// -webkit-transition: all 0.3s ease;
+	// -moz-transition: all 0.3s ease;
+	// -o-transition: all 0.3s ease;
+	// transition: all 0.3s ease;
 }
 
 .platformBtn {
@@ -55,6 +55,7 @@
 		border: 1px solid rgb(160, 158, 158);
 		height: 50px;
 		svg {
+			margin-right: 4px;
 			font-size: 20px;
 		}
 		@extend %buttons;

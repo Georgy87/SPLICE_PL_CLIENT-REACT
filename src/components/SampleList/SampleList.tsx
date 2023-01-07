@@ -16,7 +16,7 @@ type PropsType = {
 	pageName?: string;
 };
 
-export const SampleList: React.FC<PropsType> = ({ samples, pageName }) => {
+const SampleListChild: React.FC<PropsType> = ({ samples, pageName }) => {
 	const packTag = useSelector(selectTag);
 
 	const dispatch = useAppDispatch();
@@ -50,3 +50,5 @@ export const SampleList: React.FC<PropsType> = ({ samples, pageName }) => {
 		</>
 	);
 };
+
+export const SampleList = React.memo(SampleListChild);

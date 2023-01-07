@@ -6,7 +6,7 @@ import { Loader } from '../../components/Loader/Loader';
 import { SampleList } from '../../components/SampleList/SampleList';
 import { defaultState } from '../../context/PlayerContextProvider/PlayerContextProvider';
 import { useSound } from '../../hooks/useSound';
-import Modal from '../../layouts/ModalLayout/ModalLayout';
+import { Modal } from '../../layouts/ModalLayout/ModalLayout';
 import { canvasChartService } from '../../services/canvasChartService';
 import {
     selectLoading,
@@ -47,7 +47,7 @@ export const ProfilePackPage = () => {
     useEffect(() => {
         dispatch(fetchGetPack({ packId: params?.packId, tag: null }));
     }, []);
-
+ 
     useEffect(() => {
         if (!packViews) return;
 	
@@ -62,7 +62,7 @@ export const ProfilePackPage = () => {
         if (width < 600) {
             canvasChartService.drawingChart(canvasRef.current, packViews[year], 350, 35);
         }
-        
+      
     }, [width, packProfile, year]);
 
     useEffect(() => {
@@ -75,6 +75,7 @@ export const ProfilePackPage = () => {
             samples: samples,
             packs: [packProfile],
         });
+       
     }, [packProfile]);
 
     return (
@@ -105,10 +106,10 @@ export const ProfilePackPage = () => {
             ) : (
                 <Loader />
             )}
-            <Modal setActive={setActiveModal} active={activeModal}>
+            {packViews && activeModal && <Modal setActive={setActiveModal} active={activeModal}>
                 <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                     <div>
-                        <canvas ref={canvasRef} data-testid="canvas" />
+                        <canvas ref={canvasRef} />
                     </div>
                     <div className={styles.changeYears}>
                         {packViews &&
@@ -119,7 +120,7 @@ export const ProfilePackPage = () => {
                             ))}
                     </div>
                 </div>
-            </Modal>
+            </Modal>}
         </div>
     );
 };

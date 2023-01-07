@@ -1,95 +1,46 @@
 import React from 'react';
-// import { PlayCircleFilled } from '@material-ui/icons';
-// import { PauseCircleFilled } from '@material-ui/icons';
-// import { PlayArrow } from '@material-ui/icons';
-// import { Pause } from '@material-ui/icons';
-// import { PlayCircleOutline } from '@material-ui/icons';
-// import { PauseCircleOutline } from '@material-ui/icons';
-import {
-    PlayCircleOutlined,
-    PlaySquareOutlined,
-    PlayCircleTwoTone,
-    PauseCircleOutlined,
-    PauseCircleFilled,
-} from '@ant-design/icons';
 
-import { ButtonLayout } from '../ButtonLayout/ButtonLayout';
+import { Play } from '../../components/Icons/Play';
+import { Pause } from '../../components/Icons/Pause';
 
-const iconsPlay = {
-    play: PlayCircleOutlined,
-    'play-footer': PlaySquareOutlined,
-    'play-sequencer': PlayCircleTwoTone,
-};
-
-const iconsPause = {
-    pause: PauseCircleOutlined,
-    'pause-footer': PauseCircleFilled,
-    'pause-sequencer': PauseCircleFilled,
-};
+import styles from './IconChangeLayout.module.scss';
 
 type PropsType = {
     blockStyle?: string;
     iconOneOrTwo: boolean;
     onClicked: any;
-    iconOne: keyof typeof iconsPlay;
-    iconTwo: keyof typeof iconsPause;
-    iconStyle?: {
-        color: string;
-        fontSize: string;
-        cursor: string;
-    };
-    typeBtn:
-        | 'footer'
-        | 'black'
-        | 'blue'
-        | 'auth'
-        | 'submit'
-        | 'blue-disabled'
-        | 'download'
-        | 'sample-player'
-        | 'sample-item'
-        | 'sign-in-out'
-        | 'update'
-        | 'pack-profile'
-        | 'sample-update'
-        | 'tags'
-        | 'sequencer'
-        | 'Play sample'
-        | 'pack';
     trackId?: string | number;
     currentTrackId?: string | boolean | number;
     children?: React.ReactNode;
+    size: string;
+    color: string;
 };
 
 export const IconChangeLayout: React.FC<PropsType> = ({
     children,
     blockStyle,
     onClicked,
-    iconStyle,
     iconOneOrTwo,
-    iconOne,
-    iconTwo,
-    typeBtn,
     trackId,
     currentTrackId,
+    size,
+    color,
 }) => {
-    const IconPlay = iconsPlay[iconOne];
-    const IconPause = iconsPause[iconTwo];
+    const IconPlay = Play;
+    const IconPause = Pause;
 
     return (
         <div className={blockStyle}>
             {iconOneOrTwo && currentTrackId === trackId ? (
-                <ButtonLayout typeStyle={typeBtn}>
-                    <IconPause style={iconStyle} onClick={onClicked} />
-                    {typeBtn === 'sample-player' && 'Play sample'}
+                <button onClick={onClicked} className={styles.iconBtn}>
+                    <IconPause size={size} color={color} />
                     {children}
-                </ButtonLayout>
+                </button>
             ) : (
-                <ButtonLayout typeStyle={typeBtn}>
-                    <IconPlay style={iconStyle} onClick={onClicked} />
-                    {typeBtn === 'sample-player' && 'Play sample'}
+                <button onClick={onClicked} className={styles.iconBtn}>
+                    <IconPlay size={size} color={color} />
                     {children}
-                </ButtonLayout>
+                </button>
             )}
         </div>
     );

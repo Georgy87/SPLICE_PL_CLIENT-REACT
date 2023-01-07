@@ -12,9 +12,10 @@ import { fetchGetPacks, fetchSearchPacks } from '../../store/slices/pack/actions
 import { selectLoading } from '../../store/selectors/packsSelectors';
 import { setDefaultPackState, setLoading } from '../../store/slices/pack/packSlice';
 import { useAppDispatch } from '../../store/types';
+import { intersectionObserverService } from '../../services/intersectionObserverService';
 
 import styles from './PacksPage.module.scss';
-import { intersectionObserverService } from '../../services/intersectionObserverService';
+
 
 type PropsType = {
 	pageName?: 'main-packs' | 'user-packs';

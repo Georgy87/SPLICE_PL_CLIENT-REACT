@@ -6,7 +6,7 @@ import { renderWithStore } from "../../utils/tests";
 import * as reduxHooks from "react-redux";
 import * as actions from "../../store/slices/pack/actions";
 import { chartData } from "../mocks/packActions";
-import Modal from "../../layouts/ModalLayout/ModalLayout";
+import { Modal } from "../../layouts/ModalLayout/ModalLayout";
 import { ButtonLayout } from "../../layouts/ButtonLayout/ButtonLayout";
 import { samples } from "../mocks/packPage";
 
