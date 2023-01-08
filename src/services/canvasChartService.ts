@@ -38,7 +38,7 @@ export class CanvasChartService implements ICanvasChart {
 		
 		// Todo доработать
 		if (!coordsData) return;
-
+		
 		const mountNames: string[] = Object.keys(coordsData);
 		const coordsXY: { x: number; y: number }[] = Object.values(coordsData);
 

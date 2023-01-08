@@ -14,6 +14,7 @@ export const useWindowSize = (): SizeData => {
 	const resizeHanlder = () => {
 		const width: number = window.innerWidth;
 		const height: number = window.innerHeight;
+	
 		setSize({
 			width,
 			height,
@@ -27,6 +28,9 @@ export const useWindowSize = (): SizeData => {
 		};
 	}, [size]);
 
+	useEffect(() => {
+		resizeHanlder();
+	}, []);
 	return {
 		width: size.width,
 		height: size.height,

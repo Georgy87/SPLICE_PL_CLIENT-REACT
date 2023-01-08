@@ -36,7 +36,7 @@ export const ProfilePackPage = () => {
     const [year, setYear] = useState<string>('2022');
 
     const { width } = useWindowSize();
-
+   
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     const dispatch = useAppDispatch();
@@ -50,12 +50,13 @@ export const ProfilePackPage = () => {
  
     useEffect(() => {
         if (!packViews) return;
-	
+       
         if (width < 900 && width > 600) {
             canvasChartService.drawingChart(canvasRef.current, packViews[year], 600, 55);
         }
 
         if (width > 900) {
+           
             canvasChartService.drawingChart(canvasRef.current, packViews[year], 1000, 80);
         }
 
@@ -63,7 +64,7 @@ export const ProfilePackPage = () => {
             canvasChartService.drawingChart(canvasRef.current, packViews[year], 350, 35);
         }
       
-    }, [width, packProfile, year]);
+    }, [width, packProfile, year, activeModal]);
 
     useEffect(() => {
         dispatch(fetchGetPack({ packId: params?.packId, tag }));
@@ -106,7 +107,7 @@ export const ProfilePackPage = () => {
             ) : (
                 <Loader />
             )}
-            {packViews && activeModal && <Modal setActive={setActiveModal} active={activeModal}>
+            {activeModal && <Modal setActive={setActiveModal} active={activeModal}>
                 <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                     <div>
                         <canvas ref={canvasRef} />
