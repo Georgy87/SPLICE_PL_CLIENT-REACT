@@ -5,7 +5,7 @@ export const Home = () => {
             height="26px"
             stroke="#ffffff"
             stroke-miterlimit="10"
-            stroke-width="2.04"
+            strokeWidth="2.04"
             fill="none"
             viewBox="0 0 24 24"
             id="Layer_1"

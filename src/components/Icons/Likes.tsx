@@ -6,12 +6,12 @@ export const Likes = () => {
             height="23px"
             stroke="#ffff"
             fill="#ffff"
-            stroke-width="0.256"
+            strokeWidth="0.256"
             id="Uploaded to svgrepo.com"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
         >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g id="SVGRepo_iconCarrier">
                 <path
                     className="bentblocks_een"

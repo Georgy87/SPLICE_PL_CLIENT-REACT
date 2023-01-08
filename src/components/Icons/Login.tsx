@@ -7,7 +7,7 @@ export const Login = () => {
             width="23px"
             height="23px"
         >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g id="SVGRepo_iconCarrier">
                 <g>
                     <path fill="none" d="M0 0h24v24H0z"></path>

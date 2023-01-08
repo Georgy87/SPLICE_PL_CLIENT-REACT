@@ -73,7 +73,7 @@ export const PacksPage: React.FC<PropsType> = () => {
 					))
 				) : (
 					<div className={styles.loaderWrapper} >
-						<Loader />
+						<Loader data-testid='loader' />
 					</div>
 				)}
 				<div className={styles.loaderPagination} ref={pageEnd}>

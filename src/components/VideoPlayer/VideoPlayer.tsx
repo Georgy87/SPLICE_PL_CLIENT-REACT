@@ -8,6 +8,7 @@ export const VideoPlayer: React.FC = () => {
 	return (
 		<div className={styles.player}>
 			<video
+				data-testid={'video-player'}
 				className={styles.playerVideo}
 				autoPlay
 				src='https://storage.yandexcloud.net/sample-cloud/videos/ARCADE%20by%20Output.mp4'
