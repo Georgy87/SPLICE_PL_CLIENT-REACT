@@ -1,5 +1,3 @@
-import { Spin } from 'antd';
-
 import styles from './Loader.module.scss';
 
 type PropsType = {

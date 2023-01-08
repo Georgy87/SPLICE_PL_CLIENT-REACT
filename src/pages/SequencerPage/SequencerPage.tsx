@@ -30,7 +30,7 @@ export const SequencerPage = () => {
 
 	const dispatch = useAppDispatch();
 
-	const { initialPattern, step, requestId, gain, loadSamples, setTempo, onPlay, onStop, setGain } = useSequencer();
+	const { initialPattern, step, requestId, gain, loadSamples, setTempo, onPlay, onStop } = useSequencer();
 
 	const { dragStart } = useDropzone();
 
@@ -106,7 +106,7 @@ export const SequencerPage = () => {
 					iconOneOrTwo={!isPlaying}
 					size="70px"
 					color="#000000"
-				></IconChangeLayout>
+				/>
 				<div className={styles.bpmControls}>
 					<IconLayout iconName='metronom' />
 					<input type='text' onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeBpm(e)} defaultValue={valueBpm} />
