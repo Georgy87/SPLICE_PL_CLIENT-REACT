@@ -76,7 +76,7 @@ describe('PACKS PAGE', () => {
 
         expect(input.getAttribute('placeholder')).toBe('');
         expect(input.getAttribute('value')).toBe('');
-       
+
     });
 
     it('render video player', async () => {
