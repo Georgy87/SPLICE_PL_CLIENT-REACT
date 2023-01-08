@@ -7,7 +7,7 @@ export const Profile = () => {
             fill="#ffff"
             strokeWidth="0.256"
             viewBox="0 0 32 32"
-            enable-background="new 0 0 32 32"
+            enableBackground="new 0 0 32 32"
             id="Stock_cut"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +22,7 @@ export const Profile = () => {
                         r="15"
                         stroke="#ffff"
                         strokeLinejoin="round"
-                        stroke-miterlimit="10"
+                        strokeMiterlimit="10"
                         strokeWidth="2"
                     ></circle>
                     <path
@@ -30,7 +30,7 @@ export const Profile = () => {
                         fill="none"
                         stroke="#ffff"
                         strokeLinejoin="round"
-                        stroke-miterlimit="10"
+                        strokeMiterlimit="10"
                         strokeWidth="2"
                     ></path>
                     <circle
@@ -40,7 +40,7 @@ export const Profile = () => {
                         r="6"
                         stroke="#ffff"
                         strokeLinejoin="round"
-                        stroke-miterlimit="10"
+                        strokeMiterlimit="10"
                         strokeWidth="2"
                     ></circle>
                 </g>

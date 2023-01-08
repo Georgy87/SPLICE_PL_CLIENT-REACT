@@ -155,7 +155,7 @@ export class CanvasChartService implements ICanvasChart {
 	
 		ctx.beginPath();
 		ctx.lineWidth = 4;
-		ctx.strokeStyle = 'red';
+		ctx.strokeStyle = '#DC4C46';
 		for (const [x, y] of coords) {
 			ctx.lineTo(x + this.padding, y);
 		}
@@ -227,8 +227,9 @@ export class CanvasChartService implements ICanvasChart {
 
 		let idx1: number = -1;
 		ctx.beginPath();
-		ctx.strokeStyle = 'red';
-		ctx.lineWidth = 3;
+		ctx.strokeStyle = '#4F84C4';
+		
+		ctx.lineWidth = 2;
 		for (let key of mountNames) {
 			idx1++;
 			const x: number = idx1 * xRatio;

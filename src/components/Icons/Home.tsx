@@ -4,7 +4,7 @@ export const Home = () => {
             width="26px"
             height="26px"
             stroke="#ffffff"
-            stroke-miterlimit="10"
+            strokeMiterlimit="10"
             strokeWidth="2.04"
             fill="none"
             viewBox="0 0 24 24"
