@@ -141,11 +141,11 @@ email: test@gmail.com
 
 Пользователь попадает на страницу созданных им библиотек(Packs). Здесь можно добавлять семплы просто дропнув их в соответствующую библиотеку.
 
-<img src="src/assets//readme-images/drop-samples-page.png"  width="60%" height="50%">
+<img src="src/assets//readme-images/drop-samples-page.png"  width="40%" height="50%">
 
 ## `Секвенсор`
 
-<img src="src/assets//readme-images/sequencer-page.png"  width="60%" height="50%">
+<img src="src/assets//readme-images/sequencer-page.png"  width="40%" height="50%">
 
 Секвенсор - это функционал для проигрывания семплов. Он включает семпл в определенный момент времени и работает c определенной скоростью bpm.
 
