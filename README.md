@@ -33,13 +33,7 @@ SAMPLE CLOUD - это платформа для использования и с
 
 ## `Регистрация`
 
-
-img {
-	width: 40%;
-	height: 10%;
-}
-
-<img src="src/assets/readme-images/registration.png" width="550" height="270">
+<img src="src/assets/readme-images/registration.png" width="50%" height="50%">
 
 ## `Вход`
 
@@ -47,7 +41,7 @@ img {
 email: test@gmail.com
 пароль: 12345678
 
-<img src="src/assets/readme-images/login.png" width="550" height="270">
+<img src="src/assets/readme-images/login.png" width="50%" height="50%">
 
 ## `Главная страница`
 
