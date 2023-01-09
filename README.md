@@ -39,7 +39,6 @@ img {
 	height: 10%;
 }
 </style>
-
 <img src="src/assets/readme-images/registration.png" width="550" height="270">
 
 ## `Вход`
