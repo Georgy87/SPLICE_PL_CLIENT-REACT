@@ -141,17 +141,17 @@ email: test@gmail.com
 
 Пользователь попадает на страницу созданных им библиотек(Packs). Здесь можно добавлять семплы просто дропнув их в соответствующую библиотеку.
 
-<img src="src/assets//readme-images/drop-samples-page.png"  width="40%" height="50%">
+<img src="src/assets//readme-images/drop-samples-page.png"  width="60%" height="50%">
 
 ## `Секвенсор`
 
-<img src="src/assets//readme-images/sequencer-page.png"  width="40%" height="50%">
+<img src="src/assets//readme-images/sequencer-page.png"  width="60%" height="50%">
 
 Секвенсор - это функционал для проигрывания семплов. Он включает семпл в определенный момент времени и работает c определенной скоростью bpm.
 
 При включении секвенсора пользователь может переключить bpm на панели:
 
-<img src="src/assets//readme-images/bpm-controls.png"  width="60%" height="50%">
+<img src="src/assets//readme-images/bpm-controls.png"  width="40%" height="50%">
 
 `Пример изменения скорости проигрывания секвенсора:`
 
@@ -163,7 +163,7 @@ email: test@gmail.com
 
 Семплы, которые пользователь отметил лайком, попадают на страницу секвенсора. Перетаскиваем семпл на любую дорожку секвенсора в зеленый бокс.
 
-<img src="src/assets//readme-images/drop-sequencer.png"  width="60%" height="50%">
+<img src="src/assets//readme-images/drop-sequencer.png"  width="40%" height="50%">
 
 и кликаем место, в котором семпл должен начинать свое проигрывание. Оно выделяется синим цветом.
 
