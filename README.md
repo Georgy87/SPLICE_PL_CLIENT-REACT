@@ -41,7 +41,7 @@ SAMPLE CLOUD - это платформа для использования и с
 email: test@gmail.com
 пароль: 12345678
 
-<img src="src/assets/readme-images/login.png" width="50%" height="50%">
+<img src="src/assets/readme-images/login.png"  width="60%" height="50%">
 
 ## `Главная страница`
 
@@ -49,23 +49,23 @@ email: test@gmail.com
 
 <br/>
 
-<img src="src/assets/readme-images/main-page.png" width="550" height="270">
+<img src="src/assets/readme-images/main-page.png"  width="60%" height="50%">
 
 <br/>
 
 `Поиск осуществляется по жанрам, а также авторам библиотек.`
 
-<img src="src/assets/readme-images/search.png" width="550" height="50">
+<img src="src/assets/readme-images/search.png"  width="60%" height="50%">
 
 `При нажатии на иконку play открывается плеер и включается проигрывание демо библиотеки.`
 
-<img src="src/assets//readme-images/player.png" width="550" height="270">
+<img src="src/assets//readme-images/player.png"  width="60%" height="50%">
 
 ## `Профайл библиотеки`
 
 `Выбрав библиотеку на странице main page открываем профайл с семплами.`
 
-<img src="src/assets//readme-images/sample-page.png" width="550" height="270">
+<img src="src/assets//readme-images/sample-page.png"  width="60%" height="50%">
 
 `Категорию семплов можно фильтровать по тегам`
 
@@ -75,35 +75,35 @@ email: test@gmail.com
 
 Добавить категорию семпла, а также его bpm можно в модальном окне, которое открывается при нажатии на крайний правый вертикальный эллипсис семпла:
 
-<img src="src/assets//readme-images/category-bpm-modal.png" width="550" height="250">
+<img src="src/assets//readme-images/category-bpm-modal.png"  width="60%" height="50%">
 
 Также в профайле библиотеки возможно посмотреть ежемесячную статистику просмотров:
 
-<img src="src/assets/readme-images/views-data.png" width="550" height="270">
+<img src="src/assets/readme-images/views-data.png"  width="60%" height="50%">
 
 ## `Профайл пользователя`
 
 Страница для редактирования профайла пользователя.
 
-<img src="src/assets//readme-images/profile.png" width="550" height="270">
+<img src="src/assets//readme-images/profile.png"  width="60%" height="50%">
 
 <br/>
 
 #### `Редактирование аватара`
 
-<img src="src/assets//readme-images/avatar.png" width="550" height="100">
+<img src="src/assets//readme-images/avatar.png"  width="60%" height="50%">
 
 <br/>
 
-<img src="src/assets/readme-images/avatar-pointer.png" width="550" height="270">
+<img src="src/assets/readme-images/avatar-pointer.png"  width="60%" height="50%">
 
 `Все, что нам нужно, это сделать дроп изображения. В результате получаем возможность вырезать нужный фрагмент из фото и сохранить результат.`
 
-<img src="src/assets/readme-images/avatar-editor.png" width="700" height="270">
+<img src="src/assets/readme-images/avatar-editor.png"  width="60%" height="50%">
 
 #### `Редактирование почты и инициалов пользователя`
 
-<img src="src/assets//readme-images/update-username.png" width="450" height="250">
+<img src="src/assets//readme-images/update-username.png"  width="60%" height="50%">
 
 <br/>
 
@@ -111,19 +111,19 @@ email: test@gmail.com
 
 -   Заполняем форму(pack information).
 
-<img src="src/assets//readme-images/create-pack-info.png" width="350" height="340">
+>
 
 <br/>
 
 -   Загружаем обложку для библиотеки.
 
-<img src="src/assets//readme-images/pack-upload-image.png" width="350" height="340">
+>
 
 <br/>
 
 -   Загружаем аудио для библиотеки.
 
-<img src="src/assets//readme-images/pack-audio-upload.png" width="350" height="340">
+>
 
 `Далее попадаем на страницу библиотек(Packs), созданных пользователем(см.загрузка семплов в библиотеку(PACK)).`
 
@@ -131,7 +131,7 @@ email: test@gmail.com
 
 Для загрузки семплов в библиотеку заходим на странницу `PROFILE`
 
-<img src="src/assets//readme-images/profile-pointer.png" width="600" height="50">
+<img src="src/assets//readme-images/profile-pointer.png"  width="60%" height="50%">
 
 <br/>
 
@@ -141,17 +141,17 @@ email: test@gmail.com
 
 Пользователь попадает на страницу созданных им библиотек(Packs). Здесь можно добавлять семплы просто дропнув их в соответствующую библиотеку.
 
-<img src="src/assets//readme-images/drop-samples-page.png" width="550" height="300">
+<img src="src/assets//readme-images/drop-samples-page.png"  width="60%" height="50%">
 
 ## `Секвенсор`
 
-<img src="src/assets//readme-images/sequencer-page.png" width="550" height="300">
+<img src="src/assets//readme-images/sequencer-page.png"  width="60%" height="50%">
 
 Секвенсор - это функционал для проигрывания семплов. Он включает семпл в определенный момент времени и работает c определенной скоростью bpm.
 
 При включении секвенсора пользователь может переключить bpm на панели:
 
-<img src="src/assets//readme-images/bpm-controls.png" width="300" height="60">
+<img src="src/assets//readme-images/bpm-controls.png"  width="60%" height="50%">
 
 `Пример изменения скорости проигрывания секвенсора:`
 
@@ -163,13 +163,13 @@ email: test@gmail.com
 
 Семплы, которые пользователь отметил лайком, попадают на страницу секвенсора. Перетаскиваем семпл на любую дорожку секвенсора в зеленый бокс.
 
-<img src="src/assets//readme-images/drop-sequencer.png" width="300" height="300">
+<img src="src/assets//readme-images/drop-sequencer.png"  width="60%" height="50%">
 
 и кликаем место, в котором семпл должен начинать свое проигрывание. Оно выделяется синим цветом.
 
 при адаптации на мобильные устройства, так как мы не можем перетащить семплы в зеленый дроп бокс секвенсора, при нажатии на бокс появляется модальное окно, откуда можно загрузить соответствующий семпл выбрав его.
 
-<img src="src/assets//readme-images/MOBILE-SEQUENCER-SAMPLES.png" width="300" height="350">
+<img src="src/assets//readme-images/MOBILE-SEQUENCER-SAMPLES.png"  width="60%" height="50%">
 
 ###### Секвенсор позволяет пользователю прослушать понравившиеся ему семплы в сочетании друг с другом в работе, приближенной к реальному музыкальному редактору.
 
