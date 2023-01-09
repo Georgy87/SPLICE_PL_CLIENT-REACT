@@ -37,7 +37,7 @@ describe('PACKS PAGE', () => {
         mockedDispatch.mockReturnValue(dispatch);
 
         jest.spyOn(reduxHooks, 'useSelector').mockReturnValue(packs);
-        mockedDispatch.mockReturnValue(jest.fn());
+        // mockedDispatch.mockReturnValue(jest.fn());
 
         const mockedfetchGetPacks = jest.spyOn(actions, 'fetchGetPacks');
         const mockedSetLoading = jest.spyOn(packSlice, 'setLoading');
@@ -54,29 +54,35 @@ describe('PACKS PAGE', () => {
     it('render search input', async () => {
         const dispatch = jest.fn();
         mockedDispatch.mockReturnValue(dispatch);
+           
+        const mockedfetchSearchPacks = jest.spyOn(actions, 'fetchSearchPacks');
+        
         const {
+            store,
             result: { getByTestId },
         } = await act(async () => renderWithStore(<PacksPage />, {}, ''));
 
-        fireEvent.change(getByTestId('search_input'), {
-            target: { value: 'rap' },
-        });
-
         await act(async () => {
             fireEvent.click(screen.getByTestId('open_input'));
+        });
+     
+        fireEvent.change(getByTestId('search_input'), {
+            target: { value: 'rap' },
         });
 
         const input = getByTestId('search_input');
         expect(input.getAttribute('placeholder')).toBe('Search genres, author');
         expect(input.getAttribute('value')).toBe('rap');
-   
+
+        expect(mockedfetchSearchPacks).toHaveBeenCalledTimes(1);
+        expect(mockedfetchSearchPacks).toBeCalledWith('rap');
+
         await act(async () => {
             fireEvent.click(screen.getByTestId('close_input'));
         });
 
         expect(input.getAttribute('placeholder')).toBe('');
         expect(input.getAttribute('value')).toBe('');
-
     });
 
     it('render video player', async () => {
