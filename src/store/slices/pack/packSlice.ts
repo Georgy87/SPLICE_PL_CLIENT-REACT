@@ -32,32 +32,29 @@ export const packSlice = createSlice({
         builder
             .addCase(
                 fetchGetPacks.fulfilled.type,
-                (state, action: PayloadAction<{ data: { packs: Pack[]; totalPages: number } }>) => {
-                    const { data } = action.payload;
-               
-                    const { packs, totalPages } = data;
+                (state, action: PayloadAction<{ packs: Pack[]; totalPages: number }>) => {
+                    const { packs, totalPages } = action.payload;
                     state.packs = [...state.packs, ...packs];
                     state.totalPages = totalPages;
                     state.loading = false;
                 }
             )
-            .addCase(fetchCreatePack.fulfilled.type, (state, action: PayloadAction<{ data: Pack[] }>) => {
-                const { data } = action.payload;
-                state.packs = data;
+            .addCase(fetchCreatePack.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
+                const packs = action.payload;
+                state.packs = packs;
             })
-            .addCase(fetchGetPack.fulfilled.type, (state, action: PayloadAction<{ data: PackProfile }>) => {
-                const { data } = action.payload;
-				console.log(data);
-                state.packProfile = data;
+            .addCase(fetchGetPack.fulfilled.type, (state, action: PayloadAction<PackProfile>) => {
+                const pack = action.payload;
+                state.packProfile = pack;
                 state.loading = true;
             })
-            .addCase(fetchGetUserPacks.fulfilled.type, (state, action: PayloadAction<{ data: Pack[] }>) => {
-                const { data } = action.payload;
-                state.userPacks = data;
+            .addCase(fetchGetUserPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
+                const packs = action.payload;
+                state.userPacks = packs;
             })
-            .addCase(fetchSearchPacks.fulfilled.type, (state, action: PayloadAction<{ data: Pack[] }>) => {
-                const { data } = action.payload;
-                state.packs = data;
+            .addCase(fetchSearchPacks.fulfilled.type, (state, action: PayloadAction<Pack[]>) => {
+                const packs = action.payload;
+                state.packs = packs;
             }),
 });
 

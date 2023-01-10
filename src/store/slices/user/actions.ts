@@ -16,12 +16,9 @@ export const fetchLogin = createAsyncThunk(
     'user/loginStatus',
     async (payload: { email: string; password: string }, { rejectWithValue }) => {
         try {
-            const data: {
-                data: { user: User; token: string; message: string };
-            } = await userApi.login(payload);
-
-            localStorage.setItem('token', data.data.token);
-            return data;
+            const response: { user: User; token: string; message: string } = await userApi.login(payload);
+            localStorage.setItem('token', response.token);
+            return response;
         } catch (error) {
             // const data: any = error.response;
             // console.log(data);
@@ -44,9 +41,7 @@ export const fetchUpdateEmail = createAsyncThunk(
     'user/updateEmailStatus',
     async (payload: { email: string | undefined }) => {
         try {
-            const data: { user: User } = await userApi.updateEmail(payload.email);
-
-            return data;
+            return userApi.updateEmail(payload.email);
         } catch (error) {
             console.log(error);
         }
@@ -57,12 +52,7 @@ export const fetchUpdateFullName = createAsyncThunk(
     'user/updateFullNameStatus',
     async (payload: { fullname: string | undefined }) => {
         try {
-            const data: {
-                user: User;
-                token: string;
-                message: string;
-            } = await userApi.updateFullName(payload.fullname);
-            return data;
+            return userApi.updateFullName(payload.fullname);
         } catch (error) {
             console.log(error);
         }
@@ -71,8 +61,7 @@ export const fetchUpdateFullName = createAsyncThunk(
 
 export const fetchGetLikedSamples = createAsyncThunk('user/getLikedSamplesStatus', async () => {
     try {
-        const data: Samples[] = await userApi.getLikedSamples();
-        return data;
+        return userApi.getLikedSamples();
     } catch (error) {
         console.log(error);
     }
@@ -83,11 +72,9 @@ export const fetchUpdateAvatar = createAsyncThunk('user/updateAvatarSamplesStatu
         if (!file) return;
 
         const formData = new FormData();
-
         formData.append('file', file);
 
-        const data: string = await userApi.updateAvatar(formData);
-        return data;
+        return userApi.updateAvatar(formData);;
     } catch (error) {
         console.log(error);
     }

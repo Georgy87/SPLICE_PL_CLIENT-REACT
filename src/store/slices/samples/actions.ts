@@ -9,7 +9,6 @@ export const fetchCreateSamples = createAsyncThunk(
 			const { file } = payload;
 
 			const formData = new FormData();
-
 			formData.append('file', file);
 		} catch (error) {
 			console.log(error);
