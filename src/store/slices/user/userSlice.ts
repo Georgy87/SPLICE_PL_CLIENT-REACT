@@ -33,19 +33,14 @@ export const userSlice = createSlice({
     },
     extraReducers: (builder) =>
         builder
-            .addCase(
-                fetchLogin.fulfilled.type,
-                (state, action: PayloadAction<{ data: { user: User; token: string; message: string } }>) => {
-                    if (action.payload) {
-                        const { data } = action.payload;
-                        const { user, token, message } = data;
-
-                        state.user = user;
-                        state.token = token;
-                        state.isAuth = true;
-                    }
+            .addCase(fetchLogin.fulfilled.type, (state, action: PayloadAction<{ user: User; token: string }>) => {
+                if (action.payload) {
+                    const { user, token } = action.payload;
+                    state.user = user;
+                    state.token = token;
+                    state.isAuth = true;
                 }
-            )
+            })
             .addCase(fetchLogin.rejected.type, (state, action: PayloadAction<string>) => {
                 state.errorMessage = action.payload;
             })

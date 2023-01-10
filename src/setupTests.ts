@@ -1,25 +1,24 @@
-
 // Setup Worker
 class Worker {
-	url: string;
-	onmessage: (msg: string) => void;
-	addEventListener: (e: unknown) => void;
-	removeEventListener: (e: unknown) => void;
-	constructor(url: string) {
-		this.url = url;
-		this.onmessage = () => { };
-		this.addEventListener = () => { };
-		this.removeEventListener = () => { };
-	}
+    url: string;
+    onmessage: (msg: string) => void;
+    addEventListener: (e: unknown) => void;
+    removeEventListener: (e: unknown) => void;
+    constructor(url: string) {
+        this.url = url;
+        this.onmessage = () => {};
+        this.addEventListener = () => {};
+        this.removeEventListener = () => {};
+    }
 
-	postMessage(msg: string) {
-		this.onmessage(msg);
-	}
+    postMessage(msg: string) {
+        this.onmessage(msg);
+    }
 }
 
-function noOp() { }
+function noOp() {}
 if (typeof window.URL.createObjectURL === 'undefined') {
-	Object.defineProperty(window.URL, 'createObjectURL', { value: noOp })
+    Object.defineProperty(window.URL, 'createObjectURL', { value: noOp });
 }
 //@ts-ignore
 window.Worker = Worker;
@@ -27,28 +26,27 @@ window.Worker = Worker;
 // Setup AudioContext
 
 Object.defineProperty(HTMLMediaElement.prototype, 'muted', {
-	set: () => { },
+    set: () => {},
 });
 
 window.AudioContext = jest.fn().mockImplementation(() => {
-	return {}
+    return {};
 });
 
 // Setup IntersectionObserver
 
 class IntersectionObserver {
-	observe = jest.fn()
-	disconnect = jest.fn()
-	unobserve = jest.fn()
+    observe = jest.fn();
+    disconnect = jest.fn();
+    unobserve = jest.fn();
 }
 
 Object.defineProperty(window, 'IntersectionObserver', {
-	writable: true,
-	configurable: true,
-	value: IntersectionObserver,
-})
+    writable: true,
+    configurable: true,
+    value: IntersectionObserver,
+});
 
-import "jest-canvas-mock";
+import 'jest-canvas-mock';
 import '@testing-library/jest-dom/extend-expect';
 import '@testing-library/jest-dom';
-

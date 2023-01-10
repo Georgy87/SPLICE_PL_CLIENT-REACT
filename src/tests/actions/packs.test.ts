@@ -54,9 +54,10 @@ describe('PACK ACTIONS TESTS', () => {
 	test('Get packs', async () => {
 		const data: { packs: Pack[]; totalPages: number } = {
 			packs: [pack],
-			totalPages: 1,
+			totalPages: 2,
 		};
-		const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce(data);
+
+		const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
 
 		await store.dispatch(fetchGetPacks(2));
 		expect(getSpy).toBeCalledWith('packs?page=2');
