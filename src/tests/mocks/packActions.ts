@@ -1,4 +1,4 @@
-import { ChartDataType, Pack, PackProfile } from '../../store/slices/pack/types';
+import { ChartDataType, createPackType, Pack, PackProfile } from '../../store/slices/pack/types';
 
 export let chartData: ChartDataType = {
     '2018': {
@@ -113,3 +113,19 @@ export const pack: Pack = {
     _id: '621fe5b9815ea94e0e103a89',
     viewsData: chartData,
 };
+
+export const file = new File([''], 'filename.txt', {
+    type: 'text/plain',
+    lastModified: 2,
+});
+
+export const createPackpayload: createPackType = {
+    info: {
+        genre: 'jazz',
+        authorName: 'Ivan Ignatov',
+        packInfo: 'Test info',
+    },
+    picture: file,
+    audio: file,
+};
+

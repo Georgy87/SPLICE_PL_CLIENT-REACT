@@ -20,9 +20,7 @@ export const fetchLogin = createAsyncThunk(
             localStorage.setItem('token', response.token);
             return response;
         } catch (error) {
-            // const data: any = error.response;
-            // console.log(data);
-            // return rejectWithValue(data.message);
+            console.log(error);
         }
     }
 );
