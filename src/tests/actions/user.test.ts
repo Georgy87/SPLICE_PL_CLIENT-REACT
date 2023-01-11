@@ -1,64 +1,150 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { fetchLogin } from '../../store/slices/user/actions';
-// import fetch from 'jest-fetch-mock';
-global.fetch = jest.fn();
-const response = {
-    user: {
-        _id: '618ebb5a6293c30f4156802a',
-        avatar: 'https://sample-cloud.storage.yandexcloud.net/AVATAR/0ecfda8b-3c55-49dd-be51-b3d35b7412d5.png',
-        confirm_hash: '$2b$08$mNb1dRGb61OOh./IWpYDFOwRq8yDOhWCpV44iwelIKHO6B1WYRgrK',
-        createdAt: '2021-11-12T19:07:06.467Z',
-        email: 'test@gmail.com',
-        fullname: 'Георгий Петренко',
-        password: '$2b$08$R.gsmRdXcysVzby/kzrV.Otca4eRDlCJgYR.B2Qr1H4x5q8.mglLi',
-        updatedAt: '2023-01-07T13:02:49.460Z',
-    },
-    token: 'wdsjsklkjw134',
-};
+import { fetchUpdateAvatar } from './../../store/slices/user/actions';
+import { instance } from '../../core/axios';
+import {
+    fetchAuth,
+    fetchGetLikedSamples,
+    fetchLogin,
+    fetchRegistration,
+    fetchUpdateEmail,
+    fetchUpdateFullName,
+} from '../../store/slices/user/actions';
+import { User } from '../../store/slices/user/types';
+import { RootState } from '../../store/types';
+import { _deepClone } from '../../utils/deepClone';
+import { createStoreMock } from '../../utils/tests';
+import { samples } from '../mocks/samplesActions';
+import { payloadLogin, payloadRegistration, user } from '../mocks/userActions';
+import { file } from '../mocks/packActions';
+
+const mockStore = createStoreMock();
 
 describe('USER ACTIONS', () => {
-    it('should fetchLogin with resolved response', async () => {
-        const mockResponse = response;
-        //@ts-ignore
-        fetch.mockResolvedValue({
-            ok: true,
-            json: () => Promise.resolve(response),
-        });
-        const dispatch = jest.fn();
+    it('registration', async () => {
+        const postSpy = jest.spyOn(instance, 'post').mockResolvedValueOnce(undefined);
 
-        const thunk = fetchLogin({ email: 'email', password: 'password' });
-
-        //@ts-ignore
-        await thunk(dispatch, () => {});
-
-        const { calls } = dispatch.mock;
-        const [start, end] = calls;
-        //@ts-ignore
-        expect(start[0].type).toBe(fetchLogin.pending().type);
-        //@ts-ignore
-        expect(end[0].type).toBe(fetchLogin.fulfilled().type);
-        expect(end[0].payload).toBe(response);
+        const store = mockStore({ user: {} } as RootState);
+        await store.dispatch(fetchRegistration(payloadRegistration));
+        expect(postSpy).toBeCalledTimes(1);
+        expect(store.getActions()[1].type).toBe(fetchRegistration.fulfilled.type);
     });
+    it('login', async () => {
+        const data = { token: user.token, user: user.user, message: 'SUCCESS' };
+        const expectedActions = {
+            type: 'user/loginStatus/fulfilled',
+            payload: data,
+        };
 
-    it('should fetchLogin with rejected response', async () => {
-        const mockResponse = response;
-        //@ts-ignore
-        fetch.mockResolvedValue({
-            ok: false,
-        });
-        const dispatch = jest.fn();
+        const postSpy = jest.spyOn(instance, 'post').mockResolvedValueOnce({ data });
 
-        const thunk = fetchLogin({ email: 'email', password: 'password' });
-        //@ts-ignore
-        await thunk(dispatch, () => {});
+        const store = mockStore({ user } as RootState);
+        const response = await store.dispatch(fetchLogin(payloadLogin));
 
-        const { calls } = dispatch.mock;
-        const [start, end] = calls;
-        //@ts-ignore
-        expect(start[0].type).toBe(fetchLogin.pending().type);
-        //@ts-ignore
-        expect(end[0].type).toBe(fetchLogin.rejected().type);
-        expect(end[0].payload).toBe('Неправильный логин или пароль!');
-        expect(end[0].meta.rejectedWithValue).toBe(true);
+        expect(postSpy).toBeCalled();
+        expect(store.getActions()[1].type).toEqual(expectedActions.type);
+        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+        expect(response.payload).toEqual(data);
+    });
+    it('auth', async () => {
+        const data = { token: user.token, user: user.user };
+        const expectedActions = {
+            type: 'user/authStatus/fulfilled',
+            payload: data,
+        };
+
+        const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
+
+        const store = mockStore({ user } as RootState);
+        const response = await store.dispatch(fetchAuth());
+
+        expect(getSpy).toBeCalledWith('auth');
+        expect(store.getActions()[1].type).toEqual(expectedActions.type);
+        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+        expect(response.payload).toEqual(data);
+    });
+    it('update email', async () => {
+        const { user: obj } = user;
+        const serverResponse = _deepClone(obj);
+        if (serverResponse) serverResponse.email = 'goshana87@gmail.com';
+
+        const data = { user: serverResponse };
+        const expectedActions = {
+            type: 'user/updateEmailStatus/fulfilled',
+            payload: data,
+        };
+
+        const putSpy = jest.spyOn(instance, 'put').mockResolvedValueOnce({ data });
+
+        const store = mockStore({ user: serverResponse } as RootState);
+        const response = await store.dispatch(fetchUpdateEmail({ email: 'goshana87@gmail.com' }));
+
+        expect(putSpy).toBeCalled();
+        expect(store.getActions()[1].type).toEqual(expectedActions.type);
+        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+        expect(response.payload).toEqual(data);
+    });
+    it('update fullname', async () => {
+        const { user: obj } = user;
+        const serverResponse = _deepClone(obj);
+        if (serverResponse) serverResponse.fullname = 'Ben Gromov';
+
+        const data = { user: serverResponse };
+        const expectedActions = {
+            type: 'user/updateFullNameStatus/fulfilled',
+            payload: data,
+        };
+
+        const putSpy = jest.spyOn(instance, 'put').mockResolvedValueOnce({ data });
+
+        const store = mockStore({ user: serverResponse } as RootState);
+        const response = await store.dispatch(fetchUpdateFullName({ fullname: 'Swetlana Litvinenko' }));
+
+        expect(putSpy).toBeCalled();
+        expect(store.getActions()[1].type).toEqual(expectedActions.type);
+        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+        expect(response.payload).toEqual(data);
+    });
+    it('get liked Samples', async () => {
+        const serverResponse: RootState['user'] = _deepClone(user);
+        serverResponse.samples = samples;
+        const data = serverResponse;
+
+        const expectedActions = {
+            type: 'user/getLikedSamplesStatus/fulfilled',
+            payload: data,
+        };
+
+        const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
+
+        const store = mockStore({ user: serverResponse } as RootState);
+        const response = await store.dispatch(fetchGetLikedSamples());
+
+        expect(getSpy).toBeCalled();
+        expect(store.getActions()[1].type).toEqual(expectedActions.type);
+        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+        expect(response.payload).toEqual(data);
+    });
+    it('update avatar', async () => {
+        const data: string = 'avatar.png';
+        const serverResponse: RootState['user'] = _deepClone(user);
+        serverResponse.avatar = data;
+        const { user: userResponse } =  serverResponse;
+        
+        if (userResponse) userResponse.avatar = data;
+    
+        const expectedActions = {
+            type: 'user/updateAvatarSamplesStatus/fulfilled',
+            payload: data,
+        };
+
+        const putSpy = jest.spyOn(instance, 'put').mockResolvedValueOnce({ data });
+
+        const store = mockStore({ user: serverResponse } as RootState);
+        const response = await store.dispatch(fetchUpdateAvatar(file));
+
+        expect(putSpy).toBeCalled();
+        expect(store.getActions()[1].type).toEqual(expectedActions.type);
+        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+        expect(response.payload).toEqual(data);
+        console.log(store.getState());
     });
 });

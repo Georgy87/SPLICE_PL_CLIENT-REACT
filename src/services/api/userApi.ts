@@ -3,6 +3,10 @@ import { Samples } from '../../store/slices/samples/types';
 import { User } from '../../store/slices/user/types';
 
 export const userApi = {
+    async registration(payload: User) {
+        const { email, fullname, password } = payload;
+        await instance.post('registration', { email, fullname, password });
+    },
     async auth() {
         const { data } = await instance.get<{ user: User; token: string }>('auth');
         return data;
@@ -16,10 +20,6 @@ export const userApi = {
         });
 
         return data;
-    },
-    async registration(payload: User) {
-        const { email, fullname, password } = payload;
-        await instance.post('registration', { email, fullname, password });
     },
     async updateEmail(email: string | undefined) {
         const { data } = await instance.put<{user: User }>('users/email', { email });
