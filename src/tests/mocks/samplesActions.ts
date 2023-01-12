@@ -1,4 +1,6 @@
-import { Samples } from "../../store/slices/samples/types";
+import { Samples } from '../../store/slices/samples/types';
+
+const blob = new Blob();
 
 export const samples: Samples[] = [
     {
@@ -17,3 +19,9 @@ export const samples: Samples[] = [
         category: 'drums',
     },
 ];
+
+export const createSamplePayload: { file: File; packId: string; audioCoordinates: number[] } = {
+    file: new File([blob], 'file.jpeg'),
+    packId: '622002b7ad53bf0526655f19',
+    audioCoordinates: [17, 43, 36, 33, 9, 7, 7, 7, 6, 7, 5, 7],
+};

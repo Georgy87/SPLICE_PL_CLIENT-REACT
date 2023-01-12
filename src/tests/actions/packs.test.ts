@@ -9,11 +9,12 @@ import {
 import { Pack } from '../../store/slices/pack/types';
 import { RootState } from '../../store/types';
 import { createStoreMock } from '../../utils/tests';
-import { createPackpayload, getPacksPayload, pack, packProfile } from '../mocks/packActions';
+import { createPackpayload, pack, packProfile } from '../mocks/packActions';
 
 const mockStore = createStoreMock();
+
 describe('PACK ACTIONS TESTS', () => {
-    it('Create pack', async () => {
+    it('create pack', async () => {
         const packs: Pack[] = pack;
         const data = packs;
         const postSpy = jest.spyOn(instance, 'post').mockResolvedValueOnce({ data });
@@ -31,7 +32,7 @@ describe('PACK ACTIONS TESTS', () => {
         expect(response.payload).toEqual(data);
     });
 
-    it('Get packs', async () => {
+    it('get packs', async () => {
         const data: { packs: Pack[]; totalPage: number } = {
             packs: pack,
             totalPage: 2,
@@ -53,7 +54,7 @@ describe('PACK ACTIONS TESTS', () => {
         expect(response.payload).toEqual(data);
     });
 
-    it('Get user packs', async () => {
+    it('get user packs', async () => {
         const data = pack;
         const expectedActions = {
             type: 'packs/getUserPacksStatus/fulfilled',
@@ -71,7 +72,7 @@ describe('PACK ACTIONS TESTS', () => {
         expect(response.payload).toEqual(data);
     });
 
-    it('Get pack', async () => {
+    it('get pack', async () => {
         const tag = null;
         const data = packProfile;
 
@@ -90,7 +91,7 @@ describe('PACK ACTIONS TESTS', () => {
         expect(response.payload).toEqual(data);
     });
 
-    it('Search pack', async () => {
+    it('search pack', async () => {
         const search = 'James Blake';
         const data = pack;
         const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
