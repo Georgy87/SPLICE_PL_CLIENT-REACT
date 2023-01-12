@@ -1,4 +1,3 @@
-import { configureStore } from '@reduxjs/toolkit';
 import { instance } from '../../core/axios';
 import {
     fetchCreatePack,
@@ -8,75 +7,87 @@ import {
     fetchSearchPacks,
 } from '../../store/slices/pack/actions';
 import { Pack } from '../../store/slices/pack/types';
-import { createPackpayload, pack, packProfile } from '../mocks/packActions';
+import { RootState } from '../../store/types';
+import { createStoreMock } from '../../utils/tests';
+import { createPackpayload, getPacksPayload, pack, packProfile } from '../mocks/packActions';
 
-const store = configureStore({
-    reducer: function (state = '', action) {
-        switch (action.type) {
-            case 'packs/createPackStatus/fulfilled':
-                return action.payload;
-            case 'packs/getPacksStatus/fulfilled':
-                return action.payload;
-            case 'packs/getUserPacksStatus/fulfilled':
-                return action.payload;
-            case 'packs/getPackStatus/fulfilled':
-                return action.payload;
-            case 'packs/getSearchPacksStatus/fulfilled':
-                return action.payload;
-            case 'packs/getSearchPacksStatus/fulfilled':
-                return action.payload;
-            default:
-                return state;
-        }
-    },
-});
-
+const mockStore = createStoreMock();
 describe('PACK ACTIONS TESTS', () => {
     it('Create pack', async () => {
-        const packs: Pack[] = [pack];
+        const packs: Pack[] = pack;
         const data = packs;
         const postSpy = jest.spyOn(instance, 'post').mockResolvedValueOnce({ data });
+        const expectedActions = {
+            type: 'packs/createPackStatus/fulfilled',
+            payload: data,
+        };
+        const store = mockStore({ packs: { packs: [] } } as RootState);
 
-        await store.dispatch(fetchCreatePack(createPackpayload));
+        const response = await store.dispatch(fetchCreatePack(createPackpayload));
+
         expect(postSpy).toBeCalled();
-        const state = store.getState();
-        expect(state).toEqual(data);
+        expect(store.getActions()[1].type).toEqual(expectedActions.type);
+        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+        expect(response.payload).toEqual(data);
     });
 
     it('Get packs', async () => {
-        const data: { packs: Pack[]; totalPages: number } = {
-            packs: [pack],
-            totalPages: 2,
+        const data: { packs: Pack[]; totalPage: number } = {
+            packs: pack,
+            totalPage: 2,
+        };
+
+        const expectedActions = {
+            type: 'packs/getPacksStatus/fulfilled',
+            payload: data,
         };
 
         const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
+        const store = mockStore({ packs: { packs: [] } } as RootState);
 
-        await store.dispatch(fetchGetPacks(2));
+        const response = await store.dispatch(fetchGetPacks(2));
+
         expect(getSpy).toBeCalledWith('packs?page=2');
-        const state = store.getState();
-        expect(state).toEqual(data);
+        expect(store.getActions()[1].type).toEqual(expectedActions.type);
+        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+        expect(response.payload).toEqual(data);
     });
 
     it('Get user packs', async () => {
-        const packs = [pack];
-        const data = packs;
-        const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
+        const data = pack;
+        const expectedActions = {
+            type: 'packs/getUserPacksStatus/fulfilled',
+            payload: data,
+        };
 
-        await store.dispatch(fetchGetUserPacks());
+        const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
+        const store = mockStore({ packs: { userPacks: [] } } as RootState);
+
+        const response = await store.dispatch(fetchGetUserPacks());
+
         expect(getSpy).toBeCalledWith('packs/user-packs');
-        const state = store.getState();
-        expect(state).toEqual(data);
+        expect(store.getActions()[1].type).toEqual(expectedActions.type);
+        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+        expect(response.payload).toEqual(data);
     });
 
     it('Get pack', async () => {
         const tag = null;
         const data = packProfile;
-        const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
 
-        await store.dispatch(fetchGetPack({ packId: '621fe5b9815ea94e0e103a89', tag }));
+        const expectedActions = {
+            type: 'packs/getPackStatus/fulfilled',
+            payload: data,
+        };
+        const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
+        const store = mockStore({ packs: { userPacks: [] } } as RootState);
+
+        const response = await store.dispatch(fetchGetPack({ packId: '621fe5b9815ea94e0e103a89', tag }));
+
         expect(getSpy).toBeCalledWith(`packs/pack?packId=621fe5b9815ea94e0e103a89&tag=${tag}`);
-        const state = store.getState();
-        expect(state).toEqual(data);
+        expect(store.getActions()[1].type).toEqual(expectedActions.type);
+        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+        expect(response.payload).toEqual(data);
     });
 
     it('Search pack', async () => {
@@ -84,9 +95,18 @@ describe('PACK ACTIONS TESTS', () => {
         const data = pack;
         const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
 
-        await store.dispatch(fetchSearchPacks(search));
+        const expectedActions = {
+            type: 'packs/getSearchPacksStatus/fulfilled',
+            payload: data,
+        };
+
+        const store = mockStore({ packs: { userPacks: [] } } as RootState);
+
+        const response = await store.dispatch(fetchSearchPacks(search));
+
         expect(getSpy).toBeCalledWith(`packs/search-packs?search=${search}`);
-        const state = store.getState();
-        expect(state).toEqual(data);
+        expect(store.getActions()[1].type).toEqual(expectedActions.type);
+        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+        expect(response.payload).toEqual(data);
     });
 });

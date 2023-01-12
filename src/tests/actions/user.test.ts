@@ -8,7 +8,7 @@ import {
     fetchUpdateEmail,
     fetchUpdateFullName,
 } from '../../store/slices/user/actions';
-import { User } from '../../store/slices/user/types';
+import { User, UserSliceState } from '../../store/slices/user/types';
 import { RootState } from '../../store/types';
 import { _deepClone } from '../../utils/deepClone';
 import { createStoreMock } from '../../utils/tests';
@@ -43,6 +43,7 @@ describe('USER ACTIONS', () => {
         expect(store.getActions()[1].type).toEqual(expectedActions.type);
         expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
         expect(response.payload).toEqual(data);
+       
     });
     it('auth', async () => {
         const data = { token: user.token, user: user.user };
@@ -104,7 +105,7 @@ describe('USER ACTIONS', () => {
         expect(response.payload).toEqual(data);
     });
     it('get liked Samples', async () => {
-        const serverResponse: RootState['user'] = _deepClone(user);
+        const serverResponse: UserSliceState = _deepClone(user);
         serverResponse.samples = samples;
         const data = serverResponse;
 
@@ -125,7 +126,7 @@ describe('USER ACTIONS', () => {
     });
     it('update avatar', async () => {
         const data: string = 'avatar.png';
-        const serverResponse: RootState['user'] = _deepClone(user);
+        const serverResponse: UserSliceState = _deepClone(user);
         serverResponse.avatar = data;
         const { user: userResponse } =  serverResponse;
         
@@ -145,6 +146,5 @@ describe('USER ACTIONS', () => {
         expect(store.getActions()[1].type).toEqual(expectedActions.type);
         expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
         expect(response.payload).toEqual(data);
-        console.log(store.getState());
     });
 });

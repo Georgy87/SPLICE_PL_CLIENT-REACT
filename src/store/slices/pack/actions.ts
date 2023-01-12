@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { packsApi } from '../../../services/api/packsApi';
-import { createPackType, Pack } from './types';
+import { createPackType } from './types';
 
 export const fetchCreatePack = createAsyncThunk('packs/createPackStatus', async (payload: createPackType) => {
     try {

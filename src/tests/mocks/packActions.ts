@@ -102,17 +102,19 @@ export const packProfile: PackProfile = {
     ],
 };
 
-export const pack: Pack = {
-    audio: 'https://sample-cloud.storage.yandexcloud.net/PACK-AUDIO/b6906d94-10b8-4794-a6e2-472a9f5a5862.wav',
-    genre: 'Bass House',
-    listens: 0,
-    name: 'James Blake',
-    packInfo: 'The next generation',
-    picture: 'https://sample-cloud.storage.yandexcloud.net/PACK-IMAGES/5dd58548-f621-4fad-b985-3a03d22dd574.jpeg',
-    userId: '618ebb5a6293c30f4156802a',
-    _id: '621fe5b9815ea94e0e103a89',
-    viewsData: chartData,
-};
+export const pack: Pack[] = [
+    {
+        audio: 'https://sample-cloud.storage.yandexcloud.net/PACK-AUDIO/b6906d94-10b8-4794-a6e2-472a9f5a5862.wav',
+        genre: 'Bass House',
+        listens: 0,
+        name: 'James Blake',
+        packInfo: 'The next generation',
+        picture: 'https://sample-cloud.storage.yandexcloud.net/PACK-IMAGES/5dd58548-f621-4fad-b985-3a03d22dd574.jpeg',
+        userId: '618ebb5a6293c30f4156802a',
+        _id: '621fe5b9815ea94e0e103a89',
+        viewsData: chartData,
+    },
+];
 
 export const file = new File([''], 'filename.txt', {
     type: 'text/plain',
@@ -129,3 +131,7 @@ export const createPackpayload: createPackType = {
     audio: file,
 };
 
+export const getPacksPayload = {
+    packs: pack,
+    totalPage: 2,
+};
