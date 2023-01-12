@@ -8,7 +8,7 @@ import {
     fetchUpdateEmail,
     fetchUpdateFullName,
 } from '../../store/slices/user/actions';
-import { User, UserSliceState } from '../../store/slices/user/types';
+import { UserSliceState } from '../../store/slices/user/types';
 import { RootState } from '../../store/types';
 import { _deepClone } from '../../utils/deepClone';
 import { createStoreMock } from '../../utils/tests';
