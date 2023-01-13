@@ -2,7 +2,7 @@
   "name": "react-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "sample-cloud",
+  "homepage": "SPLICE_PL_CLIENT-REACT",
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
     "@reduxjs/toolkit": "^1.9.1",
