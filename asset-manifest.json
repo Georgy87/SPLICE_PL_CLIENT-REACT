@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/sample-cloud/static/css/main.ee42d604.css",
-    "main.js": "/sample-cloud/static/js/main.eb8a82df.js",
+    "main.js": "/sample-cloud/static/js/main.7c105263.js",
     "static/js/787.bd5a8236.chunk.js": "/sample-cloud/static/js/787.bd5a8236.chunk.js",
     "static/media/auth-background-image.jpeg": "/sample-cloud/static/media/auth-background-image.e0ce920509a52f3b5a74.jpeg",
     "static/media/Open-Hat.wav": "/sample-cloud/static/media/Open-Hat.63d5fc99d28b8f619771.wav",
@@ -11,11 +11,11 @@
     "static/media/unnamed.jpg": "/sample-cloud/static/media/unnamed.ce48ced2f652d62f8a22.jpg",
     "index.html": "/sample-cloud/index.html",
     "main.ee42d604.css.map": "/sample-cloud/static/css/main.ee42d604.css.map",
-    "main.eb8a82df.js.map": "/sample-cloud/static/js/main.eb8a82df.js.map",
+    "main.7c105263.js.map": "/sample-cloud/static/js/main.7c105263.js.map",
     "787.bd5a8236.chunk.js.map": "/sample-cloud/static/js/787.bd5a8236.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ee42d604.css",
-    "static/js/main.eb8a82df.js"
+    "static/js/main.7c105263.js"
   ]
 }
