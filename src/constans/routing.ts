@@ -1,7 +1,7 @@
 export enum QUERY_PARAM {
     LOGIN = '/login',
     REGISTRATION = '/registration',
-    MAIN = '/sample-cloud',
+    MAIN = '/',
     PROFILE_PACK = '/profile-pack/:packId',
     PROFILE = '/profile',
     PROFILE_CREATE = '/profile/create',
