@@ -2,7 +2,7 @@
   "name": "react-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://georgy87.github.io/SPLICE_PL_CLIENT-REACT/",
+  "homepage": "https://georgy87.github.io/SPLICE_PL_CLIENT-REACT.git",
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
     "@reduxjs/toolkit": "^1.9.1",
