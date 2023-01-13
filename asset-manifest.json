@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/SPLICE_PL_CLIENT-REACT/static/css/main.07927a5a.css",
-    "main.js": "/SPLICE_PL_CLIENT-REACT/static/js/main.7469c509.js",
+    "main.js": "/SPLICE_PL_CLIENT-REACT/static/js/main.13a6ef67.js",
     "static/js/787.bd5a8236.chunk.js": "/SPLICE_PL_CLIENT-REACT/static/js/787.bd5a8236.chunk.js",
     "static/media/auth-background-image.jpeg": "/SPLICE_PL_CLIENT-REACT/static/media/auth-background-image.e0ce920509a52f3b5a74.jpeg",
     "static/media/Open-Hat.wav": "/SPLICE_PL_CLIENT-REACT/static/media/Open-Hat.63d5fc99d28b8f619771.wav",
@@ -11,11 +11,11 @@
     "static/media/unnamed.jpg": "/SPLICE_PL_CLIENT-REACT/static/media/unnamed.ce48ced2f652d62f8a22.jpg",
     "index.html": "/SPLICE_PL_CLIENT-REACT/index.html",
     "main.07927a5a.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/main.07927a5a.css.map",
-    "main.7469c509.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/main.7469c509.js.map",
+    "main.13a6ef67.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/main.13a6ef67.js.map",
     "787.bd5a8236.chunk.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/787.bd5a8236.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.07927a5a.css",
-    "static/js/main.7469c509.js"
+    "static/js/main.13a6ef67.js"
   ]
 }
