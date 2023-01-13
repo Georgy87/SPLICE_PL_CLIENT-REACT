@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/sample-cloud/static/css/main.ee42d604.css",
-    "main.js": "/sample-cloud/static/js/main.b44708bd.js",
-    "static/js/787.bd5a8236.chunk.js": "/sample-cloud/static/js/787.bd5a8236.chunk.js",
-    "static/media/auth-background-image.jpeg": "/sample-cloud/static/media/auth-background-image.e0ce920509a52f3b5a74.jpeg",
-    "static/media/Open-Hat.wav": "/sample-cloud/static/media/Open-Hat.63d5fc99d28b8f619771.wav",
-    "static/media/Kick.wav": "/sample-cloud/static/media/Kick.88d07023eda0dab11b65.wav",
-    "static/media/Clap.wav": "/sample-cloud/static/media/Clap.1b886df419951c4bb580.wav",
-    "static/media/Hat.wav": "/sample-cloud/static/media/Hat.f4f08b10afb697fd5a0f.wav",
-    "static/media/unnamed.jpg": "/sample-cloud/static/media/unnamed.ce48ced2f652d62f8a22.jpg",
-    "index.html": "/sample-cloud/index.html",
-    "main.ee42d604.css.map": "/sample-cloud/static/css/main.ee42d604.css.map",
-    "main.b44708bd.js.map": "/sample-cloud/static/js/main.b44708bd.js.map",
-    "787.bd5a8236.chunk.js.map": "/sample-cloud/static/js/787.bd5a8236.chunk.js.map"
+    "main.css": "/SPLICE_PL_CLIENT-REACT/static/css/main.07927a5a.css",
+    "main.js": "/SPLICE_PL_CLIENT-REACT/static/js/main.626ebcfc.js",
+    "static/js/787.bd5a8236.chunk.js": "/SPLICE_PL_CLIENT-REACT/static/js/787.bd5a8236.chunk.js",
+    "static/media/auth-background-image.jpeg": "/SPLICE_PL_CLIENT-REACT/static/media/auth-background-image.e0ce920509a52f3b5a74.jpeg",
+    "static/media/Open-Hat.wav": "/SPLICE_PL_CLIENT-REACT/static/media/Open-Hat.63d5fc99d28b8f619771.wav",
+    "static/media/Kick.wav": "/SPLICE_PL_CLIENT-REACT/static/media/Kick.88d07023eda0dab11b65.wav",
+    "static/media/Clap.wav": "/SPLICE_PL_CLIENT-REACT/static/media/Clap.1b886df419951c4bb580.wav",
+    "static/media/Hat.wav": "/SPLICE_PL_CLIENT-REACT/static/media/Hat.f4f08b10afb697fd5a0f.wav",
+    "static/media/unnamed.jpg": "/SPLICE_PL_CLIENT-REACT/static/media/unnamed.ce48ced2f652d62f8a22.jpg",
+    "index.html": "/SPLICE_PL_CLIENT-REACT/index.html",
+    "main.07927a5a.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/main.07927a5a.css.map",
+    "main.626ebcfc.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/main.626ebcfc.js.map",
+    "787.bd5a8236.chunk.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/787.bd5a8236.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ee42d604.css",
-    "static/js/main.b44708bd.js"
+    "static/css/main.07927a5a.css",
+    "static/js/main.626ebcfc.js"
   ]
 }
