@@ -11,7 +11,7 @@ export const VideoPlayer: React.FC = () => {
 				data-testid={'video-player'}
 				className={styles.playerVideo}
 				autoPlay
-				src='https://storage.yandexcloud.net/sample-cloud/videos/ARCADE%20by%20Output.mp4'
+				src='https://storage.yandexcloud.net/sample-cloud/videos/Arcade%20by%20Output.mp4'
 				loop
                 muted
 			/>
