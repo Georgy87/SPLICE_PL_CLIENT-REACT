@@ -1,8 +1,7 @@
 export enum QUERY_PARAM {
     LOGIN = '/login',
     REGISTRATION = '/registration',
-    MAIN = '/',
-    FIRST_LOAD = 'SPLICE_PL_CLIENT-REACT',
+    MAIN = '/sample-cloud',
     PROFILE_PACK = '/profile-pack/:packId',
     PROFILE = '/profile',
     PROFILE_CREATE = '/profile/create',
