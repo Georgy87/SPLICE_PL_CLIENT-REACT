@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Loader } from '../../components/Loader/Loader';
 import { SampleList } from '../../components/SampleList/SampleList';
 import { defaultState } from '../../context/PlayerContextProvider/PlayerContextProvider';
 import { useSound } from '../../hooks/useSound';
@@ -33,7 +32,7 @@ export const LikedSamplesPage: React.FC = () => {
 
 	return (
 		<div className={styles.root} data-testid='liked-samples-page'>
-			{!likedSamples ? <Loader /> : <SampleList samples={likedSamples} pageName='liked-samples-page' />}
+			{<SampleList samples={likedSamples} pageName='liked-samples-page' />}
 		</div>
 	);
 };

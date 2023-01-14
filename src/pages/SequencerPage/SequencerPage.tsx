@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { useSequencer } from '../../hooks/useSequencer';
 import { IconLayout } from '../../layouts/IconLayout/IconLayout';
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-
 import { selectLikedSamples } from '../../store/selectors/userSelectors';
 import { Samples } from '../../store/slices/samples/types';
 import { Loader } from '../../components/Loader/Loader';

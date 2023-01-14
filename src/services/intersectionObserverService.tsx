@@ -22,7 +22,6 @@ class IntersectionObserverService implements IIntersectionObserver {
 			},
 			{ threshold: 1 }
 		);
-
 		if (pageEnd?.current) {
 			observer.observe(pageEnd.current);
 		}

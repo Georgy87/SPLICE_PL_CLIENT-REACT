@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Player } from '../../components/Player/Player';
@@ -14,73 +14,79 @@ import { setDefaultPackState, setLoading } from '../../store/slices/pack/packSli
 import { useAppDispatch } from '../../store/types';
 import { intersectionObserverService } from '../../services/intersectionObserverService';
 
-import styles from './PacksPage.module.scss';
 
+import styles from './PacksPage.module.scss';
+import { PACKS_SKELETON_ITEMS } from '../../constans/skeleton';
+import { VerticalSkeletonLayout } from '../../layouts/VerticalSkeletonLayout/VerticalSkeletonLayout';
 
 type PropsType = {
-	pageName?: 'main-packs' | 'user-packs';
+    pageName?: 'main-packs' | 'user-packs';
 };
 
 export const PacksPage: React.FC<PropsType> = () => {
-	const packs = useSelector(selectPacks);
-	const loading = useSelector(selectLoading);
-	const totalPages = useSelector(selectTotalPages);
+    const packs = useSelector(selectPacks);
+    const loading = useSelector(selectLoading);
+    const totalPages = useSelector(selectTotalPages);
 
-	let pagesCounter: number = 1;
+    let pagesCounter: number = 1;
 
-	const pageEnd = useRef() as React.MutableRefObject<HTMLInputElement>;
+    const pageEnd = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-	const [pageNumber, setPageNumber] = useState<number>(0);
-	const [value, setValue] = useState<string>('');
+    const [pageNumber, setPageNumber] = useState<number>(0);
+    const [value, setValue] = useState<string>('');
 
-	const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
 
-	const onLongMore = () => {
-		setPageNumber((prevPageNumber) => prevPageNumber + 1);
-	};
+    const onLongMore = () => {
+        setPageNumber((prevPageNumber) => prevPageNumber + 1);
+    };
 
-	useEffect(() => {
-		dispatch(fetchGetPacks(pageNumber));
-		dispatch(setLoading(true));
-	}, [pageNumber]);
+    useEffect(() => {
+        dispatch(fetchGetPacks(pageNumber));
+        dispatch(setLoading(true));
+    }, [pageNumber]);
 
-	useEffect(() => {
-		dispatch(setDefaultPackState());
-	}, []);
+    useEffect(() => {
+        dispatch(setDefaultPackState());
+    }, []);
 
-	const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
-		e.stopPropagation();
-		setValue(e.target.value);
-		dispatch(fetchSearchPacks(e.target.value));
-	};
+    const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
+        e.stopPropagation();
+        setValue(e.target.value);
+        dispatch(fetchSearchPacks(e.target.value));
+    };
 
-	useEffect(() => {
-		if (loading) {
-			intersectionObserverService.isObserver(totalPages, pageEnd, pagesCounter, onLongMore);
-		}
-	}, [loading]);
+    useEffect(() => {
+        if (loading) {
+            intersectionObserverService.isObserver(totalPages, pageEnd, pagesCounter, onLongMore);
+        }
+    }, [loading]);
 
-	return (
-		<div className={styles.root} data-testid='packs-page'>
-			<VideoPlayer />
-			<SearchInput onChangeValue={onChangeValue} setValue={setValue} value={value} />
-			<div className={styles.root}>
-				{packs?.length ? (
-					packs.map((pack: Pack, index: number) => (
-						<div className={styles.packCardContainer} key={pack._id}>
-							<PackItem pack={pack} id={pack._id} index={index} />
-						</div>
-					))
-				) : (
-					<div className={styles.loaderWrapper} >
-						<Loader data-testid='loader' />
-					</div>
-				)}
-				<div className={styles.loaderPagination} ref={pageEnd}>
-					{''}
-				</div>
-				<Player />
-			</div>
-		</div>
-	);
+    return (
+        <div className={styles.root} data-testid="packs-page">
+            <VideoPlayer />
+            <SearchInput onChangeValue={onChangeValue} setValue={setValue} value={value} />
+            <div className={styles.root}>
+                {packs?.length ? (
+                    packs.map((pack: Pack, index: number) => (
+                        <div className={styles.packCardContainer} key={pack._id}>
+                            <PackItem pack={pack} id={pack._id} index={index} />
+                        </div>
+                    ))
+                ) : (
+                    <>
+                        {PACKS_SKELETON_ITEMS.map((_, index) => (
+                            <div className={styles.packCardContainer} key={index}>
+                                <VerticalSkeletonLayout />
+                            </div>
+                        ))}
+                    </>
+                )}
+                <div className={styles.loaderPagination} ref={pageEnd}>
+                    {''}
+                </div>
+                <Player />
+            </div>
+        </div>
+    );
 };

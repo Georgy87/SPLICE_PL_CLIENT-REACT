@@ -25,3 +25,4 @@ export const VideoPlayer: React.FC = () => {
 		</div>
 	);
 };
+
