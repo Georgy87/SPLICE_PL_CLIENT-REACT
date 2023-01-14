@@ -1,10 +1,10 @@
+import Shimmer from '../../components/Shimmer/Shimmer';
 import { SKELETON_ELEMENT_TYPE } from '../../constans/skeleton';
-import Shimmer from './Shimmer';
 import { SkeletonElement } from './SkeletonElement';
 
 import styles from './VerticalSkeletonLayout.module.scss';
 
-export const VerticalSkeletonLayout: React.FC = () => {
+export const VerticalSkeletonLayout = () => {
     return (
         <div className={styles.skeleton}>
             <div className={styles.skeletonWrapper}>

@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
 import { HorizontalSkeletonLayout } from '../../layouts/HorizontalSkeletonLayout/HorizontalSkeletonLayout';
-import { VerticalSkeletonLayout } from '../../layouts/VerticalSkeletonLayout/VerticalSkeletonLayout';
 import { selectTag } from '../../store/selectors/packsSelectors';
 import { setTag } from '../../store/slices/pack/packSlice';
 import { Samples } from '../../store/slices/samples/types';
@@ -18,7 +17,7 @@ type PropsType = {
     pageName?: string;
 };
 
-const SampleListChild: React.FC<PropsType> = ({ samples, pageName }) => {
+export const SampleList: React.FC<PropsType> = ({ samples, pageName }) => {
     const packTag = useSelector(selectTag);
 
     const dispatch = useAppDispatch();
@@ -56,8 +55,7 @@ const SampleListChild: React.FC<PropsType> = ({ samples, pageName }) => {
                       return <SampleItem key={sample._id} sample={sample} idx={index} />;
                   })
                 : sceleton}
+            {sceleton}
         </>
     );
 };
-
-export const SampleList = React.memo(SampleListChild);

@@ -1,4 +1,4 @@
-import styles from './VerticalSkeletonLayout.module.scss';
+import styles from './Shimmer.module.scss';
 
 export const Shimmer = () => {
     return (
