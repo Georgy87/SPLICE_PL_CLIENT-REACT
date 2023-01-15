@@ -2,12 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-import { IconLayout } from '../../layouts/IconLayout/IconLayout';
-import { selectAuth } from '../../store/selectors/userSelectors';
-import { logout } from '../../store/slices/user/userSlice';
-import { useAppDispatch } from '../../store/types';
-import { SidebarList } from '../SidebarList/SidebarList';
+import { ButtonLayout } from '@layouts/ButtonLayout';
+import { IconLayout } from '@layouts/IconLayout';
+import { selectAuth } from '@selectors/userSelectors';
+import { logout } from '@slices/user/userSlice';
+import { useAppDispatch } from '@store/types';
+import { SidebarList } from '@components/SidebarList';
 
 import styles from './Sidebar.module.scss';
 

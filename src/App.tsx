@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 
-import { Navbar } from './components/Navbar/Navbar';
-import { PlayerContextProvider } from './context/PlayerContextProvider/PlayerContextProvider';
-import { fetchAuth, fetchLogin } from './store/slices/user/actions';
-import { AppRouter } from './router/AppRouter';
-import { useAppDispatch } from './store/types';
+import { Navbar } from '@components/Navbar';
+import { PlayerContextProvider } from '@context/PlayerContextProvider';
+import { fetchAuth } from '@slices/user/actions';
+import { AppRouter } from '@router/AppRouter';
+import { useAppDispatch } from '@store/types';
 
 import styles from './App.module.scss';
-
 
 export const App = () => {
     const dispatch = useAppDispatch();

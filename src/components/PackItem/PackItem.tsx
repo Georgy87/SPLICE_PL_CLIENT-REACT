@@ -1,12 +1,13 @@
 import React from 'react';
-
-import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
-import { useSound } from '../../hooks/useSound';
-import { Pack } from '../../store/slices/pack/types';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectAuth } from '../../store/selectors/userSelectors';
-import { QUERY_PARAM } from '../../constans/routing';
+
+import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
+import { useSound } from '@/hooks/useSound';
+import { Pack } from '@slices/pack/types';
+import { selectAuth } from '@selectors/userSelectors';
+import { QUERY_PARAM } from 'constans/routing';
+
 import styles from './PackItem.module.scss';
 
 type PackListProps = {

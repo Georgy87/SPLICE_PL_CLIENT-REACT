@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { SliderProgress } from '../SliderProgress/SliderProgress';
-import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
-import { formatTime } from '../../utils/formatTime';
-import { useSound } from '../../hooks/useSound';
+import { SliderProgress } from '@components/SliderProgress';
+import { IconChangeLayout } from '@layouts/IconChangeLayout';
+import { formatTime } from '@utils/formatTime';
+import { useSound } from '@hooks/useSound';
 
 import styles from './Player.module.scss';
 
@@ -13,7 +13,6 @@ export const Player: React.FC = () => {
     if (!active) {
         return null;
     }
-
     return (
         <div className={styles.player}>
             <SliderProgress sliderType="currentTime" width="98vw" />

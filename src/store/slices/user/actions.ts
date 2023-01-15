@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { userApi } from '../../../services/api/userApi';
+import { userApi } from '@services/api/userApi';
 import { User } from './types';
 import { Samples } from '../samples/types';
 

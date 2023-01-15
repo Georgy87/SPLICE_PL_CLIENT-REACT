@@ -1,7 +1,7 @@
 import { userInitialState } from './../mocks/userActions';
-import { userReducer } from '../../store/slices/user/userSlice';
-import { RootState } from '../../store/types';
-import { createStoreMock } from '../../utils/tests';
+import { userReducer } from '@slices/user/userSlice';
+import { RootState } from '@store/types';
+import { createStoreMock } from '@utils/tests';
 import { user } from '../mocks/userActions';
 
 const mockStore = createStoreMock();

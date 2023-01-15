@@ -1,19 +1,20 @@
 import { Routes, Route } from 'react-router-dom';
+import { FC } from 'react';
 
 import { QUERY_PARAM } from '../constans/routing';
 
-import { AvatarEditorPage } from '../pages';
-import { CreatePackPage } from '../pages';
-import { LikedSamplesPage } from '../pages';
-import { LoginPage } from '../pages';
-import { PacksPage } from '../pages';
-import { ProfilePackPage } from '../pages';
-import { RegistrationPage } from '../pages';
-import { SequencerPage } from '../pages';
-import { UserPacksPage } from '../pages';
-import { UserProfilePage } from '../pages';
+import { AvatarEditorPage } from '@pages/AvatarEditorPage';
+import { CreatePackPage } from '@pages/CreatePackPage';
+import { LikedSamplesPage } from '@pages/LikedSamplesPage';
+import { LoginPage } from '@pages/LoginPage';
+import { PacksPage } from '@pages/PacksPage';
+import { ProfilePackPage } from '@pages/ProfilePackPage';
+import { RegistrationPage } from '@pages/RegistrationPage';
+import { SequencerPage } from '@pages/SequencerPage';
+import { UserPacksPage } from '@pages/UserPacksPage';
+import { UserProfilePage } from '@pages/UserProfilePage';
 
-export const AppRouter: React.FC = () => {
+export const AppRouter: FC = () => {
     return (
         <>
             <Routes>

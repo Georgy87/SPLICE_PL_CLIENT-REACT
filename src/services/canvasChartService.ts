@@ -1,4 +1,4 @@
-import { MountType } from '../store/slices/pack/types';
+import { MountType } from '@slices/pack/types';
 import { ICanvasChart } from './types';
 
 export class CanvasChartService implements ICanvasChart {

@@ -1,6 +1,6 @@
-import { instance } from '../../core/axios';
-import { Samples } from '../../store/slices/samples/types';
-import { User } from '../../store/slices/user/types';
+import { instance } from '@core/axios';
+import { Samples } from '@slices/samples/types';
+import { User } from '@slices/user/types';
 
 export const userApi = {
     async registration(payload: User) {

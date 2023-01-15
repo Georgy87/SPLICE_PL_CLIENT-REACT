@@ -1,9 +1,9 @@
 import { fireEvent, screen } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import * as reduxHooks from 'react-redux';
 
-import { renderWithStore } from '../../utils/tests';
-import { LoginPage } from '../../pages';
-import { act } from 'react-dom/test-utils';
+import { renderWithStore } from '@utils/tests';
+import { LoginPage } from '@pages/LoginPage';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),

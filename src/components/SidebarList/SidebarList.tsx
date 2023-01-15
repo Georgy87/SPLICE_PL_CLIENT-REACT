@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { icons } from '../../layouts/IconLayout/IconLayout';
-import { SidebarItem } from '../SidebarItem/SidebarItem';
+import { icons } from '@layouts/IconLayout';
+import { SidebarItem } from '@components/SidebarItem';
 
 import styles from './SidebarList.module.scss';
 

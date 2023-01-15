@@ -1,4 +1,4 @@
-import { ChartDataType, createPackType, Pack, PackProfile } from '../../store/slices/pack/types';
+import { ChartDataType, createPackType, Pack, PackProfile } from '@slices/pack/types';
 
 export let chartData: ChartDataType = {
     '2018': {

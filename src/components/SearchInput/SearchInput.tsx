@@ -8,7 +8,7 @@ type PropsType = {
     value: string;
 };
 
-const SearchInput: React.FC<PropsType> = ({ onChangeValue, setValue, value }) => {
+export const SearchInput: React.FC<PropsType> = ({ onChangeValue, setValue, value }) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [open, setOpen] = useState<boolean>(false);
     const [placeholder, setPlaceholder] = useState<string>('Search genres, author');
@@ -58,4 +58,3 @@ const SearchInput: React.FC<PropsType> = ({ onChangeValue, setValue, value }) =>
     );
 };
 
-export default SearchInput;

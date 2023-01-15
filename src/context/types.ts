@@ -1,5 +1,5 @@
-import { Pack } from "../../store/slices/pack/types";
-import { Samples } from "../../store/slices/samples/types";
+import { Pack } from "../store/slices/pack/types";
+import { Samples } from "../store/slices/samples/types";
 
 export type PlayerStateType = {
     audioPlayer: HTMLMediaElement;

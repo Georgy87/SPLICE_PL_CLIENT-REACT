@@ -1,14 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-import { HorizontalSkeletonLayout } from '../../layouts/HorizontalSkeletonLayout/HorizontalSkeletonLayout';
-import { selectTag } from '../../store/selectors/packsSelectors';
-import { setTag } from '../../store/slices/pack/packSlice';
-import { Samples } from '../../store/slices/samples/types';
-import { useAppDispatch } from '../../store/types';
-import { sampleCategories } from '../AddSampleInfoModal/sampleCategories';
-import { SampleItem } from '../SampleItem/SampleItem';
+import { ButtonLayout } from '@layouts/ButtonLayout';
+import { HorizontalSkeletonLayout } from '@layouts/HorizontalSkeletonLayout';
+import { selectTag } from '@selectors/packsSelectors';
+import { setTag } from '@slices/pack/packSlice';
+import { Samples } from '@slices/samples/types';
+import { useAppDispatch } from '@store/types';
+import { sampleCategories } from '@components/AddSampleInfoModal/sampleCategories';
+import { SampleItem } from '@components/SampleItem';
 
 import styles from './SampleList.module.scss';
 

@@ -1,36 +1,33 @@
-import { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useMemo, useRef, useState, MutableRefObject } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Player } from '../../components/Player/Player';
-import SearchInput from '../../components/SearchInput/SearchInput';
-import { PackItem } from '../../components/PackItem/PackItem';
-import { Pack } from '../../store/slices/pack/types';
-import { selectPacks, selectTotalPages } from '../../store/selectors/packsSelectors';
-import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
-import { Loader } from '../../components/Loader/Loader';
-import { fetchGetPacks, fetchSearchPacks } from '../../store/slices/pack/actions';
-import { selectLoading } from '../../store/selectors/packsSelectors';
-import { setDefaultPackState, setLoading } from '../../store/slices/pack/packSlice';
-import { useAppDispatch } from '../../store/types';
-import { intersectionObserverService } from '../../services/intersectionObserverService';
-
+import { Player } from '@components/Player';
+import { SearchInput } from '@components/SearchInput';
+import { PackItem } from '@components/PackItem';
+import { Pack } from '@slices/pack/types';
+import { selectPacks, selectTotalPages, selectLoading  } from '@selectors/packsSelectors';
+import { VideoPlayer } from '@components/VideoPlayer';
+import { fetchGetPacks, fetchSearchPacks } from '@slices/pack/actions';
+import { setDefaultPackState, setLoading } from '@slices/pack/packSlice';
+import { useAppDispatch } from '@store/types';
+import { intersectionObserverService } from '@services/intersectionObserverService';
+import { PACKS_SKELETON_ITEMS } from '../../constans/skeleton';
+import { VerticalSkeletonLayout } from '@layouts/VerticalSkeletonLayout';
 
 import styles from './PacksPage.module.scss';
-import { PACKS_SKELETON_ITEMS } from '../../constans/skeleton';
-import { VerticalSkeletonLayout } from '../../layouts/VerticalSkeletonLayout/VerticalSkeletonLayout';
 
 type PropsType = {
     pageName?: 'main-packs' | 'user-packs';
 };
 
-export const PacksPage: React.FC<PropsType> = () => {
+export const PacksPage: FC<PropsType> = () => {
     const packs = useSelector(selectPacks);
     const loading = useSelector(selectLoading);
     const totalPages = useSelector(selectTotalPages);
 
     let pagesCounter: number = 1;
 
-    const pageEnd = useRef() as React.MutableRefObject<HTMLInputElement>;
+    const pageEnd = useRef() as MutableRefObject<HTMLInputElement>;
 
     const [pageNumber, setPageNumber] = useState<number>(0);
     const [value, setValue] = useState<string>('');

@@ -1,0 +1,1 @@
+export { AddSampleInfoModal } from './AddSampleInfoModal';

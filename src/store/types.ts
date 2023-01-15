@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 
-import { store } from './index';
+import { store } from '@/store';
 import { PacksSliceState } from './slices/pack/types';
 import { SampleSliceState } from './slices/samples/types';
 import { UserSliceState } from './slices/user/types';

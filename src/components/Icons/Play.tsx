@@ -1,7 +1,7 @@
 type PropsType = {
     size: string;
     color: string;
-}
+};
 
 export const Play: React.FC<PropsType> = ({ size, color }) => {
     return (

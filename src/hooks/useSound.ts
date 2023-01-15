@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
-import { PlayerContext } from '../context/PlayerContext';
-import { PlayerStateType } from '../context/PlayerContextProvider/types';
+import { PlayerContext } from '@context/PlayerContext';
+import { PlayerStateType } from '@context/types';
 
 export const useSound = () => {
 	const [playerState, setPlayerState] = useContext(PlayerContext);

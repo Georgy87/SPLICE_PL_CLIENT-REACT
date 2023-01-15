@@ -1,4 +1,4 @@
-import { Pack } from '../../store/slices/pack/types';
+import { Pack } from '@slices/pack/types';
 
 export const packs: Pack[] = [
     {

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import { useState, FC, ChangeEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NavLink } from 'react-router-dom';
-import { useAppDispatch } from '../../store/types';
+import { useAppDispatch } from '@store/types';
 
-import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-import { AuthorizationLayout } from '../../layouts/AuthorizationLayout/AuthorizationLayout';
-import { RegisterFormSchema } from '../../utils/useFormSchemas';
-import { fetchRegistration } from '../../store/slices/user/actions';
+import { ButtonLayout } from '@layouts/ButtonLayout';
+import { AuthorizationLayout } from '@layouts/AuthorizationLayout';
+import { RegisterFormSchema } from '@utils/useFormSchemas';
+import { fetchRegistration } from '@slices/user/actions';
 
 import styles from './RegistrationPage.module.scss';
 
@@ -18,7 +18,7 @@ export type FormProps = {
 	password2: string;
 };
 
-export const RegistrationPage: React.FC = () => {
+export const RegistrationPage: FC = () => {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [password2, setPassword2] = useState<string>('');
@@ -26,19 +26,19 @@ export const RegistrationPage: React.FC = () => {
 
 	const dispatch = useAppDispatch();
 
-	const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
 		setFullName(e.target.value);
 	};
 
-	const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value);
 	};
 
-	const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
 		setPassword(e.target.value);
 	};
 
-	const onChangePassword2 = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangePassword2 = (e: ChangeEvent<HTMLInputElement>) => {
 		setPassword2(e.target.value);
 	};
 
@@ -74,7 +74,7 @@ export const RegistrationPage: React.FC = () => {
 							{...register('fullname')}
 							value={fullName}
 							onChange={(
-								e: React.ChangeEvent<HTMLInputElement>,
+								e: ChangeEvent<HTMLInputElement>,
 							) => onChangeName(e)}
 						/>
 						<p>{errors.fullname?.message}</p>
@@ -86,7 +86,7 @@ export const RegistrationPage: React.FC = () => {
 							{...register('email')}
 							value={email}
 							onChange={(
-								e: React.ChangeEvent<HTMLInputElement>,
+								e: ChangeEvent<HTMLInputElement>,
 							) => onChangeEmail(e)}
 						/>
 						<p>{errors.email?.message}</p>
@@ -98,7 +98,7 @@ export const RegistrationPage: React.FC = () => {
 							{...register('password')}
 							value={password}
 							onChange={(
-								e: React.ChangeEvent<HTMLInputElement>,
+								e: ChangeEvent<HTMLInputElement>,
 							) => onChangePassword(e)}
 						/>
 						<p>{errors.password?.message}</p>
@@ -110,7 +110,7 @@ export const RegistrationPage: React.FC = () => {
 							{...register('password2')}
 							value={password2}
 							onChange={(
-								e: React.ChangeEvent<HTMLInputElement>,
+								e: ChangeEvent<HTMLInputElement>,
 							) => onChangePassword2(e)}
 						/>
 						<p>{errors.password2?.message}</p>

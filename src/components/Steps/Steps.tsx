@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import classNames from 'classnames';
 
 import styles from './Steps.module.scss';
@@ -8,7 +8,7 @@ type PropsType = {
 	typeStyle: string;
 };
 
-export const Steps: React.FC<PropsType> = (props) => {
+export const Steps: FC<PropsType> = (props) => {
 	const { step, typeStyle } = props;
 	return (
 		<div className={styles.step}>

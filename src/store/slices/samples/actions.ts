@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { samplesApi } from '../../../services/api/samplesApi';
+import { samplesApi } from '@services/api/samplesApi';
 
 export const fetchCreateSamples = createAsyncThunk(
 	'sample/createSamplesStatus',

@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 
-import { useDropzone } from '../../hooks/useDropzone';
-import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-import { IconLayout } from '../../layouts/IconLayout/IconLayout';
-import { getColumnColor } from '../../utils/getColumnColor';
+import { useDropzone } from '@hooks/useDropzone';
+import { ButtonLayout } from '@layouts/ButtonLayout';
+import { IconLayout } from '@layouts/IconLayout';
+import { getColumnColor } from '@utils/getColumnColor';
 
 import styles from './Sequencer.module.scss';
 
@@ -16,7 +16,7 @@ type PropsType = {
 	onDropHandler: (e: React.DragEvent<HTMLDivElement>, index: number) => void;
 }
 
-export const Sequencer: React.FC<PropsType> = ({ setIndexBox, setActiveModal, step, pattern, updatePattern, onDropHandler }) => {
+export const Sequencer: FC<PropsType> = ({ setIndexBox, setActiveModal, step, pattern, updatePattern, onDropHandler }) => {
 	const samplesBoxs: string[] = ['kick', 'snare', 'hihat', 'bass', 'smpl'];
 	
 	const { dragEnter } = useDropzone();

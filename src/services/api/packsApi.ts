@@ -1,5 +1,5 @@
-import { instance } from '../../core/axios';
-import { Pack, PackProfile } from '../../store/slices/pack/types';
+import { instance } from '@core/axios';
+import { Pack, PackProfile } from '@slices/pack/types';
 
 export const packsApi = {
     async createPack(formData: FormData) {

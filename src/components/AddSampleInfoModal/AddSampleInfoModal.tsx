@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import { useAppDispatch } from '../../store/types';
-import { Modal } from '../../layouts/ModalLayout/ModalLayout';
+import { useAppDispatch } from '@store/types';
+import { Modal } from '@layouts/ModalLayout';
 import { sampleCategories } from './sampleCategories';
-import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-import { fetchSetSampleBpm, fetchSetSampleCategory } from '../../store/slices/samples/actions';
+import { ButtonLayout } from '@layouts/ButtonLayout';
+import { fetchSetSampleBpm, fetchSetSampleCategory } from '@slices/samples/actions';
 
 import styles from './AddSampleInfoModal.module.scss';
 

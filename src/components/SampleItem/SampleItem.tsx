@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { useAppDispatch } from '../../store/types';
-import { useSound } from '../../hooks/useSound';
-import { IconChangeLayout } from '../../layouts/IconChangeLayout/IconChangeLayout';
-import { SampleSliderLayout } from '../../layouts/SampleSliderLayout/SampleSliderLayout';
-import { formatTime } from '../../utils/formatTime';
-import { Samples } from '../../store/slices/samples/types';
-import { IconLayout } from '../../layouts/IconLayout/IconLayout';
-import { canvasSampleService } from '../../services/canvasSampleService';
-import { AddSampleInfoModal } from '../AddSampleInfoModal/AddSampleInfoModal';
-import { fetchDeleteLike, fetchSetLike } from '../../store/slices/samples/actions';
+import { useAppDispatch } from '@store/types';
+import { useSound } from '@hooks/useSound';
+import { IconChangeLayout } from '@layouts/IconChangeLayout';
+import { SampleSliderLayout } from '@layouts/SampleSliderLayout';
+import { formatTime } from '@utils/formatTime';
+import { Samples } from '@slices/samples/types';
+import { IconLayout } from '@layouts/IconLayout';
+import { canvasSampleService } from '@services/canvasSampleService';
+import { AddSampleInfoModal } from '@components/AddSampleInfoModal';
+import { fetchDeleteLike, fetchSetLike } from '@slices/samples/actions';
 
 import styles from './SampleItem.module.scss';
 

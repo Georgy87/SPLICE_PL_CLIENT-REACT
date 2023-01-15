@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, DragEvent } from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
 
-import { useAppDispatch } from '../../store/types';
-import { useDropzone } from '../../hooks/useDropzone';
-import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-import { IconLayout } from '../../layouts/IconLayout/IconLayout';
-import { canvasAvatarService } from '../../services/canvasAvatarService';
-import { fileService } from '../../services/fileService';
-import { fetchUpdateAvatar } from '../../store/slices/user/actions';
+import { useAppDispatch } from '@store/types';
+import { useDropzone } from '@hooks/useDropzone';
+import { ButtonLayout } from '@layouts/ButtonLayout';
+import { IconLayout } from '@layouts/IconLayout';
+import { canvasAvatarService } from '@services/canvasAvatarService';
+import { fileService } from '@services/fileService';
+import { fetchUpdateAvatar } from '@slices/user/actions';
 
 import './UserProfilePhoto.css';
 
@@ -39,11 +39,11 @@ export const AvatarEditorPage = () => {
 
 	const { dragEnter, dragLeave } = useDropzone();
 
-	const handleOnDrop = (e: React.DragEvent<HTMLDivElement>) => {
+	const handleOnDrop = (e: DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
 		e.stopPropagation();
 
-		const eventData = (e as React.DragEvent).dataTransfer;
+		const eventData = (e as DragEvent).dataTransfer;
 		const files = [eventData.files];
 
 		fileService.fileUpload({ files, setAvatarState, onDrop: true });

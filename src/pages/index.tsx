@@ -2,7 +2,7 @@ export { AvatarEditorPage } from './AvatarEditorPage';
 export { CreatePackPage } from './CreatePackPage';
 export { LikedSamplesPage } from './LikedSamplesPage';
 export { LoginPage } from './LoginPage';
-export { PacksPage } from './PacksPage/PacksPage';
+export { PacksPage } from './PacksPage';
 export { ProfilePackPage } from './ProfilePackPage';
 export { RegistrationPage } from './RegistrationPage';
 export { SequencerPage } from './SequencerPage';

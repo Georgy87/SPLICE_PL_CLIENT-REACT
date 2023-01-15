@@ -1,4 +1,4 @@
-import { Samples } from '../../store/slices/samples/types';
+import { Samples } from '@slices/samples/types';
 
 const blob = new Blob();
 

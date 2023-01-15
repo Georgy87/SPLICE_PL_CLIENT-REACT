@@ -1,4 +1,4 @@
-import { UserSliceState } from '../../store/slices/user/types';
+import { UserSliceState } from '@slices/user/types';
 
 export const user: UserSliceState = {
     user: {

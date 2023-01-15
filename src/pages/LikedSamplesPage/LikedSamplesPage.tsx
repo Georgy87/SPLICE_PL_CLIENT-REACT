@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { SampleList } from '../../components/SampleList/SampleList';
-import { defaultState } from '../../context/PlayerContextProvider/PlayerContextProvider';
+import { defaultState } from '../../context/PlayerContextProvider';
 import { useSound } from '../../hooks/useSound';
 import { selectLikedSamples, selectUserMain } from '../../store/selectors/userSelectors';
 import { fetchGetLikedSamples } from '../../store/slices/user/actions';

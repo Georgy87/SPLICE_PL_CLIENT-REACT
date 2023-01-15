@@ -1,5 +1,5 @@
 import { MutableRefObject } from 'react';
-import { MountType } from '../store/slices/pack/types';
+import { MountType } from '@slices/pack/types';
 
 export interface ICanvasChart {
 	width: number;

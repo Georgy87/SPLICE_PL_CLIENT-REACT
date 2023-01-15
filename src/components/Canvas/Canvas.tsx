@@ -1,21 +1,21 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef, FC } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectPackId } from '../../store/selectors/samplesSelectors';
-import { audioService } from '../../services/audioService';
-import { workerInstanceCreateSample } from '../../workers/WebWorkerEnabler';
-import { canvasSampleService } from '../../services/canvasSampleService';
-import { deleteSampleFiles } from '../../store/slices/samples/samplesSlice';
-import { createSamples } from '../../utils/createSamples';
-import { detectBrowser } from '../../utils/detectBrowser';
-import { useAppDispatch } from '../../store/types';
+import { selectPackId } from '@selectors/samplesSelectors';
+import { audioService } from '@services/audioService';
+import { workerInstanceCreateSample } from '@workers/WebWorkerEnabler';
+import { canvasSampleService } from '@services/canvasSampleService';
+import { deleteSampleFiles } from '@slices/samples/samplesSlice';
+import { createSamples } from '@utils/createSamples';
+import { detectBrowser } from '@utils/detectBrowser';
+import { useAppDispatch } from '@store/types';
 
 type PropsType = {
 	file: File;
 	fileId: string;
 };
 
-export const Canvas: React.FC<PropsType> = ({ file, fileId }) => {
+export const Canvas: FC<PropsType> = ({ file, fileId }) => {
 	const packId = useSelector(selectPackId);
 
 	const browser = detectBrowser();

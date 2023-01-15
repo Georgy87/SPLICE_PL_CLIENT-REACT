@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import * as Icons from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 
-import { NavbarList } from '../NavbarList/NavbarList';
-import { Sidebar } from '../Sidebar/Sidebar';
-import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-import { IconLayout } from '../../layouts/IconLayout/IconLayout';
-import { selectAuth, selectUser } from '../../store/selectors/userSelectors';
-import { logout } from '../../store/slices/user/userSlice';
-import { setDefaultPackState } from '../../store/slices/pack/packSlice';
-import defaultAvatar from '../../assets/avatar/unnamed.jpg';
-import { useAppDispatch } from '../../store/types';
+import { NavbarList } from '@components/NavbarList';
+import { Sidebar } from '@components/Sidebar';
+import { ButtonLayout } from '@layouts/ButtonLayout';
+import { IconLayout } from '@layouts/IconLayout';
+import { selectAuth, selectUser } from '@/store/selectors';
+import { logout } from '@slices/user/userSlice';
+import { setDefaultPackState } from '@slices/pack/packSlice';
+import defaultAvatar from '@assets/avatar/unnamed.jpg';
+import { useAppDispatch } from '@store/types';
 
 import styles from './Navbar.module.scss';
 

@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC, ChangeEvent  } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { userInfoItems } from '../../pages/UserProfilePage/ProfileItems';
-import { selectUser } from '../../store/selectors/userSelectors';
+import { userInfoItems } from '@pages/UserProfilePage/ProfileItems';
+import { selectUser } from '@selectors/userSelectors';
 
 import styles from './UserProfileItem.module.scss';
 
@@ -14,7 +14,7 @@ type PropsType = {
 	avatar: string;
 };
 
-export const UserProfileItem: React.FC<PropsType> = ({ profileItems, setEmail, setFullName, avatar }) => {
+export const UserProfileItem: FC<PropsType> = ({ profileItems, setEmail, setFullName, avatar }) => {
 	const user = useSelector(selectUser);
 
 	const navigate = useNavigate();
@@ -32,7 +32,7 @@ export const UserProfileItem: React.FC<PropsType> = ({ profileItems, setEmail, s
 				{profileItems === 'Email' && (
 					<input
 						defaultValue={user?.email}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+						onChange={(e: ChangeEvent<HTMLInputElement>) => {
 							setEmail(e.target.value);
 						}}
 					/>
@@ -40,7 +40,7 @@ export const UserProfileItem: React.FC<PropsType> = ({ profileItems, setEmail, s
 				{profileItems === 'Name' && (
 					<input
 						defaultValue={user?.fullname}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+						onChange={(e: ChangeEvent<HTMLInputElement>) =>
 							setFullName(e.target.value)
 						}
 					/>

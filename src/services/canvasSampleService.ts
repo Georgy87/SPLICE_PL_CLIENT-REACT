@@ -1,5 +1,5 @@
 import { Crop } from 'react-image-crop';
-import { base64StringtoFile } from '../utils/base64StringtoFile';
+import { base64StringtoFile } from '@utils/base64StringtoFile';
 
 class CanvasSampleService {
 	drawingSampleCanvas(canvas: HTMLCanvasElement | null, audioCoordinates: number[], percent: number) {

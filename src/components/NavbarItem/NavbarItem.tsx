@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { IconLayout, icons } from '../../layouts/IconLayout/IconLayout';
+import { IconLayout, icons } from '@layouts/IconLayout';
 
 import styles from './NavbarItem.module.scss';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { IconLayout, icons } from '../../layouts/IconLayout/IconLayout';
+import { IconLayout, icons } from '@layouts/IconLayout';
 
 import styles from './SidebarItem.module.scss';
 

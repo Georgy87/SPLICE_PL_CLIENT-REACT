@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { PlayerStateType } from './PlayerContextProvider/types';
+import { PlayerStateType } from './types';
 
 export type ContextProps = [PlayerStateType, (state: any) => void];
 
