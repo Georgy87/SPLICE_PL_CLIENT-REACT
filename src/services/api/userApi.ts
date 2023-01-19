@@ -1,40 +1,102 @@
+import { ENDPOINTS } from '@/constans/endpoints';
 import { instance } from '@core/axios';
-import { Samples } from '@slices/samples/types';
 import { User } from '@slices/user/types';
+import { authedHttpFetch } from '@services/base/authedJsonFetch/authedHttpFetch';
+import {
+    userAuthResponseDto,
+    userLikedSamplesResponseDto,
+    userLoginResponseDto,
+    userUpdateAvatarResponseDto,
+    userUpdateEmailResponseDto,
+} from '@services/mapping/user';
+import {
+    AuthResponseDto,
+    LikedSamplesResponseDto,
+    LoginRequestDto,
+    LoginResponseDto,
+    RegistrationRequestDto,
+    UpdateAvatarRequestDto,
+    UpdateAvatarResponseDto,
+    UpdateEmailRequestDto,
+    UpdateEmailResponseDto,
+    UpdateFullNameRequestDto,
+    UpdateFullNameResponseDto,
+} from './types';
 
 export const userApi = {
-    async registration(payload: User) {
-        const { email, fullname, password } = payload;
-        await instance.post('registration', { email, fullname, password });
+    registration(data: RegistrationRequestDto) {
+        authedHttpFetch<null, RegistrationRequestDto>(ENDPOINTS.user.registration(), {
+            method: 'POST',
+            data,
+        });
     },
-    async auth() {
-        const { data } = await instance.get<{ user: User; token: string }>('auth');
-        return data;
-    },
-    async login(payload: { email: string; password: string }) {
-        const { email, password } = payload;
 
-        const { data } = await instance.post<{ user: User; token: string; message: string }>('login', {
-            email,
-            password,
+    auth() {
+        const { promise, cancel } = authedHttpFetch<AuthResponseDto>(ENDPOINTS.user.auth(), { method: 'GET' });
+        return {
+            promise: promise.then(userAuthResponseDto),
+            cancel,
+        };
+    },
+
+    login(data: LoginRequestDto) {
+        const { promise, cancel } = authedHttpFetch<LoginResponseDto, LoginRequestDto>(ENDPOINTS.user.login(), {
+            method: 'POST',
+            data,
+        });
+        return {
+            promise: promise.then(userLoginResponseDto),
+            cancel,
+        };
+    },
+
+    updateEmail(data?: UpdateEmailRequestDto) {
+        const { promise, cancel } = authedHttpFetch<UpdateEmailResponseDto, UpdateEmailRequestDto>(
+            ENDPOINTS.user.updateEmail(),
+            {
+                method: 'PUT',
+                data,
+            }
+        );
+        return {
+            promise: promise.then(userUpdateEmailResponseDto),
+            cancel,
+        };
+    },
+
+    updateFullName(data: UpdateFullNameRequestDto) {
+        const { promise, cancel } = authedHttpFetch<UpdateFullNameResponseDto, UpdateFullNameRequestDto>(
+            ENDPOINTS.user.updateFullName(),
+            {
+                method: 'PUT',
+                data,
+            }
+        );
+        return {
+            promise: promise.then(userUpdateEmailResponseDto),
+            cancel,
+        };
+    },
+
+    getLikedSamples() {
+        const { promise, cancel } = authedHttpFetch<LikedSamplesResponseDto>(ENDPOINTS.user.likedSamples(), {
+            method: 'GET',
         });
 
-        return data;
+        return {
+            promise: promise.then(userLikedSamplesResponseDto),
+            cancel,
+        };
     },
-    async updateEmail(email: string | undefined) {
-        const { data } = await instance.put<{user: User }>('users/email', { email });
-        return data;
-    },
-    async updateFullName(fullname: string | undefined) {
-        const { data } = await instance.put<User>('users/fullname', { fullname });
-        return data;
-    },
-    async getLikedSamples() {
-        const { data } = await instance.get<Samples[]>('users/liked-samples');
-        return data;
-    },
-    async updateAvatar(formData: FormData) {
-        const { data } = await instance.put<string>('users/avatar', formData);
-        return data;
+
+    updateAvatar(data: UpdateAvatarRequestDto) {
+        const { promise, cancel } = authedHttpFetch<UpdateAvatarResponseDto, UpdateAvatarRequestDto>(
+            ENDPOINTS.user.updateAvatar(),
+            { method: 'PUT', data }
+        );
+        return {
+            promise: promise.then(userUpdateAvatarResponseDto),
+            cancel,
+        };
     },
 };

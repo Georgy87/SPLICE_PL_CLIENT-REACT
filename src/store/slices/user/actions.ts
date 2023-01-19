@@ -1,33 +1,31 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+import {
+    LikedSamplesResponseDto,
+    UpdateEmailResponseDto,
+    UpdateFullNameRequestDto,
+    UpdateFullNameResponseDto,
+    UpdateAvatarResponseDto,
+    RegistrationRequestDto,
+} from '@services/api/types';
+import { AuthResponseDto, LoginResponseDto, UpdateEmailRequestDto } from '@services/api/types';
 import { userApi } from '@services/api/userApi';
-import { User } from './types';
-import { Samples } from '../samples/types';
+import { LoginRequestDto } from '@/services/api/types';
 
-export const fetchRegistration = createAsyncThunk('user/registrationStatus', async (payload: any) => {
-    try {
-        await userApi.registration(payload);
-    } catch (error) {
-        console.log(error);
-    }
-});
-
-export const fetchLogin = createAsyncThunk(
-    'user/loginStatus',
-    async (payload: { email: string; password: string }, { rejectWithValue }) => {
+export const fetchRegistration = createAsyncThunk(
+    'user/registrationStatus',
+    async (payload: RegistrationRequestDto) => {
         try {
-            const response: { user: User; token: string; message: string } = await userApi.login(payload);
-            localStorage.setItem('token', response.token);
-            return response;
+            await userApi.registration(payload);
         } catch (error) {
             console.log(error);
         }
     }
 );
 
-export const fetchAuth = createAsyncThunk('user/authStatus', async () => {
+export const fetchLogin = createAsyncThunk('user/loginStatus', async (payload: LoginRequestDto) => {
     try {
-        const data: { user: User; token: string } = await userApi.auth();
+        const data: LoginResponseDto = await userApi.login(payload).promise;
         localStorage.setItem('token', data.token);
         return data;
     } catch (error) {
@@ -35,22 +33,31 @@ export const fetchAuth = createAsyncThunk('user/authStatus', async () => {
     }
 });
 
-export const fetchUpdateEmail = createAsyncThunk(
-    'user/updateEmailStatus',
-    async (payload: { email: string | undefined }) => {
-        try {
-            return userApi.updateEmail(payload.email);
-        } catch (error) {
-            console.log(error);
-        }
+export const fetchAuth = createAsyncThunk('user/authStatus', async () => {
+    try {
+        const data: AuthResponseDto = await userApi.auth().promise;
+        localStorage.setItem('token', data.token);
+        return data;
+    } catch (error) {
+        console.log(error);
     }
-);
+});
+
+export const fetchUpdateEmail = createAsyncThunk('user/updateEmailStatus', async (payload: UpdateEmailRequestDto) => {
+    try {
+        const data: UpdateEmailResponseDto = await userApi.updateEmail(payload).promise;
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 export const fetchUpdateFullName = createAsyncThunk(
     'user/updateFullNameStatus',
-    async (payload: { fullname: string | undefined }) => {
+    async (payload: UpdateFullNameRequestDto) => {
         try {
-            return userApi.updateFullName(payload.fullname);
+            const data: UpdateFullNameResponseDto = await userApi.updateFullName(payload).promise;
+            return data;
         } catch (error) {
             console.log(error);
         }
@@ -59,7 +66,8 @@ export const fetchUpdateFullName = createAsyncThunk(
 
 export const fetchGetLikedSamples = createAsyncThunk('user/getLikedSamplesStatus', async () => {
     try {
-        return userApi.getLikedSamples();
+        const data: LikedSamplesResponseDto = await userApi.getLikedSamples().promise;
+        return data;
     } catch (error) {
         console.log(error);
     }
@@ -72,7 +80,8 @@ export const fetchUpdateAvatar = createAsyncThunk('user/updateAvatarSamplesStatu
         const formData = new FormData();
         formData.append('file', file);
 
-        return userApi.updateAvatar(formData);;
+        const data: UpdateAvatarResponseDto = await userApi.updateAvatar(formData).promise;
+        return data;
     } catch (error) {
         console.log(error);
     }

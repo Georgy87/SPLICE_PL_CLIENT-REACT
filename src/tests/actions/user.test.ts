@@ -15,10 +15,19 @@ import { createStoreMock } from '../../utils/tests';
 import { samples } from '../mocks/samplesActions';
 import { payloadLogin, payloadRegistration, user } from '../mocks/userActions';
 import { file } from '../mocks/packActions';
+import axios from 'axios';
+import moxios from 'moxios';
 
 const mockStore = createStoreMock();
 
 describe('USER ACTIONS', () => {
+    beforeEach(() => {
+        moxios.install();
+    });
+
+    afterEach(() => {
+        moxios.uninstall();
+    });
     it('registration', async () => {
         const postSpy = jest.spyOn(instance, 'post').mockResolvedValueOnce(undefined);
 
@@ -43,7 +52,6 @@ describe('USER ACTIONS', () => {
         expect(store.getActions()[1].type).toEqual(expectedActions.type);
         expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
         expect(response.payload).toEqual(data);
-       
     });
     it('auth', async () => {
         const data = { token: user.token, user: user.user };
@@ -52,12 +60,17 @@ describe('USER ACTIONS', () => {
             payload: data,
         };
 
-        const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
+        moxios.wait(() => {
+            const request = moxios.requests.at(0);
+            request.respondWith({
+                status: 200,
+                response: data,
+            });
+        });
 
         const store = mockStore({ user } as RootState);
         const response = await store.dispatch(fetchAuth());
 
-        expect(getSpy).toBeCalledWith('auth');
         expect(store.getActions()[1].type).toEqual(expectedActions.type);
         expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
         expect(response.payload).toEqual(data);
@@ -128,10 +141,10 @@ describe('USER ACTIONS', () => {
         const data: string = 'avatar.png';
         const serverResponse: UserSliceState = _deepClone(user);
         serverResponse.avatar = data;
-        const { user: userResponse } =  serverResponse;
-        
+        const { user: userResponse } = serverResponse;
+
         if (userResponse) userResponse.avatar = data;
-    
+
         const expectedActions = {
             type: 'user/updateAvatarSamplesStatus/fulfilled',
             payload: data,
