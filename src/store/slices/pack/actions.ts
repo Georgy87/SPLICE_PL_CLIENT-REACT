@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+import { CreatePackResponseDto, GetPacksResponseDto, GetUserPacksResponseDto, SearchPacksResponseDto } from '@services/api/types';
 import { packsApi } from '@services/api/packsApi';
+
 import { createPackType } from './types';
 
 export const fetchCreatePack = createAsyncThunk('packs/createPackStatus', async (payload: createPackType) => {
@@ -15,7 +17,8 @@ export const fetchCreatePack = createAsyncThunk('packs/createPackStatus', async 
         formData.append('picture', picture);
         formData.append('audio', audio);
 
-        return packsApi.createPack(formData);
+        const data: CreatePackResponseDto = await packsApi.createPack(formData).promise;
+        return data;
     } catch (error) {
         console.log(error);
     }
@@ -23,7 +26,8 @@ export const fetchCreatePack = createAsyncThunk('packs/createPackStatus', async 
 
 export const fetchGetPacks = createAsyncThunk('packs/getPacksStatus', async (payload: number) => {
     try {
-        return packsApi.getPacks(payload);
+        const data: GetPacksResponseDto = await packsApi.getPacks(payload).promise;
+        return data;
     } catch (error) {
         console.log(error);
     }
@@ -33,8 +37,7 @@ export const fetchGetPack = createAsyncThunk(
     'packs/getPackStatus',
     async (payload: { packId: string; tag: string | null }) => {
         try {
-            const { packId, tag } = payload;
-            return packsApi.getPack(packId, tag);
+            return packsApi.getPack(payload).promise;
         } catch (error) {
             console.log(error);
         }
@@ -43,28 +46,18 @@ export const fetchGetPack = createAsyncThunk(
 
 export const fetchGetUserPacks = createAsyncThunk('packs/getUserPacksStatus', async () => {
     try {
-        return packsApi.getUserPacks();
+        const data: GetUserPacksResponseDto = await packsApi.getUserPacks().promise;
+        return data;
     } catch (error) {
         console.log(error);
     }
 });
 
-export const fetchSearchPacks = createAsyncThunk('packs/getSearchPacksStatus', async (search: string) => {
+export const fetchSearchPacks = createAsyncThunk('packs/getSearchPacksStatus', async (payload: string) => {
     try {
-        return packsApi.searchPacks(search);
+        const data: SearchPacksResponseDto = await packsApi.searchPacks(payload).promise;
+        return data;
     } catch (error) {
         console.log(error);
     }
 });
-
-export const fetchPackUpdate = createAsyncThunk(
-    'packs/packUpdateStatus',
-    async (payload: { update: boolean; packId: string }) => {
-        try {
-            const { update, packId } = payload;
-            await packsApi.packUpdate(update, packId);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-);

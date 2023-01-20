@@ -1,6 +1,4 @@
 import { ENDPOINTS } from '@/constans/endpoints';
-import { instance } from '@core/axios';
-import { User } from '@slices/user/types';
 import { authedHttpFetch } from '@services/base/authedJsonFetch/authedHttpFetch';
 import {
     userAuthResponseDto,

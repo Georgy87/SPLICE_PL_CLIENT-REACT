@@ -1,4 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { encode } from 'querystring';
+
+import { omitNullish } from '@utils/loadash';
 import { HttpFetchHeaders, HttpFetchParams, HttpFetchResult, HTTP_CACHE_CONTROL, HTTP_HEADER_NAME } from '../types';
 
 export const httpOwnHeaders = {
@@ -22,7 +25,7 @@ export const httpFetch = <R, D = undefined, P = undefined, H extends HttpFetchHe
 
     const config: AxiosRequestConfig = {
         cancelToken,
-        //   paramsSerializer: (params) => encode(omitNullish(params)),
+        paramsSerializer: (params) => encode(omitNullish(params)),
         ...nextParams,
         url,
         onUploadProgress: (event) => {

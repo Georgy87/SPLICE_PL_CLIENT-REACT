@@ -1,5 +1,8 @@
-import { Samples } from '@/store/slices/samples/types';
+import { Pack, PackProfile } from '@store/slices/pack/types';
+import { Samples } from '@store/slices/samples/types';
 import { User } from '@store/slices/user/types';
+
+// User
 
 export type AuthResponseData = {
     data: {
@@ -34,4 +37,24 @@ export type UpdateAvatarResponseData = {
     data: string;
 };
 
+// Packs
 
+export type CreatePackResponseData = {
+    data: Pack[];
+};
+
+export type GetPacksResponseData = {
+    data: { packs: Pack[]; totalPage: number };
+};
+
+export type GetPackResponseData = {
+    data: PackProfile;
+};
+
+export type GetUserPacksResponseData = {
+    data: Pack[];
+};
+
+export type SearchPacksResponseData = {
+    data: Pack[];
+};

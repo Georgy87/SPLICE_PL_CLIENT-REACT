@@ -10,4 +10,11 @@ export const ENDPOINTS = {
         likedSamples: (): string => `${BASE_URL}/users/liked-samples`,
         updateAvatar: (): string => `${BASE_URL}/users/avatar`,
     },
+    packs: {
+        create: (): string => `${BASE_URL}/packs/pack`,
+        getPacks: (): string => `${BASE_URL}/packs`,
+        getPack: (): string => `${BASE_URL}/packs/pack`,
+        getUserPacks: (): string => `${BASE_URL}/packs/user-packs`,
+        searchPacks: (): string => `${BASE_URL}/packs/search-packs`,
+    },
 };
