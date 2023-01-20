@@ -51,10 +51,10 @@ export const PacksPage: FC<PropsType> = () => {
     const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
         e.stopPropagation();
         setValue(e.target.value);
-        debouncedCallback(e);
+        debouncedCallback(e.target.value);
     };
 
-    const debouncedCallback = useDebounce(() => {
+    const debouncedCallback = useDebounce((value: string) => {
         dispatch(fetchSearchPacks(value));
     }, 500);
 
