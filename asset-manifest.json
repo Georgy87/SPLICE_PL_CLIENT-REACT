@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/SPLICE_PL_CLIENT-REACT/static/css/main.eff9f7b5.css",
-    "main.js": "/SPLICE_PL_CLIENT-REACT/static/js/main.b70dd234.js",
+    "main.js": "/SPLICE_PL_CLIENT-REACT/static/js/main.d37a719e.js",
     "static/css/658.bf55a1f1.chunk.css": "/SPLICE_PL_CLIENT-REACT/static/css/658.bf55a1f1.chunk.css",
     "static/js/658.c187d6e9.chunk.js": "/SPLICE_PL_CLIENT-REACT/static/js/658.c187d6e9.chunk.js",
     "static/css/628.32483a13.chunk.css": "/SPLICE_PL_CLIENT-REACT/static/css/628.32483a13.chunk.css",
@@ -15,7 +15,7 @@
     "static/media/unnamed.jpg": "/SPLICE_PL_CLIENT-REACT/static/media/unnamed.ce48ced2f652d62f8a22.jpg",
     "index.html": "/SPLICE_PL_CLIENT-REACT/index.html",
     "main.eff9f7b5.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/main.eff9f7b5.css.map",
-    "main.b70dd234.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/main.b70dd234.js.map",
+    "main.d37a719e.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/main.d37a719e.js.map",
     "658.bf55a1f1.chunk.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/658.bf55a1f1.chunk.css.map",
     "658.c187d6e9.chunk.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/658.c187d6e9.chunk.js.map",
     "628.32483a13.chunk.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/628.32483a13.chunk.css.map",
@@ -24,6 +24,6 @@
   },
   "entrypoints": [
     "static/css/main.eff9f7b5.css",
-    "static/js/main.b70dd234.js"
+    "static/js/main.d37a719e.js"
   ]
 }
