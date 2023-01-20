@@ -17,4 +17,11 @@ export const ENDPOINTS = {
         getUserPacks: (): string => `${BASE_URL}/packs/user-packs`,
         searchPacks: (): string => `${BASE_URL}/packs/search-packs`,
     },
+    samples: {
+        create: (): string => `${BASE_URL}/samples`,
+        setLike: (): string => `${BASE_URL}/samples/like`,
+        deleteLike: (): string => `${BASE_URL}/samples/like`,
+        setSampleCategory: (): string => `${BASE_URL}/samples/category`,
+        setSampleBpm: (): string => `${BASE_URL}/samples/bpm`,
+    },
 };

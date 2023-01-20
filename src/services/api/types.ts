@@ -70,7 +70,40 @@ export type GetUserPacksResponseDto = Pack[];
 
 export type SearchPacksResponseDto = Pack[];
 
-export type  SearchPacksRequestParams = {
+export type SearchPacksRequestParams = {
     search: string;
 };
 
+// Samples types
+
+export type CreateSampleRequestParams = {
+    packId: string | null;
+    fileId: string;
+};
+
+export type CreateSampleRequestDto = FormData;
+
+export type CreateSampleParams = {
+    packId: string;
+    fileId: string;
+};
+
+export type CreateSampleResponseDto = string;
+
+export type SetLikeSampleRequestParams = {
+    sampleId: string;
+};
+
+export type DeleteLikeSampleRequestParams = {
+    sampleId: string;
+};
+
+export type SetSampleCategoryRequestParams = {
+    sampleId: string;
+    category: string;
+};
+
+export type SetSampleBpmRequestParams = {
+    sampleId: string;
+    bpm: number;
+};

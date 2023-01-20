@@ -20,7 +20,7 @@ export const fetchSetLike = createAsyncThunk(
 	'sample/setLikeSampleStatus',
 	async (payload: { sampleId: string }) => {
 		try {
-			await samplesApi.setLike(payload.sampleId);
+			await samplesApi.setLike(payload);
 		} catch (error) {
 			console.log(error);
 		}
@@ -31,7 +31,7 @@ export const fetchDeleteLike = createAsyncThunk(
 	'sample/deleteLikeSampleStatus',
 	async (payload: { sampleId: string }) => {
 		try {
-			await samplesApi.deleteLike(payload.sampleId);
+			await samplesApi.deleteLike(payload);
 		} catch (error) {
 			console.log(error);
 		}
