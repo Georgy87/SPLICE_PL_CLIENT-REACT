@@ -55,7 +55,6 @@ export const SampleList: React.FC<PropsType> = ({ samples, pageName }) => {
                       return <SampleItem key={sample._id} sample={sample} idx={index} />;
                   })
                 : sceleton}
-            {sceleton}
         </>
     );
 };
