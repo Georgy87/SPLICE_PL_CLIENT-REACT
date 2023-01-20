@@ -1,18 +1,21 @@
 import { Routes, Route } from 'react-router-dom';
-import { FC } from 'react';
+import { FC, lazy } from 'react';
 
-import { QUERY_PARAM } from '../constans/routing';
+import { QUERY_PARAM } from '@/constans/routing';
 
 import { AvatarEditorPage } from '@pages/AvatarEditorPage';
 import { CreatePackPage } from '@pages/CreatePackPage';
-import { LikedSamplesPage } from '@pages/LikedSamplesPage';
 import { LoginPage } from '@pages/LoginPage';
 import { PacksPage } from '@pages/PacksPage';
 import { ProfilePackPage } from '@pages/ProfilePackPage';
 import { RegistrationPage } from '@pages/RegistrationPage';
 import { SequencerPage } from '@pages/SequencerPage';
-import { UserPacksPage } from '@pages/UserPacksPage';
 import { UserProfilePage } from '@pages/UserProfilePage';
+
+import withLazyComponent from '@hoks/withLazyComponent';
+
+const UserPacksPage = withLazyComponent(lazy(() => import('@pages/UserPacksPage')));
+const LikedSamplesPage = withLazyComponent(lazy(() => import('@pages/LikedSamplesPage')));
 
 export const AppRouter: FC = () => {
     return (
@@ -25,10 +28,10 @@ export const AppRouter: FC = () => {
                 <Route path={QUERY_PARAM.PROFILE_PACK} element={<ProfilePackPage />} />
                 <Route path={QUERY_PARAM.PROFILE} element={<UserProfilePage />} />
                 <Route path={QUERY_PARAM.PROFILE_CREATE} element={<CreatePackPage />} />
-                <Route path={QUERY_PARAM.PROFILE_PACKS} element={<UserPacksPage />} />
                 <Route path={QUERY_PARAM.PROFILE_AVATAR} element={<AvatarEditorPage />} />
                 <Route path={QUERY_PARAM.SEQUENCER} element={<SequencerPage />} />
                 <Route path={QUERY_PARAM.LIKES} element={<LikedSamplesPage />} />
+                <Route path={QUERY_PARAM.PROFILE_PACKS} element={<UserPacksPage />} />
             </Routes>
         </>
     );

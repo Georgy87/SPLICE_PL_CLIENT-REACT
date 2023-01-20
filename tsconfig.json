@@ -25,6 +25,7 @@
       "@components/*": ["components/*"],
       "@context/*": ["context/*"],
       "@hooks/*": ["hooks/*"],
+      "@hoks/*": ["hoks/*"],
       "@types/*": ["types/*"],
       "@store/*": ["store/*"],
       "@pages/*": ["pages/*"],

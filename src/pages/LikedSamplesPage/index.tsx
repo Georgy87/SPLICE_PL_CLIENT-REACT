@@ -1,1 +1,1 @@
-export { LikedSamplesPage } from './LikedSamplesPage';
+export { default } from './LikedSamplesPage';

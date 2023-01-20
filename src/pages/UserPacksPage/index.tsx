@@ -1,1 +1,1 @@
-export { UserPacksPage } from './UserPacksPage';
+export { default } from './UserPacksPage';
