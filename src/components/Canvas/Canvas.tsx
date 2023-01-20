@@ -57,7 +57,7 @@ export const Canvas: FC<PropsType> = ({ file, fileId }) => {
 						if (!dataToSampleCreate) return;
 
 						const id = await createSamples(dataToSampleCreate);
-
+						if (!id) return;
 						dispatch(deleteSampleFiles(id));
 					} else {
 						if (!canvasRef?.current) return;

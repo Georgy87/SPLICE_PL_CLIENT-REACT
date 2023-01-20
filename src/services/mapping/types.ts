@@ -58,3 +58,9 @@ export type GetUserPacksResponseData = {
 export type SearchPacksResponseData = {
     data: Pack[];
 };
+
+// Samples
+
+export type CreateSampleResponseData = {
+    data: string;
+};

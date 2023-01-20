@@ -38,7 +38,7 @@ export const UserPacksPage = () => {
 			const { imageFile, audioFile, audioCoordinates, packId, fileId, duration } = e.data;
 
 			const id = await createSamples({ imageFile, audioFile, audioCoordinates, packId, fileId, duration });
-
+			if (!id) return;
 			dispatch(deleteSampleFiles(id));
 		}
 
