@@ -1,18 +1,19 @@
-import { ChangeEvent, FC, useEffect, useMemo, useRef, useState, MutableRefObject } from 'react';
+import { ChangeEvent, FC, useEffect, useRef, useState, MutableRefObject } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Player } from '@components/Player';
 import { SearchInput } from '@components/SearchInput';
 import { PackItem } from '@components/PackItem';
 import { Pack } from '@slices/pack/types';
-import { selectPacks, selectTotalPages, selectLoading  } from '@selectors/packsSelectors';
+import { selectPacks, selectTotalPages, selectLoading } from '@selectors/packsSelectors';
 import { VideoPlayer } from '@components/VideoPlayer';
 import { fetchGetPacks, fetchSearchPacks } from '@slices/pack/actions';
 import { setDefaultPackState, setLoading } from '@slices/pack/packSlice';
 import { useAppDispatch } from '@store/types';
 import { intersectionObserverService } from '@services/intersectionObserverService';
-import { PACKS_SKELETON_ITEMS } from '../../constans/skeleton';
+import { PACKS_SKELETON_ITEMS } from '@/constans/skeleton';
 import { VerticalSkeletonLayout } from '@layouts/VerticalSkeletonLayout';
+import { useDebounce } from '@hooks/useDebounce';
 
 import styles from './PacksPage.module.scss';
 
@@ -50,8 +51,12 @@ export const PacksPage: FC<PropsType> = () => {
     const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
         e.stopPropagation();
         setValue(e.target.value);
-        dispatch(fetchSearchPacks(e.target.value));
+        debouncedCallback(e);
     };
+
+    const debouncedCallback = useDebounce(() => {
+        dispatch(fetchSearchPacks(value));
+    }, 500);
 
     useEffect(() => {
         if (loading) {
