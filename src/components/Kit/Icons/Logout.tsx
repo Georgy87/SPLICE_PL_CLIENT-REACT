@@ -1,12 +1,8 @@
-export const Logout = () => {
+import { memo } from 'react';
+
+const LogoutToMemo = () => {
     return (
-        <svg
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="#ffffff"
-            width="23px"
-            height="23px"
-        >
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="23px" height="23px">
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g id="SVGRepo_iconCarrier">
                 <g>
@@ -17,3 +13,5 @@ export const Logout = () => {
         </svg>
     );
 };
+
+export const Logout = memo(LogoutToMemo);

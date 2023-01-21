@@ -1,4 +1,6 @@
-export const Dislike = () => {
+import { memo } from 'react';
+
+const DislikeToMemo = () => {
     return (
         <svg
             fill="#000000"
@@ -16,3 +18,5 @@ export const Dislike = () => {
         </svg>
     );
 };
+
+export const Dislike = memo(DislikeToMemo);

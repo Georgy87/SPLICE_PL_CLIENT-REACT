@@ -1,4 +1,6 @@
-export const Profile = () => {
+import { memo } from 'react';
+
+const ProfileToMemo = () => {
     return (
         <svg
             width="21px"
@@ -48,3 +50,5 @@ export const Profile = () => {
         </svg>
     );
 };
+
+export const Profile = memo(ProfileToMemo);

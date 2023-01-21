@@ -6,7 +6,7 @@ import { IconLayout } from '@layouts/IconLayout';
 import { ButtonLayout } from '@layouts/ButtonLayout';
 import { selectLikedSamples } from '@selectors/userSelectors';
 import { Samples } from '@slices/samples/types';
-import { Loader } from '@components/Loader';
+import { Loader } from '@/components/Kit/Loader';
 import { useDropzone } from '@hooks/useDropzone';
 import { IconChangeLayout } from '@layouts/IconChangeLayout';
 import { Modal } from '@layouts/ModalLayout';

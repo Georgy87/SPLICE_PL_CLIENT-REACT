@@ -54,6 +54,9 @@
 			.search {
 				width: 0%;
 			}
+			input {
+				display: none;
+			}
 		}
 		&.open {
 			justify-content: flex-start;

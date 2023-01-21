@@ -1,4 +1,6 @@
-export const Metronom = () => {
+import { memo } from 'react';
+
+const MetronomToMemo = () => {
     return (
         <svg
             fill="#000000"
@@ -35,3 +37,5 @@ export const Metronom = () => {
         </svg>
     );
 };
+
+export const Metronom = memo(MetronomToMemo);

@@ -1,4 +1,6 @@
-export const Like = () => {
+import { memo } from 'react';
+
+const LikeToMemo = () => {
     return (
         <svg
             fill="#000000"
@@ -16,3 +18,5 @@ export const Like = () => {
         </svg>
     );
 };
+
+export const Like = memo(LikeToMemo);

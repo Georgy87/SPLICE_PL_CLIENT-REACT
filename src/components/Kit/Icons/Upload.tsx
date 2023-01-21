@@ -1,4 +1,6 @@
-export const Upload = () => {
+import { memo } from 'react';
+
+const UploadToMemo = () => {
     return (
         <svg viewBox="0 0 24 24" width="14px" height="14px" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -14,3 +16,5 @@ export const Upload = () => {
         </svg>
     );
 };
+
+export const Upload = memo(UploadToMemo);

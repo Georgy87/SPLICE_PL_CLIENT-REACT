@@ -1,24 +1,22 @@
-import React, { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useState, memo, FC } from 'react';
 
 import styles from './SearchInput.module.scss';
 
 type PropsType = {
     onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
-    setValue: (value: string) => void;
+    setDefultValue: (value: string) => void;
     value: string;
 };
 
-export const SearchInput: React.FC<PropsType> = ({ onChangeValue, setValue, value }) => {
-    const inputRef = useRef<HTMLInputElement>(null);
+const SearchInputToMemo: FC<PropsType> = ({ onChangeValue, setDefultValue, value }) => {
     const [open, setOpen] = useState<boolean>(false);
     const [placeholder, setPlaceholder] = useState<string>('Search genres, author');
-
     return (
         <div className={styles.inputContainer}>
             <label>Sounds</label>
             <div className={open ? `${styles.search} ${styles.open}` : styles.search}>
                 <svg
-					data-testid={'open_input'}
+                    data-testid={'open_input'}
                     onClick={(e) => {
                         e.stopPropagation();
                         setOpen(true);
@@ -32,18 +30,17 @@ export const SearchInput: React.FC<PropsType> = ({ onChangeValue, setValue, valu
                 </svg>
                 <input
                     data-testid={'search_input'}
-                    ref={inputRef}
                     type="text"
                     className={styles.searchInput}
                     onChange={onChangeValue}
-                    defaultValue={value}
+                    defaultValue={!open ? '' : value}
                     placeholder={open ? placeholder : ''}
                 />
                 <svg
-					data-testid={'close_input'}
+                    data-testid={'close_input'}
                     onClick={(e) => {
                         e.stopPropagation();
-                        setValue('');
+                        setDefultValue('');
                         setPlaceholder('');
                         setOpen(!open);
                     }}
@@ -58,3 +55,4 @@ export const SearchInput: React.FC<PropsType> = ({ onChangeValue, setValue, valu
     );
 };
 
+export const SearchInput = memo(SearchInputToMemo);

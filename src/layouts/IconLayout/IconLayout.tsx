@@ -1,13 +1,13 @@
-import { Dislike } from '../../components/Icons/Dislike';
-import { Home } from '../../components/Icons/Home';
-import { Like } from '../../components/Icons/Like';
-import { Likes } from '../../components/Icons/Likes';
-import { Login } from '../../components/Icons/Login';
-import { Logout } from '../../components/Icons/Logout';
-import { Metronom } from '../../components/Icons/Metronom';
-import { Profile } from '../../components/Icons/Profile';
-import { Sequencer } from '../../components/Icons/Sequencer';
-import { Upload } from '../../components/Icons/Upload';
+import { Dislike } from '@components/Kit/Icons/Dislike';
+import { Home } from '@components/Kit/Icons/Home';
+import { Like } from '@components/Kit/Icons/Like';
+import { Likes } from '@components/Kit/Icons/Likes';
+import { Login } from '@components/Kit/Icons/Login';
+import { Logout } from '@components/Kit/Icons/Logout';
+import { Metronom } from '@components/Kit/Icons/Metronom';
+import { Profile } from '@components/Kit/Icons/Profile';
+import { Sequencer } from '@components/Kit/Icons/Sequencer';
+import { Upload } from '@components/Kit/Icons/Upload';
 
 import styles from './IconLayout.module.scss';
 

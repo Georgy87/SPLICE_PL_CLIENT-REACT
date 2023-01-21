@@ -1,4 +1,6 @@
-export const Likes = () => {
+import { memo } from 'react';
+
+const LikesToMemo = () => {
     return (
         <svg
             version="1.1"
@@ -21,3 +23,5 @@ export const Likes = () => {
         </svg>
     );
 };
+
+export const Likes = memo(LikesToMemo);

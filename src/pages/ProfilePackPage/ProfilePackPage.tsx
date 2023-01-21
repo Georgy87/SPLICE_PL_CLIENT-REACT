@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { Loader } from '@components/Loader';
+import { Loader } from '@components/Kit/Loader';
 import { SampleList } from '@components/SampleList';
 import { defaultState } from '@context/PlayerContextProvider';
 import { useSound } from '@hooks/useSound';
