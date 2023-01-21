@@ -1,4 +1,6 @@
-export const Home = () => {
+import { memo } from 'react';
+
+const HomeToMemo = () => {
     return (
         <svg
             width="26px"
@@ -24,3 +26,5 @@ export const Home = () => {
         </svg>
     );
 };
+
+export const Home = memo(HomeToMemo);

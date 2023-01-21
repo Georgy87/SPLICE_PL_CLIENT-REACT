@@ -1,0 +1,20 @@
+.root {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	position: relative;
+	.loaderPagination {
+		position: absolute;
+		bottom: 10px;
+	}
+	.loaderWrapper {
+		display: flex;
+		width: 200px;
+		height: 200px;
+	}
+}
+
+.packCardContainer {
+	padding: 10px;
+	margin-right: 10px;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Play } from '../../components/Icons/Play';
-import { Pause } from '../../components/Icons/Pause';
+import { Play } from '@components/Kit/Icons/Play';
+import { Pause } from '@components/Kit/Icons/Pause';
 
 import styles from './IconChangeLayout.module.scss';
 

@@ -1,4 +1,4 @@
-import { Loader } from '@components/Loader';
+import { Loader } from '@/components/Kit/Loader';
 import { Suspense } from 'react';
 
 export default function withSuspense<P>(Component: React.ComponentType & any) {

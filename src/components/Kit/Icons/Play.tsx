@@ -1,9 +1,11 @@
+import { memo } from 'react';
+
 type PropsType = {
     size: string;
     color: string;
 };
 
-export const Play: React.FC<PropsType> = ({ size, color }) => {
+const PlayToMemo: React.FC<PropsType> = ({ size, color }) => {
     return (
         <svg
             viewBox="-7.92 -7.92 39.84 39.84"
@@ -33,3 +35,5 @@ export const Play: React.FC<PropsType> = ({ size, color }) => {
         </svg>
     );
 };
+
+export const Play = memo(PlayToMemo);
