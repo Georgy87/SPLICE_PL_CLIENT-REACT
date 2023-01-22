@@ -1,6 +1,4 @@
 import React, { memo } from 'react';
-import { useSelector } from 'react-redux';
-import { selectLikedSamples } from '../../store/selectors/userSelectors';
 
 import styles from './Modal.module.scss';
 
@@ -10,7 +8,7 @@ export type PropsModalType = {
     children?: React.ReactNode;
 };
 
-export const ModalF: React.FC<PropsModalType> = ({ active, setActive, children }) => {
+export const ModalToMemo: React.FC<PropsModalType> = ({ active, setActive, children }) => {
     return (
         <div
             data-testid="modal"
@@ -22,4 +20,4 @@ export const ModalF: React.FC<PropsModalType> = ({ active, setActive, children }
     );
 };
 
-export const Modal = memo(ModalF);
+export const Modal = memo(ModalToMemo);
