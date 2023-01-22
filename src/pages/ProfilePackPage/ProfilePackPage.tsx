@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -39,6 +39,12 @@ export const ProfilePackPage = () => {
     const params: { packId: string } = useParams();
     const { setPlayerState } = useSound();
 
+    const onOpenModal = useCallback(() => setActiveModal(false), []);
+
+    const activeModalMemo = useMemo(() => {
+        return activeModal;
+    }, [activeModal]);
+
     useEffect(() => {
         dispatch(fetchGetPack({ packId: params?.packId, tag: null }));
     }, []);
@@ -71,6 +77,24 @@ export const ProfilePackPage = () => {
         });
     }, [packProfile]);
 
+    const CanvasChildren = useMemo(() => {
+        return (
+            <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+                <div>
+                    <canvas ref={canvasRef} />
+                </div>
+                <div className={styles.changeYears}>
+                    {packViews &&
+                        Object.keys(packViews).map((year: string) => (
+                            <ButtonLayout key={year} typeStyle={'auth'} onClicked={() => setYear(year)}>
+                                {year}
+                            </ButtonLayout>
+                        ))}
+                </div>
+            </div>
+        );
+    }, [packViews]);
+
     return (
         <div data-testid="profile-pack-page">
             {loading ? (
@@ -100,20 +124,8 @@ export const ProfilePackPage = () => {
                 <Loader />
             )}
             {activeModal && (
-                <Modal setActive={setActiveModal} active={activeModal}>
-                    <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-                        <div>
-                            <canvas ref={canvasRef} />
-                        </div>
-                        <div className={styles.changeYears}>
-                            {packViews &&
-                                Object.keys(packViews).map((year: string) => (
-                                    <ButtonLayout key={year} typeStyle={'auth'} onClicked={() => setYear(year)}>
-                                        {year}
-                                    </ButtonLayout>
-                                ))}
-                        </div>
-                    </div>
+                <Modal setActive={onOpenModal} active={activeModalMemo}>
+                    {CanvasChildren}
                 </Modal>
             )}
         </div>

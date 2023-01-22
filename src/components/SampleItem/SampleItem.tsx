@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useAppDispatch } from '@store/types';
 import { useSound } from '@hooks/useSound';
@@ -50,6 +50,13 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
         setCanvasOffsetLeft(canvasRef.current?.getBoundingClientRect().left);
     }, [canvas]);
 
+    const onOpenModal = useCallback(() => {
+        setActiveModal(() => false);
+    }, [activeModal]);
+
+    const activeModalMemo = useMemo(() => activeModal, [activeModal]);
+    const idMemo = useMemo(() => _id, [_id]);
+
     return (
         <>
             <ul className={styles.listItem}>
@@ -66,7 +73,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
                             currentTrackId={currentSampleId}
                             blockStyle={styles.playPauseSample}
                             trackId={_id}
-							size="65px"
+                            size="65px"
                             color="#000000"
                         ></IconChangeLayout>
                     </div>
@@ -137,15 +144,9 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
                             <p></p>
                         </div>
                     </div>
-                    {activeModal && (
-                        <AddSampleInfoModal
-                            setActive={() => setActiveModal(false)}
-                            active={activeModal}
-                            sampleId={_id}
-                        />
-                    )}
                 </li>
             </ul>
+            {activeModal && <AddSampleInfoModal setActive={onOpenModal} active={activeModalMemo} sampleId={idMemo} />}
         </>
     );
 };
