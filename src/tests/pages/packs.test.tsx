@@ -40,15 +40,15 @@ describe('PACKS PAGE', () => {
         // mockedDispatch.mockReturnValue(jest.fn());
 
         const mockedfetchGetPacks = jest.spyOn(actions, 'fetchGetPacks');
-        const mockedSetLoading = jest.spyOn(packSlice, 'setLoading');
+        // const mockedSetLoading = jest.spyOn(packSlice, 'setLoading');
 
         await act(async () => renderWithStore(<PacksPage />, {}, ''));
 
         expect(mockedfetchGetPacks).toHaveBeenCalledTimes(1);
         expect(mockedfetchGetPacks).toBeCalledWith(0);
 
-        expect(mockedSetLoading).toHaveBeenCalledTimes(1);
-        expect(mockedSetLoading).toBeCalledWith(true);
+        // expect(mockedSetLoading).toHaveBeenCalledTimes(1);
+        // expect(mockedSetLoading).toBeCalledWith(true);
     });
 
     it('render search input', async () => {

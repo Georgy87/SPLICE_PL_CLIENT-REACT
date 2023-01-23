@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-
 import axios, { AxiosResponse } from 'axios';
+
 import { useState } from 'react';
 
 export type SequencerStateType = {
@@ -53,27 +52,12 @@ export const useSequencer = () => {
         initialPattern,
         currentInitialPattern,
         requestId,
-        gain,
     } = sequencerState;
-
-
-    let gainNode = AUDIO.createGain();
 
     const [step, setStep] = useState<number>(1);
 
     const setTempo = (tempoValue: number) => {
         tic = 60 / tempoValue / 4;
-    };
-
-    const setGain = (gainValue: number) => {
-        setSequencerState((state) => {
-            return {
-                ...state,
-                gain: gainValue,
-            };
-        });
-
-        gainNode.gain.value = gainValue;
     };
 
     const scheduleNote = () => {
@@ -108,7 +92,6 @@ export const useSequencer = () => {
 
         if (currentStep === 32) currentStep = 0;
 
-        console.log(tic);
         noteTime += tic;
     };
 
@@ -124,11 +107,6 @@ export const useSequencer = () => {
         const s: AudioBufferSourceNode = AUDIO.createBufferSource();
         //@ts-ignore
         s.buffer = bank[id];
-
-        gainNode.gain.value = gain;
-     
-        s.connect(gainNode);
-        gainNode.connect(AUDIO.destination);
 
         s.connect(AUDIO.destination);
         s.start(when);
@@ -193,11 +171,9 @@ export const useSequencer = () => {
         step,
         isPlaying,
         requestId,
-        gain,
         onPlay,
         onStop,
         loadSamples,
         setTempo,
-        setGain,
     };
 };

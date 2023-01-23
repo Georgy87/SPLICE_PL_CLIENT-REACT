@@ -1,8 +1,8 @@
 import { memo } from 'react';
 
 type PropsType = {
-    size: string;
-    color: string;
+    size?: string;
+    color?: string;
 };
 
 const PlayToMemo: React.FC<PropsType> = ({ size, color }) => {

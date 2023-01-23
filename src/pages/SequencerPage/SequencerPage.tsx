@@ -1,25 +1,20 @@
-import { useCallback, useEffect, useMemo, useState, DragEvent, ChangeEvent } from 'react';
+import { useEffect, useState, DragEvent, ChangeEvent, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { useSequencer } from '@hooks/useSequencer';
 import { IconLayout } from '@layouts/IconLayout';
 import { ButtonLayout } from '@layouts/ButtonLayout';
 import { selectLikedSamples } from '@selectors/userSelectors';
-import { Samples } from '@slices/samples/types';
-import { Loader } from '@/components/Kit/Loader';
 import { useDropzone } from '@hooks/useDropzone';
 import { IconChangeLayout } from '@layouts/IconChangeLayout';
 import { Modal } from '@layouts/ModalLayout';
 import { Sequencer } from '@components/Sequencer';
 import { fetchGetLikedSamples } from '@slices/user/actions';
-//@ts-ignore
-import Kick from '@assets/samples-sequenser/Kick.wav';
-//@ts-ignore
-import Clap from '@assets/samples-sequenser/Clap.wav';
-//@ts-ignore
-import Hat from '@assets/samples-sequenser/Hat.wav';
-//@ts-ignore
-import Open_Hat from '@assets/samples-sequenser/Open-Hat.wav';
+import { SequencerSampleList } from '@components/SequencerSampleList';
+import Kick from '@assets/samplesSequenser/Kick.wav';
+import Clap from '@assets/samplesSequenser/Clap.wav';
+import Hat from '@assets/samplesSequenser/Hat.wav';
+import Open_Hat from '@assets/samplesSequenser/Open-Hat.wav';
 import { useAppDispatch } from '@store/types';
 
 import styles from './SequencerPage.module.scss';
@@ -29,7 +24,7 @@ export const SequencerPage = () => {
 
     const dispatch = useAppDispatch();
 
-    const { initialPattern, step, requestId, gain, loadSamples, setTempo, onPlay, onStop } = useSequencer();
+    const { initialPattern, step, requestId, loadSamples, setTempo, onPlay, onStop } = useSequencer();
 
     const { dragStart } = useDropzone();
 
@@ -42,6 +37,12 @@ export const SequencerPage = () => {
     const [isPlaying, setIsPlaying] = useState<boolean>(true);
     const [activeModal, setActiveModal] = useState<boolean>(false);
     const [indexBox, setIndexBox] = useState<number>(0);
+
+    const onOpenModal = useCallback(() => setActiveModal(() => false), [activeModal]);
+
+    const activeModalMemo = useMemo(() => {
+        return activeModal;
+    }, [activeModal]);
 
     function updatePattern({ x, y, value }: { x: number; y: number; value: number }) {
         const patternCopy: number[][] = [...pattern];
@@ -76,111 +77,80 @@ export const SequencerPage = () => {
         setValueBpm(+e.target.value);
     };
 
+    const { size, color } = useMemo(() => {
+        return {
+            size: '70px',
+            color: '#000000',
+        };
+    }, []);
+
+    const isPlayMemo = useMemo(() => {
+        if (isPlaying) {
+            onStop();
+        }
+        return isPlaying;
+    }, [isPlaying]);
+
+    const onChangeIconLayout = useCallback(
+        (e: Event) => {
+            e.stopPropagation();
+            setTempo(valueBpm);
+            setIsPlaying(!isPlaying);
+            if (isPlaying === true) {
+                onPlay(sampleList);
+            } else {
+                onStop();
+            }
+        },
+        [isPlaying]
+    );
+
+    const ModalChildren = useMemo(() => {
+        return (
+            <div className={styles.mobileModalWrapper}>
+                <SequencerSampleList onClicked={setSampleHandler} />
+            </div>
+        );
+    }, [likedSamples, indexBox]);
+
+    const setTempoBpm = useCallback(() => {
+        onStop();
+        setTempo(valueBpm);
+        onPlay(sampleList);
+        if (isPlaying === true) {
+            onStop();
+            setTempo(valueBpm);
+        }
+    }, [valueBpm, isPlaying, sampleList, onStop]);
+
     return (
         <div className={styles.root} data-testid="sequencer-page">
-            {/* <input type="range" min={1} max={30} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-				// onStop();
-				setGain(+e.target.value / 10)
-				// onPlay(sampleList);
-			}}/> */}
             <div className={styles.sequencerControls}>
-                <IconChangeLayout
-                    onClicked={(e: Event) => {
-                        e.stopPropagation();
-                        setTempo(valueBpm);
-                        setIsPlaying(!isPlaying);
-                        if (isPlaying === true) {
-                            onPlay(sampleList);
-                        } else {
-                            onStop();
-                        }
-                    }}
-                    blockStyle={styles.playPauseCircle}
-                    iconOneOrTwo={!isPlaying}
-                    size="70px"
-                    color="#000000"
-                />
+                <IconChangeLayout onClicked={onChangeIconLayout} iconOneOrTwo={!isPlayMemo} size={size} color={color} />
                 <div className={styles.bpmControls}>
                     <IconLayout iconName="metronom" />
-                    <input
+                      <input
                         type="text"
                         onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeBpm(e)}
                         defaultValue={valueBpm}
                     />
-                    <ButtonLayout
-                        typeStyle="update-bpm"
-                        onClicked={() => {
-                            onStop();
-                            setTempo(valueBpm);
-                            onPlay(sampleList);
-                            if (isPlaying === true) {
-                                onStop();
-                                setTempo(valueBpm);
-                            }
-                        }}
-                    >
-                        Update bpm
+                    <ButtonLayout typeStyle={"update-bpm"} onClicked={setTempoBpm}>
+                        bpm
                     </ButtonLayout>
                 </div>
             </div>
 
             <Sequencer
-                setIndexBox={setIndexBox}
-                setActiveModal={setActiveModal}
                 step={step}
                 pattern={pattern}
+                setIndexBox={setIndexBox}
+                setActiveModal={setActiveModal}
                 updatePattern={updatePattern}
                 onDropHandler={onDropHandler}
             />
 
-            {/* <div className={styles.desktopModalWrapper}>
-				<div className={styles.samplesContainer}>
-					{!likedSamples ? (
-						<Loader />
-					) : (
-						likedSamples?.map((samples: Samples) => {
-							return (
-								<ul
-									key={samples._id}
-									className={styles.likesSample}
-									draggable={true}
-									onDragStart={(e: React.DragEvent<HTMLUListElement>) => dragStart(e, samples.audio, setNewSampleSrc)}
-								>
-									<li>
-										<img src={samples.packPicture} alt='likes-sample' />
-										<p>{samples.sampleName}</p>
-									</li>
-								</ul>
-							);
-						})
-					)}
-				</div>
-			</div> */}
-
-            <Modal setActive={setActiveModal} active={activeModal}>
-                <div className={styles.mobileModalWrapper}>
-                    <div className={styles.samplesContainer}>
-                        {!likedSamples ? (
-                            <Loader />
-                        ) : (
-                            likedSamples?.map((samples: Samples) => {
-                                return (
-                                    <ul
-                                        key={samples._id}
-                                        className={styles.likesSample}
-                                        draggable={true}
-                                        onClick={() => setSampleHandler(samples.audio)}
-                                    >
-                                        <li>
-                                            <img src={samples.packPicture} alt="likes-sample" />
-                                            <p>{samples.sampleName}</p>
-                                        </li>
-                                    </ul>
-                                );
-                            })
-                        )}
-                    </div>
-                </div>
+            <Modal setActive={onOpenModal} active={activeModalMemo}>
+                {ModalChildren}
             </Modal>
         </div>
     );

@@ -10,7 +10,8 @@ interface SliderProgressProps {
 
 export const SliderProgress: FC<SliderProgressProps> = ({ width, sliderType }) => {
     const { volume, packPercent, changeVolume, changeCurrentTime } = useSound();
-
+    const percent = Number.isNaN(packPercent) ? '0' : String(packPercent);
+   
     return (
         <div className={styles.slider}>
             {sliderType === 'volume' ? (
@@ -19,10 +20,9 @@ export const SliderProgress: FC<SliderProgressProps> = ({ width, sliderType }) =
                 <input
                     style={{ width: width }}
                     type="range"
-                    value={String(packPercent)}
+                    value={percent}
                     onChange={changeCurrentTime}
-                    // min='0'
-                    // max='100'
+                    // defaultValue={0}
                 ></input>
             )}
         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectSamplesFiles } from '@selectors/samplesSelectors';
-import { Canvas } from '@components/Canvas';
+import { Canvas } from '@/components/SampleCanvasItem';
 
 export const CanvasList = () => {
 	const sampleFiles = useSelector(selectSamplesFiles);

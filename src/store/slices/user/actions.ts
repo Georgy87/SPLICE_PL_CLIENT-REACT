@@ -79,7 +79,7 @@ export const fetchUpdateAvatar = createAsyncThunk('user/updateAvatarSamplesStatu
 
         const formData = new FormData();
         formData.append('file', file);
-
+        
         const data: UpdateAvatarResponseDto = await userApi.updateAvatar(formData).promise;
         return data;
     } catch (error) {

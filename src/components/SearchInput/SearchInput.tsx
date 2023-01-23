@@ -4,11 +4,10 @@ import styles from './SearchInput.module.scss';
 
 type PropsType = {
     onChangeValue: (e: ChangeEvent<HTMLInputElement>) => void;
-    setDefultValue: (value: string) => void;
     value: string;
 };
 
-const SearchInputToMemo: FC<PropsType> = ({ onChangeValue, setDefultValue, value }) => {
+const SearchInputToMemo: FC<PropsType> = ({ onChangeValue, value }) => {
     const [open, setOpen] = useState<boolean>(false);
     const [placeholder, setPlaceholder] = useState<string>('Search genres, author');
     return (
@@ -33,14 +32,12 @@ const SearchInputToMemo: FC<PropsType> = ({ onChangeValue, setDefultValue, value
                     type="text"
                     className={styles.searchInput}
                     onChange={onChangeValue}
-                    defaultValue={!open ? '' : value}
                     placeholder={open ? placeholder : ''}
                 />
                 <svg
                     data-testid={'close_input'}
                     onClick={(e) => {
                         e.stopPropagation();
-                        setDefultValue('');
                         setPlaceholder('');
                         setOpen(!open);
                     }}

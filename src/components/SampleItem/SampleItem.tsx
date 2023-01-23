@@ -10,6 +10,7 @@ import { IconLayout } from '@layouts/IconLayout';
 import { canvasSampleService } from '@services/canvasSampleService';
 import { AddSampleInfoModal } from '@components/AddSampleInfoModal';
 import { fetchDeleteLike, fetchSetLike } from '@slices/samples/actions';
+import { Image } from '@components/Kit/Image';
 
 import styles from './SampleItem.module.scss';
 
@@ -24,6 +25,9 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
     const [like, setLike] = useState<boolean>(false);
     const [activeModal, setActiveModal] = useState<boolean>(false);
     const [canvasOffsetLeft, setCanvasOffsetLeft] = useState<number>(0);
+
+    const activeModalMemo = useMemo(() => activeModal, [activeModal]);
+    const idMemo = useMemo(() => _id, [_id]);
 
     const { playTrack, isPlaying, currentSampleId, currentTime, percent } = useSound();
 
@@ -54,14 +58,53 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
         setActiveModal(() => false);
     }, [activeModal]);
 
-    const activeModalMemo = useMemo(() => activeModal, [activeModal]);
-    const idMemo = useMemo(() => _id, [_id]);
+    const renderCanvasContent = () => {
+        return (
+            currentSampleId === _id && (
+                <canvas
+                    ref={canvasRef}
+                    style={{
+                        width: '550px',
+                        height: '35px',
+                        zIndex: 50,
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                    }}
+                />
+            )
+        );
+    };
+
+    const isChangeLike = () => {
+        if (!like) {
+            return (
+                <IconLayout
+                    iconName="dislike"
+                    onClicked={() => {
+                        dispatch(fetchSetLike({ sampleId: _id }));
+                        setLike(!like);
+                    }}
+                />
+            );
+        }
+
+        return (
+            <IconLayout
+                iconName="like"
+                onClicked={() => {
+                    dispatch(fetchDeleteLike({ sampleId: _id }));
+                    setLike(!like);
+                }}
+            />
+        );
+    };
 
     return (
         <>
             <ul className={styles.listItem}>
                 <li>
-                    <img src={`${sample.packPicture}`} alt="pack-cover" />
+                    <Image src={`${sample.packPicture}`} alt="pack-cover" />
                     <div className={styles.iconChangeWrap}>
                         <p className={styles.sampleTime}>{formatTime(+duration)}</p>
                         <IconChangeLayout
@@ -74,7 +117,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
                             blockStyle={styles.playPauseSample}
                             trackId={_id}
                             size="65px"
-                            color="#000000"
+                            color="#03f"
                         ></IconChangeLayout>
                     </div>
                     <SampleSliderLayout
@@ -82,32 +125,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
                         trackId={_id}
                         currentSampleId={currentSampleId}
                     >
-                        {currentSampleId === _id && (
-                            <>
-                                <canvas
-                                    ref={canvasRef}
-                                    style={{
-                                        width: '550px',
-                                        height: '35px',
-                                        zIndex: 50,
-                                        position: 'absolute',
-                                        top: 0,
-                                        left: 0,
-                                    }}
-                                />
-                                {/* <div
-										style={{
-											height: '35px',
-											zIndex: 49,
-											position: 'absolute',
-											top: 0,
-											left: 0,
-											backgroundColor: '#fff',
-											width: `${percent}px`,
-										}}
-									/> */}
-                            </>
-                        )}
+                        {renderCanvasContent()}
 
                         <div
                             className={styles.backgroundWave}
@@ -120,23 +138,7 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
                     <p className={styles.sampleName}>{sampleName}</p>
                     <div className={styles.rightWrap}>
                         <div className={styles.sampleBpm}>{bpm}</div>
-                        {!like ? (
-                            <IconLayout
-                                iconName="dislike"
-                                onClicked={() => {
-                                    dispatch(fetchSetLike({ sampleId: _id }));
-                                    setLike(!like);
-                                }}
-                            />
-                        ) : (
-                            <IconLayout
-                                iconName="like"
-                                onClicked={() => {
-                                    dispatch(fetchDeleteLike({ sampleId: _id }));
-                                    setLike(!like);
-                                }}
-                            />
-                        )}
+                        {isChangeLike()}
 
                         <div className={styles.addInfo} onClick={() => setActiveModal(true)}>
                             <p></p>

@@ -17,6 +17,7 @@ export const initialState: UserSliceState = {
     isAuth: false,
     samples: null,
     avatar: null,
+    loading: false,
     errorMessage: null,
 };
 
@@ -65,8 +66,12 @@ export const userSlice = createSlice({
             .addCase(fetchGetLikedSamples.fulfilled.type, (state, action: PayloadAction<Samples[]>) => {
                 state.samples = action.payload;
             })
+            .addCase(fetchUpdateAvatar.pending.type, (state, action) => {
+                state.loading = true;
+            })
             .addCase(fetchUpdateAvatar.fulfilled.type, (state, action: PayloadAction<string>) => {
                 state.avatar = action.payload;
+                state.loading = false;
             }),
 });
 

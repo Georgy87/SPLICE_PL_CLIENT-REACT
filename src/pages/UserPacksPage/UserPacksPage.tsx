@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { CanvasList } from '../../components/CanvasList/CanvasList';
+import { CanvasList } from '../../components/SampleCanvasList/CanvasList';
 import { UserPackItem } from '../../components/UserPackItem/UserPackItem';
 import { selectUserPacks } from '../../store/selectors/packsSelectors';
 import { selectFiles } from '../../store/selectors/samplesSelectors';
@@ -55,7 +55,7 @@ const UserPacksPage = () => {
         <div data-testid="user-packs-page">
             <div className={styles.root}>
                 <Modal setActive={setActiveModal} active={activeModal}>
-                    <Loader customColor="secondary" />
+                    <Loader />
                 </Modal>
 
                 {userPacks.map((pack: Pack, index: number) => (

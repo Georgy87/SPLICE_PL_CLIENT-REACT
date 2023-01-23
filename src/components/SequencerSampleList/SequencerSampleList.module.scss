@@ -1,0 +1,33 @@
+.samplesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+    .likesSample {
+        display: flex;
+        padding: 7px;
+        border: 1px solid #f4f8f7;
+        border-radius: 5px;
+        margin: 4px;
+        &:hover {
+            box-shadow: 0 15px 20px #e6f7f1;
+            cursor: pointer;
+        }
+        li {
+            display: flex;
+            width: 320px;
+            list-style: none;
+            overflow: hidden;
+            p {
+                margin-left: 30px;
+                width: 100%;
+                font-size: 13px;
+            }
+            img {
+                width: 50px;
+                height: 50px;
+                border-radius: 5px;
+            }
+        }
+    }
+}

@@ -15,6 +15,7 @@ export const user: UserSliceState = {
     isAuth: false,
     samples: null,
     avatar: null,
+    loading: false,
     errorMessage: null,
 };
 

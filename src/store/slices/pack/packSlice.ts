@@ -24,12 +24,12 @@ export const packSlice = createSlice({
         setTag: (state, action: PayloadAction<string | null>) => {
             state.tag = action.payload;
         },
-        setLoading: (state, action: PayloadAction<boolean>) => {
-            state.loading = action.payload;
-        },
     },
     extraReducers: (builder) =>
         builder
+            .addCase(fetchGetPacks.pending.type, (state) => {
+                state.loading = true;
+            })
             .addCase(
                 fetchGetPacks.fulfilled.type,
                 (state, action: PayloadAction<{ packs: Pack[]; totalPages: number }>) => {
@@ -58,6 +58,6 @@ export const packSlice = createSlice({
             }),
 });
 
-export const { setDefaultPackState, setTag, setLoading } = packSlice.actions;
+export const { setDefaultPackState, setTag } = packSlice.actions;
 
 export const packsReducer = packSlice.reducer;
