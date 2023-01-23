@@ -39,43 +39,47 @@ export const UserProfilePage: FC = () => {
         }
     };
 
+    const profileItems = () => {
+        return ProfileItems.map((profileItems: UserInfoItems, idx: number) => (
+            <UserProfileItem
+                key={idx}
+                profileItems={profileItems.itemName}
+                setFullName={setFullName}
+                setEmail={setEmail}
+                avatar={avatar}
+            />
+        ));
+    };
+
+    const profileTriggerItems = () =>
+        ProfileTriggerItems.map((profileTriggers: UserInfoTriggers, idx: number) => {
+            return (
+                <div className={styles.downloadPack} key={idx}>
+                    <h1>{profileTriggers.itemName}</h1>
+                    {profileTriggers.itemName === 'Update' && (
+                        <ButtonLayout typeStyle="update" onClicked={onUpdateInfo}>
+                            {profileTriggers.itemName}
+                        </ButtonLayout>
+                    )}
+                    {profileTriggers.itemName === 'DownLoad' && (
+                        <Link to={'/profile/create'} data-testid="create-pack-link">
+                            <ButtonLayout typeStyle="update">{profileTriggers.itemName}</ButtonLayout>
+                        </Link>
+                    )}
+                    {profileTriggers.itemName === 'Packs' && (
+                        <Link to={'/profile/packs'} data-testid="user-packs-link">
+                            <ButtonLayout typeStyle="update">{profileTriggers.itemName}</ButtonLayout>
+                        </Link>
+                    )}
+                </div>
+            );
+        });
+
     return (
         <div className={styles.root} data-testid="user-profile-page">
             <ul className={styles.userInfoList}>
-                {ProfileItems.map((profileItems: UserInfoItems, idx: number) => {
-                    return (
-                        <UserProfileItem
-                            key={idx}
-                            profileItems={profileItems.itemName}
-                            setFullName={setFullName}
-                            setEmail={setEmail}
-                            avatar={avatar}
-                        />
-                    );
-                })}
-
-                {ProfileTriggerItems.map((profileTriggers: UserInfoTriggers, idx: number) => {
-                    return (
-                        <div className={styles.downloadPack} key={idx}>
-                            <h1>{profileTriggers.itemName}</h1>
-                            {profileTriggers.itemName === 'Update' && (
-                                <ButtonLayout typeStyle="update" onClicked={onUpdateInfo}>
-                                    {profileTriggers.itemName}
-                                </ButtonLayout>
-                            )}
-                            {profileTriggers.itemName === 'DownLoad' && (
-                                <Link to={'/profile/create'} data-testid="create-pack-link">
-                                    <ButtonLayout typeStyle="update">{profileTriggers.itemName}</ButtonLayout>
-                                </Link>
-                            )}
-                            {profileTriggers.itemName === 'Packs' && (
-                                <Link to={'/profile/packs'} data-testid="user-packs-link">
-                                    <ButtonLayout typeStyle="update">{profileTriggers.itemName}</ButtonLayout>
-                                </Link>
-                            )}
-                        </div>
-                    );
-                })}
+                {profileItems()}
+                {profileTriggerItems()}
             </ul>
         </div>
     );

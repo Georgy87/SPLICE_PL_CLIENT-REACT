@@ -1,5 +1,5 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
+import { FC } from 'react';
 
 import { ButtonLayout } from '@layouts/ButtonLayout';
 import { HorizontalSkeletonLayout } from '@layouts/HorizontalSkeletonLayout';
@@ -17,7 +17,7 @@ type PropsType = {
     pageName?: string;
 };
 
-export const SampleList: React.FC<PropsType> = ({ samples, pageName }) => {
+export const SampleList: FC<PropsType> = ({ samples, pageName }) => {
     const packTag = useSelector(selectTag);
 
     const dispatch = useAppDispatch();
@@ -32,29 +32,37 @@ export const SampleList: React.FC<PropsType> = ({ samples, pageName }) => {
 
     const sceleton = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, index) => <HorizontalSkeletonLayout key={index} />);
 
+    const likedPageSamplesList = () => {
+        return (
+            pageName != 'liked-samples-page' && (
+                <div className={styles.tags}>
+                    {sampleCategories.map((tag: string, index: number) => (
+                        <ButtonLayout key={index} typeStyle="tags" onClicked={() => onSetTag(tag)}>
+                            {tag}
+                        </ButtonLayout>
+                    ))}
+                </div>
+            )
+        );
+    };
+
+    const packProfileSampleList = () => {
+        return samples
+            ? samples?.map((sample: Samples, index: number) => {
+                  return <SampleItem key={sample._id} sample={sample} idx={index} />;
+              })
+            : sceleton;
+    };
+
     return (
         <>
             <div className={styles.samplesLabel}>
                 <div className={styles.sample}>Sample</div>
-                {pageName != 'liked-samples-page' && (
-                    <div className={styles.tags}>
-                        {sampleCategories.map((tag: string, index: number) => {
-                            return (
-                                <ButtonLayout key={index} typeStyle="tags" onClicked={() => onSetTag(tag)}>
-                                    {tag}
-                                </ButtonLayout>
-                            );
-                        })}
-                    </div>
-                )}
+                {likedPageSamplesList()}
                 <div className={styles.bpm}>Bpm</div>
             </div>
 
-            {samples
-                ? samples?.map((sample: Samples, index: number) => {
-                      return <SampleItem key={sample._id} sample={sample} idx={index} />;
-                  })
-                : sceleton}
+            {packProfileSampleList()}
         </>
     );
 };

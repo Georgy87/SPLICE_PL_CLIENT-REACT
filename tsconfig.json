@@ -44,5 +44,5 @@
   },
   "files": ["./declarations.d.ts"],
   "include": [
-    "src", "./setupJest.js", "craco.config.js" ]
+    "src", "./setupJest.js", "craco.config.js", "index.d.ts"]
 }

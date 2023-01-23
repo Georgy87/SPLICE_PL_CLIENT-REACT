@@ -1,10 +1,8 @@
+import { FC } from 'react';
+
 import styles from './Loader.module.scss';
 
-type PropsType = {
-    customColor?: 'primary' | 'secondary' | 'inherit' | undefined;
-};
-
-export const Loader: React.FC<PropsType> = ({ customColor }) => {
+export const Loader: FC = () => {
     return (
         <div className={styles.loader} data-testid="loader">
             ...Loading

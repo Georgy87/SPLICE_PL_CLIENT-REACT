@@ -31,24 +31,21 @@ export const PackItem: React.FC<PackListProps> = ({ pack, index, id }) => {
                     e.stopPropagation();
                 }}
             >
-                {
-                    <IconChangeLayout
-                        onClicked={(e: Event) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            playTrack(index, 'packs');
-                        }}
-                        blockStyle={styles.playPauseCircle}
-                        iconOneOrTwo={isPlaying}
-                        trackId={id}
-                        size="100px"
-                        color="#fff"
-                        currentTrackId={currentPackId}
-                    />
-                }
+                <IconChangeLayout
+                    onClicked={(e: Event) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        playTrack(index, 'packs');
+                    }}
+                    blockStyle={styles.playPauseCircle}
+                    iconOneOrTwo={isPlaying}
+                    trackId={id}
+                    size="100px"
+                    color="#fff"
+                    currentTrackId={currentPackId}
+                />
 
-                {/* <img src={`${pack.picture}`} alt="pack-cover" /> */}
-                <Image src={pack.picture} alt={"pack-cover"}/>
+                <Image src={pack.picture} alt={'pack-cover'} />
                 <div>
                     <div>{pack.genre}</div>
                     <div style={{ fontSize: 12, color: 'gray' }}>{pack.name}</div>

@@ -16,7 +16,7 @@ export type AddSampleInfoModalType = {
 
 const AddSampleInfoModalToMemo: React.FC<AddSampleInfoModalType> = (props) => {
     const { sampleId } = props;
-	
+
     const [value, setValue] = useState<number>(0);
     const [bpmValue, setBpmValue] = useState<number>(0);
     const [category, setCategory] = useState<string>(sampleCategories[0]);
@@ -28,7 +28,23 @@ const AddSampleInfoModalToMemo: React.FC<AddSampleInfoModalType> = (props) => {
         setValue(+e.target.value);
         setBpmValue(+e.target.value);
     };
-    
+
+    const dropDownContent = () =>
+        isActive && (
+            <div className={styles.dropdownContent}>
+                {sampleCategories.map((option) => (
+                    <div
+                        onClick={(e) => {
+                            setCategory(option);
+                            setIsActive(false);
+                        }}
+                        className={styles.dropdownItem}
+                    >
+                        {option}
+                    </div>
+                ))}
+            </div>
+        );
     return (
         <Modal {...props}>
             <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -51,24 +67,10 @@ const AddSampleInfoModalToMemo: React.FC<AddSampleInfoModalType> = (props) => {
                         <p>Sample category</p>
                         <div className={styles.dropdown}>
                             <div className={styles.dropdownBtn} onClick={(e) => setIsActive(!isActive)}>
+                                {dropDownContent()}
                                 {category}
                                 <span className="fas fa-caret-down"></span>
                             </div>
-                            {isActive && (
-                                <div className={styles.dropdownContent}>
-                                    {sampleCategories.map((option) => (
-                                        <div
-                                            onClick={(e) => {
-                                                setCategory(option);
-                                                setIsActive(false);
-                                            }}
-                                            className={styles.dropdownItem}
-                                        >
-                                            {option}
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
                         </div>
                         <ButtonLayout
                             typeStyle="sample-update"

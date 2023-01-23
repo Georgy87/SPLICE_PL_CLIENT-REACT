@@ -8,7 +8,13 @@ import { defaultState } from '@context/PlayerContextProvider';
 import { useSound } from '@hooks/useSound';
 import { Modal } from '@layouts/ModalLayout';
 import { canvasChartService } from '@services/canvasChartService';
-import { selectLoading, selectPackProfile, selectSamples, selectTag, selectViewsData } from '@selectors/packsSelectors';
+import {
+    selectPackLoading,
+    selectPackProfile,
+    selectSamples,
+    selectTag,
+    selectViewsData,
+} from '@selectors/packsSelectors';
 import { fetchGetPack } from '@slices/pack/actions';
 import { ButtonLayout } from '@layouts/ButtonLayout';
 import { useWindowSize } from '@hooks/useWIndowSize';
@@ -19,7 +25,7 @@ import styles from './ProfilePackPage.module.scss';
 export const ProfilePackPage = () => {
     const packProfile = useSelector(selectPackProfile);
     const samples = useSelector(selectSamples);
-    const loading = useSelector(selectLoading);
+    const loading = useSelector(selectPackLoading);
     const tag = useSelector(selectTag);
     const packViews = useSelector(selectViewsData);
 
@@ -39,8 +45,8 @@ export const ProfilePackPage = () => {
     const params: { packId: string } = useParams();
     const { setPlayerState } = useSound();
 
-    const onOpenModal = useCallback(() => setActiveModal(false), []);
-
+    const onOpenModal = useCallback(() => setActiveModal(() => false), [activeModal]);
+    
     const activeModalMemo = useMemo(() => {
         return activeModal;
     }, [activeModal]);
@@ -77,55 +83,62 @@ export const ProfilePackPage = () => {
         });
     }, [packProfile]);
 
-    const CanvasChildren = useMemo(() => {
+    const ModalChildren = useMemo(() => {
         return (
             <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                 <div>
                     <canvas ref={canvasRef} />
                 </div>
                 <div className={styles.changeYears}>
-                    {packViews &&
-                        Object.keys(packViews).map((year: string) => (
-                            <ButtonLayout key={year} typeStyle={'auth'} onClicked={() => setYear(year)}>
-                                {year}
-                            </ButtonLayout>
-                        ))}
+                    {packViews
+                        ? Object.keys(packViews).map((year: string) => (
+                              <ButtonLayout key={year} typeStyle={'auth'} onClicked={() => setYear(year)}>
+                                  {year}
+                              </ButtonLayout>
+                          ))
+                        : null}
                 </div>
             </div>
         );
     }, [packViews]);
 
-    return (
-        <div data-testid="profile-pack-page">
-            {loading ? (
-                <div className={styles.profilePackContainer} data-testid="profile-pack">
-                    <div className={styles.infoBackground}>
-                        <img src={`${packProfile?.picture}`} alt={`${packProfile?.picture}`} />
-                    </div>
-                    <div className={styles.playerInner}>
-                        <img src={`${packProfile?.picture}`} alt={packProfile?.picture} />
+    const renderContent = () => {
+        if (!loading) {
+            return <Loader />;
+        }
 
-                        <div className={styles.packInfo}>
-                            <h1>{packProfile?.name}</h1>
-                            <p>{packProfile?.packInfo}</p>
-                        </div>
-                        <div className={styles.openChart}>
-                            <ButtonLayout key={year} typeStyle={'auth'} onClicked={() => setActiveModal(true)}>
-                                Views
-                            </ButtonLayout>
-                        </div>
-                    </div>
+        return (
+            <div className={styles.profilePackContainer} data-testid="profile-pack">
+                <div className={styles.infoBackground}>
+                    <img src={`${packProfile?.picture}`} alt={`${packProfile?.picture}`} />
+                </div>
+                <div className={styles.playerInner}>
+                    <img src={`${packProfile?.picture}`} alt={packProfile?.picture} />
 
-                    <div className={styles.sampleList}>
-                        <SampleList samples={samples} />
+                    <div className={styles.packInfo}>
+                        <h1>{packProfile?.name}</h1>
+                        <p>{packProfile?.packInfo}</p>
+                    </div>
+                    <div className={styles.openChart}>
+                        <ButtonLayout key={year} typeStyle={'auth'} onClicked={() => setActiveModal(true)}>
+                            Views
+                        </ButtonLayout>
                     </div>
                 </div>
-            ) : (
-                <Loader />
-            )}
+
+                <div className={styles.sampleList}>
+                    <SampleList samples={samples} />
+                </div>
+            </div>
+        );
+    };
+
+    return (
+        <div data-testid="profile-pack-page">
+            {renderContent()}
             {activeModal && (
                 <Modal setActive={onOpenModal} active={activeModalMemo}>
-                    {CanvasChildren}
+                    {ModalChildren}
                 </Modal>
             )}
         </div>

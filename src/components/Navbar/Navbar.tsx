@@ -22,6 +22,29 @@ export const Navbar = () => {
     const dispatch = useAppDispatch();
 
     const isAuth = useSelector(selectAuth);
+
+    const isLogin = () => (
+        <Link to="/login" data-testid="login-link">
+            {isAuth ? (
+                <ButtonLayout
+                    typeStyle={'sign-in-out'}
+                    onClicked={() => {
+                        dispatch(logout());
+                        dispatch(setDefaultPackState());
+                    }}
+                >
+                    <IconLayout iconName={'login'} />
+                    <span>Log Out</span>
+                </ButtonLayout>
+            ) : (
+                <ButtonLayout typeStyle={'sign-in-out'}>
+                    <IconLayout iconName={'logout'} />
+                    <span>Log In</span>
+                </ButtonLayout>
+            )}
+        </Link>
+    );
+
     return (
         <>
             <nav className={isAuth ? styles.navbar : `${styles.navbar} ${styles.notAuth}`}>
@@ -42,27 +65,7 @@ export const Navbar = () => {
                         <img src={user?.avatar ? user.avatar : defaultAvatar} alt="user-avatar" />
                     </div>
                 )}
-                {
-                    <Link to="/login" data-testid="login-link">
-                        {isAuth ? (
-                            <ButtonLayout
-                                typeStyle={'sign-in-out'}
-                                onClicked={() => {
-                                    dispatch(logout());
-                                    dispatch(setDefaultPackState());
-                                }}
-                            >
-                                <IconLayout iconName={'login'} />
-                                <span>Log Out</span>
-                            </ButtonLayout>
-                        ) : (
-                            <ButtonLayout typeStyle={'sign-in-out'}>
-                                <IconLayout iconName={'logout'} />
-                                <span>Log In</span>
-                            </ButtonLayout>
-                        )}
-                    </Link>
-                }
+                {isLogin()}
             </nav>
             {sidebar && <Sidebar sidebar={sidebar} setSideBar={setSideBar} />}
         </>

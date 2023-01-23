@@ -3,23 +3,25 @@ import { useSelector } from 'react-redux';
 
 import { Player } from '@components/Player';
 import { SearchInput } from '@components/SearchInput';
-import { selectPacks, selectTotalPages, selectLoading } from '@selectors/packsSelectors';
+import { selectPacks, selectTotalPages, selectPackLoading } from '@selectors/packsSelectors';
 import { VideoPlayer } from '@components/VideoPlayer';
 import { fetchGetPacks, fetchSearchPacks } from '@slices/pack/actions';
-import { setDefaultPackState, setLoading } from '@slices/pack/packSlice';
+import { setDefaultPackState } from '@slices/pack/packSlice';
 import { useAppDispatch } from '@store/types';
 import { intersectionObserverService } from '@services/intersectionObserverService';
 import { useDebounce } from '@hooks/useDebounce';
 import { PackListItem } from '@components/PackListItem/PackListItem';
 
 import styles from './PacksPage.module.scss';
+import { PACKS_SKELETON_ITEMS } from '@/constans/skeleton';
+import { VerticalSkeletonLayout } from '@/layouts';
 
 type PropsType = {
     pageName?: 'main-packs' | 'user-packs';
 };
 
 export const PacksPage: FC<PropsType> = () => {
-    const loading = useSelector(selectLoading);
+    const loading = useSelector(selectPackLoading);
     const totalPages = useSelector(selectTotalPages);
     const packs = useSelector(selectPacks);
 
@@ -38,7 +40,6 @@ export const PacksPage: FC<PropsType> = () => {
 
     useEffect(() => {
         dispatch(fetchGetPacks(pageNumber));
-        dispatch(setLoading(true));
     }, [pageNumber]);
 
     useEffect(() => {
@@ -54,27 +55,22 @@ export const PacksPage: FC<PropsType> = () => {
         [value]
     );
 
-    const setDefultValue = useCallback(
-        (value: string) => {
-            dispatch(fetchSearchPacks(value));
-        },
-        [value]
-    );
-
     const debouncedCallback = useDebounce((value: string) => {
         dispatch(fetchSearchPacks(value));
     }, 500);
 
-    useEffect(() => {
-        if (loading) {
-            intersectionObserverService.isObserver(totalPages, pageEnd, pagesCounter, onLongMore);
-        }
-    }, [loading]);
+    // TODO add packs for app
+
+    // useEffect(() => {
+    //     if (loading && totalPages !== pagesCounter) {  
+    //         intersectionObserverService.isObserver(totalPages, pageEnd, pagesCounter, onLongMore);
+    //     }
+    // }, [loading]);
 
     return (
         <div className={styles.root} data-testid="packs-page">
             <VideoPlayer />
-            <SearchInput onChangeValue={onChangeValue} setDefultValue={setDefultValue} value={value} />
+            <SearchInput onChangeValue={onChangeValue} value={value} />
             <PackListItem pageEnd={pageEnd} packs={packs} />
             <Player />
         </div>

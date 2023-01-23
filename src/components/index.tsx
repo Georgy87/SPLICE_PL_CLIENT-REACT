@@ -1,7 +1,7 @@
 export { Navbar } from './Navbar';
 export { AddSampleInfoModal } from './AddSampleInfoModal';
-export { Canvas } from './Canvas';
-export { CanvasList } from './CanvasList';
+export { Canvas } from './SampleCanvasItem';
+export { CanvasList } from './SampleCanvasList';
 export { FileUpload } from './FileUpload';
 export { NavbarItem } from './NavbarItem';
 export { NavbarList } from './NavbarList';

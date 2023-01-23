@@ -18,4 +18,5 @@ export type UserSliceState = {
 	samples: Samples[] | null;
 	avatar: null | string;
 	errorMessage: null | string;
+	loading: boolean;
 };

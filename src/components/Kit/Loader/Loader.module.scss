@@ -1,4 +1,7 @@
+@import "../../../styles/variables.scss";
+
 .loader {
     margin: 0 auto;
-    margin-top: 6rem;
+    text-align: center;
+    color: $blue;
 }

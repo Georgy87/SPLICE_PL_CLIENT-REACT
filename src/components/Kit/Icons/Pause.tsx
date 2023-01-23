@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 type PropsType = {
-    size: string;
+    size?: string;
     color?: string;
 };
 

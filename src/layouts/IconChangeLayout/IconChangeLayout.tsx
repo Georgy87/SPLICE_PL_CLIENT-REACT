@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode, memo, FC } from 'react';
 
 import { Play } from '@components/Kit/Icons/Play';
 import { Pause } from '@components/Kit/Icons/Pause';
@@ -11,12 +11,12 @@ type PropsType = {
     onClicked: any;
     trackId?: string | number;
     currentTrackId?: string | boolean | number;
-    children?: React.ReactNode;
+    children?: ReactNode;
     size: string;
     color: string;
 };
 
-export const IconChangeLayout: React.FC<PropsType> = ({
+export const IconChangeLayoutToMemo: FC<PropsType> = ({
     children,
     blockStyle,
     onClicked,
@@ -44,3 +44,5 @@ export const IconChangeLayout: React.FC<PropsType> = ({
         </div>
     );
 };
+
+export const IconChangeLayout = memo(IconChangeLayoutToMemo);
