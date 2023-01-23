@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.css": "/SPLICE_PL_CLIENT-REACT/static/css/main.eff9f7b5.css",
-    "main.js": "/SPLICE_PL_CLIENT-REACT/static/js/main.d37a719e.js",
-    "static/css/658.bf55a1f1.chunk.css": "/SPLICE_PL_CLIENT-REACT/static/css/658.bf55a1f1.chunk.css",
-    "static/js/658.c187d6e9.chunk.js": "/SPLICE_PL_CLIENT-REACT/static/js/658.c187d6e9.chunk.js",
+    "main.css": "/SPLICE_PL_CLIENT-REACT/static/css/main.567ca7f3.css",
+    "main.js": "/SPLICE_PL_CLIENT-REACT/static/js/main.4a9902e1.js",
+    "static/css/512.64871cb8.chunk.css": "/SPLICE_PL_CLIENT-REACT/static/css/512.64871cb8.chunk.css",
+    "static/js/512.b6868e25.chunk.js": "/SPLICE_PL_CLIENT-REACT/static/js/512.b6868e25.chunk.js",
     "static/css/628.32483a13.chunk.css": "/SPLICE_PL_CLIENT-REACT/static/css/628.32483a13.chunk.css",
     "static/js/628.022af34d.chunk.js": "/SPLICE_PL_CLIENT-REACT/static/js/628.022af34d.chunk.js",
     "static/js/787.bd5a8236.chunk.js": "/SPLICE_PL_CLIENT-REACT/static/js/787.bd5a8236.chunk.js",
@@ -14,16 +14,16 @@
     "static/media/Hat.wav": "/SPLICE_PL_CLIENT-REACT/static/media/Hat.f4f08b10afb697fd5a0f.wav",
     "static/media/unnamed.jpg": "/SPLICE_PL_CLIENT-REACT/static/media/unnamed.ce48ced2f652d62f8a22.jpg",
     "index.html": "/SPLICE_PL_CLIENT-REACT/index.html",
-    "main.eff9f7b5.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/main.eff9f7b5.css.map",
-    "main.d37a719e.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/main.d37a719e.js.map",
-    "658.bf55a1f1.chunk.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/658.bf55a1f1.chunk.css.map",
-    "658.c187d6e9.chunk.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/658.c187d6e9.chunk.js.map",
+    "main.567ca7f3.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/main.567ca7f3.css.map",
+    "main.4a9902e1.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/main.4a9902e1.js.map",
+    "512.64871cb8.chunk.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/512.64871cb8.chunk.css.map",
+    "512.b6868e25.chunk.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/512.b6868e25.chunk.js.map",
     "628.32483a13.chunk.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/628.32483a13.chunk.css.map",
     "628.022af34d.chunk.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/628.022af34d.chunk.js.map",
     "787.bd5a8236.chunk.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/787.bd5a8236.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eff9f7b5.css",
-    "static/js/main.d37a719e.js"
+    "static/css/main.567ca7f3.css",
+    "static/js/main.4a9902e1.js"
   ]
 }
