@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables.scss";
 
 .player {
 	position: relative;
@@ -22,6 +22,12 @@
 	left: 100px;
 	width: 400px;
 	height: 300px;
+	@media screen and (max-width: 540px) {
+		top: 110px;
+		left: 20px;
+		width: 200px;
+		height: 300px;
+	}
 	h1 {
 		color: $white;
 		font-size: 2vw;

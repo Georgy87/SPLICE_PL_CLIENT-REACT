@@ -76,26 +76,26 @@
 	}
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 540px) {
 	.player {
 		.playerControls {
-			justify-content: flex-start;
+			// justify-content: flex-start;
 			.trackActive {
 				display: flex;
 				align-items: center;
 				.trackInfo {
-					padding-left: 10px;
-					font-size: 14px;
+					padding-left: 5px;
+					font-size: 12px;
 				}
 			}
 			.volumeAndTimer {
 				display: flex;
-				width: 240px;
+				width: 200px;
 				.timer {
 					display: flex;
 					span {
 						display: block;
-						font-size: 13px;
+						font-size: 12px;
 					}
 				}
 			}

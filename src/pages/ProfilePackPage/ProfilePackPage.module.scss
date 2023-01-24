@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables.scss";
 
 .profilePackContainer {
 	width: 90vw;
@@ -24,6 +24,9 @@
 			transform: scale(3.1);
 			border-radius: 5px;
 			width: 100%;
+		}
+		@media screen and (max-width: 540px) { 
+			height: 405px;
 		}
 	}
 	.sampleList {
@@ -158,14 +161,22 @@
 	}
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 540px) {
+	.playerInner {
+		display: flex;
+		flex-direction: column;
+	}
+	.infoBackground {
+		height: 500px;
+	}
 	.packInfo {
+		margin: 0;
 		overflow: visible;
 		p {
 			display: none;
 		}
 		h1 {
-			font-size: 1.5rem;
+			font-size: 1rem;
 		}
 	}
 }
