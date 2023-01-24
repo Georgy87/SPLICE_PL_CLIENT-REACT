@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/SPLICE_PL_CLIENT-REACT/static/css/main.567ca7f3.css",
-    "main.js": "/SPLICE_PL_CLIENT-REACT/static/js/main.e8f10f50.js",
+    "main.css": "/SPLICE_PL_CLIENT-REACT/static/css/main.e73ae9bb.css",
+    "main.js": "/SPLICE_PL_CLIENT-REACT/static/js/main.d5a38ede.js",
     "static/css/512.64871cb8.chunk.css": "/SPLICE_PL_CLIENT-REACT/static/css/512.64871cb8.chunk.css",
     "static/js/512.b881ce5d.chunk.js": "/SPLICE_PL_CLIENT-REACT/static/js/512.b881ce5d.chunk.js",
-    "static/css/628.32483a13.chunk.css": "/SPLICE_PL_CLIENT-REACT/static/css/628.32483a13.chunk.css",
+    "static/css/628.7bcfc71b.chunk.css": "/SPLICE_PL_CLIENT-REACT/static/css/628.7bcfc71b.chunk.css",
     "static/js/628.022af34d.chunk.js": "/SPLICE_PL_CLIENT-REACT/static/js/628.022af34d.chunk.js",
     "static/js/787.bd5a8236.chunk.js": "/SPLICE_PL_CLIENT-REACT/static/js/787.bd5a8236.chunk.js",
     "static/media/auth-background-image.jpeg": "/SPLICE_PL_CLIENT-REACT/static/media/auth-background-image.e0ce920509a52f3b5a74.jpeg",
@@ -14,16 +14,16 @@
     "static/media/Hat.wav": "/SPLICE_PL_CLIENT-REACT/static/media/Hat.f4f08b10afb697fd5a0f.wav",
     "static/media/unnamed.jpg": "/SPLICE_PL_CLIENT-REACT/static/media/unnamed.ce48ced2f652d62f8a22.jpg",
     "index.html": "/SPLICE_PL_CLIENT-REACT/index.html",
-    "main.567ca7f3.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/main.567ca7f3.css.map",
-    "main.e8f10f50.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/main.e8f10f50.js.map",
+    "main.e73ae9bb.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/main.e73ae9bb.css.map",
+    "main.d5a38ede.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/main.d5a38ede.js.map",
     "512.64871cb8.chunk.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/512.64871cb8.chunk.css.map",
     "512.b881ce5d.chunk.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/512.b881ce5d.chunk.js.map",
-    "628.32483a13.chunk.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/628.32483a13.chunk.css.map",
+    "628.7bcfc71b.chunk.css.map": "/SPLICE_PL_CLIENT-REACT/static/css/628.7bcfc71b.chunk.css.map",
     "628.022af34d.chunk.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/628.022af34d.chunk.js.map",
     "787.bd5a8236.chunk.js.map": "/SPLICE_PL_CLIENT-REACT/static/js/787.bd5a8236.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.567ca7f3.css",
-    "static/js/main.e8f10f50.js"
+    "static/css/main.e73ae9bb.css",
+    "static/js/main.d5a38ede.js"
   ]
 }
