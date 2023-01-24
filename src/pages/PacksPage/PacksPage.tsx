@@ -11,10 +11,10 @@ import { useAppDispatch } from '@store/types';
 import { intersectionObserverService } from '@services/intersectionObserverService';
 import { useDebounce } from '@hooks/useDebounce';
 import { PackListItem } from '@components/PackListItem/PackListItem';
-
-import styles from './PacksPage.module.scss';
 import { PACKS_SKELETON_ITEMS } from '@/constans/skeleton';
 import { VerticalSkeletonLayout } from '@/layouts';
+
+import styles from './PacksPage.module.scss';
 
 type PropsType = {
     pageName?: 'main-packs' | 'user-packs';
@@ -66,7 +66,7 @@ export const PacksPage: FC<PropsType> = () => {
     //         intersectionObserverService.isObserver(totalPages, pageEnd, pagesCounter, onLongMore);
     //     }
     // }, [loading]);
-
+    
     return (
         <div className={styles.root} data-testid="packs-page">
             <VideoPlayer />

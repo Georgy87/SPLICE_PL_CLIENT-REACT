@@ -12,7 +12,7 @@ import { RegistrationPage } from '@pages/RegistrationPage';
 import { SequencerPage } from '@pages/SequencerPage';
 import { UserProfilePage } from '@pages/UserProfilePage';
 
-import withLazyComponent from '@hoks/withLazyComponent';
+import withLazyComponent from '@/hocs/withLazyComponent';
 
 const UserPacksPage = withLazyComponent(lazy(() => import('@pages/UserPacksPage')));
 const LikedSamplesPage = withLazyComponent(lazy(() => import('@pages/LikedSamplesPage')));

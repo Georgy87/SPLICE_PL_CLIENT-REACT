@@ -58,15 +58,15 @@ export const ProfilePackPage = () => {
     useEffect(() => {
         if (!packViews) return;
 
-        if (width < 900 && width > 600) {
+        if (width < 768 && width > 540) {
             canvasChartService.drawingChart(canvasRef.current, packViews[year], 600, 55);
         }
 
-        if (width > 900) {
+        if (width > 768) {
             canvasChartService.drawingChart(canvasRef.current, packViews[year], 1000, 80);
         }
 
-        if (width < 600) {
+        if (width < 540) {
             canvasChartService.drawingChart(canvasRef.current, packViews[year], 350, 35);
         }
     }, [width, packProfile, year, activeModal]);

@@ -2,16 +2,17 @@
 
 .listItem {
 	display: flex;
+	justify-content: center;
 	padding: 7px;
 	margin: 3px;
 	border: 1px solid #f4f7f6;
 	border-radius: 4px;
 	list-style: none;
-	@media screen and (max-width: 500px) {
+	@media screen and (max-width: 540px) {
 		display: flex;
 		width: 400px;
 		margin-right: 0;
-		justify-content: center
+		justify-content: center;
 	}
 	&:hover {
 		box-shadow: 0 2px 20px #e6f7f1;
@@ -42,7 +43,6 @@
 		.sampleName {
 			font-size: 1em;
 			margin-left: 50px;
-			text-overflow: ellipsis;
 		}
 		.sampleBpm {
 			font-weight: 700;
@@ -89,7 +89,7 @@
 		}
 	}
 
-	@media screen and (max-width: 900px) {
+	@media screen and (max-width: 768px) {
 		li {
 			.sampleName {
 				font-size: 0.7rem;
@@ -107,16 +107,19 @@
 		}
 	}
 
-	@media screen and (max-width: 500px) {
+	@media screen and (max-width: 540px) {
 		display: flex;
-		width: 380px;
-		margin-right: 0;
 		justify-content: center;
+		width: 350px;
 		li {
+			margin: 0 auto;
 			.sampleName {
 				margin: 0;
 				font-size: 0.5em;
 				text-overflow: hidden;
+			}
+			.sampleBpm {
+				display: none;
 			}
 			&:hover {
 				// width: 350px;
@@ -125,20 +128,26 @@
 			}
 		}
 	}
-	@media screen and (max-width: 320px) {
+
+	@media screen and (max-width: 540px) {
 		display: flex;
 		justify-content: center;
-		width: 250px;
-		margin-right: 0;
-	
+		width: 270px;
+		margin: 0 auto;
+
 		li {
 			.sampleName {
 				margin: 0;
 				font-size: 0.5em;
-				text-overflow: clip;
+				width: 100px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			.sampleBpm {
+				display: none;
 			}
 			&:hover {
-				// width: 350px;
 				box-shadow: none;
 				cursor: pointer;
 			}

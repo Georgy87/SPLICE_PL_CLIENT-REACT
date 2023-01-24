@@ -28,6 +28,7 @@ export const IconChangeLayoutToMemo: FC<PropsType> = ({
 }) => {
     const IconPlay = Play;
     const IconPause = Pause;
+    console.log('Render');
     return (
         <div className={blockStyle}>
             {iconOneOrTwo && currentTrackId === trackId ? (
