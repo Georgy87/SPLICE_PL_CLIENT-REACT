@@ -135,7 +135,9 @@ export const SampleItem: React.FC<PropsType> = ({ sample, idx }) => {
                             }}
                         />
                     </SampleSliderLayout>
+
                     <p className={styles.sampleName}>{sampleName}</p>
+
                     <div className={styles.rightWrap}>
                         <div className={styles.sampleBpm}>{bpm}</div>
                         {isChangeLike()}
