@@ -1,6 +1,5 @@
 import moxios from 'moxios';
 
-import { instance } from '../../core/axios';
 import {
     fetchCreatePack,
     fetchGetPack,
