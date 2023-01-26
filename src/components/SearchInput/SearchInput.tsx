@@ -31,6 +31,7 @@ const SearchInputToMemo: FC<PropsType> = ({ onChangeValue, value }) => {
                     data-testid={'search_input'}
                     type="text"
                     className={styles.searchInput}
+                    defaultValue={value}
                     onChange={onChangeValue}
                     placeholder={open ? placeholder : ''}
                 />

@@ -36,7 +36,6 @@ type PropsType = {
 };
 
 const ButtonLayoutToMemo: React.FC<PropsType> = ({ children, typeStyle, onClicked, disabled }) => {
-    console.log('render  ButtonLayoutToMemo');
     return (
         <div className={styles.platformBtn}>
             <button

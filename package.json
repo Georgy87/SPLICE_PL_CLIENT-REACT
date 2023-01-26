@@ -74,6 +74,7 @@
     "@types/redux-mock-store": "^1.0.3",
     "@types/uuid": "^8.3.4",
     "craco-alias": "^3.0.1",
+    "cross-env": "^7.0.3",
     "gh-pages": "^4.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^28.1.3",

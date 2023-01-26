@@ -1,15 +1,28 @@
-import { instance } from '../../core/axios';
-import { RootState } from '../../store/types';
-import { _deepClone } from '../../utils/deepClone';
-import { createStoreMock } from '../../utils/tests';
-import { fetchDeleteLike, fetchSetLike, fetchSetSampleBpm, fetchSetSampleCategory } from '../../store/slices/samples/actions';
+import moxios from 'moxios';
+
+import { RootState } from '@store/types';
+import { _deepClone } from '@utils/deepClone';
+import { createStoreMock } from '@utils/tests';
+import {
+    fetchDeleteLike,
+    fetchSetLike,
+    fetchSetSampleBpm,
+    fetchSetSampleCategory,
+} from '@slices/samples/actions';
+import { ENDPOINTS } from '@/constans/endpoints';
 
 const mockStore = createStoreMock();
 
 describe('SAMPLES ACTIONS', () => {
+    beforeEach(() => {
+        moxios.install();
+    });
+
+    afterEach(() => {
+        moxios.uninstall();
+    });
     it('set like', async () => {
         const sampleId: string = 'a7923870643';
-        const postSpy = jest.spyOn(instance, 'post').mockResolvedValueOnce(undefined);
 
         const expectedActions = {
             type: 'sample/setLikeSampleStatus/fulfilled',
@@ -17,12 +30,13 @@ describe('SAMPLES ACTIONS', () => {
 
         const store = mockStore({ samples: {} } as RootState);
         await store.dispatch(fetchSetLike({ sampleId }));
-        expect(postSpy).toBeCalledTimes(1);
+        const config = moxios.requests.at(0).config;
+        expect(config.url).toBe(ENDPOINTS.samples.setLike());
         expect(store.getActions()[1].type).toBe(expectedActions.type);
     });
     it('delete like', async () => {
         const sampleId: string = 'a7923870643';
-        const deleteSpy = jest.spyOn(instance, 'delete').mockResolvedValueOnce(undefined);
+
 
         const expectedActions = {
             type: 'sample/deleteLikeSampleStatus/fulfilled',
@@ -30,12 +44,12 @@ describe('SAMPLES ACTIONS', () => {
 
         const store = mockStore({ samples: {} } as RootState);
         await store.dispatch(fetchDeleteLike({ sampleId }));
-        expect(deleteSpy).toBeCalledTimes(1);
+        const config = moxios.requests.at(0).config;
+        expect(config.url).toBe(ENDPOINTS.samples.deleteLike());
         expect(store.getActions()[1].type).toBe(expectedActions.type);
     });
     it('set sample category', async () => {
         const sampleId: string = 'a7923870643';
-        const postSpy = jest.spyOn(instance, 'post').mockResolvedValueOnce(undefined);
 
         const expectedActions = {
             type: 'sample/setSampleCategoryStatus/fulfilled',
@@ -43,12 +57,12 @@ describe('SAMPLES ACTIONS', () => {
 
         const store = mockStore({ samples: {} } as RootState);
         await store.dispatch(fetchSetSampleCategory({ sampleId, category: 'bass' }));
-        expect(postSpy).toBeCalledTimes(1);
+        const config = moxios.requests.at(0).config;
+        expect(config.url).toBe(ENDPOINTS.samples.setSampleCategory());
         expect(store.getActions()[1].type).toBe(expectedActions.type);
     });
     it('set sample Bpm', async () => {
         const sampleId: string = 'a7923870643';
-        const postSpy = jest.spyOn(instance, 'post').mockResolvedValueOnce(undefined);
 
         const expectedActions = {
             type: 'sample/setSampleBpmStatus/fulfilled',
@@ -56,7 +70,8 @@ describe('SAMPLES ACTIONS', () => {
 
         const store = mockStore({ samples: {} } as RootState);
         await store.dispatch(fetchSetSampleBpm({ sampleId, bpm: 120 }));
-        expect(postSpy).toBeCalledTimes(1);
+        const config = moxios.requests.at(0).config;
+        expect(config.url).toBe(ENDPOINTS.samples.setSampleBpm());
         expect(store.getActions()[1].type).toBe(expectedActions.type);
     });
 });

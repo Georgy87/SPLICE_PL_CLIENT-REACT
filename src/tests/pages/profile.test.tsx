@@ -1,13 +1,13 @@
 import { act } from '@testing-library/react';
-
-import { ProfilePackPage } from '../../pages';
-import { renderWithStore } from '../../utils/tests';
 import * as reduxHooks from 'react-redux';
-import * as actions from '../../store/slices/pack/actions';
-import { chartData } from '../mocks/packActions';
-import { Modal } from '../../layouts/ModalLayout/ModalLayout';
-import { ButtonLayout } from '../../layouts/ButtonLayout/ButtonLayout';
-import { samples } from '../mocks/packPage';
+
+import { ProfilePackPage } from '@pages/ProfilePackPage';
+import { renderWithStore } from '@utils/tests';
+import * as actions from '@slices/pack/actions';
+import { chartData } from '@mocks/packActions';
+import { Modal } from '@layouts/ModalLayout/ModalLayout';
+import { ButtonLayout } from '@layouts/ButtonLayout/ButtonLayout';
+import { samples } from '@mocks/packPage';
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),

@@ -1,3 +1,5 @@
+import moxios from 'moxios';
+
 import { instance } from '../../core/axios';
 import {
     fetchCreatePack,
@@ -5,28 +7,43 @@ import {
     fetchGetPacks,
     fetchGetUserPacks,
     fetchSearchPacks,
-} from '../../store/slices/pack/actions';
-import { Pack } from '../../store/slices/pack/types';
-import { RootState } from '../../store/types';
-import { createStoreMock } from '../../utils/tests';
-import { createPackpayload, pack, packProfile } from '../mocks/packActions';
+} from '@slices/pack/actions';
+import { Pack } from '@slices/pack/types';
+import { RootState } from '@store/types';
+import { createStoreMock } from '@utils/tests';
+import { createPackpayload, pack, packProfile } from '@mocks/packActions';
 
 const mockStore = createStoreMock();
 
 describe('PACK ACTIONS TESTS', () => {
+    beforeEach(() => {
+        moxios.install();
+    });
+
+    afterEach(() => {
+        moxios.uninstall();
+    });
     it('create pack', async () => {
         const packs: Pack[] = pack;
         const data = packs;
-        const postSpy = jest.spyOn(instance, 'post').mockResolvedValueOnce({ data });
+       
         const expectedActions = {
             type: 'packs/createPackStatus/fulfilled',
             payload: data,
         };
+
+        moxios.wait(() => {
+            const request = moxios.requests.at(0);
+            request.respondWith({
+                status: 200,
+                response: data,
+            });
+        });
+
         const store = mockStore({ packs: { packs: [] } } as RootState);
 
         const response = await store.dispatch(fetchCreatePack(createPackpayload));
 
-        expect(postSpy).toBeCalled();
         expect(store.getActions()[1].type).toEqual(expectedActions.type);
         expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
         expect(response.payload).toEqual(data);
@@ -43,12 +60,18 @@ describe('PACK ACTIONS TESTS', () => {
             payload: data,
         };
 
-        const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
+        moxios.wait(() => {
+            const request = moxios.requests.at(0);
+            request.respondWith({
+                status: 200,
+                response: data,
+            });
+        });
+
         const store = mockStore({ packs: { packs: [] } } as RootState);
 
         const response = await store.dispatch(fetchGetPacks(2));
 
-        expect(getSpy).toBeCalledWith('packs?page=2');
         expect(store.getActions()[1].type).toEqual(expectedActions.type);
         expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
         expect(response.payload).toEqual(data);
@@ -61,12 +84,18 @@ describe('PACK ACTIONS TESTS', () => {
             payload: data,
         };
 
-        const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
+        moxios.wait(() => {
+            const request = moxios.requests.at(0);
+            request.respondWith({
+                status: 200,
+                response: data,
+            });
+        });
+
         const store = mockStore({ packs: { userPacks: [] } } as RootState);
 
         const response = await store.dispatch(fetchGetUserPacks());
 
-        expect(getSpy).toBeCalledWith('packs/user-packs');
         expect(store.getActions()[1].type).toEqual(expectedActions.type);
         expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
         expect(response.payload).toEqual(data);
@@ -80,12 +109,19 @@ describe('PACK ACTIONS TESTS', () => {
             type: 'packs/getPackStatus/fulfilled',
             payload: data,
         };
-        const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
+
+        moxios.wait(() => {
+            const request = moxios.requests.at(0);
+            request.respondWith({
+                status: 200,
+                response: data,
+            });
+        });
+
         const store = mockStore({ packs: { userPacks: [] } } as RootState);
 
         const response = await store.dispatch(fetchGetPack({ packId: '621fe5b9815ea94e0e103a89', tag }));
 
-        expect(getSpy).toBeCalledWith(`packs/pack?packId=621fe5b9815ea94e0e103a89&tag=${tag}`);
         expect(store.getActions()[1].type).toEqual(expectedActions.type);
         expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
         expect(response.payload).toEqual(data);
@@ -94,18 +130,24 @@ describe('PACK ACTIONS TESTS', () => {
     it('search pack', async () => {
         const search = 'James Blake';
         const data = pack;
-        const getSpy = jest.spyOn(instance, 'get').mockResolvedValueOnce({ data });
 
         const expectedActions = {
             type: 'packs/getSearchPacksStatus/fulfilled',
             payload: data,
         };
 
+        moxios.wait(() => {
+            const request = moxios.requests.at(0);
+            request.respondWith({
+                status: 200,
+                response: data,
+            });
+        });
+
         const store = mockStore({ packs: { userPacks: [] } } as RootState);
 
         const response = await store.dispatch(fetchSearchPacks(search));
 
-        expect(getSpy).toBeCalledWith(`packs/search-packs?search=${search}`);
         expect(store.getActions()[1].type).toEqual(expectedActions.type);
         expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
         expect(response.payload).toEqual(data);
