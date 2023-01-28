@@ -2,12 +2,12 @@ import moxios from 'moxios';
 
 import { fetchUpdateAvatar } from '@slices/user/actions';
 import {
-    fetchAuth,
-    fetchGetLikedSamples,
-    fetchLogin,
-    fetchRegistration,
-    fetchUpdateEmail,
-    fetchUpdateFullName,
+  fetchAuth,
+  fetchGetLikedSamples,
+  fetchLogin,
+  fetchRegistration,
+  fetchUpdateEmail,
+  fetchUpdateFullName,
 } from '@slices/user/actions';
 import { UserSliceState } from '@slices/user/types';
 import { RootState } from '@store/types';
@@ -16,174 +16,175 @@ import { createStoreMock } from '@utils/tests';
 import { samples } from '@mocks/samplesActions';
 import { payloadLogin, payloadRegistration, user } from '@mocks/userActions';
 import { file } from '@mocks/packActions';
+
 import { ENDPOINTS } from '@/constans/endpoints';
 
 const mockStore = createStoreMock();
 
 describe('USER ACTIONS', () => {
-    beforeEach(() => {
-        moxios.install();
+  beforeEach(() => {
+    moxios.install();
+  });
+
+  afterEach(() => {
+    moxios.uninstall();
+  });
+  it('registration', async () => {
+    const store = mockStore({ user: {} } as RootState);
+    await store.dispatch(fetchRegistration(payloadRegistration));
+    const config = moxios.requests.at(0).config;
+    expect(config.url).toBe(ENDPOINTS.user.registration());
+    expect(store.getActions()[1].type).toBe(fetchRegistration.fulfilled.type);
+  });
+  it('login', async () => {
+    const data = { token: user.token, user: user.user, message: 'SUCCESS' };
+    const expectedActions = {
+      type: 'user/loginStatus/fulfilled',
+      payload: data,
+    };
+
+    moxios.wait(() => {
+      const request = moxios.requests.at(0);
+      request.respondWith({
+        status: 200,
+        response: data,
+      });
     });
 
-    afterEach(() => {
-        moxios.uninstall();
-    });
-    it('registration', async () => {
-        const store = mockStore({ user: {} } as RootState);
-        await store.dispatch(fetchRegistration(payloadRegistration));
-        const config = moxios.requests.at(0).config;
-        expect(config.url).toBe(ENDPOINTS.user.registration());
-        expect(store.getActions()[1].type).toBe(fetchRegistration.fulfilled.type);
-    });
-    it('login', async () => {
-        const data = { token: user.token, user: user.user, message: 'SUCCESS' };
-        const expectedActions = {
-            type: 'user/loginStatus/fulfilled',
-            payload: data,
-        };
+    const store = mockStore({ user } as RootState);
+    const response = await store.dispatch(fetchLogin(payloadLogin));
 
-        moxios.wait(() => {
-            const request = moxios.requests.at(0);
-            request.respondWith({
-                status: 200,
-                response: data,
-            });
-        });
+    expect(store.getActions()[1].type).toEqual(expectedActions.type);
+    expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+    expect(response.payload).toEqual(data);
+  });
 
-        const store = mockStore({ user } as RootState);
-        const response = await store.dispatch(fetchLogin(payloadLogin));
+  it('auth', async () => {
+    const data = { token: user.token, user: user.user };
+    const expectedActions = {
+      type: 'user/authStatus/fulfilled',
+      payload: data,
+    };
 
-        expect(store.getActions()[1].type).toEqual(expectedActions.type);
-        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
-        expect(response.payload).toEqual(data);
+    moxios.wait(() => {
+      const request = moxios.requests.at(0);
+      request.respondWith({
+        status: 200,
+        response: data,
+      });
     });
 
-    it('auth', async () => {
-        const data = { token: user.token, user: user.user };
-        const expectedActions = {
-            type: 'user/authStatus/fulfilled',
-            payload: data,
-        };
+    const store = mockStore({ user } as RootState);
+    const response = await store.dispatch(fetchAuth());
 
-        moxios.wait(() => {
-            const request = moxios.requests.at(0);
-            request.respondWith({
-                status: 200,
-                response: data,
-            });
-        });
+    expect(store.getActions()[1].type).toEqual(expectedActions.type);
+    expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+    expect(response.payload).toEqual(data);
+  });
+  it('update email', async () => {
+    const { user: obj } = user;
+    const serverResponse = _deepClone(obj);
 
-        const store = mockStore({ user } as RootState);
-        const response = await store.dispatch(fetchAuth());
+    if (serverResponse) serverResponse.email = 'goshana87@gmail.com';
 
-        expect(store.getActions()[1].type).toEqual(expectedActions.type);
-        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
-        expect(response.payload).toEqual(data);
+    const data = { user: serverResponse };
+    const expectedActions = {
+      type: 'user/updateEmailStatus/fulfilled',
+      payload: data,
+    };
+
+    moxios.wait(() => {
+      const request = moxios.requests.at(0);
+      request.respondWith({
+        status: 200,
+        response: data,
+      });
     });
-    it('update email', async () => {
-        const { user: obj } = user;
-        const serverResponse = _deepClone(obj);
 
-        if (serverResponse) serverResponse.email = 'goshana87@gmail.com';
+    const store = mockStore({ user: serverResponse } as RootState);
+    const response = await store.dispatch(fetchUpdateEmail({ email: 'goshana87@gmail.com' }));
 
-        const data = { user: serverResponse };
-        const expectedActions = {
-            type: 'user/updateEmailStatus/fulfilled',
-            payload: data,
-        };
+    expect(store.getActions()[1].type).toEqual(expectedActions.type);
+    expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+    expect(response.payload).toEqual(data);
+  });
+  it('update fullname', async () => {
+    const { user: obj } = user;
+    const serverResponse = _deepClone(obj);
+    if (serverResponse) serverResponse.fullname = 'Ben Gromov';
 
-        moxios.wait(() => {
-            const request = moxios.requests.at(0);
-            request.respondWith({
-                status: 200,
-                response: data,
-            });
-        });
+    const data = { user: serverResponse };
+    const expectedActions = {
+      type: 'user/updateFullNameStatus/fulfilled',
+      payload: data,
+    };
 
-        const store = mockStore({ user: serverResponse } as RootState);
-        const response = await store.dispatch(fetchUpdateEmail({ email: 'goshana87@gmail.com' }));
-
-        expect(store.getActions()[1].type).toEqual(expectedActions.type);
-        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
-        expect(response.payload).toEqual(data);
+    moxios.wait(() => {
+      const request = moxios.requests.at(0);
+      request.respondWith({
+        status: 200,
+        response: data,
+      });
     });
-    it('update fullname', async () => {
-        const { user: obj } = user;
-        const serverResponse = _deepClone(obj);
-        if (serverResponse) serverResponse.fullname = 'Ben Gromov';
 
-        const data = { user: serverResponse };
-        const expectedActions = {
-            type: 'user/updateFullNameStatus/fulfilled',
-            payload: data,
-        };
+    const store = mockStore({ user: serverResponse } as RootState);
+    const response = await store.dispatch(fetchUpdateFullName({ fullname: 'Swetlana Litvinenko' }));
 
-        moxios.wait(() => {
-            const request = moxios.requests.at(0);
-            request.respondWith({
-                status: 200,
-                response: data,
-            });
-        });
+    expect(store.getActions()[1].type).toEqual(expectedActions.type);
+    expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+    expect(response.payload).toEqual(data);
+  });
+  it('get liked Samples', async () => {
+    const serverResponse: UserSliceState = _deepClone(user);
+    serverResponse.samples = samples;
+    const data = serverResponse;
 
-        const store = mockStore({ user: serverResponse } as RootState);
-        const response = await store.dispatch(fetchUpdateFullName({ fullname: 'Swetlana Litvinenko' }));
+    const expectedActions = {
+      type: 'user/getLikedSamplesStatus/fulfilled',
+      payload: data,
+    };
 
-        expect(store.getActions()[1].type).toEqual(expectedActions.type);
-        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
-        expect(response.payload).toEqual(data);
+    moxios.wait(() => {
+      const request = moxios.requests.at(0);
+      request.respondWith({
+        status: 200,
+        response: data,
+      });
     });
-    it('get liked Samples', async () => {
-        const serverResponse: UserSliceState = _deepClone(user);
-        serverResponse.samples = samples;
-        const data = serverResponse;
 
-        const expectedActions = {
-            type: 'user/getLikedSamplesStatus/fulfilled',
-            payload: data,
-        };
+    const store = mockStore({ user: serverResponse } as RootState);
+    const response = await store.dispatch(fetchGetLikedSamples());
 
-        moxios.wait(() => {
-            const request = moxios.requests.at(0);
-            request.respondWith({
-                status: 200,
-                response: data,
-            });
-        });
+    expect(store.getActions()[1].type).toEqual(expectedActions.type);
+    expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+    expect(response.payload).toEqual(data);
+  });
+  it('update avatar', async () => {
+    const data: string = 'avatar.png';
+    const serverResponse: UserSliceState = _deepClone(user);
+    serverResponse.avatar = data;
+    const { user: userResponse } = serverResponse;
 
-        const store = mockStore({ user: serverResponse } as RootState);
-        const response = await store.dispatch(fetchGetLikedSamples());
+    if (userResponse) userResponse.avatar = data;
 
-        expect(store.getActions()[1].type).toEqual(expectedActions.type);
-        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
-        expect(response.payload).toEqual(data);
+    const expectedActions = {
+      type: 'user/updateAvatarSamplesStatus/fulfilled',
+      payload: data,
+    };
+
+    moxios.wait(() => {
+      const request = moxios.requests.at(0);
+      request.respondWith({
+        status: 200,
+        response: data,
+      });
     });
-    it('update avatar', async () => {
-        const data: string = 'avatar.png';
-        const serverResponse: UserSliceState = _deepClone(user);
-        serverResponse.avatar = data;
-        const { user: userResponse } = serverResponse;
 
-        if (userResponse) userResponse.avatar = data;
+    const store = mockStore({ user: serverResponse } as RootState);
+    const response = await store.dispatch(fetchUpdateAvatar(file));
 
-        const expectedActions = {
-            type: 'user/updateAvatarSamplesStatus/fulfilled',
-            payload: data,
-        };
-
-        moxios.wait(() => {
-            const request = moxios.requests.at(0);
-            request.respondWith({
-                status: 200,
-                response: data,
-            });
-        });
-
-        const store = mockStore({ user: serverResponse } as RootState);
-        const response = await store.dispatch(fetchUpdateAvatar(file));
-
-        expect(store.getActions()[1].type).toEqual(expectedActions.type);
-        expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
-        expect(response.payload).toEqual(data);
-    });
+    expect(store.getActions()[1].type).toEqual(expectedActions.type);
+    expect(store.getActions()[1].payload).toEqual(expectedActions.payload);
+    expect(response.payload).toEqual(data);
+  });
 });

@@ -16,41 +16,41 @@ import { AppDispatch, RootState } from '../store/types';
 export const mockStore = createMockStore([thunk]);
 
 export const MOCK_INITIAL_STATE = {
-    packs: initialPackState,
-    user: initialUserState,
-    samples: initialSamplesState,
+  packs: initialPackState,
+  user: initialUserState,
+  samples: initialSamplesState,
 };
 
 export const renderWithStore = (
-    component: ReactNode,
-    initialState: Partial<typeof MOCK_INITIAL_STATE> = {},
-    param?: string
+  component: ReactNode,
+  initialState: Partial<typeof MOCK_INITIAL_STATE> = {},
+  param?: string,
 ) => {
-    const store = mockStore({ ...MOCK_INITIAL_STATE, ...initialState });
-    return {
-        result: render(
-            <Provider store={store}>
-                <MemoryRouter initialEntries={[param ? param : '/']}>{component}</MemoryRouter>
-            </Provider>
-        ),
-        store,
-    };
+  const store = mockStore({ ...MOCK_INITIAL_STATE, ...initialState });
+  return {
+    result: render(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={[param ? param : '/']}>{component}</MemoryRouter>
+      </Provider>,
+    ),
+    store,
+  };
 };
 
 export const renderWithRouter = (component: React.ReactChild, initialRoute = '/login') => {
-    return (
-        <Provider store={store}>
-            <MemoryRouter initialEntries={[initialRoute]}>
-                <AppRouter />
-                {component}
-            </MemoryRouter>
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <MemoryRouter initialEntries={[initialRoute]}>
+        <AppRouter />
+        {component}
+      </MemoryRouter>
+    </Provider>
+  );
 };
 
 type DispatchExts = AppDispatch;
 
 export const createStoreMock = (): MockStoreCreator<RootState, DispatchExts> => {
-    const middlewares = [thunkMiddleware];
-    return createMockStore<RootState, DispatchExts>(middlewares);
+  const middlewares = [thunkMiddleware];
+  return createMockStore<RootState, DispatchExts>(middlewares);
 };

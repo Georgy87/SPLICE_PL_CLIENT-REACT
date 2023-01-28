@@ -5,62 +5,62 @@ import { User } from '@store/slices/user/types';
 // User
 
 export type AuthResponseData = {
-    data: {
-        user: User;
-        token: string;
-    };
+  data: {
+    user: User;
+    token: string;
+  };
 };
 
 export type LoginResponseData = {
-    data: {
-        message: string;
-        user: User;
-        token: string;
-    };
+  data: {
+    message: string;
+    user: User;
+    token: string;
+  };
 };
 
 export type UpdateEmailResponseData = {
-    data: {
-        user: User;
-    };
+  data: {
+    user: User;
+  };
 };
 
 export type UpdateFullNameResponseData = UpdateEmailResponseData;
 
 export type LikedSamplesResponseData = {
-    data: {
-        samples: Samples[];
-    };
+  data: {
+    samples: Samples[];
+  };
 };
 
 export type UpdateAvatarResponseData = {
-    data: string;
+  data: string;
 };
 
 // Packs
 
 export type CreatePackResponseData = {
-    data: Pack[];
+  data: Pack[];
 };
 
 export type GetPacksResponseData = {
-    data: { packs: Pack[]; totalPage: number };
+  data: { packs: Pack[]; totalPage: number };
 };
 
 export type GetPackResponseData = {
-    data: PackProfile;
+  data: PackProfile;
 };
 
 export type GetUserPacksResponseData = {
-    data: Pack[];
+  data: Pack[];
 };
 
 export type SearchPacksResponseData = {
-    data: Pack[];
+  data: Pack[];
 };
 
 // Samples
 
 export type CreateSampleResponseData = {
-    data: string;
+  data: string;
 };

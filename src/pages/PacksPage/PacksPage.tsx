@@ -1,63 +1,50 @@
-import {
-  ChangeEvent,
-  FC,
-  useEffect,
-  useRef,
-  useState,
-  MutableRefObject,
-  useCallback,
-} from "react";
-import { useSelector } from "react-redux";
+import { ChangeEvent, FC, useEffect, useRef, useState, MutableRefObject, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 
-import { Player } from "@components/Player";
-import { SearchInput } from "@components/SearchInput";
-import {
-  selectPacks,
-  selectTotalPages,
-  selectPackLoading,
-} from "@selectors/packsSelectors";
-import { VideoPlayer } from "@components/VideoPlayer";
-import { fetchGetPacks, fetchSearchPacks } from "@slices/pack/actions";
-import { setDefaultPackState } from "@slices/pack/packSlice";
-import { useAppDispatch } from "@store/types";
-import { intersectionObserverService } from "@services/intersectionObserverService";
-import { useDebounce } from "@hooks/useDebounce";
-import { PackListItem } from "@components/PackListItem/PackListItem";
+import { Player } from '@components/Player';
+import { SearchInput } from '@components/SearchInput';
+import { selectPacks } from '@selectors/packsSelectors';
+import { VideoPlayer } from '@components/VideoPlayer';
+import { fetchGetPacks, fetchSearchPacks } from '@slices/pack/actions';
+import { setDefaultPackState } from '@slices/pack/packSlice';
+import { useAppDispatch } from '@store/types';
+import { useDebounce } from '@hooks/useDebounce';
+import { PackListItem } from '@components/PackListItem/PackListItem';
 
-import { PACKS_SKELETON_ITEMS } from "@/constans/skeleton";
-import { VerticalSkeletonLayout } from "@/layouts";
-
-import styles from "./PacksPage.module.scss";
+import styles from './PacksPage.module.scss';
 
 type PropsType = {
-  pageName?: "main-packs" | "user-packs";
+  pageName?: 'main-packs' | 'user-packs';
 };
 
 export const PacksPage: FC<PropsType> = () => {
-  const loading = useSelector(selectPackLoading);
-  const totalPages = useSelector(selectTotalPages);
+  // const loading = useSelector(selectPackLoading);
+  // const totalPages = useSelector(selectTotalPages);
   const packs = useSelector(selectPacks);
 
-  let pagesCounter: number = 1;
+  // let pagesCounter: number = 1;
 
   const pageEnd = useRef() as MutableRefObject<HTMLInputElement>;
 
   const [pageNumber, setPageNumber] = useState<number>(0);
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>('');
 
   const dispatch = useAppDispatch();
 
-  const onLongMore = () => {
-    setPageNumber((prevPageNumber) => prevPageNumber + 1);
-  };
+  // const onLongMore = () => {
+  //     setPageNumber((prevPageNumber) => prevPageNumber + 1);
+  // };
 
   useEffect(() => {
     dispatch(fetchGetPacks(pageNumber));
-  }, [pageNumber]);
+  }, [pageNumber, dispatch]);
 
   useEffect(() => {
     dispatch(setDefaultPackState());
-  }, []);
+  }, [dispatch]);
+  const { debouncedCallback } = useDebounce((value: string) => {
+    dispatch(fetchSearchPacks(value));
+  }, 500);
 
   const onChangeValue = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -65,12 +52,8 @@ export const PacksPage: FC<PropsType> = () => {
       setValue(e.target.value);
       debouncedCallback(e.target.value);
     },
-    [value]
+    [debouncedCallback],
   );
-
-  const debouncedCallback = useDebounce((value: string) => {
-    dispatch(fetchSearchPacks(value));
-  }, 500);
 
   // TODO add packs for app
 

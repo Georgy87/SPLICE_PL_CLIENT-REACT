@@ -18,57 +18,57 @@ import { useAppDispatch } from '../../store/types';
 import styles from './UserPacksPage.module.scss';
 
 const UserPacksPage = () => {
-    const userPacks = useSelector(selectUserPacks);
-    const files = useSelector(selectFiles);
+  const userPacks = useSelector(selectUserPacks);
+  const files = useSelector(selectFiles);
 
-    const [activeModal, setActiveModal] = useState<boolean>(false);
+  const [activeModal, setActiveModal] = useState<boolean>(false);
 
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        if (files?.length) {
-            setActiveModal(true);
-        } else {
-            setActiveModal(false);
-        }
-    }, [files]);
+  useEffect(() => {
+    if (files?.length) {
+      setActiveModal(true);
+    } else {
+      setActiveModal(false);
+    }
+  }, [files]);
 
-    useEffect(() => {
-        async function create(e: any) {
-            const { imageFile, audioFile, audioCoordinates, packId, fileId, duration } = e.data;
+  useEffect(() => {
+    async function create(e: any) {
+      const { imageFile, audioFile, audioCoordinates, packId, fileId, duration } = e.data;
 
-            const id = await createSamples({ imageFile, audioFile, audioCoordinates, packId, fileId, duration });
-            if (!id) return;
-            dispatch(deleteSampleFiles(id));
-        }
+      const id = await createSamples({ imageFile, audioFile, audioCoordinates, packId, fileId, duration });
+      if (!id) return;
+      dispatch(deleteSampleFiles(id));
+    }
 
-        workerInstanceCreateSample.addEventListener('message', create);
+    workerInstanceCreateSample.addEventListener('message', create);
 
-        dispatch(fetchGetUserPacks());
+    dispatch(fetchGetUserPacks());
 
-        return () => {
-            workerInstanceCreateSample.removeEventListener('message', create);
-        };
-    }, []);
+    return () => {
+      workerInstanceCreateSample.removeEventListener('message', create);
+    };
+  }, []);
 
-    return (
-        <div data-testid="user-packs-page">
-            <div className={styles.root}>
-                <Modal setActive={setActiveModal} active={activeModal}>
-                    <Loader />
-                </Modal>
+  return (
+    <div data-testid="user-packs-page">
+      <div className={styles.root}>
+        <Modal setActive={setActiveModal} active={activeModal}>
+          <Loader />
+        </Modal>
 
-                {userPacks.map((pack: Pack, index: number) => (
-                    <div className={styles.packCardContainer} key={pack._id}>
-                        <UserPackItem pack={pack} id={pack._id} index={index} />
-                    </div>
-                ))}
+        {userPacks.map((pack: Pack, index: number) => (
+          <div className={styles.packCardContainer} key={pack._id}>
+            <UserPackItem pack={pack} id={pack._id} index={index} />
+          </div>
+        ))}
 
-                <div></div>
-                <CanvasList />
-            </div>
-        </div>
-    );
+        <div></div>
+        <CanvasList />
+      </div>
+    </div>
+  );
 };
 
 export default UserPacksPage;

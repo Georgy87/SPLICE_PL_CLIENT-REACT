@@ -18,51 +18,51 @@ type PropsType = {
 };
 
 export const SampleList: FC<PropsType> = ({ samples, pageName }) => {
-    const packTag = useSelector(selectTag);
+  const packTag = useSelector(selectTag);
 
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-    const onSetTag = (tag: string) => {
-        if (tag !== packTag) {
-            dispatch(setTag(tag));
-        } else {
-            dispatch(setTag(null));
-        }
-    };
+  const onSetTag = (tag: string) => {
+    if (tag !== packTag) {
+      dispatch(setTag(tag));
+    } else {
+      dispatch(setTag(null));
+    }
+  };
 
-    const sceleton = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, index) => <HorizontalSkeletonLayout key={index} />);
+  const sceleton = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, index) => <HorizontalSkeletonLayout key={index} />);
 
-    const likedPageSamplesList = () => {
-        return (
-            pageName != 'liked-samples-page' && (
-                <div className={styles.tags}>
-                    {sampleCategories.map((tag: string, index: number) => (
-                        <ButtonLayout key={index} typeStyle="tags" onClicked={() => onSetTag(tag)}>
-                            {tag}
-                        </ButtonLayout>
-                    ))}
-                </div>
-            )
-        );
-    };
-
-    const packProfileSampleList = () => {
-        return samples
-            ? samples?.map((sample: Samples, index: number) => {
-                  return <SampleItem key={sample._id} sample={sample} idx={index} />;
-              })
-            : sceleton;
-    };
-
+  const likedPageSamplesList = () => {
     return (
-        <>
-            <div className={styles.samplesLabel}>
-                <div className={styles.sample}>Sample</div>
-                {likedPageSamplesList()}
-                <div className={styles.bpm}>Bpm</div>
-            </div>
-
-            {packProfileSampleList()}
-        </>
+      pageName != 'liked-samples-page' && (
+        <div className={styles.tags}>
+          {sampleCategories.map((tag: string, index: number) => (
+            <ButtonLayout key={index} typeStyle="tags" onClicked={() => onSetTag(tag)}>
+              {tag}
+            </ButtonLayout>
+          ))}
+        </div>
+      )
     );
+  };
+
+  const packProfileSampleList = () => {
+    return samples
+      ? samples?.map((sample: Samples, index: number) => {
+        return <SampleItem key={sample._id} sample={sample} idx={index} />;
+      })
+      : sceleton;
+  };
+
+  return (
+    <>
+      <div className={styles.samplesLabel}>
+        <div className={styles.sample}>Sample</div>
+        {likedPageSamplesList()}
+        <div className={styles.bpm}>Bpm</div>
+      </div>
+
+      {packProfileSampleList()}
+    </>
+  );
 };

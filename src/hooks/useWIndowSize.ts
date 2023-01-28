@@ -1,38 +1,38 @@
 import { useEffect, useState } from 'react';
 
 type SizeData = {
-	width: number;
-	height: number;
+  width: number;
+  height: number;
 };
 
 export const useWindowSize = (): SizeData => {
-	const [size, setSize] = useState<SizeData>({
-		width: window.innerWidth,
-		height: window.innerHeight,
-	});
+  const [size, setSize] = useState<SizeData>({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
-	const resizeHanlder = () => {
-		const width: number = window.innerWidth;
-		const height: number = window.innerHeight;
-	
-		setSize({
-			width,
-			height,
-		});
-	};
+  const resizeHanlder = () => {
+    const width: number = window.innerWidth;
+    const height: number = window.innerHeight;
 
-	useEffect(() => {
-		window.addEventListener('resize', resizeHanlder);
-		return () => {
-			window.removeEventListener('resize', resizeHanlder);
-		};
-	}, [size]);
+    setSize({
+      width,
+      height,
+    });
+  };
 
-	useEffect(() => {
-		resizeHanlder();
-	}, []);
-	return {
-		width: size.width,
-		height: size.height,
-	};
+  useEffect(() => {
+    window.addEventListener('resize', resizeHanlder);
+    return () => {
+      window.removeEventListener('resize', resizeHanlder);
+    };
+  }, [size]);
+
+  useEffect(() => {
+    resizeHanlder();
+  }, []);
+  return {
+    width: size.width,
+    height: size.height,
+  };
 };

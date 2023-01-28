@@ -1,34 +1,34 @@
 export default function SampleViewWebWorker() {
-	onmessage = (e) => {
-		const { audioCoordinates, cssCanvasWidth, cssCanvasHeight, dpr } = e.data;
+  onmessage = (e) => {
+    const { audioCoordinates, cssCanvasWidth, cssCanvasHeight, dpr } = e.data;
 
-		const ctx = e.data.canvas.getContext('2d');
-		const { canvas } = e.data;
+    const ctx = e.data.canvas.getContext('2d');
+    const { canvas } = e.data;
 
-		if (e.data.canvas === null) return;
+    if (e.data.canvas === null) return;
 
-		canvas.width = cssCanvasWidth * dpr;
-		canvas.height = cssCanvasHeight * dpr;
+    canvas.width = cssCanvasWidth * dpr;
+    canvas.height = cssCanvasHeight * dpr;
 
-		ctx?.scale(dpr, dpr);
-		ctx?.translate(0, cssCanvasHeight / 2);
+    ctx?.scale(dpr, dpr);
+    ctx?.translate(0, cssCanvasHeight / 2);
 
-		const barWidth = cssCanvasWidth / audioCoordinates.length;
-		ctx.strokeStyle = 'red';
-		ctx.beginPath();
+    const barWidth = cssCanvasWidth / audioCoordinates.length;
+    ctx.strokeStyle = 'red';
+    ctx.beginPath();
 
-		for (let i = 0; i < audioCoordinates.length; i++) {
-			const x = barWidth * i;
+    for (let i = 0; i < audioCoordinates.length; i++) {
+      const x = barWidth * i;
 
-			let barHeight = audioCoordinates[i];
-			drawLineSegment(ctx, x, barHeight, barWidth);
-		}
-		postMessage({ audioCoordinates });
-	};
+      const barHeight = audioCoordinates[i];
+      drawLineSegment(ctx, x, barHeight, barWidth);
+    }
+    postMessage({ audioCoordinates });
+  };
 
-	const drawLineSegment = (ctx, x, barHeight, barWidth) => {
-		// ctx.moveTo(x, 0);
-		ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
-		ctx.fillStyle = 'red';
-	};
+  const drawLineSegment = (ctx, x, barHeight, barWidth) => {
+    // ctx.moveTo(x, 0);
+    ctx.fillRect(x + barWidth / 2, -(barHeight / 2), 2, barHeight);
+    ctx.fillStyle = 'red';
+  };
 }

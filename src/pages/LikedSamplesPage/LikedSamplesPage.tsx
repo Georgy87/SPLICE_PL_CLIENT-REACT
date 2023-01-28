@@ -11,30 +11,30 @@ import { useAppDispatch } from '../../store/types';
 import styles from './LikedSamplesPage.module.scss';
 
 const LikedSamplesPage: React.FC = () => {
-    const likedSamples = useSelector(selectLikedSamples);
-    const user = useSelector(selectUserMain);
+  const likedSamples = useSelector(selectLikedSamples);
+  const user = useSelector(selectUserMain);
 
-    const { setPlayerState } = useSound();
+  const { setPlayerState } = useSound();
 
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        dispatch(fetchGetLikedSamples());
-    }, []);
+  useEffect(() => {
+    dispatch(fetchGetLikedSamples());
+  }, [dispatch]);
 
-    useEffect(() => {
-        setPlayerState({
-            ...defaultState,
-            samples: likedSamples,
-            packs: null,
-        });
-    }, [user]);
+  useEffect(() => {
+    setPlayerState({
+      ...defaultState,
+      samples: likedSamples,
+      packs: null,
+    });
+  }, [user, likedSamples, setPlayerState]);
 
-    return (
-        <div className={styles.root} data-testid="liked-samples-page">
-            {<SampleList samples={likedSamples} pageName="liked-samples-page" />}
-        </div>
-    );
+  return (
+    <div className={styles.root} data-testid="liked-samples-page">
+      {<SampleList samples={likedSamples} pageName="liked-samples-page" />}
+    </div>
+  );
 };
 
 export default LikedSamplesPage;

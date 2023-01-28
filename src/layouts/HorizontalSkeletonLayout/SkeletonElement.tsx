@@ -7,5 +7,5 @@ type PropsType = {
 };
 
 export const SkeletonElement: React.FC<PropsType> = ({ type }) => {
-    return <div className={`${styles.skeleton} ${styles[type]}`}></div>;
+  return <div className={`${styles.skeleton} ${styles[type]}`}></div>;
 };

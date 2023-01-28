@@ -20,138 +20,134 @@ import { useAppDispatch } from '@store/types';
 import styles from './SequencerPage.module.scss';
 
 export const SequencerPage = () => {
-    const likedSamples = useSelector(selectLikedSamples);
+  const likedSamples = useSelector(selectLikedSamples);
 
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-    const { initialPattern, step, requestId, loadSamples, setTempo, onPlay, onStop } = useSequencer();
+  const { initialPattern, step, requestId, loadSamples, setTempo, onPlay, onStop } = useSequencer();
 
-    const { dragStart } = useDropzone();
+  const { dragStart } = useDropzone();
 
-    const [pattern, setPattern] = useState<number[][]>(initialPattern);
+  const [pattern, setPattern] = useState<number[][]>(initialPattern);
 
-    const [newSampleSrc, setNewSampleSrc] = useState<string>('');
-    const [sampleList, setSampleList] = useState<string[]>([Kick, Clap, Hat, Open_Hat]);
+  const [newSampleSrc, setNewSampleSrc] = useState<string>('');
+  const [sampleList, setSampleList] = useState<string[]>([Kick, Clap, Hat, Open_Hat]);
 
-    const [valueBpm, setValueBpm] = useState<number>(120);
-    const [isPlaying, setIsPlaying] = useState<boolean>(true);
-    const [activeModal, setActiveModal] = useState<boolean>(false);
-    const [indexBox, setIndexBox] = useState<number>(0);
+  const [valueBpm, setValueBpm] = useState<number>(120);
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const [activeModal, setActiveModal] = useState<boolean>(false);
+  const [indexBox, setIndexBox] = useState<number>(0);
 
-    const onOpenModal = useCallback(() => setActiveModal(() => false), [activeModal]);
+  const onOpenModal = useCallback(() => setActiveModal(() => false), [activeModal]);
 
-    const activeModalMemo = useMemo(() => {
-        return activeModal;
-    }, [activeModal]);
+  const activeModalMemo = useMemo(() => {
+    return activeModal;
+  }, [activeModal]);
 
-    function updatePattern({ x, y, value }: { x: number; y: number; value: number }) {
-        const patternCopy: number[][] = [...pattern];
-        patternCopy[y][x] = +!value;
-        setPattern(patternCopy);
+  function updatePattern({ x, y, value }: { x: number; y: number; value: number }) {
+    const patternCopy: number[][] = [...pattern];
+    patternCopy[y][x] = +!value;
+    setPattern(patternCopy);
+  }
+
+  useEffect(() => {
+    dispatch(fetchGetLikedSamples());
+    window.cancelAnimationFrame(requestId);
+  }, []);
+
+  useEffect(() => {
+    loadSamples(sampleList);
+  }, [sampleList]);
+
+  const onDropHandler = (e: DragEvent<HTMLDivElement>, index: number) => {
+    e.preventDefault();
+
+    const sampleListCopy = [...sampleList];
+    sampleListCopy[index] = newSampleSrc;
+    setSampleList(sampleListCopy);
+  };
+
+  const setSampleHandler = (src: string) => {
+    const sampleListCopy = [...sampleList];
+    sampleListCopy[indexBox] = src;
+    setSampleList(sampleListCopy);
+  };
+
+  const onChangeBpm = (e: ChangeEvent<HTMLInputElement>) => {
+    setValueBpm(+e.target.value);
+  };
+
+  const { size, color } = useMemo(() => {
+    return {
+      size: '70px',
+      color: '#000000',
+    };
+  }, []);
+
+  const isPlayMemo = useMemo(() => {
+    if (isPlaying) {
+      onStop();
     }
+    return isPlaying;
+  }, [isPlaying]);
 
-    useEffect(() => {
-        dispatch(fetchGetLikedSamples());
-        window.cancelAnimationFrame(requestId);
-    }, []);
-
-    useEffect(() => {
-        loadSamples(sampleList);
-    }, [sampleList]);
-
-    const onDropHandler = (e: DragEvent<HTMLDivElement>, index: number) => {
-        e.preventDefault();
-
-        let sampleListCopy = [...sampleList];
-        sampleListCopy[index] = newSampleSrc;
-        setSampleList(sampleListCopy);
-    };
-
-    const setSampleHandler = (src: string) => {
-        let sampleListCopy = [...sampleList];
-        sampleListCopy[indexBox] = src;
-        setSampleList(sampleListCopy);
-    };
-
-    const onChangeBpm = (e: ChangeEvent<HTMLInputElement>) => {
-        setValueBpm(+e.target.value);
-    };
-
-    const { size, color } = useMemo(() => {
-        return {
-            size: '70px',
-            color: '#000000',
-        };
-    }, []);
-
-    const isPlayMemo = useMemo(() => {
-        if (isPlaying) {
-            onStop();
-        }
-        return isPlaying;
-    }, [isPlaying]);
-
-    const onChangeIconLayout = useCallback(
-        (e: Event) => {
-            e.stopPropagation();
-            setTempo(valueBpm);
-            setIsPlaying(!isPlaying);
-            if (isPlaying === true) {
-                onPlay(sampleList);
-            } else {
-                onStop();
-            }
-        },
-        [isPlaying]
-    );
-
-    const ModalChildren = useMemo(() => {
-        return (
-            <div className={styles.mobileModalWrapper}>
-                <SequencerSampleList onClicked={setSampleHandler} />
-            </div>
-        );
-    }, [likedSamples, indexBox]);
-
-    const setTempoBpm = useCallback(() => {
-        onStop();
-        setTempo(valueBpm);
+  const onChangeIconLayout = useCallback(
+    (e: Event) => {
+      e.stopPropagation();
+      setTempo(valueBpm);
+      setIsPlaying(!isPlaying);
+      if (isPlaying === true) {
         onPlay(sampleList);
-        if (isPlaying === true) {
-            onStop();
-            setTempo(valueBpm);
-        }
-    }, [valueBpm, isPlaying, sampleList, onStop]);
+      } else {
+        onStop();
+      }
+    },
+    [isPlaying],
+  );
 
+  const ModalChildren = useMemo(() => {
     return (
-        <div className={styles.root} data-testid="sequencer-page">
-            <div className={styles.sequencerControls}>
-                <IconChangeLayout onClicked={onChangeIconLayout} iconOneOrTwo={!isPlayMemo} size={size} color={color} />
-                <div className={styles.bpmControls}>
-                    <IconLayout iconName="metronom" />
-                      <input
-                        type="text"
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeBpm(e)}
-                        defaultValue={valueBpm}
-                    />
-                    <ButtonLayout typeStyle={"update-bpm"} onClicked={setTempoBpm}>
-                        bpm
-                    </ButtonLayout>
-                </div>
-            </div>
-
-            <Sequencer
-                step={step}
-                pattern={pattern}
-                setIndexBox={setIndexBox}
-                setActiveModal={setActiveModal}
-                updatePattern={updatePattern}
-                onDropHandler={onDropHandler}
-            />
-
-            <Modal setActive={onOpenModal} active={activeModalMemo}>
-                {ModalChildren}
-            </Modal>
-        </div>
+      <div className={styles.mobileModalWrapper}>
+        <SequencerSampleList onClicked={setSampleHandler} />
+      </div>
     );
+  }, [likedSamples, indexBox]);
+
+  const setTempoBpm = useCallback(() => {
+    onStop();
+    setTempo(valueBpm);
+    onPlay(sampleList);
+    if (isPlaying === true) {
+      onStop();
+      setTempo(valueBpm);
+    }
+  }, [valueBpm, isPlaying, sampleList, onStop, onPlay, setTempo]);
+
+  return (
+    <div className={styles.root} data-testid="sequencer-page">
+      <div className={styles.sequencerControls}>
+        <IconChangeLayout onClicked={onChangeIconLayout} iconOneOrTwo={!isPlayMemo} size={size} color={color} />
+        <div className={styles.bpmControls}>
+          <IconLayout iconName="metronom" />
+          <input type="text" onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeBpm(e)} defaultValue={valueBpm} />
+          <ButtonLayout typeStyle={'update-bpm'} onClicked={setTempoBpm}>
+            bpm
+          </ButtonLayout>
+        </div>
+      </div>
+
+      <Sequencer
+        step={step}
+        pattern={pattern}
+        setIndexBox={setIndexBox}
+        setActiveModal={setActiveModal}
+        updatePattern={updatePattern}
+        onDropHandler={onDropHandler}
+      />
+
+      <Modal setActive={onOpenModal} active={activeModalMemo}>
+        {ModalChildren}
+      </Modal>
+    </div>
+  );
 };

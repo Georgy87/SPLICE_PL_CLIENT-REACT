@@ -9,22 +9,22 @@ import { useAppDispatch } from '@store/types';
 import styles from './App.module.scss';
 
 export const App = () => {
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+ 
+  useEffect(() => {
+    dispatch(fetchAuth());
+  }, [dispatch]);
 
-    useEffect(() => {
-        dispatch(fetchAuth());
-    }, []);
-
-    return (
-        <PlayerContextProvider>
-            <div className={styles.appContainer}>
-                <div className={styles.navbarBlock}>
-                    <Navbar />
-                </div>
-                <div className={styles.pagesBlock}>
-                    <AppRouter />
-                </div>
-            </div>
-        </PlayerContextProvider>
-    );
+  return (
+    <PlayerContextProvider>
+      <div className={styles.appContainer}>
+        <div className={styles.navbarBlock}>
+          <Navbar />
+        </div>
+        <div className={styles.pagesBlock}>
+          <AppRouter />
+        </div>
+      </div>
+    </PlayerContextProvider>
+  );
 };

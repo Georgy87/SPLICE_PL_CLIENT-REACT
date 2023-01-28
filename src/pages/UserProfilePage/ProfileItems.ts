@@ -1,8 +1,8 @@
 export const userInfoItems = {
-	Photo: 'Photo',
-	Username: 'Username',
-	Email: 'Email',
-	Name: 'Name',
+  Photo: 'Photo',
+  Username: 'Username',
+  Email: 'Email',
+  Name: 'Name',
 };
 
 export type UserInfoItems = {
@@ -10,17 +10,17 @@ export type UserInfoItems = {
 };
 
 export const ProfileItems: UserInfoItems[] = [
-	{ itemName: 'Photo' },
-	{ itemName: 'Username' },
-	{ itemName: 'Email' },
-	{ itemName: 'Name' },
+  { itemName: 'Photo' },
+  { itemName: 'Username' },
+  { itemName: 'Email' },
+  { itemName: 'Name' },
 ];
 
 
 export const userInfoTriggers = {
-	Update: 'Update',
-	DownLoad: 'DownLoad',
-	Packs: 'Packs',
+  Update: 'Update',
+  DownLoad: 'DownLoad',
+  Packs: 'Packs',
 };
 
 export type UserInfoTriggers = {
@@ -28,7 +28,7 @@ export type UserInfoTriggers = {
 };
 
 export const ProfileTriggerItems: UserInfoTriggers[] = [
-	{ itemName: 'Update' },
-	{ itemName: 'DownLoad' },
-	{ itemName: 'Packs' },
+  { itemName: 'Update' },
+  { itemName: 'DownLoad' },
+  { itemName: 'Packs' },
 ];
