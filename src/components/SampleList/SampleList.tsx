@@ -34,7 +34,7 @@ export const SampleList: FC<PropsType> = ({ samples, pageName }) => {
 
   const likedPageSamplesList = () => {
     return (
-      pageName != 'liked-samples-page' && (
+      pageName !== 'liked-samples-page' && (
         <div className={styles.tags}>
           {sampleCategories.map((tag: string, index: number) => (
             <ButtonLayout key={index} typeStyle="tags" onClicked={() => onSetTag(tag)}>

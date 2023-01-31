@@ -53,16 +53,17 @@ Object.defineProperty(window, 'IntersectionObserver', {
 
 // Setup audio
 
-export const mockAudio = jest.fn().mockImplementation(() => {
-  return {
-    play: jest.fn(),
-    pause: jest.fn(),
-    volume: 0,
-    currentTime: 0,
-    duration: 2322,
-  };
-});
-
-jest.spyOn(window, 'Audio').mockImplementation(() => mockAudio);
-
+// export const mockAudio = jest.fn().mockImplementation(() => {
+//   return {
+//     play: jest.fn(),
+//     pause: jest.fn(),
+//     volume: 0,
+//     currentTime: 0,
+//     duration: 2322,
+//   };
+// });
+// const mockAudio = jest.fn().mockImplementation(() => {
+//   return new Audio();
+// });
+// jest.spyOn(window, 'Audio').mockImplementation(mockAudio);
 

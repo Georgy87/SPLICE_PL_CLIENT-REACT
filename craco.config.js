@@ -29,6 +29,9 @@ module.exports = {
   jest: {
     configure: {
       preset: 'ts-jest',
+      collectCoverage: false,
+      collectCoverageFrom: ['src/**/*.{ts,tsx}'],
+      coverageReporters: ['text', 'lcov'],
       moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
         prefix: '<rootDir>/src/',
       }),

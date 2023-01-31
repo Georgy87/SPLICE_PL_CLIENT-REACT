@@ -46,7 +46,8 @@
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build",
     "lint": "eslint . --ext .ts,.tsx,.js",
-    "lint:fix": "eslint . --ext .ts,.tsx,.js --fix"
+    "lint:fix": "eslint . --ext .ts,.tsx,.js --fix",
+    "test:coverage": "jest --coverage --config=jest.config.json"
   },
   "browserslist": {
     "production": [

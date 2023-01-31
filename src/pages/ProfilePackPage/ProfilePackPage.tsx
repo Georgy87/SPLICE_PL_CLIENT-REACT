@@ -17,10 +17,13 @@ import {
 } from '@selectors/packsSelectors';
 import { fetchGetPack } from '@slices/pack/actions';
 import { ButtonLayout } from '@layouts/ButtonLayout';
-import { useWindowSize } from '@hooks/useWIndowSize';
+
 import { useAppDispatch } from '@store/types';
 
 import styles from './ProfilePackPage.module.scss';
+
+import { useWindowSize } from '@/hooks/useWindowSize';
+import { Player } from '@/components';
 
 export const ProfilePackPage = () => {
   const packProfile = useSelector(selectPackProfile);
@@ -81,7 +84,7 @@ export const ProfilePackPage = () => {
       samples: samples,
       packs: [packProfile],
     });
-  }, [packProfile]);
+  }, [packProfile,  setPlayerState, samples]);
 
   const ModalChildren = useMemo(() => {
     return (
@@ -136,6 +139,7 @@ export const ProfilePackPage = () => {
   return (
     <div data-testid="profile-pack-page">
       {renderContent()}
+      <Player />
       {activeModal && (
         <Modal setActive={onOpenModal} active={activeModalMemo}>
           {ModalChildren}

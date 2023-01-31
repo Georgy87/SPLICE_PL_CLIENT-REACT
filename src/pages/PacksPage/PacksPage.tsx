@@ -42,6 +42,7 @@ export const PacksPage: FC<PropsType> = () => {
   useEffect(() => {
     dispatch(setDefaultPackState());
   }, [dispatch]);
+  
   const { debouncedCallback } = useDebounce((value: string) => {
     dispatch(fetchSearchPacks(value));
   }, 500);
