@@ -31,7 +31,7 @@ export const SequencerPage = () => {
   const [pattern, setPattern] = useState<number[][]>(initialPattern);
 
   const [newSampleSrc, setNewSampleSrc] = useState<string>('');
-  const [sampleList, setSampleList] = useState<string[]>([Kick, Clap, Hat, Open_Hat]);
+  const [sampleList, setSampleList] = useState<string[]>(['https://storage.yandexcloud.net/sample-cloud/SAMPLES-AUDIO/0cc0dec1-6152-4962-ae71-ee49e8fdb928.wav', Clap, Hat, Open_Hat]);
 
   const [valueBpm, setValueBpm] = useState<number>(120);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
@@ -102,7 +102,7 @@ export const SequencerPage = () => {
         onStop();
       }
     },
-    [isPlaying],
+    [isPlaying]
   );
 
   const ModalChildren = useMemo(() => {
@@ -117,7 +117,7 @@ export const SequencerPage = () => {
     onStop();
     setTempo(valueBpm);
     onPlay(sampleList);
-    if (isPlaying === true) {
+    if (isPlaying) {
       onStop();
       setTempo(valueBpm);
     }

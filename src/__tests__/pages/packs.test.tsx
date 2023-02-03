@@ -1,4 +1,4 @@
-import { act, fireEvent, screen, renderHook } from '@testing-library/react';
+import { act, fireEvent, screen } from '@testing-library/react';
 import * as reduxHooks from 'react-redux';
 
 import * as packSlice from '@store/slices/pack/packSlice';

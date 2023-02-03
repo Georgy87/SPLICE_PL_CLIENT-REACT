@@ -22,7 +22,7 @@ module.exports = {
       '@constants': path.resolve(__dirname, 'src/constants'),
       '@slices': path.resolve(__dirname, 'src/store/slices'),
       '@store': path.resolve(__dirname, 'src/store'),
-      '@mocks': path.resolve(__dirname, 'src/tests/mocks'),
+      '@mocks': path.resolve(__dirname, 'src/mocks'),
       '@hoks': path.resolve(__dirname, 'src/hoks'),
     },
   },

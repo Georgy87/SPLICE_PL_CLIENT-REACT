@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 export type SequencerStateType = {
   AUDIO: AudioContext;
@@ -9,7 +9,6 @@ export type SequencerStateType = {
   startTime: number;
   currentStep: number;
   tempo: number;
-  gain: number;
   tic: number;
   bank: [] | ArrayBuffer;
   totalCount: number;
@@ -19,13 +18,13 @@ export type SequencerStateType = {
 };
 
 export const useSequencer = () => {
+  const tic = useRef<number>(60 / 128 / 4);
   const [sequencerState, setSequencerState] = useState<SequencerStateType>({
     AUDIO: new (window.AudioContext || window.webkitAudioContext)(),
     isPlaying: false,
     noteTime: 0,
     startTime: 0,
     currentStep: 0,
-    gain: 2,
     tempo: 90,
     tic: 60 / 128 / 4,
     bank: [],
@@ -41,27 +40,21 @@ export const useSequencer = () => {
     requestId: 0,
   });
 
-  let {
-    AUDIO,
-    isPlaying,
-    noteTime,
-    startTime,
-    currentStep,
-    tic,
-    bank,
-    initialPattern,
-    currentInitialPattern,
-    requestId,
-  } = sequencerState;
+  let { AUDIO, isPlaying, noteTime, startTime, currentStep, bank, initialPattern, currentInitialPattern, requestId } =
+    sequencerState;
 
   const [step, setStep] = useState<number>(1);
 
   const setTempo = (tempoValue: number) => {
-    tic = 60 / tempoValue / 4;
+    tic.current = 60 / tempoValue / 4;
+    setSequencerState((state: SequencerStateType) => ({
+      ...state,
+      tic: tic.current,
+    }));
   };
 
-  const scheduleNote = () => {
-    if (!isPlaying) return false;
+  const scheduleNote = (isNotePlaying: boolean) => {
+    if (!isNotePlaying) return false;
 
     const _scheduleNote = () => {
       let ct: number = AUDIO.currentTime;
@@ -91,8 +84,7 @@ export const useSequencer = () => {
     setStep(currentStep);
 
     if (currentStep === 32) currentStep = 0;
-
-    noteTime += tic;
+    noteTime += tic.current;
   };
 
   const playPatternStepAtTime = (pt: number) => {
@@ -147,20 +139,28 @@ export const useSequencer = () => {
   };
 
   const onPlay = (sampleList: string[]) => {
+    const isNotePlaying = true;
     AUDIO.resume();
-    isPlaying = true;
-    noteTime = 0.0;
-    startTime = AUDIO.currentTime;
 
-    scheduleNote();
+    setSequencerState((state: SequencerStateType) => ({
+      ...state,
+      isPlaying: !state.isPlaying,
+      noteTime: 0.0,
+      startTime: state.AUDIO.currentTime,
+    }));
+
+    scheduleNote(isNotePlaying);
 
     _parsePattern();
     loadSamples(sampleList);
   };
 
   const onStop = () => {
-    isPlaying = false;
-    currentStep = 0;
+    setSequencerState((state: SequencerStateType) => ({
+      ...state,
+      isPlaying: false,
+      currentStep: 0,
+    }));
 
     cancelAnimationFrame(requestId);
   };

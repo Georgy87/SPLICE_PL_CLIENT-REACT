@@ -37,12 +37,12 @@
       "@assets/*": ["assets/*"],
       "@services/*": ["services/*"],
       "@constants/*": ["constants/*"],
-      "@mocks/*": ["tests/mocks/*"],
+      "@mocks/*": ["mocks/*"],
       "@slices/*": ["store/slices/*"],
       "@selectors/*": ["store/selectors/*"]
     }
   },
   "files": ["./declarations.d.ts"],
   "include": [
-    "src", "./setupJest.js", "craco.config.js", "index.d.ts"]
+    "src", "./setupJest.js", "craco.config.js", "index.d.ts", "mocks"]
 }
