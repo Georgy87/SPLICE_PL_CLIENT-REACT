@@ -1,4 +1,4 @@
-import { act } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import * as reduxHooks from 'react-redux';
 
 import { ProfilePackPage } from '@pages/ProfilePackPage';
@@ -19,16 +19,16 @@ describe('PROFILE PACK', () => {
   it('render loader', async () => {
     jest.spyOn(reduxHooks, 'useSelector').mockReturnValue(false);
     mockedDispatch.mockReturnValue(jest.fn());
-    const { result } = renderWithStore(<ProfilePackPage />, {});
-    expect(result.getAllByTestId('loader')).toBeTruthy();
+    renderWithStore(<ProfilePackPage />, {});
+    expect(screen.getAllByTestId('loader')).toBeTruthy();
   });
 
   it('render profile pack', async () => {
     jest.spyOn(reduxHooks, 'useSelector').mockReturnValue(samples);
     mockedDispatch.mockReturnValue(jest.fn());
 
-    const { result } = await act(async () => renderWithStore(<ProfilePackPage />, {}, ''));
-    const packContainer = result.getByTestId('profile-pack');
+    act(async () => await renderWithStore(<ProfilePackPage />, {}, ''));
+    const packContainer = screen.getByTestId('profile-pack');
     expect(packContainer).toBeInTheDocument();
   });
 
@@ -38,12 +38,12 @@ describe('PROFILE PACK', () => {
     jest.spyOn(reduxHooks, 'useSelector').mockReturnValue(samples);
 
     const mockedFetchGetPack = jest.spyOn(actions, 'fetchGetPack');
-    await act(async () => renderWithStore(<ProfilePackPage />, {}, ''));
+    act(async () => await renderWithStore(<ProfilePackPage />, {}, ''));
     expect(mockedFetchGetPack).toHaveBeenCalledTimes(2);
   });
 
   it('canvas modal', () => {
-    const { result } = renderWithStore(
+    renderWithStore(
       <Modal active={true} setActive={jest.fn()}>
         {Object.keys(chartData).map((year) => {
           return (
@@ -56,7 +56,7 @@ describe('PROFILE PACK', () => {
       {},
     );
 
-    const buttonYear = result.getByRole('button', { name: '2022' });
+    const buttonYear = screen.getByRole('button', { name: '2022' });
     expect(buttonYear).toBeTruthy();
   });
 });

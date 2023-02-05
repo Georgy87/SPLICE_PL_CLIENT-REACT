@@ -10,15 +10,17 @@ import { useAppDispatch } from '@store/types';
 import { sampleCategories } from '@components/AddSampleInfoModal/sampleCategories';
 import { SampleItem } from '@components/SampleItem';
 
+import { useTypedSelector } from '@hooks/useTypedSelector';
+
 import styles from './SampleList.module.scss';
 
 type PropsType = {
-    samples?: Samples[] | null;
-    pageName?: string;
+  samples?: Samples[] | null;
+  pageName?: string;
 };
 
 export const SampleList: FC<PropsType> = ({ samples, pageName }) => {
-  const packTag = useSelector(selectTag);
+  const packTag = useTypedSelector(selectTag);
 
   const dispatch = useAppDispatch();
 
@@ -49,8 +51,8 @@ export const SampleList: FC<PropsType> = ({ samples, pageName }) => {
   const packProfileSampleList = () => {
     return samples
       ? samples?.map((sample: Samples, index: number) => {
-        return <SampleItem key={sample._id} sample={sample} idx={index} />;
-      })
+          return <SampleItem key={sample._id} sample={sample} idx={index} />;
+        })
       : sceleton;
   };
 

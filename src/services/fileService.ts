@@ -8,7 +8,7 @@ class FileService {
   fileUpload({ files, setAvatarState, onDrop }: { files: any; setAvatarState: any; onDrop: boolean }) {
     if (files && files.length > 0) {
       let currentFile;
-
+      
       if (onDrop) {
         currentFile = files[0];
       } else {

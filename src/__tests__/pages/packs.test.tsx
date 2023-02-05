@@ -55,7 +55,6 @@ describe('PACKS PAGE', () => {
     jest.spyOn(reduxHooks, 'useSelector').mockReturnValue(packs);
 
     const {
-      store,
       result: { getByTestId },
     } = await act(async () => renderWithStore(<PacksPage />, {}, ''));
 

@@ -23,7 +23,8 @@ module.exports = {
       '@slices': path.resolve(__dirname, 'src/store/slices'),
       '@store': path.resolve(__dirname, 'src/store'),
       '@mocks': path.resolve(__dirname, 'src/mocks'),
-      '@hoks': path.resolve(__dirname, 'src/hoks'),
+      '@hocs': path.resolve(__dirname, 'src/hocs'),
+      '@config': path.resolve(__dirname, 'src/config'),
     },
   },
   jest: {

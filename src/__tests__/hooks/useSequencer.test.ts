@@ -25,7 +25,7 @@ describe('USE SEQUENCER', () => {
   });
 
   it('should play sequencer', () => {
-    const { result, rerender } = renderHook(() => useSequencer());
+    const { result } = renderHook(() => useSequencer());
     const sampleData = new ArrayBuffer(1);
     (axios.request as jest.Mock).mockResolvedValue({ data: sampleData });
     const spy = jest.spyOn(axios, 'request').mockResolvedValue({ data: sampleData });

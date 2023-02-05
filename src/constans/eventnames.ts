@@ -1,0 +1,35 @@
+
+export enum EVENT_NAMES {
+  CLICK = 'click',
+  MOUSE_UP = 'mouseup',
+  KEYDOWN = 'keydown',
+  KEYUP = 'keyup',
+  KEYPRESS = 'keypress',
+  SCROLL = 'scroll',
+  MOUSEWHEEL = 'mousewheel',
+  MOUSEMOVE = 'mousemove',
+  TOUCHSTART = 'touchstart',
+  TOUCHMOVE = 'touchmove',
+  RESIZE = 'resize',
+  INVALID = 'invalid',
+  ERROR = 'error',
+  UNHANDLEDREJECTION = 'unhandledrejection',
+  FOCUS = 'focus',
+  BLUR = 'blur',
+  VISIBILITYCHANGE = 'visibilitychange',
+  MESSAGE = 'message',
+  LOAD = 'load',
+  BEFORE_UNLOAD = 'beforeunload',
+  PAGE_HIDE = 'pagehide',
+  SUBMIT = 'submit',
+  VALIDATE = 'validate',
+}
+
+export enum KEY_NAMES {
+  ESCAPE = 'Escape',
+  ENTER = 'Enter',
+  SPACE = ' ',
+  TAB = 'Tab',
+  ARROW_UP = 'ArrowUp',
+  ARROW_DOWN = 'ArrowDown',
+}
