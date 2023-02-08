@@ -4,7 +4,7 @@ import {
   GetPacksResponseDto,
   GetUserPacksResponseDto,
   SearchPacksResponseDto,
-} from '@services/api/types';
+} from '@/api/types';
 
 import {
   CreatePackResponseData,

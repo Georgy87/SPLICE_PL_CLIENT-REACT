@@ -25,6 +25,7 @@ module.exports = {
       '@mocks': path.resolve(__dirname, 'src/mocks'),
       '@hocs': path.resolve(__dirname, 'src/hocs'),
       '@config': path.resolve(__dirname, 'src/config'),
+      '@api': path.resolve(__dirname, 'src/api'),
     },
   },
   jest: {

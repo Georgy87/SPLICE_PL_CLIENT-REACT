@@ -1,4 +1,4 @@
-import { CreateSampleResponseDto } from '@services/api/types';
+import { CreateSampleResponseDto } from '@/api/types';
 
 import { CreateSampleResponseData } from './types';
 

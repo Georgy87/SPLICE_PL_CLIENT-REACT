@@ -41,7 +41,7 @@ class CanvasSampleService {
     };
   }
 
-  drawing({
+  private drawing({
     canvas,
     audioCoordinates,
     percent,

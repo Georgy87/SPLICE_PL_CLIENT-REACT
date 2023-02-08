@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+import { AuthResponseDto, LoginResponseDto, UpdateEmailRequestDto } from '@api/types';
+import { userApi } from '@api/userApi';
 import {
   LikedSamplesResponseDto,
   UpdateEmailResponseDto,
@@ -7,11 +9,10 @@ import {
   UpdateFullNameResponseDto,
   UpdateAvatarResponseDto,
   RegistrationRequestDto,
-} from '@services/api/types';
-import { AuthResponseDto, LoginResponseDto, UpdateEmailRequestDto } from '@services/api/types';
-import { userApi } from '@services/api/userApi';
-
-import { LoginRequestDto } from '@/services/api/types';
+  LoginRequestDto,
+} from '@api/types';
+import { localStorageService } from '@services/localStorageService';
+import { STORAGE_KEYS } from '@/constans/storage';
 
 export const fetchRegistration = createAsyncThunk(
   'user/registrationStatus',
@@ -21,13 +22,13 @@ export const fetchRegistration = createAsyncThunk(
     } catch (error) {
       console.log(error);
     }
-  },
+  }
 );
 
 export const fetchLogin = createAsyncThunk('user/loginStatus', async (payload: LoginRequestDto) => {
   try {
     const data: LoginResponseDto = await userApi.login(payload).promise;
-    localStorage.setItem('token', data.token);
+    localStorageService.write<string>(STORAGE_KEYS.TOKEN, data.token);
     return data;
   } catch (error) {
     console.log(error);
@@ -37,7 +38,7 @@ export const fetchLogin = createAsyncThunk('user/loginStatus', async (payload: L
 export const fetchAuth = createAsyncThunk('user/authStatus', async () => {
   try {
     const data: AuthResponseDto = await userApi.auth().promise;
-    localStorage.setItem('token', data.token);
+    localStorageService.write<string>(STORAGE_KEYS.TOKEN, data.token);
     return data;
   } catch (error) {
     console.log(error);
@@ -62,7 +63,7 @@ export const fetchUpdateFullName = createAsyncThunk(
     } catch (error) {
       console.log(error);
     }
-  },
+  }
 );
 
 export const fetchGetLikedSamples = createAsyncThunk('user/getLikedSamplesStatus', async () => {
@@ -80,7 +81,7 @@ export const fetchUpdateAvatar = createAsyncThunk('user/updateAvatarSamplesStatu
 
     const formData = new FormData();
     formData.append('file', file);
-        
+
     const data: UpdateAvatarResponseDto = await userApi.updateAvatar(formData).promise;
     return data;
   } catch (error) {

@@ -4,8 +4,8 @@ import {
   packGetPacksResponseDto,
   packGetUserPacksResponseDto,
   packSearchPacksResponseDto,
-} from '@services/mapping/pack';
-import { authedHttpFetch } from '@services/base/authedJsonFetch/authedHttpFetch';
+} from '@/api/mapping/pack';
+import { authedHttpFetch } from '@/api/base/authedJsonFetch/authedHttpFetch';
 
 import {
   CreatePackRequestDto,

@@ -1,7 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { CreatePackResponseDto, GetPacksResponseDto, GetUserPacksResponseDto, SearchPacksResponseDto } from '@services/api/types';
-import { packsApi } from '@services/api/packsApi';
+import {
+  CreatePackResponseDto,
+  GetPacksResponseDto,
+  GetUserPacksResponseDto,
+  SearchPacksResponseDto,
+} from '@api/types';
+import { packsApi } from '@api/packsApi';
 
 import { createPackType } from './types';
 
@@ -41,7 +46,7 @@ export const fetchGetPack = createAsyncThunk(
     } catch (error) {
       console.log(error);
     }
-  },
+  }
 );
 
 export const fetchGetUserPacks = createAsyncThunk('packs/getUserPacksStatus', async () => {

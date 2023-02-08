@@ -40,7 +40,8 @@
       "@mocks/*": ["mocks/*"],
       "@slices/*": ["store/slices/*"],
       "@selectors/*": ["store/selectors/*"],
-      "@config/*": ["config/*"]
+      "@config/*": ["config/*"],
+      "@api/*": ["api/*"]
     }
   },
   "files": ["./declarations.d.ts"],

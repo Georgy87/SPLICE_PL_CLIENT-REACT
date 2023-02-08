@@ -55,3 +55,21 @@ export interface IIntersectionObserver {
     onLongMore: () => void
   ): void;
 }
+
+// LOCAL STORAGE
+
+export type Key = string;
+
+export type Value = unknown;
+
+export type ILocalStorageCustomStorage = Storage | Record<Key, Value>;
+
+export interface ILocalStorage {
+  read<T>(key: string): undefined | T;
+  write<T>(key: string, value: T): void;
+  remove(key: string): void;
+}
+
+export interface ILocalStorageConstructor {
+  new (): ILocalStorage;
+}

@@ -5,7 +5,7 @@ import {
   LoginResponseDto,
   LikedSamplesResponseDto,
   UpdateAvatarResponseDto,
-} from '@services/api/types';
+} from '@/api/types';
 
 import {
   AuthResponseData,

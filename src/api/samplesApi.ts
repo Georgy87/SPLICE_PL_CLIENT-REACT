@@ -1,5 +1,5 @@
-import { authedHttpFetch } from '@services/base/authedJsonFetch/authedHttpFetch';
-import { sampleCreateSampleResponseDto } from '@services/mapping/sample';
+import { authedHttpFetch } from '@/api/base/authedJsonFetch/authedHttpFetch';
+import { sampleCreateSampleResponseDto } from '@/api/mapping/sample';
 
 import {
   DeleteLikeSampleRequestParams,

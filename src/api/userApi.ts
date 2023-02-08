@@ -1,11 +1,11 @@
-import { authedHttpFetch } from '@services/base/authedJsonFetch/authedHttpFetch';
+import { authedHttpFetch } from '@/api/base/authedJsonFetch/authedHttpFetch';
 import {
   userAuthResponseDto,
   userLikedSamplesResponseDto,
   userLoginResponseDto,
   userUpdateAvatarResponseDto,
   userUpdateEmailResponseDto,
-} from '@services/mapping/user';
+} from '@/api/mapping/user';
 
 import {
   AuthResponseDto,

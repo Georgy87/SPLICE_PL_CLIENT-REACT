@@ -1,6 +1,7 @@
+import { localStorageService } from '@services/localStorageService';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Samples } from '../samples/types';
+import { Samples } from '@store/slices/samples/types';
 
 import { User, UserSliceState } from './types';
 import {
@@ -11,6 +12,8 @@ import {
   fetchUpdateEmail,
   fetchUpdateFullName,
 } from './actions';
+
+import { STORAGE_KEYS } from '@/constans/storage';
 
 export const initialState: UserSliceState = {
   user: null,
@@ -30,7 +33,7 @@ export const userSlice = createSlice({
       state.isAuth = false;
       state.user = null;
       state.token = null;
-      localStorage.removeItem('token');
+      localStorageService.remove(STORAGE_KEYS.TOKEN);
     },
   },
   extraReducers: (builder) =>

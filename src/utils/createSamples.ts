@@ -1,5 +1,5 @@
-import { samplesApi } from '@services/api/samplesApi';
-import { CreateSampleResponseDto  } from '@services/api/types';
+import { samplesApi } from '@/api/samplesApi';
+import { CreateSampleResponseDto  } from '@/api/types';
 
 import { samplesToSendType } from '@slices/samples/types';
 
